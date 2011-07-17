@@ -175,6 +175,7 @@
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
 		38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = 38125C0513CA75D0001282F6 /* DebugLevel.level */; };
 		38125C0B13CA7FDF001282F6 /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125C0A13CA7FDE001282F6 /* Wall.mm */; };
+		387DDA9E13D356D000C7DD9A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.m */; };
 		38F43D1813D259DE007002B9 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38F43D1713D259DE007002B9 /* Goal.mm */; };
 		38FB190813D26106003372ED /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38FB190713D26106003372ED /* HighScoresScene.mm */; };
 /* End PBXBuildFile section */
@@ -515,6 +516,8 @@
 		38125C0713CA7FAB001282F6 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Wall.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125C0A13CA7FDE001282F6 /* Wall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Wall.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125C1313CA8226001282F6 /* DataDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataDefinitions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		387DDA9C13D356D000C7DD9A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		387DDA9D13D356D000C7DD9A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		38F43D1713D259DE007002B9 /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Goal.mm; sourceTree = "<group>"; };
 		38F43D1913D25A19007002B9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		38FB190613D26106003372ED /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
@@ -981,6 +984,8 @@
 				38125BD313CA57F8001282F6 /* PlayScene.mm */,
 				38125BBC13CA5651001282F6 /* HelloWorldLayer.h */,
 				38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */,
+				387DDA9C13D356D000C7DD9A /* GameOverScene.h */,
+				387DDA9D13D356D000C7DD9A /* GameOverScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1235,6 +1240,7 @@
 				380C13EC13D2148800C62364 /* NSSetDifference.m in Sources */,
 				38F43D1813D259DE007002B9 /* Goal.mm in Sources */,
 				38FB190813D26106003372ED /* HighScoresScene.mm in Sources */,
+				387DDA9E13D356D000C7DD9A /* GameOverScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
