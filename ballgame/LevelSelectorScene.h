@@ -1,5 +1,5 @@
 //
-//  GameOverScene.h
+//  LevelSelectorScene.h
 //  ballgame
 //
 //  Created by Ryan Hart on 7/17/11.
@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface GameOverScene : CCLayer {
-    CCLabelTTF *_gameOverLabel;
+@interface LevelSelectorScene : CCScene {
+    
 }
-+(CCScene *) scene;
 -(void)loadScene;
 @end

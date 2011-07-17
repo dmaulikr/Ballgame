@@ -18,33 +18,24 @@
 
 @interface PlayScene : CCLayer
 {
+    //Physics Data
 	b2World* world;
-	GLESDebugDraw *m_debugDraw;
-    
-    NSDictionary *_levelInfo;
-    NSMutableArray *_gameObjects;
-    CGSize _bounds;
-    
-    Player *_thePlayer;
-    
-    NSDictionary *defaults;
-    
-    CCLayer *scrollNode;
-    
-    //Collision Info
     CollisionManager *_collisionManager;
     NSSet *_previousCollisions;
+    
+    //Debug Data
+	GLESDebugDraw *m_debugDraw;
+    
+    //State Data
+    NSDictionary *_levelInfo;
+    NSMutableArray *_gameObjects;
+    Player *_thePlayer;
+    
+    //Sublayers
+    CCLayer *scrollNode;
+    
 }
-
-@property(nonatomic, retain) NSDictionary *defaults;
-
 -(id)loadLevelWithName:(NSString*)levelName;
-
-// returns a CCScene that contains the HelloWorldLayer as the only child
-+(CCScene *) scene;
-// adds a new sprite at a given coordinate
--(void) addNewSpriteWithCoords:(CGPoint)p;
-
 
 //Premade Levels
 +(CCScene*)debugScene;
