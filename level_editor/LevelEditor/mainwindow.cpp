@@ -11,11 +11,11 @@
 #include "ui_mainwindow.h"
 
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
-#ifdef ON_MAC
-#define PATH_SPRITE_PLIST "../../ballgame/Resources/BallGameSpriteSheet.plist"
-#define PATH_SPRITE_IMAGE "../../ballgame/Resources/BallGameSpriteSheet.png"
-#define PATH_DEBUG_LEVEL "../../ballgame/Resources/DebugLevel.level"
-#define PATH_BALLGAME_DIR "../../ballgame/Resources/"
+#ifdef Q_WS_MAC
+#define PATH_SPRITE_PLIST "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.plist"
+#define PATH_SPRITE_IMAGE "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.png"
+#define PATH_DEBUG_LEVEL "/Users/ryanhart/github/Ballgame/ballgame/DebugLevel.level"
+#define PATH_BALLGAME_DIR "/Users/ryanhart/github/Ballgame/ballgame"
 #else
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
