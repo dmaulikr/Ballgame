@@ -595,6 +595,7 @@
 		381259FE13CA564E001282F6 /* ballgame */ = {
 			isa = PBXGroup;
 			children = (
+				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
 				3801303113D156C70008EC14 /* Physics */,
 				38125BD713CA58CE001282F6 /* Game Objects */,
@@ -612,6 +613,7 @@
 				38125BF013CA5A6C001282F6 /* AssetManager.m */,
 				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
 				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
+				38125BB213CA5651001282F6 /* Supporting Files */,
 				381259FF13CA564E001282F6 /* Resources */,
 				38125A1313CA564E001282F6 /* cocos2d */,
 				38125B0413CA5650001282F6 /* CocosDenshion */,
@@ -619,7 +621,6 @@
 				38125B1C13CA5650001282F6 /* FontLabel */,
 				38125B2D13CA5650001282F6 /* TouchJSON */,
 				38125B4613CA5650001282F6 /* Box2D */,
-				38125BB213CA5651001282F6 /* Supporting Files */,
 			);
 			path = ballgame;
 			sourceTree = "<group>";
@@ -967,7 +968,6 @@
 			children = (
 				38125BB313CA5651001282F6 /* Prefix.pch */,
 				38125BB413CA5651001282F6 /* main.m */,
-				38125C1313CA8226001282F6 /* DataDefinitions.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1003,6 +1003,14 @@
 				38F43D1713D259DE007002B9 /* Goal.mm */,
 			);
 			name = "Game Objects";
+			sourceTree = "<group>";
+		};
+		382BC59813D2CFD300199A1D /* Hardcodes */ = {
+			isa = PBXGroup;
+			children = (
+				38125C1313CA8226001282F6 /* DataDefinitions.h */,
+			);
+			name = Hardcodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

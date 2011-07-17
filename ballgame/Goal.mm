@@ -7,7 +7,6 @@
 //
 
 #import "Goal.h"
-#import "DataDefinitions.h"
 
 @implementation Goal
 

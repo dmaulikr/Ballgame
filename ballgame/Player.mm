@@ -7,7 +7,6 @@
 //
 
 #import "Player.h"
-#import "DataDefinitions.h"
 #import "Goal.h"
 
 @interface Player ()

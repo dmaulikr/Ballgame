@@ -7,7 +7,6 @@
 //
 
 #import "Wall.h"
-#import "DataDefinitions.h"
 
 @implementation Wall
 

@@ -9,7 +9,7 @@
 #import "GameObject.h"
 #import "AssetManager.h"
 
-#define PTM_RATIO 32.0
+
 
 @implementation GameObject
 
