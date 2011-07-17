@@ -1,4 +1,9 @@
 .DS_STORE
+
 *.xcuserdatad
+
 *.xcuserstate
+
 LevelEditor-build-*
+*.pro.user
+level_editor/old

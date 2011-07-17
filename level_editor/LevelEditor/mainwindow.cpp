@@ -1,3 +1,12 @@
+// ToDo:
+
+// Create object templates for easy object creation
+// Click on object to select it
+// Drag object to move it
+// Fix coordinate issue (does not match up with box2D atm)
+// Zoom in/out
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -6,40 +15,54 @@
 #define PATH_SPRITE_PLIST "../../ballgame/Resources/BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "../../ballgame/Resources/BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "../../ballgame/Resources/DebugLevel.level"
+#define PATH_BALLGAME_DIR "../../ballgame/Resources/"
 #else
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "..\\..\\ballgame\\DebugLevel.level"
+#define PATH_BALLGAME_DIR "..\\..\\ballgame\\"
 #endif
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+        QMainWindow(parent),
+        ui(new Ui::MainWindow)
 {
-    initializing = true;
+    currentFileName = "";
+
     ui->setupUi(this);
 
     loadFile();
 
     noEmit = false;
-    initializing = false;
+
 }
 
 void MainWindow::loadFile()
 {
-
+    initializing = true;
     spriteSheet = QImage(PATH_SPRITE_IMAGE);
 
     loadSpritePlist();
-    loadLevelPlist(PATH_DEBUG_LEVEL);
 
-    // draw objects on screen;
-    updateGraphics();
+    QString fileName = QFileDialog::getOpenFileName(this,
+         tr("Open Level"), PATH_BALLGAME_DIR, tr("Level file (*.level)"));
+
+    if(fileName == "") // no file selected
+        return;
+
+    currentFileName = fileName;
+
+    loadLevelPlist(fileName);
 
     // populate tables
     updateLevelPlistTable();
     updateObjectTable(0);
     updateObjectComboBox();
+
+    // draw objects on screen;
+    updateGraphics();
+    initializing = false;
+
 }
 
 void MainWindow::updateGraphics()
@@ -90,42 +113,42 @@ void MainWindow::updateGraphics()
 void MainWindow::loadSpritePlist()
 {
     QDomDocument doc("BallGameSpriteSheet");
-     QFile file(PATH_SPRITE_PLIST);
-     if (!file.open(QIODevice::ReadOnly))
-         return;
-     if (!doc.setContent(&file)) {
-         file.close();
-         return;
-     }
-     file.close();
+    QFile file(PATH_SPRITE_PLIST);
+    if (!file.open(QIODevice::ReadOnly))
+        return;
+    if (!doc.setContent(&file)) {
+        file.close();
+        return;
+    }
+    file.close();
 
-     QString itemName = "null";
-     QRect itemRect;
+    QString itemName = "null";
+    QRect itemRect;
 
-     // print out the element names of all elements that are direct children
-     // of the outermost element.
-     QDomElement docElem = doc.documentElement();
+    // print out the element names of all elements that are direct children
+    // of the outermost element.
+    QDomElement docElem = doc.documentElement();
 
-     QDomNode n = docElem.firstChild();
-     n = n.firstChild().nextSibling().firstChild();
-     while(!n.isNull()) {
-         QDomElement e = n.toElement(); // try to convert the node to an element.
-         if(!e.isNull()) {
-             itemName = qPrintable(e.text()); // the node really is an element.
-         }
-         n = n.nextSibling();
-         QDomNode m = n.firstChild();
+    QDomNode n = docElem.firstChild();
+    n = n.firstChild().nextSibling().firstChild();
+    while(!n.isNull()) {
+        QDomElement e = n.toElement(); // try to convert the node to an element.
+        if(!e.isNull()) {
+            itemName = qPrintable(e.text()); // the node really is an element.
+        }
+        n = n.nextSibling();
+        QDomNode m = n.firstChild();
 
-         // 13 is the index of the Rect string in the sub-dicts.
-         for(int i = 0; i < 13; i++)
-             m = m.nextSibling();
+        // 13 is the index of the Rect string in the sub-dicts.
+        for(int i = 0; i < 13; i++)
+            m = m.nextSibling();
 
-         QDomElement f = m.toElement();
-         itemRect = strToRect(qPrintable(f.text()));
-         n = n.nextSibling();
+        QDomElement f = m.toElement();
+        itemRect = strToRect(qPrintable(f.text()));
+        n = n.nextSibling();
 
-         spriteSheetLocations.insert(itemName, itemRect);
-     }
+        spriteSheetLocations.insert(itemName, itemRect);
+    }
 }
 
 
@@ -168,8 +191,11 @@ void MainWindow::objectChanged(QTableWidgetItem* newItem)
 }
 
 void MainWindow::levelPlistChanged(QTableWidgetItem* newItem)
-{    // Nothing selected, abort.
-    if(ui->levelPlistTableWidget->currentColumn() < 0)
+{
+    int column = ui->levelPlistTableWidget->currentColumn();
+
+    // Nothing selected, abort.
+    if(column < 0)
         return;
 
     if(noEmit)
@@ -184,9 +210,19 @@ void MainWindow::levelPlistChanged(QTableWidgetItem* newItem)
     for(int i = 0; i < row; i++)
         ++it;
 
-    levelPlist.insert(it.key(), newItem->text());
+    if(column == 1)
+    {
+        levelPlist.insert(it.key(), newItem->text());
+    }
+    else if(column == 0)
+    {
+        QString value = levelPlist.value(it.key());
+        levelPlist.remove(it.key());
+        levelPlist.insert(newItem->text(), value);
+    }
 
     updateGraphics();
+    updateLevelPlistTable();
 
     noEmit = false;
 }
@@ -199,17 +235,13 @@ void MainWindow::updateLevelPlistTable()
     table->setRowCount(count);
     table->setColumnCount(2);
 
-
     QMap<QString, QString>::const_iterator i;
     int index = 0;
 
     for (i = levelPlist.constBegin(); i != levelPlist.constEnd(); ++i)
     {
-        QTableWidgetItem *widg = new QTableWidgetItem(i.key());
-        table->setItem(index, 0, widg);
-        //qDebug() << "before - " << levelPlist;
+        table->setItem(index, 0, new QTableWidgetItem(i.key()));
         table->setItem(index, 1, new QTableWidgetItem(i.value()));
-        //qDebug() << "after - " << levelPlist << "\n";
         index++;
     }
 }
@@ -244,6 +276,12 @@ void MainWindow::clearObjectTable()
 
 void MainWindow::updateObjectTable(int objId)
 {
+    if(objId == -2 || levelObjects.count() <= objId)
+    {
+        clearObjectTable();
+        return;
+    }
+
     if(objId == -1)
         return;
 
@@ -267,84 +305,198 @@ void MainWindow::updateObjectTable(int objId)
 
 }
 
+void MainWindow::newLevel()
+{
+    // ToDo:  implement "do you want to save?" here
+
+    currentFileName = "";
+
+    levelPlist = QMap<QString, QString>();
+    levelObjects = QList< QMap<QString, QString> >();
+
+    updateGraphics();
+    clearObjectTable();
+    updateLevelPlistTable();
+    updateObjectComboBox();
+}
+
+void MainWindow::saveLevelPlist()
+{
+    if(currentFileName != "")
+    {
+        saveLevelPlist(currentFileName);
+    }
+    else
+    {
+        saveLevelPlistAs();
+    }
+}
+
+void MainWindow::saveLevelPlistAs()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Level"),
+                                PATH_BALLGAME_DIR,
+                                tr("Levels (*.level)"));
+
+    if(fileName != "")
+    {
+        currentFileName = fileName;
+        saveLevelPlist(fileName);
+    }
+}
+
+
+void MainWindow::saveLevelPlist(QString filename)
+{
+    QDomDocument doc("plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"");
+    QDomElement root = doc.createElement("plist");
+    doc.appendChild(root);
+
+    QDomElement rootDict = doc.createElement("dict");
+    root.appendChild(rootDict);
+
+    QMap<QString, QString>::const_iterator i;
+    for (i = levelPlist.constBegin(); i != levelPlist.constEnd(); ++i)
+    {
+        QDomElement tag = doc.createElement("key");
+        rootDict.appendChild(tag);
+
+        QDomText t = doc.createTextNode(i.key());
+        tag.appendChild(t);
+
+        tag = doc.createElement("string");
+        if(i.value().toInt() != 0)
+            tag = doc.createElement("integer");
+        rootDict.appendChild(tag);
+
+        t = doc.createTextNode(i.value());
+        tag.appendChild(t);
+    }
+
+    QDomElement tag = doc.createElement("key");
+    rootDict.appendChild(tag);
+
+    QDomText t = doc.createTextNode("game_objects");
+    tag.appendChild(t);
+
+    QDomElement array = doc.createElement("array");
+    rootDict.appendChild(array);
+
+    for(int j = 0; j < levelObjects.count(); j++)
+    {
+        QDomElement dict = doc.createElement("dict");
+        array.appendChild(dict);
+
+        QMap<QString, QString>::const_iterator i;
+        for (i = levelObjects.at(j).constBegin(); i != levelObjects.at(j).constEnd(); ++i)
+        {
+            tag = doc.createElement("key");
+            dict.appendChild(tag);
+
+            t = doc.createTextNode(i.key());
+            tag.appendChild(t);
+
+            tag = doc.createElement("string");
+            if(i.value().toInt() != 0)
+                tag = doc.createElement("integer");
+            dict.appendChild(tag);
+
+            t = doc.createTextNode(i.value());
+            tag.appendChild(t);
+        }
+    }
+
+    QFile data(filename);
+    if (data.open(QFile::WriteOnly | QFile::Truncate))
+    {
+        QTextStream out(&data);
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+        //out << "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">" << endl;
+        doc.save(out, 1);
+    }
+}
+
 void MainWindow::loadLevelPlist(QString level)
 {
     QDomDocument doc("BallGameSpriteSheet");
-     QFile file(level);
-     if (!file.open(QIODevice::ReadOnly))
-         return;
-     if (!doc.setContent(&file)) {
-         file.close();
-         return;
-     }
-     file.close();
+    QFile file(level);
+    if (!file.open(QIODevice::ReadOnly))
+        return;
+    if (!doc.setContent(&file)) {
+        file.close();
+        return;
+    }
+    file.close();
 
-     QString itemName = "null";
-     QString itemContents = "null";
-     QString itemTag = "null";
+    QString itemName = "null";
+    QString itemContents = "null";
+    QString itemTag = "null";
 
-     // print out the element names of all elements that are direct children
-     // of the outermost element.
-     QDomElement docElem = doc.documentElement();
+    levelPlist.clear();
+    levelObjects.clear();
 
-     QDomNode n = docElem.firstChild();
-     n = n.firstChild();
-     while(!n.isNull()) {
-         QDomElement e = n.toElement(); // try to convert the node to an element.
-         if(!e.isNull()) {
+    // print out the element names of all elements that are direct children
+    // of the outermost element.
+    QDomElement docElem = doc.documentElement();
 
-             itemName = qPrintable(e.text()); // the node really is an element.
-             itemTag = qPrintable(e.tagName());
+    QDomNode n = docElem.firstChild();
+    n = n.firstChild();
+    while(!n.isNull()) {
+        QDomElement e = n.toElement(); // try to convert the node to an element.
+        if(!e.isNull()) {
 
-             Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Tag should be a key, but isn't!");
+            itemName = qPrintable(e.text()); // the node really is an element.
+            itemTag = qPrintable(e.tagName());
 
-             n = n.nextSibling();
-             e = n.toElement();
-             itemContents = qPrintable(e.text());
-             itemTag = qPrintable(e.tagName());
-             if(itemTag != "array")
-             {
-                 levelPlist.insert(itemName, itemContents);
-             }
-             else
-             {
-                 QDomNode m = n.firstChild();
-                 while(!m.isNull())
-                 {
-                     QMap<QString, QString> newHash;
-                     QDomNode o = m.firstChild();
-                     while(!o.isNull())
-                     {
-                         QDomElement f = o.toElement(); // try to convert the node to an element.
-                         if(!f.isNull()) {
+            Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Tag should be a key, but isn't!");
 
-                             itemName = qPrintable(f.text()); // the node really is an element.
-                             itemTag = qPrintable(f.tagName());
+            n = n.nextSibling();
+            e = n.toElement();
+            itemContents = qPrintable(e.text());
+            itemTag = qPrintable(e.tagName());
+            if(itemTag != "array")
+            {
+                levelPlist.insert(itemName, itemContents);
+            }
+            else
+            {
+                QDomNode m = n.firstChild();
+                while(!m.isNull())
+                {
+                    QMap<QString, QString> newHash;
+                    QDomNode o = m.firstChild();
+                    while(!o.isNull())
+                    {
+                        QDomElement f = o.toElement(); // try to convert the node to an element.
+                        if(!f.isNull()) {
 
-                             Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Level object tag should be a key, but isn't!");
+                            itemName = qPrintable(f.text()); // the node really is an element.
+                            itemTag = qPrintable(f.tagName());
 
-                             o = o.nextSibling();
-                             f = o.toElement();
-                             itemContents = qPrintable(f.text());
-                             itemTag = qPrintable(f.tagName());
+                            Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Level object tag should be a key, but isn't!");
 
-                             newHash.insert(itemName, itemContents);
+                            o = o.nextSibling();
+                            f = o.toElement();
+                            itemContents = qPrintable(f.text());
+                            itemTag = qPrintable(f.tagName());
 
-                             o = o.nextSibling();
-                         }
-                     } // while object dict is not done
+                            newHash.insert(itemName, itemContents);
 
-                     levelObjects.append(newHash);
-                     m = m.nextSibling();
-                 }
-             }
+                            o = o.nextSibling();
+                        }
+                    } // while object dict is not done
 
-             n = n.nextSibling();
+                    levelObjects.append(newHash);
+                    m = m.nextSibling();
+                }
+            }
+
+            n = n.nextSibling();
 
 
-         }
+        }
 
-     }
+    }
 }
 
 void MainWindow::addPropertyClicked()
@@ -433,6 +585,50 @@ void MainWindow::deleteObjectClicked()
     }
 }
 
+void MainWindow::addLevelPropertyClicked()
+{
+    if(noEmit)
+        return;
+    noEmit = true;
+
+    levelPlist.insert("new_property", "null");
+
+    updateGraphics();
+    updateLevelPlistTable();
+
+    noEmit = false;
+
+}
+
+void MainWindow::deleteLevelPropertyClicked()
+{
+    int row = ui->levelPlistTableWidget->currentRow();
+
+    if(row == -1) // nothing selected
+        return;
+
+    if(noEmit)
+        return;
+    noEmit = true;
+
+    // iterate to the deleted row
+    QMap<QString, QString>::const_iterator it = levelPlist.constBegin();
+    for(int i = 0; i < row; i++)
+        ++it;
+
+    levelPlist.remove(it.key());
+
+    updateGraphics();
+    updateLevelPlistTable();
+
+    noEmit = false;
+
+
+
+
+
+}
+
 // Helper function to convert string to rect
 QRect MainWindow::strToRect(QString in)
 {
@@ -444,6 +640,13 @@ QRect MainWindow::strToRect(QString in)
     Q_ASSERT_X(strL.length() == 4, "MainWindow::strToRect", "strL does not have 4 strings!");
 
     return QRect(strL.at(0).toInt(),strL.at(1).toInt(), strL.at(2).toInt(), strL.at(3).toInt() );
+}
+
+void MainWindow::quit()
+{
+    // ToDo:  Implement "do you want to save?" here
+
+    exit(0);
 }
 
 MainWindow::~MainWindow()
