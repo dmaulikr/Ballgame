@@ -12,6 +12,8 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //TODO: Rotation
+    _identifier = GameObjectIDGoal;
+    
     CGSize size;
     size.width = [[game_object valueForKey:@"width"] floatValue];
     size.height = [[game_object valueForKey:@"height"] floatValue];

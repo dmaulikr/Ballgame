@@ -23,6 +23,7 @@
         [NSException raise:@"Attempt to setup a player object that doesn't have levelInfo" format:@"Make sure you set the level info for the player object before setupGameObject"];
         return;
     }
+    _identifier = GameObjectIDPlayer;
     CGPoint p;
     p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
     p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
@@ -87,7 +88,7 @@
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
-    if ([object class] == [Goal class]){
+    if ([object identifier] == GameObjectIDGoal){
         [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusCompleted] forKey:@"LevelStatus"];
     }
 }
