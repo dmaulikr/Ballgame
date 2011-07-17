@@ -1,0 +1,478 @@
+//
+//  PlayScene.mm
+//  ballgame
+//
+//  Created by Ryan Hart on 7/10/11.
+//  Copyright __myCompanyName__ 2011. All rights reserved.
+//
+
+
+// Import the interfaces
+#import "PlayScene.h"
+#import "DataDefinitions.h"
+#import "HighScoresScene.h"
+
+#define DEBUG_DRAW 1
+// enums that will be used as tags
+enum {
+	kTagTileMap = 1,
+	kTagBatchNode = 1,
+	kTagAnimation1 = 1,
+};
+
+@interface PlayScene ()
+
+-(Player*) addPlayer;
+-(id)addGameObject:(NSDictionary *)gameObject;
+-(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
+@end
+
+// HelloWorldLayer implementation
+@implementation PlayScene
+
+@synthesize defaults;
+
+#pragma mark - Init
+
+-(id)loadLevelWithName:(NSString *)levelName{
+    _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
+    [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
+    defaults = [[AssetManager sharedInstance] getDefaults];
+    
+    _collisionManager = [[CollisionManager alloc] init];
+    _previousCollisions = [[NSSet alloc] initWithObjects:nil];
+#pragma mark Game World Settings
+    // enable touches
+    self.isTouchEnabled = YES;
+    
+    // enable accelerometer
+    self.isAccelerometerEnabled = YES;
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
+    
+    // Define the gravity vector.
+    b2Vec2 gravity;
+    gravity.Set(0.0f, 0.0f);
+    
+    // Do we want to let bodies sleep?
+    // This will speed up the physics simulation
+    bool doSleep = false;
+    
+    // Construct a world object, which will hold and simulate the rigid bodies.
+    world = new b2World(gravity, doSleep);
+    
+    world->SetContinuousPhysics(true);
+    
+    // Debug Draw functions
+    m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+    world->SetDebugDraw(m_debugDraw);
+    
+    uint32 flags = 0;
+    flags += b2DebugDraw::e_shapeBit;
+    //		flags += b2DebugDraw::e_jointBit;
+    //		flags += b2DebugDraw::e_aabbBit;
+    //		flags += b2DebugDraw::e_pairBit;
+    //		flags += b2DebugDraw::e_centerOfMassBit;
+    m_debugDraw->SetFlags(flags);		
+    
+    
+    // Define the ground body.
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position.Set(0, 0); // bottom-left corner
+    
+    // Call the body factory which allocates memory for the ground body
+    // from a pool and creates the ground box shape (also from a pool).
+    // The body is also added to the world.
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+    
+    // Define the ground box shape.
+    b2PolygonShape groundBox;		
+    
+    // bottom
+    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // top
+    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    
+     
+    // left
+    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2(0,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // right
+    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue]));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    
+    
+#pragma mark Game Object Initialization
+    
+
+    
+    //Initialize the Sprite Sheet
+    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"BallGameSpriteSheet.png" capacity:150];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"BallGameSpriteSheet.plist"];
+    
+    // Initialize the scrolling layer
+    // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
+    scrollNode = [CCLayer node];
+    [scrollNode setPosition:CGPointMake(-[[_levelInfo valueForKey:@"start_x"] floatValue] + screenSize.width/2 , -[[_levelInfo valueForKey:@"start_y"] floatValue] + screenSize.height/2  )];
+    [scrollNode addChild:batch];
+	//[scrollNode addChild:batch z:0 parallaxRatio:ccp(1.0f,1.0f) positionOffset:CGPointZero];
+    [scrollNode setTag:kTagBatchNode];
+    [self addChild:scrollNode];
+    
+    //Add the game Objects
+    _thePlayer = [self addPlayer];
+    
+    for (NSDictionary *game_object in [_levelInfo objectForKey:@"game_objects"]){
+        NSLog(@"Adding an object");
+        [self addGameObject:game_object];
+    }
+    
+    [_collisionManager subscribeCollisionManagerToWorld:world];
+    
+    
+#pragma mark Initialize the game loop
+    [self schedule: @selector(tick:)];
+
+    return self;
+}
+
+-(Player*)addPlayer
+{
+	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+	
+	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
+    Player *player = [Player spriteWithSpriteFrameName:@"player_amoeba.png"];
+
+    
+    
+	[batch addChild:player];
+    [player setLevelInfo:_levelInfo];
+    [player setupGameObject:nil forWorld:world];
+	
+    return player;
+}
+
+-(id)addGameObject:(NSDictionary *)gameObject{
+    CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+    
+    NSString *type = [gameObject objectForKey:@"type"];
+    NSString *frameName = [gameObject objectForKey:@"frame_name"];
+    
+    GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
+    
+    [batch addChild:object];
+    [object setupGameObject:gameObject forWorld:world];
+    
+    return nil;
+}
+
+#pragma mark - Level Creation
+
+-(NSMutableArray*)populateGameObjectsFromPlist{
+    //TODO: Tune this number once we get a feeling for about how many game objects the average level has.  Small performance gain.
+    NSMutableArray *_populatedArray = [[NSMutableArray alloc] initWithCapacity:1000];
+    
+    //HARDCODE: 
+    int NUM_WALLS = 0;
+    for (int i = 0; i < NUM_WALLS; i++){
+        
+    }
+    int NUM_COINS = 0;
+    for (int i = 0; i < NUM_COINS; i++){
+        
+    }
+    int NUM_POW_2X = 0;
+    for (int i = 0; i < NUM_POW_2X; i++){
+        
+    }
+    
+    return _populatedArray;
+}
+
+
+
++(CCScene*)debugScene{
+    
+    CCScene *scene = [CCScene node];
+	
+	// 'layer' is an autorelease object.
+	PlayScene *layer = [PlayScene node];
+	[layer loadLevelWithName:@"DebugLevel"];
+	// add layer as a child to scene
+	[scene addChild: layer];
+	
+	// return the scene
+	return scene;
+}
+                      
+
+#pragma mark - What the fuck are these
++(CCScene *) scene
+{
+	// 'scene' is an autorelease object.
+	CCScene *scene = [CCScene node];
+	
+	// 'layer' is an autorelease object.
+	PlayScene *layer = [PlayScene node];
+	
+	// add layer as a child to scene
+	[scene addChild: layer];
+	
+	// return the scene
+	return scene;
+}
+
+
+-(void) addNewSpriteWithCoords:(CGPoint)p
+{
+	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+	
+	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
+    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"spore_blue.png"];
+	[batch addChild:sprite];
+	
+	sprite.position = ccp( p.x, p.y);
+	
+	// Define the dynamic body.
+	//Set up a 1m squared box in the physics world
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+    
+	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+	bodyDef.userData = sprite;
+	b2Body *body = world->CreateBody(&bodyDef);
+	
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+	
+	// Define the dynamic body fixture.
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;	
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+	body->CreateFixture(&fixtureDef);
+}
+
+
+#pragma mark - Game Loop Methods
+
+-(void) draw
+{
+    
+     // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+     // Needed states:  GL_VERTEX_ARRAY, 
+     // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+    
+#if DEBUG_DRAW
+
+    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+    // Needed states:  GL_VERTEX_ARRAY,
+    // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+    glDisable(GL_TEXTURE_2D);
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+    glPushMatrix();
+    
+    //tileLayer is the view being offset
+    float translateX = (scrollNode.position.x);
+    float translateY = (scrollNode.position.y);
+    glTranslatef(	translateX, translateY, 0.0f);
+    
+    world->DrawDebugData();
+    
+    glPopMatrix();
+    
+    // restore default GL states
+    glEnable(GL_TEXTURE_2D);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+     
+#endif
+}
+
+-(void) tick: (ccTime) dt
+{
+    
+   // NSLog(@"current - %f, %f, new - %f, %f", currentPos.x, currentPos.y, newPosition.x, newPosition.y);
+    
+    [_thePlayer updatePlayer:dt];
+    
+	//It is recommended that a fixed time step is used with Box2D for stability
+	//of the simulation, however, we are using a variable time step here.
+	//You need to make an informed choice, the following URL is useful
+	//http://gafferongames.com/game-physics/fix-your-timestep/
+	
+	int32 velocityIterations = 8;
+	int32 positionIterations = 1;
+	
+	// Instruct the world to perform a single step of simulation. It is
+	// generally best to keep the time step and iterations fixed.
+	world->Step(dt, velocityIterations, positionIterations);
+    [self processCollisionSet:[_collisionManager collisionSet] withTime:dt];
+    
+    //Check Level Status.  Are we finished?
+	if ([[_levelInfo valueForKey:@"LevelStatus"] intValue] == LevelStatusCompleted){
+        [[CCDirector sharedDirector] replaceScene:[HighScores scene]];
+    }
+	//Iterate over the bodies in the physics world
+	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
+	{
+		if (b->GetUserData() != NULL) {
+			//Synchronize the AtlasSprites position and rotation with the corresponding body
+			CCSprite *myActor = (CCSprite*)b->GetUserData();
+			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+		}	
+	}
+    
+#pragma mark Movement of the Scroll Node
+    CGPoint currentPos = [scrollNode position];
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    b2Vec2 velocity = [_thePlayer getVelocity];
+	// if ball moved off the edge
+    
+    
+#define SCROLL_BORDER 150
+	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && _thePlayer.position.x > 0 && velocity.x < 0){
+		CGPoint currentPos = [scrollNode position];
+		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
+	}
+	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && _thePlayer.position.x < ([[_levelInfo valueForKey:@"level_width"] floatValue]) - SCROLL_BORDER && velocity.x > 0){
+		CGPoint currentPos = [scrollNode position];
+		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
+	}
+	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && _thePlayer.position.y > 0 + SCROLL_BORDER && velocity.y < 0){
+		CGPoint currentPos = [scrollNode position];
+		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
+	}
+	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && _thePlayer.position.y < ([[_levelInfo valueForKey:@"level_height"] floatValue] - SCROLL_BORDER) && velocity.y > 0){
+		CGPoint currentPos = [scrollNode position];
+		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
+	}
+}
+
+-(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt{
+    
+    NSSet *newCollisions = [collisionSet setDifferenceFromSet:_previousCollisions];
+    NSSet *removedCollisions = [_previousCollisions setDifferenceFromSet:collisionSet];
+    
+    if ([newCollisions count] != 0){
+        NSLog(@"new: %@", [newCollisions description]);
+    }
+    if ([removedCollisions count] != 0){
+        NSLog(@"removed: %@", [removedCollisions description]);
+    }
+    
+    for (GameObjectCollision *collision in newCollisions){
+        if ([[collision objectA] isEqual:_thePlayer]){
+            [_thePlayer handleCollisionWithObject:[collision objectB]];
+        }
+        else if ([[collision objectB] isEqual:_thePlayer]){
+            [_thePlayer handleCollisionWithObject:[collision objectA]];
+        }
+    }
+    
+    for (GameObjectCollision *collision in removedCollisions){
+        if ([[collision objectA] isEqual:_thePlayer]){
+            [_thePlayer noLongerCollidingWithObject:[collision objectB]];
+        }
+        else if ([[collision objectB] isEqual:_thePlayer]){
+            [_thePlayer noLongerCollidingWithObject:[collision objectA]];
+        }
+    }
+    //The last thing we do is remember last iteration's collision set
+    //So we can build change sets
+    [_previousCollisions release];
+    _previousCollisions = [collisionSet copy];
+    
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+     // set velocity of ball to 0
+     b2Vec2 v(0, 0);
+     b2Body* b = [_thePlayer body];
+     b->SetLinearVelocity(v);
+}
+
+
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for( UITouch *touch in touches ) {
+		
+		CGPoint currentPos = [scrollNode position];
+		CGPoint point = [touch locationInView:[touch view]];
+		
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
+		float pointX = point.x + -1*currentPos.x;
+		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
+		
+		NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
+		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+		
+        
+		double vConst = .05;  // multiplier
+		
+		b2Body* b = [_thePlayer body];
+		float objectX = b->GetPosition().x*PTM_RATIO;
+		float objectY = b->GetPosition().y*PTM_RATIO;
+		
+		float accelX = vConst*(pointX-objectX) ;
+		float accelY = vConst*(pointY-objectY);
+		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
+		
+		b2Vec2 v(accelX, accelY);	
+        v.Normalize();
+        v *= 10;
+		b->SetLinearVelocity(v);
+         
+	}	
+}
+
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{	
+	static float prevX=0, prevY=0;
+	
+	//#define kFilterFactor 0.05f
+#define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
+	
+	float accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
+	float accelY = (float) acceleration.y * kFilterFactor + (1- kFilterFactor)*prevY;
+	
+	prevX = accelX;
+	prevY = accelY;
+	
+	// accelerometer values are in "Portrait" mode. Change them to Landscape left
+	// multiply the gravity by 10
+	b2Vec2 gravity( -accelY * 10, accelX * 10);
+	
+	world->SetGravity( gravity );
+}
+
+#pragma mark - Data Management
+// on "dealloc" you need to release all your retained objects
+- (void) dealloc
+{
+	// in case you have something to dealloc, do it in this method
+	delete world;
+	world = NULL;
+	
+	delete m_debugDraw;
+    
+    [_levelInfo release];
+	// don't forget to call "super dealloc"
+	[super dealloc];
+}
+@end
