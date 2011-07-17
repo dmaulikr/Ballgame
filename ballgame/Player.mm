@@ -86,6 +86,7 @@
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
+    //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
     if ([object class] == [Goal class]){
         [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusCompleted] forKey:@"LevelStatus"];
     }
