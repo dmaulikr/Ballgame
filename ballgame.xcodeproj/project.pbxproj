@@ -161,7 +161,6 @@
 		38125BB513CA5651001282F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125BB413CA5651001282F6 /* main.m */; };
 		38125BB813CA5651001282F6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BB713CA5651001282F6 /* AppDelegate.mm */; };
 		38125BBB13CA5651001282F6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125BBA13CA5651001282F6 /* RootViewController.m */; };
-		38125BBE13CA5651001282F6 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */; };
 		38125BC113CA5651001282F6 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BC013CA5651001282F6 /* GLES-Render.mm */; };
 		38125BC413CA5651001282F6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BC313CA5651001282F6 /* blocks.png */; };
 		38125BD413CA57F8001282F6 /* PlayScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BD313CA57F8001282F6 /* PlayScene.mm */; };
@@ -490,8 +489,6 @@
 		38125BB713CA5651001282F6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BB913CA5651001282F6 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RootViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BBA13CA5651001282F6 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		38125BBC13CA5651001282F6 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HelloWorldLayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = HelloWorldLayer.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BBF13CA5651001282F6 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		38125BC013CA5651001282F6 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		38125BC213CA5651001282F6 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -982,8 +979,6 @@
 				38FB190713D26106003372ED /* HighScoresScene.mm */,
 				38125BD213CA57F8001282F6 /* PlayScene.h */,
 				38125BD313CA57F8001282F6 /* PlayScene.mm */,
-				38125BBC13CA5651001282F6 /* HelloWorldLayer.h */,
-				38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */,
 				387DDA9C13D356D000C7DD9A /* GameOverScene.h */,
 				387DDA9D13D356D000C7DD9A /* GameOverScene.m */,
 			);
@@ -1226,7 +1221,6 @@
 				38125BB513CA5651001282F6 /* main.m in Sources */,
 				38125BB813CA5651001282F6 /* AppDelegate.mm in Sources */,
 				38125BBB13CA5651001282F6 /* RootViewController.m in Sources */,
-				38125BBE13CA5651001282F6 /* HelloWorldLayer.mm in Sources */,
 				38125BC113CA5651001282F6 /* GLES-Render.mm in Sources */,
 				38125BD413CA57F8001282F6 /* PlayScene.mm in Sources */,
 				38125BDA13CA590F001282F6 /* GameObject.mm in Sources */,
