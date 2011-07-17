@@ -5,5 +5,5 @@
 *.xcuserstate
 
 LevelEditor-build-*
-*.pro.user
+*.pro.user.*
 level_editor/old
