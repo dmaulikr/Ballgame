@@ -8,3 +8,5 @@ LevelEditor-build-*
 *.pro.user.*
 level_editor/old
 level_editor/LevelEditor/LevelEditor.pro.user
+
+ballgame/.DS_Store
