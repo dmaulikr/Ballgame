@@ -10,12 +10,12 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "PlayScene.h"
+#import "SplashScene.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window;
+@synthesize window, navController=_navController;
 
 - (void) removeStartupFlicker
 {
@@ -42,6 +42,7 @@
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
 	// Init the window
+    
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	// Try to use CADisplayLink director
@@ -55,7 +56,7 @@
 	// Init the View Controller
 	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
 	viewController.wantsFullScreenLayout = YES;
-	
+	_navController = [[UINavigationController alloc] initWithRootViewController:viewController];
 	//
 	// Create the EAGLView manually
 	//  1. Create a RGB565 format. Alternative: RGBA8
@@ -63,13 +64,12 @@
 	//
 	//
 	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
-								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
-						];
+								   pixelFormat:kEAGLColorFormatRGBA8	// kEAGLColorFormatRGBA8
+								   depthFormat:GL_DEPTH_COMPONENT24_OES	// GL_DEPTH_COMPONENT16_OES
+                        ];
 	
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
-	
 //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 //	if( ! [director enableRetinaDisplay:YES] )
 //		CCLOG(@"Retina Display Not supported");
@@ -95,9 +95,10 @@
 	
 	// make the OpenGLView a child of the view controller
 	[viewController setView:glView];
+    [viewController.navigationController setNavigationBarHidden:YES];
 	
 	// make the View Controller a child of the main window
-	[window addSubview: viewController.view];
+	[window addSubview: _navController.view];
 	
 	[window makeKeyAndVisible];
 	
@@ -111,7 +112,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [PlayScene debugScene]];
+	[[CCDirector sharedDirector] runWithScene: [SplashScene scene]];
 }
 
 

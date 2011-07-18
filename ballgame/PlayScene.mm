@@ -36,7 +36,6 @@ enum {
 -(id)loadLevelWithName:(NSString *)levelName{
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
-    
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
 #pragma mark Game World Settings
@@ -102,7 +101,7 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
     
     // right
-    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue]));
+    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
     
@@ -112,8 +111,8 @@ enum {
 
     
     //Initialize the Sprite Sheet
-    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"BallGameSpriteSheet.png" capacity:150];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"BallGameSpriteSheet.plist"];
+    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPngName"] capacity:150];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPlistName"]];
     
     // Initialize the scrolling layer
     // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
@@ -202,7 +201,7 @@ enum {
 	
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [PlayScene node];
-	[layer loadLevelWithName:@"DebugLevel"];
+	[layer loadLevelWithName:@"box"];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	

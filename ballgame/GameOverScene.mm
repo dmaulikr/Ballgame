@@ -7,7 +7,7 @@
 //
 
 #import "GameOverScene.h"
-#import "PlayScene.h"
+#import "SplashScene.h"
 
 
 @interface GameOverScene ()
@@ -37,7 +37,7 @@
 }
 -(void)restartTapped:(id)sender{
     NSLog(@"Tapped");
-    [[CCDirector sharedDirector] replaceScene:[PlayScene debugScene]];
+    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
 }
                             
 +(CCScene *) scene{
