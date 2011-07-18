@@ -161,7 +161,6 @@
 		38125BB513CA5651001282F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125BB413CA5651001282F6 /* main.m */; };
 		38125BB813CA5651001282F6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BB713CA5651001282F6 /* AppDelegate.mm */; };
 		38125BBB13CA5651001282F6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125BBA13CA5651001282F6 /* RootViewController.m */; };
-		38125BBE13CA5651001282F6 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */; };
 		38125BC113CA5651001282F6 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BC013CA5651001282F6 /* GLES-Render.mm */; };
 		38125BC413CA5651001282F6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BC313CA5651001282F6 /* blocks.png */; };
 		38125BD413CA57F8001282F6 /* PlayScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125BD313CA57F8001282F6 /* PlayScene.mm */; };
@@ -175,9 +174,10 @@
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
 		38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = 38125C0513CA75D0001282F6 /* DebugLevel.level */; };
 		38125C0B13CA7FDF001282F6 /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125C0A13CA7FDE001282F6 /* Wall.mm */; };
-		387DDA9E13D356D000C7DD9A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.m */; };
+		387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.mm */; };
 		38F43D1813D259DE007002B9 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38F43D1713D259DE007002B9 /* Goal.mm */; };
 		38FB190813D26106003372ED /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38FB190713D26106003372ED /* HighScoresScene.mm */; };
+		38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = 38FF13BB13D3C21D00D28C29 /* TestConvert.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -490,8 +490,6 @@
 		38125BB713CA5651001282F6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BB913CA5651001282F6 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RootViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BBA13CA5651001282F6 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		38125BBC13CA5651001282F6 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HelloWorldLayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = HelloWorldLayer.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BBF13CA5651001282F6 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		38125BC013CA5651001282F6 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		38125BC213CA5651001282F6 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -517,11 +515,12 @@
 		38125C0A13CA7FDE001282F6 /* Wall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Wall.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125C1313CA8226001282F6 /* DataDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataDefinitions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		387DDA9C13D356D000C7DD9A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
-		387DDA9D13D356D000C7DD9A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		387DDA9D13D356D000C7DD9A /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverScene.mm; sourceTree = "<group>"; };
 		38F43D1713D259DE007002B9 /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Goal.mm; sourceTree = "<group>"; };
 		38F43D1913D25A19007002B9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		38FB190613D26106003372ED /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
 		38FB190713D26106003372ED /* HighScoresScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HighScoresScene.mm; sourceTree = "<group>"; };
+		38FF13BB13D3C21D00D28C29 /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestConvert.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,6 +582,12 @@
 		381259ED13CA564E001282F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38125A1313CA564E001282F6 /* cocos2d */,
+				38125B0413CA5650001282F6 /* CocosDenshion */,
+				38125B1213CA5650001282F6 /* cocoslive */,
+				38125B1C13CA5650001282F6 /* FontLabel */,
+				38125B2D13CA5650001282F6 /* TouchJSON */,
+				38125B4613CA5650001282F6 /* Box2D */,
 				381259EE13CA564E001282F6 /* QuartzCore.framework */,
 				381259F013CA564E001282F6 /* OpenGLES.framework */,
 				381259F213CA564E001282F6 /* OpenAL.framework */,
@@ -598,13 +603,14 @@
 		381259FE13CA564E001282F6 /* ballgame */ = {
 			isa = PBXGroup;
 			children = (
+				387E357513D38BC4006CB9AD /* UI Constructs */,
 				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
 				3801303113D156C70008EC14 /* Physics */,
 				38125BD713CA58CE001282F6 /* Game Objects */,
+				38125BD613CA5806001282F6 /* Scenes */,
 				38125BB613CA5651001282F6 /* AppDelegate.h */,
 				38125BB713CA5651001282F6 /* AppDelegate.mm */,
-				38125BD613CA5806001282F6 /* Scenes */,
 				38125BB913CA5651001282F6 /* RootViewController.h */,
 				38125BBA13CA5651001282F6 /* RootViewController.m */,
 				38125BBF13CA5651001282F6 /* GLES-Render.h */,
@@ -612,18 +618,13 @@
 				38125BC213CA5651001282F6 /* GameConfig.h */,
 				38125BF213CA5A7B001282F6 /* GameDefaults.plist */,
 				38125C0513CA75D0001282F6 /* DebugLevel.level */,
+				38FF13BB13D3C21D00D28C29 /* TestConvert.level */,
 				38125BEF13CA5A6B001282F6 /* AssetManager.h */,
 				38125BF013CA5A6C001282F6 /* AssetManager.m */,
 				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
 				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
 				38125BB213CA5651001282F6 /* Supporting Files */,
 				381259FF13CA564E001282F6 /* Resources */,
-				38125A1313CA564E001282F6 /* cocos2d */,
-				38125B0413CA5650001282F6 /* CocosDenshion */,
-				38125B1213CA5650001282F6 /* cocoslive */,
-				38125B1C13CA5650001282F6 /* FontLabel */,
-				38125B2D13CA5650001282F6 /* TouchJSON */,
-				38125B4613CA5650001282F6 /* Box2D */,
 			);
 			path = ballgame;
 			sourceTree = "<group>";
@@ -815,6 +816,7 @@
 				38125B0213CA5650001282F6 /* ZipUtils.m */,
 			);
 			name = cocos2d;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125B0413CA5650001282F6 /* CocosDenshion */ = {
@@ -831,6 +833,7 @@
 				38125B1013CA5650001282F6 /* SimpleAudioEngine.m */,
 			);
 			name = CocosDenshion;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125B1213CA5650001282F6 /* cocoslive */ = {
@@ -844,6 +847,7 @@
 				38125B1A13CA5650001282F6 /* cocoslive.m */,
 			);
 			name = cocoslive;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125B1C13CA5650001282F6 /* FontLabel */ = {
@@ -862,6 +866,7 @@
 				38125B2B13CA5650001282F6 /* ZFont.m */,
 			);
 			name = FontLabel;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125B2D13CA5650001282F6 /* TouchJSON */ = {
@@ -885,6 +890,7 @@
 				38125B4413CA5650001282F6 /* CJSONSerializer.m */,
 			);
 			name = TouchJSON;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125B4613CA5650001282F6 /* Box2D */ = {
@@ -964,6 +970,7 @@
 				38125BB113CA5651001282F6 /* b2WeldJoint.h */,
 			);
 			name = Box2D;
+			path = ballgame;
 			sourceTree = "<group>";
 		};
 		38125BB213CA5651001282F6 /* Supporting Files */ = {
@@ -982,10 +989,8 @@
 				38FB190713D26106003372ED /* HighScoresScene.mm */,
 				38125BD213CA57F8001282F6 /* PlayScene.h */,
 				38125BD313CA57F8001282F6 /* PlayScene.mm */,
-				38125BBC13CA5651001282F6 /* HelloWorldLayer.h */,
-				38125BBD13CA5651001282F6 /* HelloWorldLayer.mm */,
 				387DDA9C13D356D000C7DD9A /* GameOverScene.h */,
-				387DDA9D13D356D000C7DD9A /* GameOverScene.m */,
+				387DDA9D13D356D000C7DD9A /* GameOverScene.mm */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1016,6 +1021,13 @@
 				38125C1313CA8226001282F6 /* DataDefinitions.h */,
 			);
 			name = Hardcodes;
+			sourceTree = "<group>";
+		};
+		387E357513D38BC4006CB9AD /* UI Constructs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "UI Constructs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1082,6 +1094,7 @@
 				38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */,
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
 				38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */,
+				38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,7 +1239,6 @@
 				38125BB513CA5651001282F6 /* main.m in Sources */,
 				38125BB813CA5651001282F6 /* AppDelegate.mm in Sources */,
 				38125BBB13CA5651001282F6 /* RootViewController.m in Sources */,
-				38125BBE13CA5651001282F6 /* HelloWorldLayer.mm in Sources */,
 				38125BC113CA5651001282F6 /* GLES-Render.mm in Sources */,
 				38125BD413CA57F8001282F6 /* PlayScene.mm in Sources */,
 				38125BDA13CA590F001282F6 /* GameObject.mm in Sources */,
@@ -1240,7 +1252,7 @@
 				380C13EC13D2148800C62364 /* NSSetDifference.m in Sources */,
 				38F43D1813D259DE007002B9 /* Goal.mm in Sources */,
 				38FB190813D26106003372ED /* HighScoresScene.mm in Sources */,
-				387DDA9E13D356D000C7DD9A /* GameOverScene.m in Sources */,
+				387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
