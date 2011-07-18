@@ -65,7 +65,7 @@
     // e.g. self.myOutlet = nil;
     [cellTitles release];
     [cellActions release];
-    [[CCDirector sharedDirector] startAnimation];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -181,7 +181,7 @@
             [self.navigationController popViewControllerAnimated:NO];
             break;
         case 1:
-            [[AssetManager sharedInstance] cacheResourceOfType:@"png" fromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.png"] withDelegate:self andResultSelector:@selector(finishedCache)];
+            [[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.png"] withDelegate:self resultSelector:@selector(finishedCache) andDefaultsKey:@"SpriteSheetPngName"];
             break;
             
         default:

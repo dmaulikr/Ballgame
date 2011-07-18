@@ -18,6 +18,7 @@
     BOOL _isDownloading;
     id _downloadDelegate;
     SEL _resultSelector;
+    NSString *_defaultsKeyToSet;
 }
 
 @property(nonatomic, retain) NSDictionary *plistDefaults;
@@ -25,7 +26,7 @@
 +(id)sharedInstance;
 +(id)alloc;
 
--(void)cacheResourceOfType:(NSString*)type fromURL:(NSURL*)url withDelegate:(id)delegate andResultSelector:(SEL)selector;
+-(void)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key;
 -(NSDictionary*) getDefaults;
 -(NSDictionary*)levelWithName:(NSString*)levelName;
 @end

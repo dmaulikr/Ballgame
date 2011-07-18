@@ -111,7 +111,11 @@ enum {
 
     
     //Initialize the Sprite Sheet
+    NSLog(@"Purging and removing");
+    [CCTextureCache purgeSharedTextureCache];
+    [CCSpriteFrameCache purgeSharedSpriteFrameCache];
     CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPngName"] capacity:150];
+    //CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:batchTexture  capacity:150]; 
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPlistName"]];
     
     // Initialize the scrolling layer

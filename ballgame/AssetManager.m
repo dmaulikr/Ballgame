@@ -56,7 +56,7 @@ static AssetManager* sharedAssetManager = nil;
     return plistDefaults;
 }
 
--(void)cacheResourceOfType:(NSString*)type fromURL:(NSURL*)url withDelegate:(id)delegate andResultSelector:(SEL)selector;{
+-(void)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key{
     if (_isDownloading){
         NSLog(@"Already downloading");
         //[NSException raise:@"Attempt to start downloading a second URL before the first finished or failed" format:@"",nil];
@@ -64,7 +64,14 @@ static AssetManager* sharedAssetManager = nil;
     }
     _isDownloading = YES;
     _cachedData = [[NSMutableData  alloc] initWithLength:0];
-    _placeToWrite = [[NSURL URLWithString:[[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [url lastPathComponent], nil]] retain];
+    _defaultsKeyToSet = key;
+    _placeToWrite = [[NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0 ] stringByAppendingFormat:@"/%@", [url lastPathComponent], nil]] retain];
+    NSFileManager *fileMan = [NSFileManager defaultManager];
+    NSError *err = nil;
+    [fileMan removeItemAtURL:_placeToWrite error:&err];
+    if (err != nil){
+        NSLog(@"err: %@", [err description]);
+    }
     NSLog(@"URL: %@", [_placeToWrite absoluteString]);
     
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:5];
@@ -111,10 +118,24 @@ static AssetManager* sharedAssetManager = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [connection release];
     _isDownloading = NO;
-    [_cachedData writeToFile:[_placeToWrite absoluteString] atomically:YES];
-    [_downloadDelegate performSelector:_resultSelector withObject:_cachedData];
+    NSLog(@"writing %i bytes to %@", [_cachedData length], [_placeToWrite absoluteString]);
+    
+    NSError *err;
+    if ([_cachedData writeToURL:_placeToWrite options:NSDataWritingFileProtectionComplete error:&err]){
+        NSLog(@"Write Succeeded!");
+    }else{
+        NSLog(@"Write Failed: %@", [err description]);
+        _placeToWrite = nil;
+    }
+    [_downloadDelegate performSelector:_resultSelector withObject:_placeToWrite];
+    NSMutableDictionary *_changeDict = [NSMutableDictionary dictionaryWithDictionary:plistDefaults];
+    [_changeDict setValue:[_placeToWrite absoluteString] forKey:_defaultsKeyToSet];
+    [plistDefaults release];
+    plistDefaults = [_changeDict retain];
     [_placeToWrite release];
     [_cachedData release];
     NSLog(@"Data Load completed");
+    NSLog(@"%@", plistDefaults);
+    
 }
 @end
