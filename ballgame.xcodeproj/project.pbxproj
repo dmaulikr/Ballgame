@@ -174,10 +174,14 @@
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
 		38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = 38125C0513CA75D0001282F6 /* DebugLevel.level */; };
 		38125C0B13CA7FDF001282F6 /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125C0A13CA7FDE001282F6 /* Wall.mm */; };
+		382D031F13D3C51D00DCA70C /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = 382D031E13D3C51D00DCA70C /* box.level */; };
 		387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.mm */; };
+		387E357C13D39EB2006CB9AD /* SplashScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387E357B13D39EB2006CB9AD /* SplashScene.mm */; };
+		387E358213D3A0D6006CB9AD /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E358113D3A0D6006CB9AD /* DebugConfigurationViewController.m */; };
+		387E358513D3A863006CB9AD /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E358413D3A863006CB9AD /* SpecifyURLViewController.m */; };
+		38860E3713D3C28100E3BB08 /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = 38860E3613D3C28100E3BB08 /* TestConvert.level */; };
 		38F43D1813D259DE007002B9 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38F43D1713D259DE007002B9 /* Goal.mm */; };
 		38FB190813D26106003372ED /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38FB190713D26106003372ED /* HighScoresScene.mm */; };
-		38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = 38FF13BB13D3C21D00D28C29 /* TestConvert.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -506,21 +510,28 @@
 		38125BE513CA5A12001282F6 /* Pickup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Pickup.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BEF13CA5A6B001282F6 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AssetManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125BF013CA5A6C001282F6 /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AssetManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		38125BF213CA5A7B001282F6 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameDefaults.plist; sourceTree = "<group>"; };
-		38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BallGameSpriteSheet.plist; path = Resources/BallGameSpriteSheet.plist; sourceTree = "<group>"; };
-		38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BallGameSpriteSheet.png; path = Resources/BallGameSpriteSheet.png; sourceTree = "<group>"; };
+		38125BF213CA5A7B001282F6 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDefaults.plist; path = ballgame/GameDefaults.plist; sourceTree = "<group>"; };
+		38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BallGameSpriteSheet.plist; path = ballgame/Resources/BallGameSpriteSheet.plist; sourceTree = "<group>"; };
+		38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BallGameSpriteSheet.png; path = ballgame/Resources/BallGameSpriteSheet.png; sourceTree = "<group>"; };
 		38125C0413CA6D4E001282F6 /* GameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjects.h; sourceTree = "<group>"; };
-		38125C0513CA75D0001282F6 /* DebugLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; path = DebugLevel.level; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
+		38125C0513CA75D0001282F6 /* DebugLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; name = DebugLevel.level; path = ballgame/DebugLevel.level; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
 		38125C0713CA7FAB001282F6 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Wall.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125C0A13CA7FDE001282F6 /* Wall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Wall.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		38125C1313CA8226001282F6 /* DataDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataDefinitions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		382D031E13D3C51D00DCA70C /* box.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = box.level; sourceTree = "<group>"; };
 		387DDA9C13D356D000C7DD9A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		387DDA9D13D356D000C7DD9A /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverScene.mm; sourceTree = "<group>"; };
+		387E357A13D39EB2006CB9AD /* SplashScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScene.h; sourceTree = "<group>"; };
+		387E357B13D39EB2006CB9AD /* SplashScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SplashScene.mm; sourceTree = "<group>"; };
+		387E358013D3A0D6006CB9AD /* DebugConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugConfigurationViewController.h; path = ../DebugConfigurationViewController.h; sourceTree = "<group>"; };
+		387E358113D3A0D6006CB9AD /* DebugConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugConfigurationViewController.m; path = ../DebugConfigurationViewController.m; sourceTree = "<group>"; };
+		387E358313D3A863006CB9AD /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecifyURLViewController.h; sourceTree = "<group>"; };
+		387E358413D3A863006CB9AD /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecifyURLViewController.m; sourceTree = "<group>"; };
+		38860E3613D3C28100E3BB08 /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestConvert.level; sourceTree = "<group>"; };
 		38F43D1713D259DE007002B9 /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Goal.mm; sourceTree = "<group>"; };
 		38F43D1913D25A19007002B9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		38FB190613D26106003372ED /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
 		38FB190713D26106003372ED /* HighScoresScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HighScoresScene.mm; sourceTree = "<group>"; };
-		38FF13BB13D3C21D00D28C29 /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestConvert.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -603,6 +614,8 @@
 		381259FE13CA564E001282F6 /* ballgame */ = {
 			isa = PBXGroup;
 			children = (
+				387E357F13D3A017006CB9AD /* Plists and Defaults */,
+				387E357E13D39FFC006CB9AD /* Asset Tools */,
 				387E357513D38BC4006CB9AD /* UI Constructs */,
 				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
@@ -613,16 +626,12 @@
 				38125BB713CA5651001282F6 /* AppDelegate.mm */,
 				38125BB913CA5651001282F6 /* RootViewController.h */,
 				38125BBA13CA5651001282F6 /* RootViewController.m */,
+				387E358013D3A0D6006CB9AD /* DebugConfigurationViewController.h */,
+				387E358113D3A0D6006CB9AD /* DebugConfigurationViewController.m */,
+				387E358313D3A863006CB9AD /* SpecifyURLViewController.h */,
+				387E358413D3A863006CB9AD /* SpecifyURLViewController.m */,
 				38125BBF13CA5651001282F6 /* GLES-Render.h */,
 				38125BC013CA5651001282F6 /* GLES-Render.mm */,
-				38125BC213CA5651001282F6 /* GameConfig.h */,
-				38125BF213CA5A7B001282F6 /* GameDefaults.plist */,
-				38125C0513CA75D0001282F6 /* DebugLevel.level */,
-				38FF13BB13D3C21D00D28C29 /* TestConvert.level */,
-				38125BEF13CA5A6B001282F6 /* AssetManager.h */,
-				38125BF013CA5A6C001282F6 /* AssetManager.m */,
-				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
-				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
 				38125BB213CA5651001282F6 /* Supporting Files */,
 				381259FF13CA564E001282F6 /* Resources */,
 			);
@@ -985,6 +994,8 @@
 		38125BD613CA5806001282F6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				387E357A13D39EB2006CB9AD /* SplashScene.h */,
+				387E357B13D39EB2006CB9AD /* SplashScene.mm */,
 				38FB190613D26106003372ED /* HighScoresScene.h */,
 				38FB190713D26106003372ED /* HighScoresScene.mm */,
 				38125BD213CA57F8001282F6 /* PlayScene.h */,
@@ -1018,6 +1029,7 @@
 		382BC59813D2CFD300199A1D /* Hardcodes */ = {
 			isa = PBXGroup;
 			children = (
+				38125BC213CA5651001282F6 /* GameConfig.h */,
 				38125C1313CA8226001282F6 /* DataDefinitions.h */,
 			);
 			name = Hardcodes;
@@ -1028,6 +1040,29 @@
 			children = (
 			);
 			name = "UI Constructs";
+			sourceTree = "<group>";
+		};
+		387E357E13D39FFC006CB9AD /* Asset Tools */ = {
+			isa = PBXGroup;
+			children = (
+				38125BEF13CA5A6B001282F6 /* AssetManager.h */,
+				38125BF013CA5A6C001282F6 /* AssetManager.m */,
+			);
+			name = "Asset Tools";
+			sourceTree = "<group>";
+		};
+		387E357F13D3A017006CB9AD /* Plists and Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				382D031E13D3C51D00DCA70C /* box.level */,
+				38860E3613D3C28100E3BB08 /* TestConvert.level */,
+				38125BF213CA5A7B001282F6 /* GameDefaults.plist */,
+				38125C0513CA75D0001282F6 /* DebugLevel.level */,
+				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
+				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
+			);
+			name = "Plists and Defaults";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1094,7 +1129,8 @@
 				38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */,
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
 				38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */,
-				38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */,
+				38860E3713D3C28100E3BB08 /* TestConvert.level in Resources */,
+				382D031F13D3C51D00DCA70C /* box.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1253,6 +1289,9 @@
 				38F43D1813D259DE007002B9 /* Goal.mm in Sources */,
 				38FB190813D26106003372ED /* HighScoresScene.mm in Sources */,
 				387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */,
+				387E357C13D39EB2006CB9AD /* SplashScene.mm in Sources */,
+				387E358213D3A0D6006CB9AD /* DebugConfigurationViewController.m in Sources */,
+				387E358513D3A863006CB9AD /* SpecifyURLViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

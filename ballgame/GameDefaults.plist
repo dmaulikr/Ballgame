@@ -15,5 +15,9 @@
 	<integer>5</integer>
 	<key>starting_size</key>
 	<integer>70</integer>
+	<key>SpriteSheetPlistName</key>
+	<string>BallGameSpriteSheet.plist</string>
+	<key>SpriteSheetPngName</key>
+	<string>BallGameSpriteSheet.png</string>
 </dict>
 </plist>

@@ -13,8 +13,9 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
+    UINavigationController *_navController;
 }
-
+@property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, retain) UIWindow *window;
 
 @end

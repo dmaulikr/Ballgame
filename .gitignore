@@ -5,8 +5,15 @@
 *.xcuserstate
 
 LevelEditor-build-*
+<<<<<<< HEAD
 *.pro.user.*
 level_editor/old
 level_editor/LevelEditor/LevelEditor.pro.user
 
+=======
+*.pro.user
+level_editor/old
+>>>>>>> Ryan
 ballgame/.DS_Store
+
+.DS_Store

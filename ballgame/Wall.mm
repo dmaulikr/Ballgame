@@ -31,12 +31,12 @@
     float newScaleX = (float)(size.width) / originalWidth;
     float newScaleY = (float)(size.height) / originalHeight;
     //NSLog(@"newScaleX: %f, newScaleY: %f", newScaleX, newScaleY);
-    [self setScaleX:newScaleX*2];
-    [self setScaleY:newScaleY*2];
+    [self setScaleX:newScaleX];
+    [self setScaleY:newScaleY];
 
     
     b2BodyDef bodyDef;
-	bodyDef.position.Set((p.x) /PTM_RATIO, (p.y) /PTM_RATIO);
+	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
 	bodyDef.userData = self;
 	_body = world->CreateBody(&bodyDef);
 	_body->SetAwake(NO);
@@ -44,7 +44,7 @@
 	// Define another box shape for our dynamic body.
 	b2PolygonShape dynamicBox;
     
-	dynamicBox.SetAsBox(size.width/PTM_RATIO ,size.height/PTM_RATIO);
+	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/2/PTM_RATIO);
 	
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;

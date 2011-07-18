@@ -13,5 +13,6 @@
 @interface SplashScene : CCScene {
     
 }
++(CCScene *) scene;
 -(void)loadScene;
 @end
