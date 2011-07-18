@@ -23,6 +23,8 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
             previousPoint = QPointF(mapToScene(event->pos()));
         }
 
+        qDebug("Percents - %f, %f", rightPercent, bottomPercent);
+
         emit objectSelected(draggedItem->data(1).toString(), draggedItem->data(2).toInt());
 
     } else {

@@ -1,7 +1,6 @@
 // ToDo:
 
 // Create object templates for easy object creation
-// Fix coordinate issue (does not match up with box2D atm)
 // Zoom in/out
 // Create default propreties for new level
 
@@ -254,7 +253,7 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     QString sX = QString::number(x);
     QString sY = QString::number(y);
 
-    qDebug("%f, %f = %d, %d", scaleX, scaleY, x, y);
+    //qDebug("%f, %f = %d, %d", scaleX, scaleY, x, y);
 
     levelObjects[id].insert("width", sX);
     levelObjects[id].insert("height", sY);
