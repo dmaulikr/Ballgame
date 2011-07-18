@@ -9,9 +9,9 @@
   <key>level_width</key>
   <integer>500</integer>
   <key>start_x</key>
-  <integer>250</integer>
+  <integer>418</integer>
   <key>start_y</key>
-  <integer>250</integer>
+  <integer>51</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>

@@ -26,6 +26,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
     // File Menu
     void loadFile();
@@ -33,6 +34,10 @@ private slots:
     void saveLevelPlistAs();
     void newLevel();
     void quit();
+
+    void objectChanged(QString, int, QPointF, QSizeF);
+    void objectSelected(QString, int);
+    void needToRescale(QString, int, double, double);
 
     // Buttons
     void addPropertyClicked();

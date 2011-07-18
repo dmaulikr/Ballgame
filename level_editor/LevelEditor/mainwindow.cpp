@@ -1,14 +1,15 @@
 // ToDo:
 
 // Create object templates for easy object creation
-// Click on object to select it
-// Drag object to move it
 // Fix coordinate issue (does not match up with box2D atm)
 // Zoom in/out
+// Create default propreties for new level
 
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#define MINIMUM_WALL_THICKENESS 5
 
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
@@ -16,7 +17,7 @@
 #define PATH_SPRITE_IMAGE "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "/Users/ryanhart/github/Ballgame/ballgame/DebugLevel.level"
 #define PATH_BALLGAME_DIR "/Users/ryanhart/github/Ballgame/ballgame"
-#else
+#else // assuming you're on Windows
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "..\\..\\ballgame\\DebugLevel.level"
@@ -34,6 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
     loadFile();
 
     noEmit = false;
+
+    connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF)));
+    connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
+    connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double)), this, SLOT(needToRescale(QString, int, double, double)));
 
 }
 
@@ -77,15 +82,13 @@ void MainWindow::updateGraphics()
     int startX = levelPlist.value("start_x").toInt() - playerRect.width()/2;
     int startY = levelPlist.value("level_height").toInt() - (levelPlist.value("start_y").toInt() + playerRect.height()/2);
     item->setPos(startX, startY);
+    item->setData(1, "player");
+    item->setData(2, -1);
 
     for(int i = 0; i < levelObjects.length(); i++)
     {
         QRect objRect;
-
-        // ADD NEW OBJECTS HERE
-
         objRect = spriteSheetLocations.value(levelObjects.at(i).value("frame_name"));
-
 
         //Q_ASSERT_X(objRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
         QImage img = spriteSheet.copy(objRect);
@@ -98,6 +101,8 @@ void MainWindow::updateGraphics()
         int xPos = x - width/2;
         int yPos = levelPlist.value("level_height").toInt() - (y + height/2);
         item->setPos(xPos, yPos);
+        item->setData(1, "object");
+        item->setData(2, i);
     }
 
     QGraphicsView *view = ui->graphicsView;
@@ -227,8 +232,74 @@ void MainWindow::levelPlistChanged(QTableWidgetItem* newItem)
     noEmit = false;
 }
 
+void MainWindow::objectSelected(QString type, int id)
+{
+    if(type == "object")
+    {
+        ui->objectSelectorComboBox->setCurrentIndex(id);
+        updateObjectTable(id);
+    }
+}
+
+void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY)
+{
+    // ToDo:  rescale player
+
+    int x = levelObjects[id].value("width").toDouble() * scaleX;
+    int y = levelObjects[id].value("height").toDouble() * scaleY;
+
+    if(x < 5) x = 5;
+    if(y < 5) y = 5;
+
+    QString sX = QString::number(x);
+    QString sY = QString::number(y);
+
+    qDebug("%f, %f = %d, %d", scaleX, scaleY, x, y);
+
+    levelObjects[id].insert("width", sX);
+    levelObjects[id].insert("height", sY);
+
+    updateGraphics();
+    updateObjectTable(id);
+}
+
+void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size)
+{
+    //qDebug() << type << " " << id << " " << pos  << " " << size << endl;
+
+    if(type == "player")
+    {
+        levelPlist.insert("start_x", QString::number(pos.x() + (int)(size.width() / 2)));
+        QString num = QString::number(levelPlist.value("level_height").toFloat() - pos.y() - (int)(size.height() / 2));
+        levelPlist.insert("start_y", num);
+
+        // ToDo:  update size in level plist here
+
+        updateLevelPlistTable();
+    }
+
+    else if(type == "object")
+    {
+        ui->objectSelectorComboBox->setCurrentIndex(id);
+        levelObjects[id].insert("x", QString::number(pos.x() + (int)(size.width() / 2)));
+        levelObjects[id].insert("y", QString::number(levelPlist.value("level_height").toFloat() - pos.y() - (int)(size.height() / 2)));
+
+        levelObjects[id].insert("height", QString::number(size.height()));
+        levelObjects[id].insert("width", QString::number(size.width()));
+
+        updateObjectTable(id);
+    }
+
+    else
+    {
+        Q_ASSERT_X(false, "MainWindow::objectChanged", "Unknown object type!");
+    }
+}
+
 void MainWindow::updateLevelPlistTable()
 {
+    noEmit = true;
+
     QTableWidget *table = ui->levelPlistTableWidget;
 
     int count = levelPlist.count();
@@ -244,6 +315,8 @@ void MainWindow::updateLevelPlistTable()
         table->setItem(index, 1, new QTableWidgetItem(i.value()));
         index++;
     }
+
+    noEmit = false;
 }
 
 void MainWindow::updateObjectComboBox()
