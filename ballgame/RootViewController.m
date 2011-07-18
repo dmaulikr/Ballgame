@@ -41,6 +41,13 @@
  }
  */
 
+-(void)viewWillDisappear:(BOOL)animated {
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+}
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
