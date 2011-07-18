@@ -177,6 +177,7 @@
 		387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.mm */; };
 		38F43D1813D259DE007002B9 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38F43D1713D259DE007002B9 /* Goal.mm */; };
 		38FB190813D26106003372ED /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38FB190713D26106003372ED /* HighScoresScene.mm */; };
+		38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = 38FF13BB13D3C21D00D28C29 /* TestConvert.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -519,6 +520,7 @@
 		38F43D1913D25A19007002B9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
 		38FB190613D26106003372ED /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
 		38FB190713D26106003372ED /* HighScoresScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HighScoresScene.mm; sourceTree = "<group>"; };
+		38FF13BB13D3C21D00D28C29 /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestConvert.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -616,6 +618,7 @@
 				38125BC213CA5651001282F6 /* GameConfig.h */,
 				38125BF213CA5A7B001282F6 /* GameDefaults.plist */,
 				38125C0513CA75D0001282F6 /* DebugLevel.level */,
+				38FF13BB13D3C21D00D28C29 /* TestConvert.level */,
 				38125BEF13CA5A6B001282F6 /* AssetManager.h */,
 				38125BF013CA5A6C001282F6 /* AssetManager.m */,
 				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
@@ -1091,6 +1094,7 @@
 				38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */,
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
 				38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */,
+				38FF13BC13D3C21D00D28C29 /* TestConvert.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
