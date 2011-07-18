@@ -10,9 +10,15 @@
 
 
 @interface AssetManager : NSObject {
-    
     NSDictionary *plistDefaults;
     
+    //AssetDownloading
+    NSMutableData *_cachedData;
+    NSURL *_placeToWrite;
+    BOOL _isDownloading;
+    id _downloadDelegate;
+    SEL _resultSelector;
+    NSString *_defaultsKeyToSet;
 }
 
 @property(nonatomic, retain) NSDictionary *plistDefaults;
@@ -20,6 +26,7 @@
 +(id)sharedInstance;
 +(id)alloc;
 
+-(void)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key;
 -(NSDictionary*) getDefaults;
 -(NSDictionary*)levelWithName:(NSString*)levelName;
 @end

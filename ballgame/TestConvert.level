@@ -9,9 +9,9 @@
   <key>level_width</key>
   <integer>1000</integer>
   <key>start_x</key>
-  <integer>250</integer>
+  <integer>113</integer>
   <key>start_y</key>
-  <integer>500</integer>
+  <integer>606</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>
@@ -30,9 +30,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>200</integer>
+    <integer>228</integer>
     <key>y</key>
-    <integer>700</integer>
+    <integer>598</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -48,9 +48,9 @@
     <key>width</key>
     <integer>100</integer>
     <key>x</key>
-    <integer>150</integer>
+    <integer>222</integer>
     <key>y</key>
-    <integer>595</integer>
+    <integer>642</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -66,9 +66,9 @@
     <key>width</key>
     <integer>5</integer>
     <key>x</key>
-    <integer>698</integer>
+    <integer>273</integer>
     <key>y</key>
-    <integer>541</integer>
+    <integer>550</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -120,9 +120,9 @@
     <key>width</key>
     <integer>222</integer>
     <key>x</key>
-    <integer>584</integer>
+    <integer>158</integer>
     <key>y</key>
-    <integer>372</integer>
+    <integer>551</integer>
    </dict>
   </array>
  </dict>

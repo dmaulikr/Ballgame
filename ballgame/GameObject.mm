@@ -13,7 +13,7 @@
 
 @implementation GameObject
 
-@synthesize defaults, body=_body, currentFixture=_currentFixture;
+@synthesize defaults, body=_body, currentFixture=_currentFixture, identifier=_identifier;
 
 
 -(id)copyWithZone:(NSZone *)zone{
@@ -21,7 +21,7 @@
     [copy setDefaults:self.defaults];
     [copy setBody:self.body];
     [copy setCurrentFixture:self.currentFixture];
-    return copy;
+    return [copy autorelease];
 }
 // necessary for sub-classing CCSprite to work for some reason
 -(id) initWithTexture:(CCTexture2D*)texture rect:(CGRect)rect
@@ -43,7 +43,7 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //This does nothing.  Subclasses override this for custom initialization
-    
+    _identifier = GameObjectIDNone;
 }
 
 -(b2Vec2)getVelocity{

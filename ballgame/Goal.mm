@@ -12,6 +12,8 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //TODO: Rotation
+    _identifier = GameObjectIDGoal;
+    
     CGSize size;
     size.width = [[game_object valueForKey:@"width"] floatValue];
     size.height = [[game_object valueForKey:@"height"] floatValue];
@@ -29,8 +31,8 @@
     float newScaleX = (float)(size.width) / originalWidth;
     float newScaleY = (float)(size.height) / originalHeight;
     //NSLog(@"newScaleX: %f, newScaleY: %f", newScaleX, newScaleY);
-    [self setScaleX:newScaleX*2];
-    [self setScaleY:newScaleY*2];
+    [self setScaleX:newScaleX];
+    [self setScaleY:newScaleY];
     
     
     b2BodyDef bodyDef;
@@ -42,7 +44,7 @@
 	// Define another box shape for our dynamic body.
 	b2PolygonShape dynamicBox;
     
-	dynamicBox.SetAsBox(size.width/PTM_RATIO ,size.height/PTM_RATIO);
+	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/PTM_RATIO/2);
 	
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;

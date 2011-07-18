@@ -12,6 +12,7 @@
 #include <QTableWidgetItem>
 #include <QComboBox>
 #include <QDebug>
+#include <QFileDialog>
 
 namespace Ui {
     class MainWindow;
@@ -25,20 +26,39 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
-    void levelPlistChanged(QTableWidgetItem*);
-    void objectChanged(QTableWidgetItem*);
-    void updateObjectTable(int id);
+    // File Menu
+    void loadFile();
+    void saveLevelPlist();
+    void saveLevelPlistAs();
+    void newLevel();
+    void quit();
+
+    void objectChanged(QString, int, QPointF, QSizeF);
+    void objectSelected(QString, int);
+    void needToRescale(QString, int, double, double);
+
+    // Buttons
     void addPropertyClicked();
     void deletePropertyClicked();
     void newObjectClicked();
     void copyObjectClicked();
     void deleteObjectClicked();
+    void addLevelPropertyClicked();
+    void deleteLevelPropertyClicked();
+
+    // Other
+    void levelPlistChanged(QTableWidgetItem*);
+    void objectChanged(QTableWidgetItem*);
+    void updateObjectTable(int id);
+
 
 private:
     Ui::MainWindow *ui;
 
-    void loadFile();
+    void saveLevelPlist(QString filename);
+
     void loadSpritePlist();
     void loadLevelPlist(QString level);
     void updateGraphics();  // redraws entire level
@@ -56,6 +76,8 @@ private:
 
     bool noEmit;
     bool initializing;
+
+    QString currentFileName;
 
 
 };

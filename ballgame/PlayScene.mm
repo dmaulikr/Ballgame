@@ -10,7 +10,7 @@
 // Import the interfaces
 #import "PlayScene.h"
 #import "DataDefinitions.h"
-#import "HighScoresScene.h"
+#import "GameOverScene.h"
 
 #define DEBUG_DRAW 1
 // enums that will be used as tags
@@ -30,15 +30,12 @@ enum {
 // HelloWorldLayer implementation
 @implementation PlayScene
 
-@synthesize defaults;
 
 #pragma mark - Init
 
 -(id)loadLevelWithName:(NSString *)levelName{
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
-    defaults = [[AssetManager sharedInstance] getDefaults];
-    
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
 #pragma mark Game World Settings
@@ -104,7 +101,7 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
     
     // right
-    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue]));
+    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
     
@@ -114,8 +111,12 @@ enum {
 
     
     //Initialize the Sprite Sheet
-    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"BallGameSpriteSheet.png" capacity:150];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"BallGameSpriteSheet.plist"];
+    NSLog(@"Purging and removing");
+    [CCTextureCache purgeSharedTextureCache];
+    [CCSpriteFrameCache purgeSharedSpriteFrameCache];
+    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPngName"] capacity:150];
+    //CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:batchTexture  capacity:150]; 
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPlistName"]];
     
     // Initialize the scrolling layer
     // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
@@ -138,7 +139,7 @@ enum {
     
     
 #pragma mark Initialize the game loop
-    [self schedule: @selector(tick:)];
+    [self schedule: @selector(update:)];
 
     return self;
 }
@@ -197,71 +198,20 @@ enum {
 }
 
 
-
+#pragma mark - Premade Scenes
 +(CCScene*)debugScene{
     
     CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [PlayScene node];
-	[layer loadLevelWithName:@"DebugLevel"];
+	[layer loadLevelWithName:@"box"];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	
 	// return the scene
 	return scene;
 }
-                      
-
-#pragma mark - What the fuck are these
-+(CCScene *) scene
-{
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	PlayScene *layer = [PlayScene node];
-	
-	// add layer as a child to scene
-	[scene addChild: layer];
-	
-	// return the scene
-	return scene;
-}
-
-
--(void) addNewSpriteWithCoords:(CGPoint)p
-{
-	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
-	
-	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"spore_blue.png"];
-	[batch addChild:sprite];
-	
-	sprite.position = ccp( p.x, p.y);
-	
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-    
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-	bodyDef.userData = sprite;
-	b2Body *body = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);
-}
-
 
 #pragma mark - Game Loop Methods
 
@@ -301,7 +251,7 @@ enum {
 #endif
 }
 
--(void) tick: (ccTime) dt
+-(void) update: (ccTime) dt
 {
     
    // NSLog(@"current - %f, %f, new - %f, %f", currentPos.x, currentPos.y, newPosition.x, newPosition.y);
@@ -323,7 +273,7 @@ enum {
     
     //Check Level Status.  Are we finished?
 	if ([[_levelInfo valueForKey:@"LevelStatus"] intValue] == LevelStatusCompleted){
-        [[CCDirector sharedDirector] replaceScene:[HighScores scene]];
+        [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
     }
 	//Iterate over the bodies in the physics world
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -343,7 +293,7 @@ enum {
 	// if ball moved off the edge
     
     
-#define SCROLL_BORDER 150
+
 	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && _thePlayer.position.x > 0 && velocity.x < 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
