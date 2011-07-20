@@ -5,6 +5,7 @@
 #include <QGraphicsView>
 #include <QMouseEvent>
 #include <QDebug>
+#include <QList>
 
 
 class LevelGraphicsView : public QGraphicsView
@@ -21,10 +22,11 @@ public:
 signals:
     void objectChanged(QString, int, QPointF, QSizeF);
     void objectSelected(QString, int);
-    void needToRescale(QString, int, double, double);
+    void needToRescale(QString, int, double, double, bool);
 
 private:
     QGraphicsItem *draggedItem;
+    int draggedItemId;
     QPointF mouseOffset;
     bool resizing;
     QPointF previousPoint;

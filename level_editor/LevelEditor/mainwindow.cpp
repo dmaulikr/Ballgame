@@ -14,12 +14,12 @@
 #ifdef Q_WS_MAC
 #define PATH_SPRITE_PLIST "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.png"
-#define PATH_DEBUG_LEVEL "/Users/ryanhart/github/Ballgame/ballgame/DebugLevel.level"
+#define PATH_DEBUG_LEVEL "/Users/ryanhart/github/Ballgame/ballgame/levels/DebugLevel.level"
 #define PATH_BALLGAME_DIR "/Users/ryanhart/github/Ballgame/ballgame"
 #else // assuming you're on Windows
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
-#define PATH_DEBUG_LEVEL "..\\..\\ballgame\\DebugLevel.level"
+#define PATH_DEBUG_LEVEL "..\\..\\ballgame\\levels\\DebugLevel.level"
 #define PATH_BALLGAME_DIR "..\\..\\ballgame\\"
 #endif
 
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF)));
     connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
-    connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double)), this, SLOT(needToRescale(QString, int, double, double)));
+    connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, bool)));
 
 }
 
@@ -64,6 +64,7 @@ void MainWindow::loadFile()
     updateObjectComboBox();
 
     // draw objects on screen;
+    scene = new QGraphicsScene();
     updateGraphics();
     initializing = false;
 
@@ -71,6 +72,8 @@ void MainWindow::loadFile()
 
 void MainWindow::updateGraphics()
 {
+    delete scene;
+
     scene = new QGraphicsScene(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt());
 
     // Add player object to scene
@@ -93,8 +96,8 @@ void MainWindow::updateGraphics()
         QImage img = spriteSheet.copy(objRect);
         int height = levelObjects.at(i).value("height").toInt();
         int width = levelObjects.at(i).value("width").toInt();
-        int x = levelObjects.at(i).value("x").toInt();
-        int y = levelObjects.at(i).value("y").toInt();
+        int x = levelObjects.at(i).value("x").toFloat();
+        int y = levelObjects.at(i).value("y").toFloat();
         img = img.scaled(QSize(width, height), Qt::IgnoreAspectRatio);
         item = scene->addPixmap(QPixmap::fromImage(img));
         int xPos = x - width/2;
@@ -240,23 +243,44 @@ void MainWindow::objectSelected(QString type, int id)
     }
 }
 
-void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY)
+void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool doublesOK)
 {
     // ToDo:  rescale player
 
-    int x = levelObjects[id].value("width").toDouble() * scaleX;
-    int y = levelObjects[id].value("height").toDouble() * scaleY;
+    int x = levelObjects[id].value("width").toFloat() * scaleX;
+    int y = levelObjects[id].value("height").toFloat() * scaleY;
 
     if(x < 5) x = 5;
     if(y < 5) y = 5;
 
+    float dX = x - levelObjects[id].value("width").toFloat();
+    float dY = y - levelObjects[id].value("height").toFloat();
+
+    float oldX = levelObjects[id].value("x").toFloat();
+    float oldY = levelObjects[id].value("y").toFloat();
+
+    float sPXn = (float)(oldX + dX/2);
+    float sPYn = (float)(oldY - dY/2);
+
+    if(!doublesOK)
+    {
+        sPXn = (int)sPXn;
+        sPYn = (int)sPYn;
+    }
+
+
     QString sX = QString::number(x);
     QString sY = QString::number(y);
+    QString sPX = QString::number(sPXn);
+    QString sPY = QString::number(sPYn);
 
-    //qDebug("%f, %f = %d, %d", scaleX, scaleY, x, y);
+    //qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
+    //qDebug("%f, %f", sPXn, sPYn);
 
     levelObjects[id].insert("width", sX);
     levelObjects[id].insert("height", sY);
+    levelObjects[id].insert("x", sPX);
+    levelObjects[id].insert("y", sPY);
 
     updateGraphics();
     updateObjectTable(id);

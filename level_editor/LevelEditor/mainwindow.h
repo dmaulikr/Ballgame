@@ -37,7 +37,7 @@ private slots:
 
     void objectChanged(QString, int, QPointF, QSizeF);
     void objectSelected(QString, int);
-    void needToRescale(QString, int, double, double);
+    void needToRescale(QString, int, double, double, bool);
 
     // Buttons
     void addPropertyClicked();

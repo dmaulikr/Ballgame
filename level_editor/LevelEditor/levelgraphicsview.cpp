@@ -9,6 +9,17 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
     if (QGraphicsItem *item = itemAt(event->pos())) {
         //qDebug() << "You clicked on item" << item;
         draggedItem = item;
+
+        QList<QGraphicsItem*> its = items();
+
+        for(int i = 0; i < its.count(); i++)
+        {
+            if (its[i] == draggedItem)
+            {
+                draggedItemId = i;
+            }
+        }
+
         int mouseX = draggedItem->pos().x() - mapToScene(event->pos()).x();
         int mouseY = draggedItem->pos().y() - mapToScene(event->pos()).y();
         mouseOffset = QPointF(mouseX, mouseY);
@@ -23,7 +34,7 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
             previousPoint = QPointF(mapToScene(event->pos()));
         }
 
-        qDebug("Percents - %f, %f", rightPercent, bottomPercent);
+        //qDebug("Percents - %f, %f", rightPercent, bottomPercent);
 
         emit objectSelected(draggedItem->data(1).toString(), draggedItem->data(2).toInt());
 
@@ -49,6 +60,7 @@ void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
     }
     else
     {
+        draggedItem = items()[draggedItemId];
         QPointF newPoint = mapToScene(event->pos());
 
         double scaleX = (newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
@@ -57,10 +69,11 @@ void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
         if(scaleX > 0 && scaleY > 0)
         {
             previousPoint = newPoint;
-            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY);
+            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, true);
         }
     }
 }
+
 
 
 void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
@@ -77,6 +90,7 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     }
     else
     {
+        draggedItem = items()[draggedItemId];
         QPointF newPoint = mapToScene(event->pos());
 
         double scaleX = (newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
@@ -85,7 +99,7 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
         if(scaleX > 0 && scaleY > 0)
         {
             previousPoint = newPoint;
-            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY);
+            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, false);
         }
     }
 
