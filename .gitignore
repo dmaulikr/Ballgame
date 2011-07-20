@@ -4,6 +4,7 @@
 
 *.xcuserstate
 
+*.pro.user*
 LevelEditor-build-*
 <<<<<<< HEAD
 *.pro.user.*
