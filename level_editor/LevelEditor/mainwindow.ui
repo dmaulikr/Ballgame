@@ -141,6 +141,38 @@
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
+<<<<<<< HEAD
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>60</y>
+            <width>135</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Set thickness of all walls</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="wallThicknessEdit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="wallThicknessButton">
+             <property name="text">
+              <string>Go!</string>
+             </property>
+            </widget>
+=======
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
            </item>
           </layout>
          </widget>
@@ -197,9 +229,6 @@
          </widget>
         </widget>
        </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout"/>
       </item>
      </layout>
     </item>
@@ -531,6 +560,25 @@
     </hint>
    </hints>
   </connection>
+<<<<<<< HEAD
+  <connection>
+   <sender>wallThicknessButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>wallThicknessClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>787</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+=======
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -549,5 +597,9 @@
   <slot>newLevel()</slot>
   <slot>quit()</slot>
   <slot>rotationSliderMoved(int)</slot>
+<<<<<<< HEAD
+  <slot>wallThicknessClicked()</slot>
+=======
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
  </slots>
 </ui>

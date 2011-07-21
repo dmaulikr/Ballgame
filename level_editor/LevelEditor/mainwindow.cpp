@@ -3,8 +3,14 @@
 // Create object templates for easy object creation
 // Zoom in/out
 // Create default propreties for new level
+<<<<<<< HEAD
+// Make it possible to move rotated objects
+// Fix scrollbars defaulting to 0-0 upon updateGraphics() bug
+
+=======
 // Create "make all walls uniform thickness" button
 // Rotation
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 
 
 #include "mainwindow.h"
@@ -74,8 +80,12 @@ void MainWindow::loadFile()
 
 void MainWindow::updateGraphics()
 {
-    delete scene;
+    //int horizontalScrollBarPosition = ui->graphicsView->horizontalScrollBar()->sliderPosition();
+    //int verticalScrollBarPosition = ui->graphicsView->verticalScrollBar()->sliderPosition();
 
+    //qDebug("%d, %d", horizontalScrollBarPosition, verticalScrollBarPosition);
+
+    delete scene;
     scene = new QGraphicsScene(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt());
 
     // Add player object to scene
@@ -129,6 +139,11 @@ void MainWindow::updateGraphics()
     }
 
     QGraphicsView *view = ui->graphicsView;
+    //((QAbstractScrollArea*)(view->parentWidget()))->horizontalScrollBar()->setValue(100);
+    //view->verticalScrollBar()->setValue(25);
+
+    //qDebug("Min- %d, Max- %d", view->horizontalScrollBar()->minimum(), view->horizontalScrollBar()->maximum());
+
     view->setScene(scene);
     view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
 
@@ -295,9 +310,15 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     QString sPX = QString::number(sPXn);
     QString sPY = QString::number(sPYn);
 
+<<<<<<< HEAD
+    //qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
+    //qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
+    //qDebug("%f, %f", sPXn, sPYn);
+=======
     qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
     qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
     qDebug("%f, %f", sPXn, sPYn);
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 
     levelObjects[id].insert("width", sX);
     levelObjects[id].insert("height", sY);
@@ -451,6 +472,35 @@ void MainWindow::updateObjectTable(int objId)
         ui->rotationSlider->setValue(rotation / 3.6);
     }
 
+<<<<<<< HEAD
+}
+
+void MainWindow::wallThicknessClicked()
+{
+    int thickness = ui->wallThicknessEdit->text().toInt();
+
+    if(thickness <= 0) // invalid input
+        return;
+
+    for(int i = 0; i < levelObjects.count(); i++)
+    {
+        if(levelObjects[i].value("type").toLower() == "wall")
+        {
+            bool xSmaller = true;
+            if(levelObjects[i].value("height").toInt() < levelObjects[i].value("width").toInt())
+                xSmaller = false;
+
+            if(xSmaller)
+                levelObjects[i].insert("width", QString::number(thickness));
+            else
+                levelObjects[i].insert("height", QString::number(thickness));
+        }
+    }
+
+    updateGraphics();
+    updateObjectTable(ui->objectSelectorComboBox->currentIndex());
+=======
+>>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 }
 
 void MainWindow::newLevel()
