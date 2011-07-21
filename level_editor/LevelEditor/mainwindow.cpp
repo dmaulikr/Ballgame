@@ -79,7 +79,8 @@ void MainWindow::updateGraphics()
 
     //qDebug("%d, %d", horizontalScrollBarPosition, verticalScrollBarPosition);
 
-    delete scene;
+    // restatr scene
+    QGraphicsScene *previousScene = scene;
     scene = new QGraphicsScene(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt());
 
     // Add player object to scene
@@ -90,10 +91,10 @@ void MainWindow::updateGraphics()
     int startX = levelPlist.value("start_x").toInt() - playerRect.width()/2;
     int startY = levelPlist.value("level_height").toInt() - (levelPlist.value("start_y").toInt() + playerRect.height()/2);
     item->setPos(startX, startY);
-    item->setData(1, "player");
-    item->setData(2, -1);
-    item->setData(3, false);
-    item->setData(4, QPoint(0,0));
+    item->setData(1, "player");     // type of object
+    item->setData(2, -1);           // object id
+    item->setData(3, false);        // is the object rotated?
+    item->setData(4, QPoint(0,0));  // MouseOffset of the object (not used yet)
 
     for(int i = 0; i < levelObjects.length(); i++)
     {
@@ -112,19 +113,12 @@ void MainWindow::updateGraphics()
         float yPos = levelPlist.value("level_height").toFloat() - (y + height/2);
 
         // Rotate object around its own center as opposed to its top left corner
-
         float rotation = levelObjects[i].value("rotation").toFloat();
         float rotationRadians = (3.141592653/180) * rotation;
         float xShift = (width/2 * qCos(rotationRadians)) - (height/2 * qSin(rotationRadians)) - width/2;
         float yShift = (-width/2 * qSin(rotationRadians)) - (height/2 * qCos(rotationRadians)) + height/2;
 
-        /*
-        float xShift = 0, yShift = 0;
-        float rotation = 0;
-        */
-
         item->setPos((int)(xPos - xShift), (int)(yPos + yShift));
-
         item->setRotation((int)rotation);
         item->setData(1, "object");
         item->setData(2, i);
@@ -133,16 +127,15 @@ void MainWindow::updateGraphics()
     }
 
     QGraphicsView *view = ui->graphicsView;
-    //((QAbstractScrollArea*)(view->parentWidget()))->horizontalScrollBar()->setValue(100);
-    //view->verticalScrollBar()->setValue(25);
-
-    //qDebug("Min- %d, Max- %d", view->horizontalScrollBar()->minimum(), view->horizontalScrollBar()->maximum());
 
     view->setScene(scene);
     view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
 
     // set background
     scene->setBackgroundBrush(Qt::black);
+
+    // avoid memory leak.  We can't do this earlier, or the QGraphicsView resets its viewport.
+    delete previousScene;
 }
 
 // Read sprite size and location data from plist, and save it in a hash table.
