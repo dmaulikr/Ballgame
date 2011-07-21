@@ -141,7 +141,6 @@
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
-<<<<<<< HEAD
            </item>
           </layout>
          </widget>
@@ -171,8 +170,6 @@
               <string>Go!</string>
              </property>
             </widget>
-=======
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
            </item>
           </layout>
          </widget>
@@ -560,7 +557,6 @@
     </hint>
    </hints>
   </connection>
-<<<<<<< HEAD
   <connection>
    <sender>wallThicknessButton</sender>
    <signal>clicked()</signal>
@@ -577,8 +573,6 @@
     </hint>
    </hints>
   </connection>
-=======
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -597,9 +591,6 @@
   <slot>newLevel()</slot>
   <slot>quit()</slot>
   <slot>rotationSliderMoved(int)</slot>
-<<<<<<< HEAD
   <slot>wallThicknessClicked()</slot>
-=======
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
  </slots>
 </ui>

@@ -14,10 +14,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QtCore/qmath.h>
-<<<<<<< HEAD
 #include <QScrollBar>
-=======
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 
 namespace Ui {
     class MainWindow;

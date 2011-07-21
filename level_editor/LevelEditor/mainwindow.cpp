@@ -3,14 +3,8 @@
 // Create object templates for easy object creation
 // Zoom in/out
 // Create default propreties for new level
-<<<<<<< HEAD
 // Make it possible to move rotated objects
 // Fix scrollbars defaulting to 0-0 upon updateGraphics() bug
-
-=======
-// Create "make all walls uniform thickness" button
-// Rotation
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 
 
 #include "mainwindow.h"
@@ -310,15 +304,10 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     QString sPX = QString::number(sPXn);
     QString sPY = QString::number(sPYn);
 
-<<<<<<< HEAD
+
     //qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
     //qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
     //qDebug("%f, %f", sPXn, sPYn);
-=======
-    qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
-    qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
-    qDebug("%f, %f", sPXn, sPYn);
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 
     levelObjects[id].insert("width", sX);
     levelObjects[id].insert("height", sY);
@@ -471,8 +460,6 @@ void MainWindow::updateObjectTable(int objId)
 
         ui->rotationSlider->setValue(rotation / 3.6);
     }
-
-<<<<<<< HEAD
 }
 
 void MainWindow::wallThicknessClicked()
@@ -499,8 +486,6 @@ void MainWindow::wallThicknessClicked()
 
     updateGraphics();
     updateObjectTable(ui->objectSelectorComboBox->currentIndex());
-=======
->>>>>>> ebff114bb841e1209526f67971513d43b4ad601a
 }
 
 void MainWindow::newLevel()
