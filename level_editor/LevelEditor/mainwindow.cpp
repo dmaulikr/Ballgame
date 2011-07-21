@@ -3,6 +3,8 @@
 // Create object templates for easy object creation
 // Zoom in/out
 // Create default propreties for new level
+// Create "make all walls uniform thickness" button
+// Rotation
 
 
 #include "mainwindow.h"
@@ -86,6 +88,8 @@ void MainWindow::updateGraphics()
     item->setPos(startX, startY);
     item->setData(1, "player");
     item->setData(2, -1);
+    item->setData(3, false);
+    item->setData(4, QPoint(0,0));
 
     for(int i = 0; i < levelObjects.length(); i++)
     {
@@ -94,17 +98,34 @@ void MainWindow::updateGraphics()
 
         //Q_ASSERT_X(objRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
         QImage img = spriteSheet.copy(objRect);
-        int height = levelObjects.at(i).value("height").toInt();
-        int width = levelObjects.at(i).value("width").toInt();
-        int x = levelObjects.at(i).value("x").toFloat();
-        int y = levelObjects.at(i).value("y").toFloat();
+        float height = levelObjects.at(i).value("height").toFloat();
+        float width = levelObjects.at(i).value("width").toFloat();
+        float x = levelObjects.at(i).value("x").toFloat();
+        float y = levelObjects.at(i).value("y").toFloat();
         img = img.scaled(QSize(width, height), Qt::IgnoreAspectRatio);
         item = scene->addPixmap(QPixmap::fromImage(img));
-        int xPos = x - width/2;
-        int yPos = levelPlist.value("level_height").toInt() - (y + height/2);
-        item->setPos(xPos, yPos);
+        float xPos = x - width/2;
+        float yPos = levelPlist.value("level_height").toFloat() - (y + height/2);
+
+        // Rotate object around its own center as opposed to its top left corner
+
+        float rotation = levelObjects[i].value("rotation").toFloat();
+        float rotationRadians = (3.141592653/180) * rotation;
+        float xShift = (width/2 * qCos(rotationRadians)) - (height/2 * qSin(rotationRadians)) - width/2;
+        float yShift = (-width/2 * qSin(rotationRadians)) - (height/2 * qCos(rotationRadians)) + height/2;
+
+        /*
+        float xShift = 0, yShift = 0;
+        float rotation = 0;
+        */
+
+        item->setPos((int)(xPos - xShift), (int)(yPos + yShift));
+
+        item->setRotation((int)rotation);
         item->setData(1, "object");
         item->setData(2, i);
+        item->setData(3, (rotation != 0 && rotation != 360));
+        item->setData(4, QPoint(xShift, yShift));
     }
 
     QGraphicsView *view = ui->graphicsView;
@@ -274,8 +295,9 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     QString sPX = QString::number(sPXn);
     QString sPY = QString::number(sPYn);
 
-    //qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
-    //qDebug("%f, %f", sPXn, sPYn);
+    qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
+    qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
+    qDebug("%f, %f", sPXn, sPYn);
 
     levelObjects[id].insert("width", sX);
     levelObjects[id].insert("height", sY);
@@ -370,6 +392,28 @@ void MainWindow::clearObjectTable()
     table->setColumnCount(0);
 }
 
+void MainWindow::rotationSliderMoved(int value)
+{
+    int objId = ui->objectSelectorComboBox->currentIndex();
+
+    if(objId == -1) // nothing selected
+        return;
+
+    if(noEmit)
+        return;
+    noEmit = true;
+
+    float rot = (value * 360.0 / 99);  // dividing by 99 instead of 100 so that 360 can actually be reached
+    int rotation = (int)rot / 5 * 5;  // round to the nearest 5
+
+    levelObjects[objId].insert("rotation", QString::number(rotation));
+
+    updateGraphics();
+    updateObjectTable(objId);
+
+    noEmit = false;
+}
+
 void MainWindow::updateObjectTable(int objId)
 {
     if(objId == -2 || levelObjects.count() <= objId)
@@ -397,6 +441,14 @@ void MainWindow::updateObjectTable(int objId)
 
         table->setItem(rowCount-1, 0, new QTableWidgetItem(it.key()));
         table->setItem(rowCount-1, 1, new QTableWidgetItem(it.value()));
+    }
+
+    QString rotationStr = levelObjects[objId].value("rotation", "nil");
+    if(rotationStr != "nil"){
+        int rotation = rotationStr.toInt();
+        ui->rotationLabel->setText(QString("Rotation - " + QString::number(rotation) + " degrees").toAscii());
+
+        ui->rotationSlider->setValue(rotation / 3.6);
     }
 
 }

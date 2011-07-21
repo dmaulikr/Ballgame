@@ -29,38 +29,31 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>Objects</string>
          </attribute>
-         <widget class="QComboBox" name="objectSelectorComboBox">
+         <widget class="QWidget" name="">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>251</width>
-            <height>22</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QWidget" name="layoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>40</y>
             <width>258</width>
-            <height>455</height>
+            <height>496</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QComboBox" name="objectSelectorComboBox"/>
+           </item>
            <item>
             <widget class="QTableWidget" name="objectsTableWidget">
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>290</height>
+               <height>260</height>
               </size>
              </property>
              <column>
@@ -76,56 +69,78 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <item>
-              <widget class="QPushButton" name="pushButton_4">
-               <property name="text">
-                <string>Add Property</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_5">
-               <property name="text">
-                <string>Delete Property</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_3">
-               <property name="text">
-                <string>Copy Object</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton">
-               <property name="text">
-                <string>Add Blank New Object</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_2">
-               <property name="text">
-                <string>Delete Object</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="text">
+              <string>Add Property</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_5">
+             <property name="text">
+              <string>Delete Property</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="text">
+              <string>Copy Object</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Add Blank New Object</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Delete Object</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="rotationLabel">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Rotation</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="rotationSlider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -283,8 +298,8 @@
    <slot>updateObjectTable(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
-     <y>84</y>
+     <x>667</x>
+     <y>83</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -315,8 +330,8 @@
    <slot>addPropertyClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>413</y>
+     <x>667</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
      <x>790</x>
@@ -331,8 +346,8 @@
    <slot>deletePropertyClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>442</y>
+     <x>667</x>
+     <y>407</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
@@ -347,8 +362,8 @@
    <slot>copyObjectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>487</y>
+     <x>667</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -363,8 +378,8 @@
    <slot>newObjectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>516</y>
+     <x>667</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
@@ -379,8 +394,8 @@
    <slot>deleteObjectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>512</x>
-     <y>545</y>
+     <x>667</x>
+     <y>513</y>
     </hint>
     <hint type="destinationlabel">
      <x>794</x>
@@ -500,6 +515,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>rotationSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>rotationSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>418</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -517,5 +548,6 @@
   <slot>saveLevelPlistAs()</slot>
   <slot>newLevel()</slot>
   <slot>quit()</slot>
+  <slot>rotationSliderMoved(int)</slot>
  </slots>
 </ui>

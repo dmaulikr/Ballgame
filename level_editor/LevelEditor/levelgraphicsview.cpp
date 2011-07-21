@@ -7,6 +7,16 @@ LevelGraphicsView::LevelGraphicsView(QWidget* pQW_Parent)
 void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
 {
     if (QGraphicsItem *item = itemAt(event->pos())) {
+
+        // Currently don't support moving or scaling rotated objects
+        bool rotated = item->data(3).toBool();
+        if(rotated)
+        {
+            emit objectSelected(item->data(1).toString(), item->data(2).toInt());
+            return;
+        }
+
+
         //qDebug() << "You clicked on item" << item;
         draggedItem = item;
 
@@ -22,17 +32,21 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
 
         int mouseX = draggedItem->pos().x() - mapToScene(event->pos()).x();
         int mouseY = draggedItem->pos().y() - mapToScene(event->pos()).y();
-        mouseOffset = QPointF(mouseX, mouseY);
+        QPoint rotationOffset = draggedItem->data(4).toPoint();
+        mouseOffset = QPointF(mouseX, mouseY) + rotationOffset;
 
         resizing = false;
 
         double rightPercent = (double)mouseX / draggedItem->boundingRect().size().width() * -1;
         double bottomPercent = (double)mouseY / draggedItem->boundingRect().size().height() * -1;
-        if(rightPercent >= .9 || bottomPercent >= .9)
+
+        //qDebug() << draggedItem->data(3);
+        if(!(draggedItem->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
         {
             resizing = true;
             previousPoint = QPointF(mapToScene(event->pos()));
         }
+
 
         //qDebug("Percents - %f, %f", rightPercent, bottomPercent);
 

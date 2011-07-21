@@ -13,6 +13,7 @@
 #include <QComboBox>
 #include <QDebug>
 #include <QFileDialog>
+#include <QtCore/qmath.h>
 
 namespace Ui {
     class MainWindow;
@@ -35,6 +36,7 @@ private slots:
     void newLevel();
     void quit();
 
+    // From LevelGraphicsView
     void objectChanged(QString, int, QPointF, QSizeF);
     void objectSelected(QString, int);
     void needToRescale(QString, int, double, double, bool);
@@ -52,6 +54,7 @@ private slots:
     void levelPlistChanged(QTableWidgetItem*);
     void objectChanged(QTableWidgetItem*);
     void updateObjectTable(int id);
+    void rotationSliderMoved(int);
 
 
 private:
