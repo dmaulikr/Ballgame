@@ -25,8 +25,10 @@
 
 +(id)sharedInstance;
 +(id)alloc;
++(NSDictionary*)defaults;
 
--(void)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key;
+//Returns NO if it can't
+-(BOOL)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key;
 -(NSDictionary*) getDefaults;
 -(NSDictionary*)levelWithName:(NSString*)levelName;
 @end

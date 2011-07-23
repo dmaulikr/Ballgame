@@ -10,6 +10,11 @@
 #import "cocos2d.h"
 #import "GameObject.h"
 
+typedef enum {
+    PlayerBeganLevel,
+    PlayerCompletedLevel,
+    PlayerDied
+} PlayerStatus;
 
 @interface Player : GameObject {
     float _growRate;
@@ -17,8 +22,11 @@
     
     NSMutableArray *_effects;
     NSDictionary *_levelInfo;
+    
+    PlayerStatus _status;
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
+@property (readonly) PlayerStatus status;
 -(void) updatePlayer: (ccTime) dt;
 
 @end

@@ -46,9 +46,23 @@ static AssetManager* sharedAssetManager = nil;
         NSString *pathToDefaultsPlist = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
         plistDefaults = [[NSDictionary alloc] initWithContentsOfFile:pathToDefaultsPlist];
         _isDownloading = NO;
+        
+        //Take the name and plist and convert them to actual Documents Directory URLS
+        NSMutableDictionary *_changeDict = [NSMutableDictionary dictionaryWithDictionary:plistDefaults];
+        NSString *absolutePngPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:@"SpriteSheetPngName"], nil];
+        NSString *absolutePlistPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:@"SpriteSheetPlistName"], nil];
+        [_changeDict setValue:absolutePlistPath forKey:@"SpriteSheetPlistName"];
+        [_changeDict setValue:absolutePngPath forKey:@"SpriteSheetPngName"];
+        [plistDefaults release];
+        plistDefaults = [_changeDict retain];
+        NSLog(@"defaults: %@", plistDefaults);
     }
     
     return self;
+}
+
++(NSDictionary*)defaults{
+    return [[AssetManager sharedInstance] getDefaults];
 }
 
 -(NSDictionary *) getDefaults
@@ -56,16 +70,18 @@ static AssetManager* sharedAssetManager = nil;
     return plistDefaults;
 }
 
--(void)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key{
+-(BOOL)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key{
     if (_isDownloading){
         NSLog(@"Already downloading");
         //[NSException raise:@"Attempt to start downloading a second URL before the first finished or failed" format:@"",nil];
-        return;
+        return NO;
     }
+    _downloadDelegate = [delegate retain];
+    _resultSelector = selector;
     _isDownloading = YES;
     _cachedData = [[NSMutableData  alloc] initWithLength:0];
     _defaultsKeyToSet = key;
-    _placeToWrite = [[NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0 ] stringByAppendingFormat:@"/%@", [url lastPathComponent], nil]] retain];
+    _placeToWrite = [[NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0 ] stringByAppendingPathComponent:[url lastPathComponent]]] retain];
     NSFileManager *fileMan = [NSFileManager defaultManager];
     NSError *err = nil;
     [fileMan removeItemAtURL:_placeToWrite error:&err];
@@ -76,14 +92,16 @@ static AssetManager* sharedAssetManager = nil;
     
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:5];
     if ([NSURLConnection canHandleRequest:theRequest]){
-        NSLog(@"Yeah we can handle that request");
+        //NSLog(@"Yeah we can handle that request");
     }
     else{
-        NSLog(@"That request is too scary");
+        //NSLog(@"That request is too scary");
+        return NO;
     }
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
     [connection start];
+    return YES;
 }
 
 
@@ -101,12 +119,12 @@ static AssetManager* sharedAssetManager = nil;
 }
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [_cachedData appendData:data];
-    NSLog(@"Data");
+    //NSLog(@"Data");
 }
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [connection release];
-    NSLog(@"%@", [error description]);
+    //NSLog(@"%@", [error description]);
     _isDownloading = NO;
     [_cachedData release];
 }
@@ -118,24 +136,26 @@ static AssetManager* sharedAssetManager = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [connection release];
     _isDownloading = NO;
-    NSLog(@"writing %i bytes to %@", [_cachedData length], [_placeToWrite absoluteString]);
+    //NSLog(@"writing %i bytes to %@", [_cachedData length], [_placeToWrite absoluteString]);
     
     NSError *err;
     if ([_cachedData writeToURL:_placeToWrite options:NSDataWritingFileProtectionComplete error:&err]){
-        NSLog(@"Write Succeeded!");
+        //NSLog(@"Write Succeeded!");
     }else{
-        NSLog(@"Write Failed: %@", [err description]);
+        //NSLog(@"Write Failed: %@", [err description]);
         _placeToWrite = nil;
     }
-    [_downloadDelegate performSelector:_resultSelector withObject:_placeToWrite];
+    [_downloadDelegate performSelectorOnMainThread:_resultSelector withObject:_placeToWrite waitUntilDone:NO];
+    [_downloadDelegate release];
+    //[_downloadDelegate performSelector:_resultSelector withObject:_placeToWrite];
     NSMutableDictionary *_changeDict = [NSMutableDictionary dictionaryWithDictionary:plistDefaults];
-    [_changeDict setValue:[_placeToWrite absoluteString] forKey:_defaultsKeyToSet];
+    [_changeDict setValue:[_placeToWrite path] forKey:_defaultsKeyToSet];
     [plistDefaults release];
     plistDefaults = [_changeDict retain];
     [_placeToWrite release];
     [_cachedData release];
-    NSLog(@"Data Load completed");
-    NSLog(@"%@", plistDefaults);
+    //NSLog(@"Data Load completed");
+    //NSLog(@"%@", plistDefaults);
     
 }
 @end

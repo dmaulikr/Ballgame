@@ -11,26 +11,44 @@
 
 @implementation SpecifyURLViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithDefaultsKeyToSpecify:(NSString*)defaultsKey
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"SpecifyURLViewController"   bundle:nil];
     if (self) {
         // Custom initialization
+        _defaultsKey = [defaultsKey retain];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(beginLoad)];
+        self.navigationItem.rightBarButtonItem  = doneButton;
+        [doneButton release];
+        
+        //self.navigationItem.hidesBackButton = YES;
+        
     }
     return self;
 }
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+-(void)beginLoad{
+    //[[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.png"] withDelegate:self resultSelector:@selector(finishedCache) andDefaultsKey:@"SpriteSheetPngName"];
+    if ([[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:[_urlTextField text]] withDelegate:self resultSelector:@selector(loadFinished:) andDefaultsKey:_defaultsKey]){
+        [[NSUserDefaults standardUserDefaults] setValue:[_urlTextField text] forKey:[PREVIOUSLY_USED_URL stringByAppendingString:_defaultsKey]];
+        [_activityIndicator startAnimating];
+        [_urlTextField setEnabled:NO];
+    }else{
+        UIAlertView *cantloadThat = [[UIAlertView alloc] initWithTitle:@"Can't load that" message:@"Unable to load the specified URL or a load is already taking place." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [cantloadThat show];
+        [cantloadThat release];
+    }
     
-    // Release any cached data, images, etc that aren't in use.
+}
+     
+-(void)loadFinished:(id)resultPath{
+    NSLog(@"Load Finished");
+    [_activityIndicator stopAnimating];
+    [_urlTextField setEnabled:YES];
+    if (resultPath == nil){
+        UIAlertView *loadFailed = [[UIAlertView alloc] initWithTitle:@"Load Failed" message:@"The load failed for some reason." delegate:nil cancelButtonTitle:@"Oh darn." otherButtonTitles: nil];
+        [loadFailed show];
+        [loadFailed release];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -42,14 +60,21 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     //[self.navigationController setNavigationBarHidden:NO];
+    [_urlTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:[PREVIOUSLY_USED_URL stringByAppendingString:_defaultsKey]]];
+    //[_urlTextField setText:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.plist"];
+    [_defaultsKeyLabel setText:_defaultsKey];
 }
-*/
 
+
+-(void)viewWillDisappear:(BOOL)animated{
+     //[self.navigationController setNavigationBarHidden:YES];
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -60,7 +85,21 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
+#pragma mark - Memory Management
+- (void)dealloc
+{
+    [_defaultsKey release];
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
 @end

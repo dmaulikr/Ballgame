@@ -8,6 +8,7 @@
 
 #import "DebugConfigurationViewController.h"
 #import "CCDirector.h"
+#import "SpecifyURLViewController.h"
 
 @implementation DebugConfigurationViewController
 
@@ -27,6 +28,7 @@
 //                           //LoadSpriteSheetPlist
 //                       }),nil] retain];
         
+        [self.navigationItem setHidesBackButton:YES];
     }
     return self;
 }
@@ -71,11 +73,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -85,14 +89,14 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[CCDirector sharedDirector] resume];
     [super viewDidDisappear:animated];
+    [[CCDirector sharedDirector] resume];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -176,27 +180,25 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    SpecifyURLViewController *urlViewController;
+    
     switch ([indexPath row]) {
         case 0:
+            [self.navigationController setNavigationBarHidden:YES];
             [self.navigationController popViewControllerAnimated:NO];
             break;
         case 1:
-            [[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.png"] withDelegate:self resultSelector:@selector(finishedCache) andDefaultsKey:@"SpriteSheetPngName"];
+            urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPngName"];
+            [self.navigationController pushViewController:urlViewController animated:YES];
             break;
-            
+        case 2:
+            urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPlistName"];
+            [self.navigationController pushViewController:urlViewController animated:YES];
+//            [[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.plist"] withDelegate:self resultSelector:@selector(finishedCache) andDefaultsKey:@"SpriteSheetPlistName"];
         default:
             break;
     }
 //    CellBlock block = (CellBlock)[cellActions objectAtIndex:[indexPath   row]];
 //    block();
-}
-
--(void)finishedCache:(id)result{
-    NSLog(@"Finished!");
-    if (result == nil){
-        NSLog(@"Failed");
-    }else{
-        NSLog(@"Success!");
-    }
 }
 @end

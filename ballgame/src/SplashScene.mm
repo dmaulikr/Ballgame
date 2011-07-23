@@ -45,7 +45,7 @@
     [[CCDirector sharedDirector] pause];
     DebugConfigurationViewController *dbvc = [[DebugConfigurationViewController alloc] initWithStyle:UITableViewStylePlain];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] navController] pushViewController:dbvc animated:NO];
-    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] navController] setNavigationBarHidden:YES];
+    //[[(AppDelegate*)[[UIApplication sharedApplication] delegate] navController] setNavigationBarHidden:YES];
     [dbvc release];
 }
 @end

@@ -112,11 +112,14 @@ enum {
     
     //Initialize the Sprite Sheet
     NSLog(@"Purging and removing");
-    [CCTextureCache purgeSharedTextureCache];
     [CCSpriteFrameCache purgeSharedSpriteFrameCache];
-    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPngName"] capacity:150];
-    //CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:batchTexture  capacity:150]; 
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[[AssetManager sharedInstance] getDefaults] valueForKey:@"SpriteSheetPlistName"]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
+    NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:@"SpriteSheetPngName"]];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:[fileURL path]];
+    CCTexture2D *spriteSheetTexture = [[CCTexture2D alloc] initWithImage:image];
+    [image release];
+    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:spriteSheetTexture  capacity:150]; 
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[AssetManager defaults] valueForKey:@"SpriteSheetPlistName"]];
     
     // Initialize the scrolling layer
     // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
@@ -143,6 +146,8 @@ enum {
 
     return self;
 }
+
+#pragma mark - Level Creation
 
 -(Player*)addPlayer
 {
@@ -174,28 +179,7 @@ enum {
     return nil;
 }
 
-#pragma mark - Level Creation
 
--(NSMutableArray*)populateGameObjectsFromPlist{
-    //TODO: Tune this number once we get a feeling for about how many game objects the average level has.  Small performance gain.
-    NSMutableArray *_populatedArray = [[NSMutableArray alloc] initWithCapacity:1000];
-    
-    //HARDCODE: 
-    int NUM_WALLS = 0;
-    for (int i = 0; i < NUM_WALLS; i++){
-        
-    }
-    int NUM_COINS = 0;
-    for (int i = 0; i < NUM_COINS; i++){
-        
-    }
-    int NUM_POW_2X = 0;
-    for (int i = 0; i < NUM_POW_2X; i++){
-        
-    }
-    
-    return _populatedArray;
-}
 
 
 #pragma mark - Premade Scenes
@@ -272,7 +256,7 @@ enum {
     [self processCollisionSet:[_collisionManager collisionSet] withTime:dt];
     
     //Check Level Status.  Are we finished?
-	if ([[_levelInfo valueForKey:@"LevelStatus"] intValue] == LevelStatusCompleted){
+	if (_thePlayer.status == PlayerCompletedLevel || _thePlayer.status == PlayerDied){
         [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
     }
 	//Iterate over the bodies in the physics world

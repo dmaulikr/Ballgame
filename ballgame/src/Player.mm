@@ -16,13 +16,15 @@
 
 @implementation Player
 
-@synthesize levelInfo=_levelInfo;
+@synthesize levelInfo=_levelInfo, status=_status;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     if (_levelInfo == nil){
         [NSException raise:@"Attempt to setup a player object that doesn't have levelInfo" format:@"Make sure you set the level info for the player object before setupGameObject"];
         return;
     }
+    _status = PlayerBeganLevel;
+    
     _identifier = GameObjectIDPlayer;
     CGPoint p;
     p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
@@ -83,13 +85,17 @@
 	_body->DestroyFixture(_currentFixture);
 	_currentFixture = _body->CreateFixture(&fixtureDef);
     //NSLog(@"New size - %f.  Scaling factor - %f", _radius, _radius/oldRadius);
+    
+    if (_radius >= 50){
+        _status = PlayerDied;
+    }
 }
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
     if ([object identifier] == GameObjectIDGoal){
-        [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusCompleted] forKey:@"LevelStatus"];
+        _status = PlayerCompletedLevel;
     }
 }
 

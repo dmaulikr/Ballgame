@@ -158,6 +158,7 @@
 		38125BC413CA5651001282F6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BC313CA5651001282F6 /* blocks.png */; };
 		38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */; };
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
+		388EC58B13DB8D7800F83580 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 388EC58A13DB8D7800F83580 /* SpecifyURLViewController.xib */; };
 		AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */; };
 		AA03DDE813D7766E00BEFC7F /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDE713D7766E00BEFC7F /* AssetManager.m */; };
 		AA03DDED13D7768200BEFC7F /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE913D7768200BEFC7F /* box.level */; };
@@ -487,6 +488,7 @@
 		38125BC313CA5651001282F6 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BallGameSpriteSheet.plist; path = ballgame/Resources/BallGameSpriteSheet.plist; sourceTree = "<group>"; };
 		38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BallGameSpriteSheet.png; path = ballgame/Resources/BallGameSpriteSheet.png; sourceTree = "<group>"; };
+		388EC58A13DB8D7800F83580 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpecifyURLViewController.xib; sourceTree = "<group>"; };
 		AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDefaults.plist; path = ballgame/resources/GameDefaults.plist; sourceTree = "<group>"; };
 		AA03DDE613D7766E00BEFC7F /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetManager.h; path = src/AssetManager.h; sourceTree = "<group>"; };
 		AA03DDE713D7766E00BEFC7F /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetManager.m; path = src/AssetManager.m; sourceTree = "<group>"; };
@@ -1085,6 +1087,7 @@
 				AA03DE2913D778A200BEFC7F /* RootViewController.m */,
 				AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */,
 				AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */,
+				388EC58A13DB8D7800F83580 /* SpecifyURLViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1156,6 +1159,7 @@
 				AA03DDEE13D7768200BEFC7F /* DebugLevel.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
+				388EC58B13DB8D7800F83580 /* SpecifyURLViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

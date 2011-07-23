@@ -15,5 +15,4 @@ typedef void (*CellBlock)();
     NSArray *cellTitles;
     NSArray *cellActions;
 }
--(void)finishedCache:(id)result;
 @end
