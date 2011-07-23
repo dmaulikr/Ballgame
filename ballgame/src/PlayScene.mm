@@ -205,7 +205,7 @@ enum {
 	
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [PlayScene node];
-	[layer loadLevelWithName:@"DemoLevel"];
+	[layer loadLevelWithName:@"box"];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	

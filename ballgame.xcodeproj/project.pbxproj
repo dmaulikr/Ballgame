@@ -158,7 +158,6 @@
 		38125BC413CA5651001282F6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BC313CA5651001282F6 /* blocks.png */; };
 		38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */; };
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
-<<<<<<< HEAD
 		AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */; };
 		AA03DDE813D7766E00BEFC7F /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDE713D7766E00BEFC7F /* AssetManager.m */; };
 		AA03DDED13D7768200BEFC7F /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE913D7768200BEFC7F /* box.level */; };
@@ -185,19 +184,6 @@
 		AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2713D778A200BEFC7F /* DebugConfigurationViewController.m */; };
 		AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2913D778A200BEFC7F /* RootViewController.m */; };
 		AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */; };
-=======
-		38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = 38125C0513CA75D0001282F6 /* DebugLevel.level */; };
-		38125C0B13CA7FDF001282F6 /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38125C0A13CA7FDE001282F6 /* Wall.mm */; };
-		382D031F13D3C51D00DCA70C /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = 382D031E13D3C51D00DCA70C /* box.level */; };
-		387DDA9E13D356D000C7DD9A /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387DDA9D13D356D000C7DD9A /* GameOverScene.mm */; };
-		387E357C13D39EB2006CB9AD /* SplashScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 387E357B13D39EB2006CB9AD /* SplashScene.mm */; };
-		387E358213D3A0D6006CB9AD /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E358113D3A0D6006CB9AD /* DebugConfigurationViewController.m */; };
-		387E358513D3A863006CB9AD /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E358413D3A863006CB9AD /* SpecifyURLViewController.m */; };
-		38860E3713D3C28100E3BB08 /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = 38860E3613D3C28100E3BB08 /* TestConvert.level */; };
-		38F43D1813D259DE007002B9 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38F43D1713D259DE007002B9 /* Goal.mm */; };
-		38F8660913D3F2940097B7EA /* DemoLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = 38F8660813D3F2940097B7EA /* DemoLevel.level */; };
-		38FB190813D26106003372ED /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38FB190713D26106003372ED /* HighScoresScene.mm */; };
->>>>>>> Using Demo Level again
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -501,7 +487,6 @@
 		38125BC313CA5651001282F6 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BallGameSpriteSheet.plist; path = ballgame/Resources/BallGameSpriteSheet.plist; sourceTree = "<group>"; };
 		38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BallGameSpriteSheet.png; path = ballgame/Resources/BallGameSpriteSheet.png; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDefaults.plist; path = ballgame/resources/GameDefaults.plist; sourceTree = "<group>"; };
 		AA03DDE613D7766E00BEFC7F /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetManager.h; path = src/AssetManager.h; sourceTree = "<group>"; };
 		AA03DDE713D7766E00BEFC7F /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetManager.m; path = src/AssetManager.m; sourceTree = "<group>"; };
@@ -552,28 +537,6 @@
 		AA03DE2913D778A200BEFC7F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/RootViewController.m; sourceTree = "<group>"; };
 		AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpecifyURLViewController.h; path = src/SpecifyURLViewController.h; sourceTree = "<group>"; };
 		AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecifyURLViewController.m; path = src/SpecifyURLViewController.m; sourceTree = "<group>"; };
-=======
-		38125C0413CA6D4E001282F6 /* GameObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjects.h; sourceTree = "<group>"; };
-		38125C0513CA75D0001282F6 /* DebugLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; name = DebugLevel.level; path = ballgame/DebugLevel.level; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
-		38125C0713CA7FAB001282F6 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Wall.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		38125C0A13CA7FDE001282F6 /* Wall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Wall.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		38125C1313CA8226001282F6 /* DataDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataDefinitions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		382D031E13D3C51D00DCA70C /* box.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = box.level; sourceTree = "<group>"; };
-		387DDA9C13D356D000C7DD9A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
-		387DDA9D13D356D000C7DD9A /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverScene.mm; sourceTree = "<group>"; };
-		387E357A13D39EB2006CB9AD /* SplashScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScene.h; sourceTree = "<group>"; };
-		387E357B13D39EB2006CB9AD /* SplashScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SplashScene.mm; sourceTree = "<group>"; };
-		387E358013D3A0D6006CB9AD /* DebugConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugConfigurationViewController.h; path = ../DebugConfigurationViewController.h; sourceTree = "<group>"; };
-		387E358113D3A0D6006CB9AD /* DebugConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugConfigurationViewController.m; path = ../DebugConfigurationViewController.m; sourceTree = "<group>"; };
-		387E358313D3A863006CB9AD /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecifyURLViewController.h; sourceTree = "<group>"; };
-		387E358413D3A863006CB9AD /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecifyURLViewController.m; sourceTree = "<group>"; };
-		38860E3613D3C28100E3BB08 /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestConvert.level; sourceTree = "<group>"; };
-		38F43D1713D259DE007002B9 /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Goal.mm; sourceTree = "<group>"; };
-		38F43D1913D25A19007002B9 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
-		38F8660813D3F2940097B7EA /* DemoLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DemoLevel.level; path = ballgame/DemoLevel.level; sourceTree = "<group>"; };
-		38FB190613D26106003372ED /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresScene.h; sourceTree = "<group>"; };
-		38FB190713D26106003372ED /* HighScoresScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HighScoresScene.mm; sourceTree = "<group>"; };
->>>>>>> Using Demo Level again
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1092,15 +1055,7 @@
 		387E357F13D3A017006CB9AD /* Plists and Defaults */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */,
-=======
-				38F8660813D3F2940097B7EA /* DemoLevel.level */,
-				382D031E13D3C51D00DCA70C /* box.level */,
-				38860E3613D3C28100E3BB08 /* TestConvert.level */,
-				38125BF213CA5A7B001282F6 /* GameDefaults.plist */,
-				38125C0513CA75D0001282F6 /* DebugLevel.level */,
->>>>>>> Using Demo Level again
 				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
 				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
 			);
@@ -1196,18 +1151,11 @@
 				38125BC413CA5651001282F6 /* blocks.png in Resources */,
 				38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */,
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
-<<<<<<< HEAD
 				AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */,
 				AA03DDED13D7768200BEFC7F /* box.level in Resources */,
 				AA03DDEE13D7768200BEFC7F /* DebugLevel.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
-=======
-				38125C0613CA75D1001282F6 /* DebugLevel.level in Resources */,
-				38860E3713D3C28100E3BB08 /* TestConvert.level in Resources */,
-				382D031F13D3C51D00DCA70C /* box.level in Resources */,
-				38F8660913D3F2940097B7EA /* DemoLevel.level in Resources */,
->>>>>>> Using Demo Level again
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
