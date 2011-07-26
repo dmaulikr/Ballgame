@@ -23,7 +23,7 @@
     
     
     CGSize originalSize = [self contentSize];
-    NSLog(@"Content Size %f, %f", originalSize.width, originalSize.height);
+    //NSLog(@"Content Size %f, %f", originalSize.width, originalSize.height);
     float originalWidth = originalSize.width;
     float originalHeight = originalSize.height;
     

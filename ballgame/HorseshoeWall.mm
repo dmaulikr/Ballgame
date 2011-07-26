@@ -1,18 +1,26 @@
 //
-//  Wall.m
+//  HorseshoeWall.m
 //  ballgame
 //
-//  Created by Ryan Hart on 7/10/11.
-//  Copyright 2011 __myCompanyName__. All rights reserved.
+//  Created by Ryan Hart on 7/23/11.
+//  Copyright 2011 NoName. All rights reserved.
 //
 
-#import "Wall.h"
+#import "HorseshoeWall.h"
 
-@implementation Wall
+@implementation HorseshoeWall
+
+-(void)handleCollisionWithObject:(GameObject*)object{
+    NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));
+}
+
+-(void)noLongerCollidingWithObject:(GameObject*)object{
+    NSLog(@"%@ moved away from %@",NSStringFromClass([self class]), NSStringFromClass([object class]));
+}
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
-//TODO: Rotation
-    _identifier = GameObjectIDWall;
+    //This does nothing.  Subclasses override this for custom initialization
+    _identifier = GameObjectIDObstacle;
     
     CGSize size;
     size.width = [[game_object valueForKey:@"width"] floatValue];
@@ -20,8 +28,8 @@
     CGPoint p;
     p.x = [[game_object valueForKey:@"x"] floatValue];
     p.y = [[game_object valueForKey:@"y"] floatValue];
-
-
+    
+    
     CGSize originalSize = [self contentSize];
     //NSLog(@"Content Size %f, %f", originalSize.width, originalSize.height);
     float originalWidth = originalSize.width;
@@ -33,7 +41,7 @@
     //NSLog(@"newScaleX: %f, newScaleY: %f", newScaleX, newScaleY);
     [self setScaleX:newScaleX];
     [self setScaleY:newScaleY];
-
+    
     
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
@@ -42,17 +50,26 @@
 	_body->SetAwake(NO);
 	
 	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
     
-	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/2/PTM_RATIO);
-	
+//Define the base
+	b2PolygonShape base;
+    
+	base.SetAsBox(size.width/PTM_RATIO/2 , .2* size.height/2/PTM_RATIO);
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
+	fixtureDef.shape = &base;	
 	fixtureDef.density = 0.0f;
 	fixtureDef.friction = 0.3f;
 	_currentFixture = _body->CreateFixture(&fixtureDef);
-   
+    
+//Define the left side
+//    b2PolygonShape right;
+//    right.SetAsBox(.2* size.width/PTM_RATIO/2, size.height/2/PTM_RATIO);
+//    
+//    b2FixtureDef rightFixtureDef;
+//    fixtureDef.shape = &right;
+//    fixture
+    
+//Define the right side
 }
-
 @end
