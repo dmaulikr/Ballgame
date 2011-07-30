@@ -172,6 +172,7 @@
 		AA03DE0713D7777000BEFC7F /* Pickup.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0313D7777000BEFC7F /* Pickup.mm */; };
 		AA03DE0813D7777000BEFC7F /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0513D7777000BEFC7F /* Player.mm */; };
 		AA03DE0B13D7779600BEFC7F /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0A13D7779600BEFC7F /* Wall.mm */; };
+		AA03DE0E13D777AE00BEFC7F /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0D13D777AE00BEFC7F /* Goal.mm */; };
 		AA03DE1113D777D500BEFC7F /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1013D777D500BEFC7F /* GameOverScene.mm */; };
 		AA03DE1613D777EC00BEFC7F /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1313D777EC00BEFC7F /* HighScoresScene.mm */; };
 		AA03DE1713D777EC00BEFC7F /* LevelSelectorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1513D777EC00BEFC7F /* LevelSelectorScene.m */; };
@@ -183,20 +184,13 @@
 		AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2713D778A200BEFC7F /* DebugConfigurationViewController.m */; };
 		AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2913D778A200BEFC7F /* RootViewController.m */; };
 		AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */; };
-<<<<<<< HEAD
-		AAB6F25413E4B01400031C64 /* paper_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F25313E4B01400031C64 /* paper_bg.jpg */; };
 		AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F25513E4BABD00031C64 /* metalbackground.jpg */; };
-		BFA0863913E1E56000597D71 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863813E1E56000597D71 /* Switch.mm */; };
-		BFA0863D13E1EC6B00597D71 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863C13E1EC6B00597D71 /* Effect.mm */; };
-=======
-		BF442FE613E4AC1900084335 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF442FDD13E4AC1900084335 /* Effect.mm */; };
-		BF442FE713E4AC1900084335 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF442FDF13E4AC1900084335 /* Gate.mm */; };
-		BF442FE813E4AC1900084335 /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF442FE113E4AC1900084335 /* Goal.mm */; };
-		BF442FE913E4AC1900084335 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF442FE313E4AC1900084335 /* HorseshoeWall.mm */; };
-		BF442FEA13E4AC1900084335 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF442FE513E4AC1900084335 /* Switch.mm */; };
-		BF442FEC13E4ACD500084335 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF442FEB13E4ACD500084335 /* SpecifyURLViewController.xib */; };
-		BF5BCA1E13E4B7FE00369DE5 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5BCA1D13E4B7FE00369DE5 /* GameStateManager.m */; };
->>>>>>> 545540ed5cb777996d33e528bc203e442af4ecc5
+		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
+		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
+		AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */; };
+		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
+		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
+		AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -526,6 +520,8 @@
 		AA03DE0513D7777000BEFC7F /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Player.mm; path = src/Player.mm; sourceTree = "<group>"; };
 		AA03DE0913D7779600BEFC7F /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wall.h; path = src/Wall.h; sourceTree = "<group>"; };
 		AA03DE0A13D7779600BEFC7F /* Wall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Wall.mm; path = src/Wall.mm; sourceTree = "<group>"; };
+		AA03DE0C13D777AE00BEFC7F /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Goal.h; path = src/Goal.h; sourceTree = "<group>"; };
+		AA03DE0D13D777AE00BEFC7F /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Goal.mm; path = src/Goal.mm; sourceTree = "<group>"; };
 		AA03DE0F13D777D500BEFC7F /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameOverScene.h; path = src/GameOverScene.h; sourceTree = "<group>"; };
 		AA03DE1013D777D500BEFC7F /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameOverScene.mm; path = src/GameOverScene.mm; sourceTree = "<group>"; };
 		AA03DE1213D777EC00BEFC7F /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighScoresScene.h; path = src/HighScoresScene.h; sourceTree = "<group>"; };
@@ -548,28 +544,18 @@
 		AA03DE2913D778A200BEFC7F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/RootViewController.m; sourceTree = "<group>"; };
 		AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpecifyURLViewController.h; path = src/SpecifyURLViewController.h; sourceTree = "<group>"; };
 		AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecifyURLViewController.m; path = src/SpecifyURLViewController.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		AAB6F25313E4B01400031C64 /* paper_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = paper_bg.jpg; path = old_version/Resources/paper_bg.jpg; sourceTree = SOURCE_ROOT; };
 		AAB6F25513E4BABD00031C64 /* metalbackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = metalbackground.jpg; path = Resources/metalbackground.jpg; sourceTree = "<group>"; };
-		BFA0863713E1E56000597D71 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Switch.h; sourceTree = "<group>"; };
-		BFA0863813E1E56000597D71 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Switch.mm; sourceTree = "<group>"; };
-		BFA0863B13E1EC6B00597D71 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
-		BFA0863C13E1EC6B00597D71 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Effect.mm; sourceTree = "<group>"; };
-=======
-		BF442FDC13E4AC1900084335 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
-		BF442FDD13E4AC1900084335 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
-		BF442FDE13E4AC1900084335 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
-		BF442FDF13E4AC1900084335 /* Gate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Gate.mm; path = src/Gate.mm; sourceTree = "<group>"; };
-		BF442FE013E4AC1900084335 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Goal.h; path = src/Goal.h; sourceTree = "<group>"; };
-		BF442FE113E4AC1900084335 /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Goal.mm; path = src/Goal.mm; sourceTree = "<group>"; };
-		BF442FE213E4AC1900084335 /* HorseshoeWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorseshoeWall.h; path = src/HorseshoeWall.h; sourceTree = "<group>"; };
-		BF442FE313E4AC1900084335 /* HorseshoeWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HorseshoeWall.mm; path = src/HorseshoeWall.mm; sourceTree = "<group>"; };
-		BF442FE413E4AC1900084335 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Switch.h; path = src/Switch.h; sourceTree = "<group>"; };
-		BF442FE513E4AC1900084335 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
-		BF442FEB13E4ACD500084335 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/SpecifyURLViewController.xib; sourceTree = "<group>"; };
-		BF5BCA1C13E4B7FE00369DE5 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
-		BF5BCA1D13E4B7FE00369DE5 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStateManager.m; sourceTree = "<group>"; };
->>>>>>> 545540ed5cb777996d33e528bc203e442af4ecc5
+		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
+		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
+		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
+		AAB6F25F13E4C47A00031C64 /* Gate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Gate.mm; path = src/Gate.mm; sourceTree = "<group>"; };
+		AAB6F26013E4C47A00031C64 /* HorseshoeWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorseshoeWall.h; path = src/HorseshoeWall.h; sourceTree = "<group>"; };
+		AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HorseshoeWall.mm; path = src/HorseshoeWall.mm; sourceTree = "<group>"; };
+		AAB6F26213E4C47A00031C64 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Switch.h; path = src/Switch.h; sourceTree = "<group>"; };
+		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
+		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
+		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
+		AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/SpecifyURLViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -672,7 +658,6 @@
 			isa = PBXGroup;
 			children = (
 				AAB6F25513E4BABD00031C64 /* metalbackground.jpg */,
-				AAB6F25313E4B01400031C64 /* paper_bg.jpg */,
 				38125A0013CA564E001282F6 /* Default.png */,
 				38125A0213CA564E001282F6 /* fps_images.png */,
 				38125A0413CA564E001282F6 /* Icon-72.png */,
@@ -1045,16 +1030,16 @@
 		38125BD713CA58CE001282F6 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BF442FDC13E4AC1900084335 /* Effect.h */,
-				BF442FDD13E4AC1900084335 /* Effect.mm */,
-				BF442FDE13E4AC1900084335 /* Gate.h */,
-				BF442FDF13E4AC1900084335 /* Gate.mm */,
-				BF442FE013E4AC1900084335 /* Goal.h */,
-				BF442FE113E4AC1900084335 /* Goal.mm */,
-				BF442FE213E4AC1900084335 /* HorseshoeWall.h */,
-				BF442FE313E4AC1900084335 /* HorseshoeWall.mm */,
-				BF442FE413E4AC1900084335 /* Switch.h */,
-				BF442FE513E4AC1900084335 /* Switch.mm */,
+				AAB6F25C13E4C47A00031C64 /* Effect.h */,
+				AAB6F25D13E4C47A00031C64 /* Effect.mm */,
+				AAB6F25E13E4C47A00031C64 /* Gate.h */,
+				AAB6F25F13E4C47A00031C64 /* Gate.mm */,
+				AAB6F26013E4C47A00031C64 /* HorseshoeWall.h */,
+				AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */,
+				AAB6F26213E4C47A00031C64 /* Switch.h */,
+				AAB6F26313E4C47A00031C64 /* Switch.mm */,
+				AA03DE0C13D777AE00BEFC7F /* Goal.h */,
+				AA03DE0D13D777AE00BEFC7F /* Goal.mm */,
 				AA03DE0913D7779600BEFC7F /* Wall.h */,
 				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
 				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
@@ -1082,6 +1067,7 @@
 		387E357513D38BC4006CB9AD /* UI Constructs */ = {
 			isa = PBXGroup;
 			children = (
+				AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */,
 			);
 			name = "UI Constructs";
 			sourceTree = "<group>";
@@ -1089,10 +1075,10 @@
 		387E357E13D39FFC006CB9AD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				AAB6F26A13E4C4D900031C64 /* GameStateManager.h */,
+				AAB6F26B13E4C4D900031C64 /* GameStateManager.m */,
 				AA03DDE613D7766E00BEFC7F /* AssetManager.h */,
 				AA03DDE713D7766E00BEFC7F /* AssetManager.m */,
-				BF5BCA1C13E4B7FE00369DE5 /* GameStateManager.h */,
-				BF5BCA1D13E4B7FE00369DE5 /* GameStateManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1130,7 +1116,6 @@
 				AA03DE2913D778A200BEFC7F /* RootViewController.m */,
 				AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */,
 				AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */,
-				BF442FEB13E4ACD500084335 /* SpecifyURLViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1202,13 +1187,8 @@
 				AA03DDEE13D7768200BEFC7F /* DebugLevel.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
-<<<<<<< HEAD
-				388EC58B13DB8D7800F83580 /* SpecifyURLViewController.xib in Resources */,
-				AAB6F25413E4B01400031C64 /* paper_bg.jpg in Resources */,
 				AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */,
-=======
-				BF442FEC13E4ACD500084335 /* SpecifyURLViewController.xib in Resources */,
->>>>>>> 545540ed5cb777996d33e528bc203e442af4ecc5
+				AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1359,6 +1339,7 @@
 				AA03DE0713D7777000BEFC7F /* Pickup.mm in Sources */,
 				AA03DE0813D7777000BEFC7F /* Player.mm in Sources */,
 				AA03DE0B13D7779600BEFC7F /* Wall.mm in Sources */,
+				AA03DE0E13D777AE00BEFC7F /* Goal.mm in Sources */,
 				AA03DE1113D777D500BEFC7F /* GameOverScene.mm in Sources */,
 				AA03DE1613D777EC00BEFC7F /* HighScoresScene.mm in Sources */,
 				AA03DE1713D777EC00BEFC7F /* LevelSelectorScene.m in Sources */,
@@ -1370,12 +1351,11 @@
 				AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */,
 				AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */,
 				AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */,
-				BF442FE613E4AC1900084335 /* Effect.mm in Sources */,
-				BF442FE713E4AC1900084335 /* Gate.mm in Sources */,
-				BF442FE813E4AC1900084335 /* Goal.mm in Sources */,
-				BF442FE913E4AC1900084335 /* HorseshoeWall.mm in Sources */,
-				BF442FEA13E4AC1900084335 /* Switch.mm in Sources */,
-				BF5BCA1E13E4B7FE00369DE5 /* GameStateManager.m in Sources */,
+				AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */,
+				AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */,
+				AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */,
+				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
+				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

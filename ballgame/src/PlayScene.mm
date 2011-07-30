@@ -152,9 +152,9 @@ enum {
 #if !DEBUG_DRAW
     
     // background texture
-	CGSize winSize = [CCDirector sharedDirector].winSize;
+	//CGSize winSize = [CCDirector sharedDirector].winSize;
 	int NUM_TILES = 1;
-	int IMAGE_SIZE = 512;
+	//int IMAGE_SIZE = 512;
 	for(int i = 0; i < NUM_TILES; i++)
 		for(int j = 0; j < NUM_TILES; j++)
 		{
@@ -210,7 +210,7 @@ enum {
     CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
+	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadCurrentLevel];
     //[layer setColor:ccWHITE];
 	// add layer as a child to scene
