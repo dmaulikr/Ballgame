@@ -186,6 +186,8 @@
 		AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2713D778A200BEFC7F /* DebugConfigurationViewController.m */; };
 		AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2913D778A200BEFC7F /* RootViewController.m */; };
 		AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */; };
+		AAB6F25413E4B01400031C64 /* paper_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F25313E4B01400031C64 /* paper_bg.jpg */; };
+		AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F25513E4BABD00031C64 /* metalbackground.jpg */; };
 		BFA0863913E1E56000597D71 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863813E1E56000597D71 /* Switch.mm */; };
 		BFA0863D13E1EC6B00597D71 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863C13E1EC6B00597D71 /* Effect.mm */; };
 /* End PBXBuildFile section */
@@ -544,6 +546,8 @@
 		AA03DE2913D778A200BEFC7F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/RootViewController.m; sourceTree = "<group>"; };
 		AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpecifyURLViewController.h; path = src/SpecifyURLViewController.h; sourceTree = "<group>"; };
 		AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecifyURLViewController.m; path = src/SpecifyURLViewController.m; sourceTree = "<group>"; };
+		AAB6F25313E4B01400031C64 /* paper_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = paper_bg.jpg; path = old_version/Resources/paper_bg.jpg; sourceTree = SOURCE_ROOT; };
+		AAB6F25513E4BABD00031C64 /* metalbackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = metalbackground.jpg; path = Resources/metalbackground.jpg; sourceTree = "<group>"; };
 		BFA0863713E1E56000597D71 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Switch.h; sourceTree = "<group>"; };
 		BFA0863813E1E56000597D71 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Switch.mm; sourceTree = "<group>"; };
 		BFA0863B13E1EC6B00597D71 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
@@ -640,8 +644,8 @@
 				3801303113D156C70008EC14 /* Physics */,
 				38125BD713CA58CE001282F6 /* Game Objects */,
 				38125BD613CA5806001282F6 /* Scenes */,
-				38125BB213CA5651001282F6 /* Supporting Files */,
 				381259FF13CA564E001282F6 /* Resources */,
+				38125BB213CA5651001282F6 /* Supporting Files */,
 			);
 			path = ballgame;
 			sourceTree = "<group>";
@@ -649,6 +653,8 @@
 		381259FF13CA564E001282F6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAB6F25513E4BABD00031C64 /* metalbackground.jpg */,
+				AAB6F25313E4B01400031C64 /* paper_bg.jpg */,
 				38125A0013CA564E001282F6 /* Default.png */,
 				38125A0213CA564E001282F6 /* fps_images.png */,
 				38125A0413CA564E001282F6 /* Icon-72.png */,
@@ -1175,6 +1181,8 @@
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
 				388EC58B13DB8D7800F83580 /* SpecifyURLViewController.xib in Resources */,
+				AAB6F25413E4B01400031C64 /* paper_bg.jpg in Resources */,
+				AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

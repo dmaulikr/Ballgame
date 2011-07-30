@@ -8,7 +8,10 @@
 //UI Definitions
 #define PTM_RATIO 32
 #define SCROLL_BORDER 150
+
 #define PLAYER_Z_ORDER 10
+#define BACKGROUND_Z_ORDER -1
+#define OBJECT_Z_ORDER 5
 
 typedef enum{
     LevelStatusStarted,

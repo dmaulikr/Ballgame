@@ -15,7 +15,7 @@
   <key>start_y</key>
   <integer>1881</integer>
   <key>starting_size</key>
-  <integer>10</integer>
+  <integer>30</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>

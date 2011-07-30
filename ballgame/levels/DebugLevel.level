@@ -8,16 +8,16 @@
   <integer>500</integer>
   <key>level_width</key>
   <integer>500</integer>
-  <key>start_x</key>
-  <integer>77</integer>
-  <key>start_y</key>
-  <integer>425</integer>
-  <key>world</key>
-  <string>null</string>
   <key>size_grow_rate</key>
   <integer>1</integer>
+  <key>start_x</key>
+  <integer>250</integer>
+  <key>start_y</key>
+  <integer>250</integer>
   <key>starting_size</key>
   <integer>20</integer>
+  <key>world</key>
+  <string>null</string>
   <key>game_objects</key>
   <array>
    <dict>
@@ -34,9 +34,9 @@
     <key>width</key>
     <integer>292</integer>
     <key>x</key>
-    <integer>254</integer>
+    <integer>232</integer>
     <key>y</key>
-    <integer>277</integer>
+    <integer>258</integer>
    </dict>
   </array>
  </dict>
