@@ -21,6 +21,7 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //This does nothing.  Subclasses override this for custom initialization
+    [super setupGameObject:game_object forWorld:world];
     _identifier = GameObjectIDPickup;
 }
 @end

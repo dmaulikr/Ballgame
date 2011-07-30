@@ -145,6 +145,21 @@ enum {
         [self addGameObject:game_object];
     }
     
+    //Now we need to resolve any dependencies any objects might have on other game objects in the world
+    for (GameObject *game_object in _gameObjects){
+        if ([game_object conformsToProtocol:@protocol(DependantObject)]){
+            //Find his dependant object and set it
+            GameObject <DependantObject>* depObject = game_object;
+            for (GameObject *searchObject in _gameObjects){
+                if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
+                    NSLog(@"Found our dependant object");
+                    [depObject setDependantObject:searchObject];
+                    break;
+                }
+            }
+        }
+    }
+    
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
     
@@ -181,6 +196,7 @@ enum {
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
     [batch addChild:object];
     [object setupGameObject:gameObject forWorld:world];
+    
     [_gameObjects addObject:object];
     return nil;
 }

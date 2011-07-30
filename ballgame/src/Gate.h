@@ -8,10 +8,12 @@
 
 #import "GameObject.h"
 #import "Wall.h"
+#import "Switch.h"
 
-@interface Gate : Wall{
-    BOOL isLocked;
+@interface Gate : Wall <Switchable>{
+    BOOL _isLocked;
 }
--(void)unlock;
--(void)lock;
+@property (readwrite) BOOL isLocked;
+
+
 @end

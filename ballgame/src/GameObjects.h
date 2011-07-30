@@ -6,6 +6,7 @@
 //  
 //
 
+#import "GameObject.h"
 #import "Player.h"
 #import "Pickup.h"
 #import "Obstacle.h"

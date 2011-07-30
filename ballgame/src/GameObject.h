@@ -12,9 +12,16 @@
 #import "DataDefinitions.h"
 #import "Effect.h"
 
+
+@protocol DependantObject
+@property (nonatomic, retain) id dependantObject;
+-(NSString*)getDependantObjectName;
+@end
+
 @interface GameObject : CCSprite <NSCopying> {
     
     NSDictionary *defaults;
+    NSDictionary *_objectInfo;
     
     //Game State Info
     NSMutableArray *_effects;
@@ -29,6 +36,7 @@
 @property (readwrite) b2Fixture *currentFixture;
 @property(nonatomic, retain) NSDictionary *defaults;
 
+-(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
 -(b2Vec2)getVelocity;
 -(void)handleCollisionWithObject:(GameObject*)object;
