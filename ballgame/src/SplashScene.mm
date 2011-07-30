@@ -39,7 +39,7 @@
     
 }
 -(void)playTapped:(id)sender{
-    [[CCDirector sharedDirector] replaceScene:[PlayScene debugScene]];
+    [[CCDirector sharedDirector] replaceScene:[PlayScene currentLevelScene]];
 }
 -(void)debugTapped:(id)sender{
     [[CCDirector sharedDirector] pause];

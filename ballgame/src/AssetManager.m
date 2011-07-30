@@ -61,11 +61,34 @@ static AssetManager* sharedAssetManager = nil;
     return self;
 }
 
+
++(NSArray*)allBundledLevels{
+    NSFileManager *fileMan = [NSFileManager defaultManager];
+    NSArray *pathsInBundle = [fileMan contentsOfDirectoryAtPath:[[NSBundle mainBundle] bundlePath] error:nil];
+    NSMutableArray *levels = [NSMutableArray arrayWithCapacity:20];
+    for (NSString *path in pathsInBundle){
+        //NSLog(@"lastPathComponent %@", [path lastPathComponent]);
+        if ([[path lastPathComponent] hasSuffix:@"level"]){
+            
+            NSString *levelName = [[path lastPathComponent] stringByDeletingPathExtension];
+            NSLog(@"Adding Level: %@", levelName);
+            NSDictionary *level = [[AssetManager sharedInstance] levelWithName:levelName];
+            if ([level valueForKey:@"name"] == nil){
+                NSLog(@"Adding name key: %@", levelName);
+                level = [NSMutableDictionary dictionaryWithDictionary:level];
+                [level setValue:levelName forKey:@"name"];
+            }
+            [levels addObject:level];
+        }
+    }
+    return levels;
+}
+
 +(NSDictionary*)defaults{
     return [[AssetManager sharedInstance] getDefaults];
 }
 
--(NSDictionary *) getDefaults
+-(NSDictionary *)getDefaults
 {
     return plistDefaults;
 }

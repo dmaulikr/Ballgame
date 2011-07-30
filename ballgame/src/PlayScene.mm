@@ -32,6 +32,10 @@ enum {
 
 
 #pragma mark - Init
+-(id)loadCurrentLevel{
+    return [self loadLevelWithName:[[GameStateManager currentLevel] valueForKey:@"name"]];
+}
+
 
 -(id)loadLevelWithName:(NSString *)levelName{
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
@@ -185,6 +189,20 @@ enum {
 
 
 #pragma mark - Premade Scenes
++(CCScene*)currentLevelScene{
+    CCScene *scene = [CCScene node];
+	
+	// 'layer' is an autorelease object.
+	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
+	[layer loadCurrentLevel];
+    //[layer setColor:ccWHITE];
+	// add layer as a child to scene
+	[scene addChild: layer];
+	[layer release];
+	// return the scene
+	return scene;
+}
+
 +(CCScene*)debugScene{
     
     CCScene *scene = [CCScene node];
