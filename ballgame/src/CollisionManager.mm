@@ -64,7 +64,7 @@
 }
 
 -(void)beginContact:(b2Contact *)contact{
-    //NSLog(@"Beginning contact");
+    
     b2Fixture *fixtureA = contact->GetFixtureA();
     b2Body *bodyA = fixtureA->GetBody();
     GameObject *gameObjectA = (GameObject*)bodyA->GetUserData();
@@ -73,19 +73,21 @@
     b2Body *bodyB = fixtureB->GetBody();
     GameObject *gameObjectB = (GameObject*)bodyB->GetUserData();
     
+    //NSLog(@"Beginning contact: %i+%i", [gameObjectA identifier], [gameObjectB identifier]);
 
     GameObjectCollision *newCollision = [[GameObjectCollision alloc] initWithGameObjectA:gameObjectA andObjectB:gameObjectB];
     BOOL _collisionExists = NO;
     for (GameObjectCollision *collision in _collisionSet){
-        if ([collision isEqual:newCollision]){
-            return;
+        if (![collision isEqual:newCollision]){
+            
+            
         }else{
             _collisionExists = YES;
             break;
         }
     }
     if (!_collisionExists){
-        //NSLog(@"Adding Collision");
+        //NSLog(@"Adding collision: %i+%i", [gameObjectA identifier], [gameObjectB identifier]);
         [_collisionSet addObject:newCollision];
     }else{
         //This collision is already being tracked in our list.  No need to create another event.

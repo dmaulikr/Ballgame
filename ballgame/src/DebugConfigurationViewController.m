@@ -58,6 +58,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [[CCDirector sharedDirector] stopAnimation];
+    levels = [[AssetManager allBundledLevels] retain];
+    
 }
 
 - (void)viewDidUnload
@@ -67,6 +69,7 @@
     // e.g. self.myOutlet = nil;
     [cellTitles release];
     [cellActions release];
+    [levels release];
     
 }
 
@@ -100,16 +103,36 @@
 }
 
 #pragma mark - Table view data source
-
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    switch (section) {
+        case 0:
+            return @"Asset Loading";
+            break;
+        case 1:
+            return @"Levels";
+        default:
+            break;
+    }
+    return @"";
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    switch (section) {
+        case 0:
+            return [cellTitles count];
+            break;
+        case 1:
+            return [levels count];
+        default:
+            break;
+    }
     return [cellTitles count];
 }
 
@@ -122,8 +145,19 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    cell.accessoryType = UITableViewCellAccessoryNone;
     // Configure the cell...
-    [[cell textLabel] setText:[cellTitles objectAtIndex:[indexPath row]]];
+    switch ([indexPath section]){
+        case 0:
+            [[cell textLabel] setText:[cellTitles objectAtIndex:[indexPath row]]];
+            break;
+        case 1:
+            if ([indexPath row] == [[GameStateManager sharedInstance] currentLevelIndex]){
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
+            [[cell textLabel] setText:[NSString stringWithFormat:@"%i - %@", [indexPath row], [[levels objectAtIndex:[indexPath row]] valueForKey:@"name"]]];
+            break;
+    };
     
     
     return cell;
@@ -172,33 +206,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
     SpecifyURLViewController *urlViewController;
-    
-    switch ([indexPath row]) {
-        case 0:
-            [self.navigationController setNavigationBarHidden:YES];
-            [self.navigationController popViewControllerAnimated:NO];
-            break;
-        case 1:
-            urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPngName"];
-            [self.navigationController pushViewController:urlViewController animated:YES];
-            break;
-        case 2:
-            urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPlistName"];
-            [self.navigationController pushViewController:urlViewController animated:YES];
-//            [[AssetManager sharedInstance] cacheResourceFromURL:[NSURL URLWithString:@"http://192.168.1.100/~ryanhart/BallGameSpriteSheet.plist"] withDelegate:self resultSelector:@selector(finishedCache) andDefaultsKey:@"SpriteSheetPlistName"];
-        default:
-            break;
+    if ([indexPath section] == 0){
+        switch ([indexPath row]) {
+            case 0:
+                [self.navigationController setNavigationBarHidden:YES];
+                [self.navigationController popViewControllerAnimated:NO];
+                break;
+            case 1:
+                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPngName"];
+                [self.navigationController pushViewController:urlViewController animated:YES];
+                break;
+            case 2:
+                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPlistName"];
+                [self.navigationController pushViewController:urlViewController animated:YES];
+            default:
+                break;
+        }
     }
-//    CellBlock block = (CellBlock)[cellActions objectAtIndex:[indexPath   row]];
-//    block();
+     
+    if ([indexPath section] == 1){
+        [[GameStateManager sharedInstance] setCurrentLevelIndex:[indexPath row]];
+        [tableView reloadData];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

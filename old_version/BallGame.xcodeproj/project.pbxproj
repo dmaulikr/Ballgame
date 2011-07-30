@@ -236,7 +236,6 @@
 		AA8D431710E0D51800A2E994 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA8D431610E0D51800A2E994 /* test.mp3 */; };
 		AA8D434010E0DA6300A2E994 /* Game1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA8D433F10E0DA6300A2E994 /* Game1.mp3 */; };
 		AA8D43A910E0E52F00A2E994 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8D43A810E0E52F00A2E994 /* menu_texture.jpg */; };
-		AACF353810C650B40039D7C6 /* paper_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AACF353710C650B40039D7C6 /* paper_bg.jpg */; };
 		AAD924A110C69EF2003AC28C /* bitmapFontTest3.fnt in Resources */ = {isa = PBXBuildFile; fileRef = AAD924A010C69EF2003AC28C /* bitmapFontTest3.fnt */; };
 		AAD924C510C69F8E003AC28C /* bitmapFontTest3.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD924C410C69F8E003AC28C /* bitmapFontTest3.png */; };
 		AAD9254B10C6A464003AC28C /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD9254A10C6A464003AC28C /* GameOverScene.mm */; };
@@ -497,7 +496,6 @@
 		AA8D431610E0D51800A2E994 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
 		AA8D433F10E0DA6300A2E994 /* Game1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Game1.mp3; sourceTree = "<group>"; };
 		AA8D43A810E0E52F00A2E994 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_texture.jpg; sourceTree = "<group>"; };
-		AACF353710C650B40039D7C6 /* paper_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper_bg.jpg; sourceTree = "<group>"; };
 		AAD924A010C69EF2003AC28C /* bitmapFontTest3.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bitmapFontTest3.fnt; sourceTree = "<group>"; };
 		AAD924C410C69F8E003AC28C /* bitmapFontTest3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmapFontTest3.png; sourceTree = "<group>"; };
 		AAD9254910C6A464003AC28C /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
@@ -952,7 +950,6 @@
 				AAD925AA10C6AA31003AC28C /* tuffy_bold_italic-charmap.png */,
 				AAD924C410C69F8E003AC28C /* bitmapFontTest3.png */,
 				AAD924A010C69EF2003AC28C /* bitmapFontTest3.fnt */,
-				AACF353710C650B40039D7C6 /* paper_bg.jpg */,
 				50F4144410692EE7002A0D5E /* Default.png */,
 				50F4144510692EE7002A0D5E /* fps_images.png */,
 				50F4144610692EE7002A0D5E /* Icon.png */,
@@ -1182,7 +1179,6 @@
 				50F4144910692EE7002A0D5E /* Default.png in Resources */,
 				50F4144A10692EE7002A0D5E /* fps_images.png in Resources */,
 				50F4144B10692EE7002A0D5E /* Icon.png in Resources */,
-				AACF353810C650B40039D7C6 /* paper_bg.jpg in Resources */,
 				AAD924A110C69EF2003AC28C /* bitmapFontTest3.fnt in Resources */,
 				AAD924C510C69F8E003AC28C /* bitmapFontTest3.png in Resources */,
 				AAD925AB10C6AA31003AC28C /* tuffy_bold_italic-charmap.png in Resources */,

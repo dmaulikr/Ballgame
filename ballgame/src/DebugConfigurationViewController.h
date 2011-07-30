@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AssetManager.h"
+#import "GameStateManager.h"
 
 typedef void (*CellBlock)();
 
 @interface DebugConfigurationViewController : UITableViewController {
     NSArray *cellTitles;
     NSArray *cellActions;
+    NSArray *levels;
 }
 @end

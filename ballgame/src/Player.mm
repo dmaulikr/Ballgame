@@ -88,6 +88,7 @@
 	_currentFixture = _body->CreateFixture(&fixtureDef);
     //NSLog(@"New size - %f.  Scaling factor - %f", _radius, _radius/oldRadius);
     
+    //HARDCODE
     if (_radius >= 50){
         _status = PlayerDied;
     }
@@ -99,8 +100,10 @@
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
+    NSLog(@"%@", [[object class] description]);
     switch ([object identifier]){
         case GameObjectIDGoal:
+            NSLog(@"Level Completed");
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:

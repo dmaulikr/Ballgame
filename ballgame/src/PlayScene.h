@@ -13,6 +13,7 @@
 #import "GLES-Render.h"
 #import "GameObjects.h"
 #import "AssetManager.h"
+#import "GameStateManager.h"
 #import "CollisionManager.h"
 // PlayScene
 
@@ -39,5 +40,6 @@
 
 //Premade Levels
 +(CCScene*)debugScene;
++(CCScene*)currentLevelScene;
 
 @end
