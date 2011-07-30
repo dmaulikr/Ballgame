@@ -12,6 +12,11 @@
   <integer>375</integer>
   <key>start_y</key>
   <integer>53</integer>
+  <key>size_grow_rate</key>
+  <integer>1</integer>
+  <key>starting_size</key>
+  <integer>20</integer>
+     
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>

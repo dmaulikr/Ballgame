@@ -35,15 +35,15 @@
     float originalHeight = originalSize.height;
     
     // TODO:  put start size in level and move this to the player class
-    float newSize = [[defaults valueForKey:@"starting_size"] floatValue];
+    float newSize = [[_levelInfo valueForKey:@"starting_size"] floatValue];
     float newScaleX = (float)(newSize) / originalWidth;
     float newScaleY = (float)(newSize) / originalHeight;
     [self setScaleX:newScaleX];
     [self setScaleY:newScaleY];
     
     
-    _growRate = [[defaults valueForKey:@"size_grow_rate"] floatValue];
-    _radius = [[defaults valueForKey:@"starting_size"] floatValue] / 2;
+    _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
+    _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
     _chargeLevel = 0.0;
     
 	self.position = ccp( p.x,p.y );

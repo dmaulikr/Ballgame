@@ -11,13 +11,9 @@
 		<key>r</key>
 		<integer>70</integer>
 	</dict>
-	<key>size_grow_rate</key>
-	<integer>1</integer>
 	<key>SpriteSheetPlistName</key>
 	<string>BallGameSpriteSheet.plist</string>
 	<key>SpriteSheetPngName</key>
 	<string>BallGameSpriteSheet.png</string>
-	<key>starting_size</key>
-	<integer>20</integer>
 </dict>
 </plist>
