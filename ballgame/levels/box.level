@@ -36,7 +36,7 @@
    </dict>
    <dict>
     <key>frame_name</key>
-    <string>wall.png</string>
+    <string>GreenWallSegment.png</string>
     <key>height</key>
     <integer>5</integer>
     <key>name</key>
@@ -54,7 +54,7 @@
    </dict>
    <dict>
     <key>frame_name</key>
-    <string>wall.png</string>
+    <string>GreenWallSegment.png</string>
     <key>height</key>
     <integer>5</integer>
     <key>name</key>
@@ -72,7 +72,7 @@
    </dict>
    <dict>
     <key>frame_name</key>
-    <string>wall.png</string>
+    <string>GreenWallSegment.png</string>
     <key>height</key>
     <integer>305</integer>
     <key>name</key>
@@ -90,7 +90,7 @@
    </dict>
    <dict>
     <key>frame_name</key>
-    <string>wall.png</string>
+    <string>GreenWallSegment.png</string>
     <key>height</key>
     <integer>305</integer>
     <key>name</key>
@@ -120,7 +120,7 @@
       <key>width</key>
       <integer>40</integer>
       <key>x</key>
-      <integer>290</integer>
+      <integer>420</integer>
       <key>y</key>
       <integer>52</integer>
   </dict>
