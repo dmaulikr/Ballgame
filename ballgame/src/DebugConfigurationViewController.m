@@ -145,12 +145,16 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    cell.accessoryType = UITableViewCellAccessoryNone;
     // Configure the cell...
     switch ([indexPath section]){
         case 0:
             [[cell textLabel] setText:[cellTitles objectAtIndex:[indexPath row]]];
             break;
         case 1:
+            if ([indexPath row] == [[GameStateManager sharedInstance] currentLevelIndex]){
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
             [[cell textLabel] setText:[NSString stringWithFormat:@"%i - %@", [indexPath row], [[levels objectAtIndex:[indexPath row]] valueForKey:@"name"]]];
             break;
     };
