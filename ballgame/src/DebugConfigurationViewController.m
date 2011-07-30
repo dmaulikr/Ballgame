@@ -227,7 +227,9 @@
      
     if ([indexPath section] == 1){
         [[GameStateManager sharedInstance] setCurrentLevelIndex:[indexPath row]];
+        [tableView reloadData];
     }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end
