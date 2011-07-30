@@ -14,10 +14,10 @@
 
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
-#define PATH_SPRITE_PLIST "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.plist"
-#define PATH_SPRITE_IMAGE "/Users/ryanhart/github/Ballgame/ballgame/Resources/BallGameSpriteSheet.png"
-#define PATH_DEBUG_LEVEL "/Users/ryanhart/github/Ballgame/ballgame/levels/DebugLevel.level"
-#define PATH_BALLGAME_DIR "/Users/ryanhart/github/Ballgame/ballgame"
+#define PATH_SPRITE_PLIST "../../../../../ballgame/Resources/BallGameSpriteSheet.plist"
+#define PATH_SPRITE_IMAGE "../../../../../ballgame/Resources/BallGameSpriteSheet.png"
+#define PATH_DEBUG_LEVEL "../../../../../ballgame/levels/DebugLevel.level"
+#define PATH_BALLGAME_DIR "../../../../../ballgame/levels"
 #else // assuming you're on Windows
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
@@ -87,6 +87,7 @@ void MainWindow::updateGraphics()
     QRect playerRect = spriteSheetLocations.value("player_amoeba.png");
     Q_ASSERT_X(playerRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
     QImage player = spriteSheet.copy(playerRect);
+    player = player.scaledToHeight(levelPlist.value("starting_size").toFloat());
     QGraphicsPixmapItem *item = scene->addPixmap(QPixmap::fromImage(player));
     int startX = levelPlist.value("start_x").toInt() - playerRect.width()/2;
     int startY = levelPlist.value("level_height").toInt() - (levelPlist.value("start_y").toInt() + playerRect.height()/2);
@@ -524,6 +525,7 @@ void MainWindow::saveLevelPlistAs()
 
 void MainWindow::saveLevelPlist(QString filename)
 {
+    qDebug(filename.toAscii());
     QDomDocument doc("plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"");
     QDomElement root = doc.createElement("plist");
     doc.appendChild(root);

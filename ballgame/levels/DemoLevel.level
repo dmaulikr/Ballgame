@@ -8,10 +8,14 @@
   <integer>2000</integer>
   <key>level_width</key>
   <integer>2000</integer>
+  <key>size_grow_rate</key>
+  <integer>1</integer>
   <key>start_x</key>
-  <integer>1205</integer>
+  <integer>1279</integer>
   <key>start_y</key>
-  <integer>1945</integer>
+  <integer>1881</integer>
+  <key>starting_size</key>
+  <integer>10</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>
@@ -20,7 +24,7 @@
     <key>frame_name</key>
     <string>pickup_wings.png</string>
     <key>height</key>
-    <integer>69</integer>
+    <integer>115</integer>
     <key>name</key>
     <string>Goal1</string>
     <key>rotation</key>
@@ -28,17 +32,17 @@
     <key>type</key>
     <string>Goal</string>
     <key>width</key>
-    <integer>169</integer>
+    <integer>149</integer>
     <key>x</key>
-    <integer>401</integer>
+    <integer>392</integer>
     <key>y</key>
-    <integer>197</integer>
+    <integer>210</integer>
    </dict>
    <dict>
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>18</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Wall 1</string>
     <key>rotation</key>
@@ -56,7 +60,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>5</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Copy of Wall 1</string>
     <key>rotation</key>
@@ -82,7 +86,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>5</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>1400</integer>
     <key>y</key>
@@ -92,7 +96,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>19</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Copy of Copy of Copy of Wall 1</string>
     <key>rotation</key>
@@ -118,7 +122,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>25</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>1140</integer>
     <key>y</key>
@@ -136,7 +140,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>21</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>957</integer>
     <key>y</key>
@@ -146,7 +150,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>114</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Copy of Wall 1</string>
     <key>rotation</key>
@@ -164,7 +168,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>48</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Copy of Copy of Wall 1</string>
     <key>rotation</key>
@@ -190,7 +194,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>90</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>305</integer>
     <key>y</key>
@@ -208,7 +212,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>90</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>648</integer>
     <key>y</key>
@@ -226,7 +230,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>90</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>229</integer>
     <key>y</key>
@@ -244,7 +248,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>53</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>629</integer>
     <key>y</key>
@@ -262,7 +266,7 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>30</integer>
+    <integer>10</integer>
     <key>x</key>
     <integer>188</integer>
     <key>y</key>
@@ -272,7 +276,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>107</integer>
+    <integer>10</integer>
     <key>name</key>
     <string>Copy of Copy of Copy of Copy of Copy of Wall 1</string>
     <key>rotation</key>

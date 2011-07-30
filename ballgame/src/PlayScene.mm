@@ -191,7 +191,7 @@ enum {
 	
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
-	[layer loadLevelWithName:@"box"];
+	[layer loadLevelWithName:@"DemoLevel"];
     //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
