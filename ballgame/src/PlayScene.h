@@ -17,7 +17,7 @@
 #import "CollisionManager.h"
 // PlayScene
 
-@interface PlayScene : CCLayerColor
+@interface PlayScene : CCLayer
 {
     //Physics Data
 	b2World* world;

@@ -13,6 +13,7 @@
 #import "GameOverScene.h"
 
 #define DEBUG_DRAW 0
+
 // enums that will be used as tags
 enum {
 	kTagTileMap = 1,
@@ -162,6 +163,24 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
+// If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
+#if !DEBUG_DRAW
+    
+    // background texture
+	//CGSize winSize = [CCDirector sharedDirector].winSize;
+	int NUM_TILES = 1;
+	//int IMAGE_SIZE = 512;
+	for(int i = 0; i < NUM_TILES; i++)
+		for(int j = 0; j < NUM_TILES; j++)
+		{
+			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
+			//background.position = ccp(winSize.width/2, winSize.height/2);
+			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
+			
+			//[voidNode addChild:background z:-1 parallaxRatio:ccp(0.1f,0.1f) positionOffset:CGPointZero];
+		}
+#endif
+    
     
 #pragma mark Initialize the game loop
     [self schedule: @selector(update:)];
@@ -178,8 +197,6 @@ enum {
 	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
     Player *player = [Player spriteWithSpriteFrameName:@"player_amoeba.png"];
 
-    
-    
 	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];
     [player setupGameObject:nil forWorld:world];
@@ -194,7 +211,7 @@ enum {
     NSString *frameName = [gameObject objectForKey:@"frame_name"];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
-    [batch addChild:object];
+    [batch addChild:object z:OBJECT_Z_ORDER];
     [object setupGameObject:gameObject forWorld:world];
     
     [_gameObjects addObject:object];
@@ -209,7 +226,7 @@ enum {
     CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
+	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadCurrentLevel];
     //[layer setColor:ccWHITE];
 	// add layer as a child to scene
@@ -224,7 +241,7 @@ enum {
     CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
+	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadLevelWithName:@"DemoLevel"];
     //[layer setColor:ccWHITE];
 	// add layer as a child to scene
@@ -242,6 +259,8 @@ enum {
      // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
      // Needed states:  GL_VERTEX_ARRAY, 
      // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        
+    //[super draw];
     
 #if DEBUG_DRAW
 
@@ -270,7 +289,7 @@ enum {
 
      
 #endif
-    [super draw];
+    
 }
 
 -(void) update: (ccTime) dt

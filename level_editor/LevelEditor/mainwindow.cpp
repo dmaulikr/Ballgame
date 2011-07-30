@@ -4,7 +4,6 @@
 // Zoom in/out
 // Create default propreties for new level
 // Make it possible to move rotated objects
-// Fix scrollbars defaulting to 0-0 upon updateGraphics() bug
 
 
 #include "mainwindow.h"

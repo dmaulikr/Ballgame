@@ -206,8 +206,8 @@ int sizeOfPowerFly = 54;
 	
 	// background texture
 	CGSize winSize = [Director sharedDirector].winSize;
-	int NUM_TILES = 1;
-	int IMAGE_SIZE = 500 - 0; // -5 so tiles overlap slightly
+	int NUM_TILES = 5;
+	int IMAGE_SIZE = 512 - 0; // -5 so tiles overlap slightly
 	for(int i = 0; i < NUM_TILES; i++)
 		for(int j = 0; j < NUM_TILES; j++)
 		{
