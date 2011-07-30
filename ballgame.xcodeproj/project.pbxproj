@@ -186,6 +186,8 @@
 		AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2713D778A200BEFC7F /* DebugConfigurationViewController.m */; };
 		AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2913D778A200BEFC7F /* RootViewController.m */; };
 		AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */; };
+		BFA0863913E1E56000597D71 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863813E1E56000597D71 /* Switch.mm */; };
+		BFA0863D13E1EC6B00597D71 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA0863C13E1EC6B00597D71 /* Effect.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -542,6 +544,10 @@
 		AA03DE2913D778A200BEFC7F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/RootViewController.m; sourceTree = "<group>"; };
 		AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpecifyURLViewController.h; path = src/SpecifyURLViewController.h; sourceTree = "<group>"; };
 		AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecifyURLViewController.m; path = src/SpecifyURLViewController.m; sourceTree = "<group>"; };
+		BFA0863713E1E56000597D71 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Switch.h; sourceTree = "<group>"; };
+		BFA0863813E1E56000597D71 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Switch.mm; sourceTree = "<group>"; };
+		BFA0863B13E1EC6B00597D71 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		BFA0863C13E1EC6B00597D71 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Effect.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1030,6 +1036,10 @@
 				AA03DDFE13D7775000BEFC7F /* GameObjects.h */,
 				383039FB13DB98E10094903D /* HorseshoeWall.h */,
 				383039FC13DB98E10094903D /* HorseshoeWall.mm */,
+				BFA0863713E1E56000597D71 /* Switch.h */,
+				BFA0863813E1E56000597D71 /* Switch.mm */,
+				BFA0863B13E1EC6B00597D71 /* Effect.h */,
+				BFA0863C13E1EC6B00597D71 /* Effect.mm */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -1328,6 +1338,8 @@
 				AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */,
 				AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */,
 				383039FD13DB98E10094903D /* HorseshoeWall.mm in Sources */,
+				BFA0863913E1E56000597D71 /* Switch.mm in Sources */,
+				BFA0863D13E1EC6B00597D71 /* Effect.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

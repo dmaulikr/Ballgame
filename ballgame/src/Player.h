@@ -19,14 +19,16 @@ typedef enum {
 @interface Player : GameObject {
     float _growRate;
     float _radius;
+    float _chargeLevel;
     
-    NSMutableArray *_effects;
     NSDictionary *_levelInfo;
     
     PlayerStatus _status;
+    
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
 @property (readonly) PlayerStatus status;
--(void) updatePlayer: (ccTime) dt;
 
+-(void) updateGameObject: (ccTime) dt;
+-(void) reduceCharge:(float)amount;
 @end

@@ -68,6 +68,7 @@
 								   depthFormat:GL_DEPTH_COMPONENT24_OES	// GL_DEPTH_COMPONENT16_OES
                         ];
 	
+    
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
 //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices

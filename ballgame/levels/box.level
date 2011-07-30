@@ -106,6 +106,24 @@
     <key>y</key>
     <integer>250</integer>
    </dict>
+  <dict>
+      <key>frame_name</key>
+      <string>switch.png</string>
+      <key>height</key>
+      <integer>40</integer>
+      <key>name</key>
+      <string>Main Switch</string>
+      <key>rotation</key>
+      <string>0</string>
+      <key>type</key>
+      <string>Switch</string>
+      <key>width</key>
+      <integer>40</integer>
+      <key>x</key>
+      <integer>290</integer>
+      <key>y</key>
+      <integer>52</integer>
+  </dict>
   </array>
  </dict>
 </plist>

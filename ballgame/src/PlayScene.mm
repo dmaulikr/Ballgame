@@ -12,7 +12,7 @@
 #import "DataDefinitions.h"
 #import "GameOverScene.h"
 
-#define DEBUG_DRAW 1
+#define DEBUG_DRAW 0
 // enums that will be used as tags
 enum {
 	kTagTileMap = 1,
@@ -38,6 +38,9 @@ enum {
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
+    _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
+#pragma mark Layer Settings
+    
 #pragma mark Game World Settings
     // enable touches
     self.isTouchEnabled = YES;
@@ -158,7 +161,7 @@ enum {
 
     
     
-	[batch addChild:player];
+	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];
     [player setupGameObject:nil forWorld:world];
 	
@@ -172,10 +175,9 @@ enum {
     NSString *frameName = [gameObject objectForKey:@"frame_name"];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
-    
     [batch addChild:object];
     [object setupGameObject:gameObject forWorld:world];
-    
+    [_gameObjects addObject:object];
     return nil;
 }
 
@@ -188,11 +190,12 @@ enum {
     CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	PlayScene *layer = [PlayScene node];
+	PlayScene *layer = [[PlayScene alloc] initWithColor:ccc4(0, 125, 200, 255)];
 	[layer loadLevelWithName:@"box"];
+    //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
-	
+	[layer release];
 	// return the scene
 	return scene;
 }
@@ -233,6 +236,7 @@ enum {
 
      
 #endif
+    [super draw];
 }
 
 -(void) update: (ccTime) dt
@@ -240,7 +244,11 @@ enum {
     
    // NSLog(@"current - %f, %f, new - %f, %f", currentPos.x, currentPos.y, newPosition.x, newPosition.y);
     
-    [_thePlayer updatePlayer:dt];
+    [_thePlayer updateGameObject:dt];
+    for (GameObject *object in _gameObjects){
+        [object updateGameObject:dt];
+        //NSLog(@"Updated :%@", object);
+    }
     
 	//It is recommended that a fixed time step is used with Box2D for stability
 	//of the simulation, however, we are using a variable time step here.
@@ -406,6 +414,7 @@ enum {
 	delete m_debugDraw;
     
     [_levelInfo release];
+    [_gameObjects release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

@@ -32,6 +32,9 @@
     }
     return self;
 }
+-(void)updateGameObject:(ccTime)dt{
+    //Nothing
+}
 
 -(void)handleCollisionWithObject:(GameObject*)object{
     NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));

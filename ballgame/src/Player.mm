@@ -44,6 +44,7 @@
     
     _growRate = [[defaults valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[defaults valueForKey:@"starting_size"] floatValue] / 2;
+    _chargeLevel = 0.0;
     
 	self.position = ccp( p.x,p.y );
     
@@ -68,10 +69,11 @@
 	_currentFixture= _body->CreateFixture(&fixtureDef);
 }
 
--(void) updatePlayer: (ccTime) dt
+-(void) updateGameObject: (ccTime) dt
 {
     float oldRadius = _radius;
     _radius += (_growRate * dt);
+    _chargeLevel += _growRate;
     
     [self setScale: [self scale] * _radius/oldRadius];
     
@@ -89,14 +91,33 @@
     if (_radius >= 50){
         _status = PlayerDied;
     }
+    for (Effect *effect in _effects){
+        [effect updateEffect:dt];
+    }
 }
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
-    if ([object identifier] == GameObjectIDGoal){
-        _status = PlayerCompletedLevel;
+    switch ([object identifier]){
+        case GameObjectIDGoal:
+            _status = PlayerCompletedLevel;
+            break;
+        case GameObjectIDSwitch:
+            
+            break;
     }
+    
+    [object handleCollisionWithObject:self];
+}
+
+-(void)noLongerCollidingWithObject:(GameObject*)object{
+    [super noLongerCollidingWithObject:object];
+    [object noLongerCollidingWithObject:self];
+}
+
+-(void) reduceCharge:(float)amount{
+    _chargeLevel -= amount;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 
-@interface SplashScene : CCScene {
+@interface SplashScene : CCLayerColor {
     
 }
 +(CCScene *) scene;

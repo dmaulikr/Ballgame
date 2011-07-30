@@ -10,11 +10,14 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "DataDefinitions.h"
-
+#import "Effect.h"
 
 @interface GameObject : CCSprite <NSCopying> {
     
     NSDictionary *defaults;
+    
+    //Game State Info
+    NSMutableArray *_effects;
     
     //Physics Info
     b2Body *_body; //I have a body!
@@ -30,4 +33,5 @@
 -(b2Vec2)getVelocity;
 -(void)handleCollisionWithObject:(GameObject*)object;
 -(void)noLongerCollidingWithObject:(GameObject*)object;
+-(void)updateGameObject:(ccTime)dt;
 @end
