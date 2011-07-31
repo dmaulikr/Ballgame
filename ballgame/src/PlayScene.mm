@@ -150,7 +150,7 @@ enum {
     for (GameObject *game_object in _gameObjects){
         if ([game_object conformsToProtocol:@protocol(DependantObject)]){
             //Find his dependant object and set it
-            GameObject <DependantObject>* depObject = game_object;
+            GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
             for (GameObject *searchObject in _gameObjects){
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
                     NSLog(@"Found our dependant object");
@@ -195,7 +195,7 @@ enum {
 	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
 	
 	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-    Player *player = [Player spriteWithSpriteFrameName:@"player_amoeba.png"];
+    Player *player = [Player spriteWithSpriteFrameName:@"Volt.png"];
 
 	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];
