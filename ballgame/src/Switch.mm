@@ -64,7 +64,11 @@
 -(void)updateGameObject:(ccTime)dt{
     //NSLog(@"Update");
     if (_charging && _charge < _maxCharge){
-        _charge += _chargePerSecond * dt;
+        float deltaCharge = _chargePerSecond * dt;
+        if ([_thePlayer chargeLevel] >= deltaCharge){
+            [_thePlayer setChargeLevel:[_thePlayer chargeLevel] - deltaCharge];
+            _charge += _chargePerSecond * dt;
+        }
         NSLog(@"charge: %1.2f", _charge);
     }
     
@@ -81,7 +85,7 @@
     if ([object identifier] == GameObjectIDPlayer){
         NSLog(@"Charging");
         _charging = YES;
-        _thePlayer = [object retain];
+        _thePlayer = (Player*)object;
     }
 }
 
@@ -90,7 +94,6 @@
     if ([object identifier] == GameObjectIDPlayer){
         NSLog(@"Not Charging");
         _charging = NO;
-        [_thePlayer release];
         _thePlayer = nil;
     }
     
@@ -99,6 +102,11 @@
 
 -(NSString*)getDependantObjectName{
     return _depObjectName;
+}
+
+-(void)dealloc{
+    [_thePlayer release];
+    [super dealloc];
 }
 
 @end
