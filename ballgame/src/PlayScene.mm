@@ -327,20 +327,19 @@ enum {
 	// if ball moved off the edge
     
     
-
-	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && _thePlayer.position.x > 0 && velocity.x < 0){
+	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
 	}
-	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && _thePlayer.position.x < ([[_levelInfo valueForKey:@"level_width"] floatValue]) - SCROLL_BORDER && velocity.x > 0){
+	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
 	}
-	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && _thePlayer.position.y > 0 + SCROLL_BORDER && velocity.y < 0){
+	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
 	}
-	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && _thePlayer.position.y < ([[_levelInfo valueForKey:@"level_height"] floatValue] - SCROLL_BORDER) && velocity.y > 0){
+	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
 	}

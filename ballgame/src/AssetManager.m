@@ -129,7 +129,7 @@ static AssetManager* sharedAssetManager = nil;
 
 
 -(NSDictionary*)levelWithName:(NSString*)levelName{
-    //TODO: Make this work.
+    
     NSString *pathToDefaultsPlist = [[NSBundle mainBundle] pathForResource:levelName ofType:@"level"];
     NSLog(@"found: %@", pathToDefaultsPlist);
     NSDictionary *levelDefaults = [[NSDictionary alloc] initWithContentsOfFile:pathToDefaultsPlist];
