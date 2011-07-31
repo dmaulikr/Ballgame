@@ -74,12 +74,10 @@
     GameObject *gameObjectB = (GameObject*)bodyB->GetUserData();
     
     //NSLog(@"Beginning contact: %i+%i", [gameObjectA identifier], [gameObjectB identifier]);
-
     GameObjectCollision *newCollision = [[GameObjectCollision alloc] initWithGameObjectA:gameObjectA andObjectB:gameObjectB];
     BOOL _collisionExists = NO;
     for (GameObjectCollision *collision in _collisionSet){
         if (![collision isEqual:newCollision]){
-            
             
         }else{
             _collisionExists = YES;
@@ -93,7 +91,7 @@
         //This collision is already being tracked in our list.  No need to create another event.
     }
     
-    
+    [newCollision release];
 }
 -(void)endContact:(b2Contact *)contact{
     //NSLog(@"Ending Contact");
@@ -109,9 +107,11 @@
     for (GameObjectCollision *collision in _collisionSet){
         if ([collision isEqual:newCollision]){
             //NSLog(@"Removing Collision");
-            [_collisionSet removeObject:collision];;
+            [_collisionSet removeObject:collision];
+            break;
         }
     }
+    [newCollision release];
 }
 -(void)preSolve:(b2Contact *)contact withManifold:(const b2Manifold *)manifold{
 }

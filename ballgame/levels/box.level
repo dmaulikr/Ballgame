@@ -9,7 +9,7 @@
   <key>level_width</key>
   <integer>500</integer>
   <key>size_grow_rate</key>
-  <integer>1</integer>
+  <integer>5</integer>
   <key>start_x</key>
   <integer>375</integer>
   <key>start_y</key>
@@ -129,6 +129,10 @@
     <integer>420</integer>
     <key>y</key>
     <integer>52</integer>
+    <key>max_charge</key>
+    <real>25.0</real>
+    <key>charge_per_second</key>
+    <real>12.5</real>   
    </dict>
    <dict>
     <key>frame_name</key>

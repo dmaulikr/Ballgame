@@ -8,7 +8,7 @@
 
 #import "Player.h"
 #import "Goal.h"
-
+#define CHARGE_TO_PIXELS 3
 @interface Player ()
 
 
@@ -16,7 +16,7 @@
 
 @implementation Player
 
-@synthesize levelInfo=_levelInfo, status=_status, chargeLevel=_chargeLevel;
+@synthesize levelInfo=_levelInfo, status=_status, chargeLevel=_chargeLevel, shouldCharge=_shouldCharge;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     if (_levelInfo == nil){
@@ -46,6 +46,7 @@
     _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
     _chargeLevel = 0.0;
+    _shouldCharge = YES;
     
 	self.position = ccp( p.x,p.y );
     
@@ -57,14 +58,12 @@
 	_body = world->CreateBody(&bodyDef);
 	
 	// Define another box shape for our dynamic body.
-    b2PolygonShape dynamicPolygon;
     b2CircleShape dynamicCircle;
 	dynamicCircle.m_radius = _radius / PTM_RATIO;
-	dynamicPolygon.SetAsBox(_radius / PTM_RATIO, _radius / PTM_RATIO);
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicPolygon;	
+	fixtureDef.shape = &dynamicCircle;	
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 	_body->CreateFixture(&fixtureDef);
@@ -72,17 +71,20 @@
 
 -(void) updateGameObject: (ccTime) dt
 {
-    float oldRadius = _radius;
-    _radius += (_growRate * dt);
-    _chargeLevel += _growRate;
+    if (_shouldCharge){
+        _chargeLevel += _growRate * dt;
+    }
+    //NSLog(@"chargeLevel: %1.2f", _chargeLevel);
     
-    [self setScale: [self scale] * _radius/oldRadius];
+    float32 _radiusSize = (_radius + _chargeLevel/CHARGE_TO_PIXELS) ;
+    //[self setScale: _radiusSize / _radius];
+    //NSLog(@"scale: %1.2f", [self scale]);
     
     
     for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) 
     {
         b2CircleShape dynamicCircle;
-        dynamicCircle.m_radius = _radius / PTM_RATIO;
+        dynamicCircle.m_radius = _radiusSize / PTM_RATIO *2;
         
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &dynamicCircle;	
@@ -95,7 +97,7 @@
     
     //HARDCODE
     if (_chargeLevel > 100){
-        //_status = PlayerDied;
+        _status = PlayerDied;
     }
     for (Effect *effect in _effects){
         [effect updateEffect:dt];

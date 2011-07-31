@@ -22,11 +22,11 @@
     p.x = [[game_object valueForKey:@"x"] floatValue];
     p.y = [[game_object valueForKey:@"y"] floatValue];
     
+    //Switches start uncharged
     _charge = 0.0;
     
-    //HARDODE
-    _maxCharge = 100;
-    _chargePerSecond = 20;
+    _maxCharge = [[game_object valueForKey:@"max_charge"] floatValue];
+    _chargePerSecond = [[game_object valueForKey:@"charge_per_second"] floatValue];
     
     _depObjectName = [game_object valueForKey:@"dependant_object_name"];
     
@@ -66,10 +66,11 @@
     if (_charging && _charge < _maxCharge){
         float deltaCharge = _chargePerSecond * dt;
         if ([_thePlayer chargeLevel] >= deltaCharge){
+            NSLog(@"Siphoning %1.2f charge from the player.", deltaCharge);
             [_thePlayer setChargeLevel:[_thePlayer chargeLevel] - deltaCharge];
-            _charge += _chargePerSecond * dt;
+            _charge += deltaCharge;
         }
-        NSLog(@"charge: %1.2f", _charge);
+        //NSLog(@"charge: %1.2f", _charge);
     }
     
     if (_charge >= _maxCharge && !_activated){
@@ -86,6 +87,7 @@
         NSLog(@"Charging");
         _charging = YES;
         _thePlayer = (Player*)object;
+        //[_thePlayer setShouldCharge:NO];
     }
 }
 
@@ -95,6 +97,7 @@
         NSLog(@"Not Charging");
         _charging = NO;
         _thePlayer = nil;
+        //[_thePlayer setShouldCharge:YES];
     }
     
    

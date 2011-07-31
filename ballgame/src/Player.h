@@ -24,11 +24,12 @@ typedef enum {
     NSDictionary *_levelInfo;
     
     PlayerStatus _status;
-    
+    BOOL _shouldCharge;
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
 @property (readonly) PlayerStatus status;
 @property (readwrite) float chargeLevel;
+@property (readwrite) BOOL shouldCharge;
 
 -(void) updateGameObject: (ccTime) dt;
 @end

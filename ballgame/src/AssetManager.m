@@ -124,6 +124,7 @@ static AssetManager* sharedAssetManager = nil;
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
     [connection start];
+    [connection release];
     return YES;
 }
 
