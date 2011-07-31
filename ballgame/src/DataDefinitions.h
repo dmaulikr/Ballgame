@@ -12,7 +12,7 @@
 //UI Definitions
 #define PTM_RATIO 32
 
-#define SCROLL_BORDER 150
+#define SCROLL_BORDER 75
 #define SCROLL_OUTER_BOUNDS 50
 
 #define PLAYER_Z_ORDER 10

@@ -33,4 +33,7 @@ typedef enum {
 @property (readwrite) BOOL shouldCharge;
 
 -(void) updateGameObject: (ccTime) dt;
+
+-(void) startAnimating;
+  
 @end

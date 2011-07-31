@@ -57,6 +57,8 @@
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 	_body->CreateFixture(&fixtureDef);
+    
+    [self startAnimating];
 }
 
 -(void) updateGameObject: (ccTime) dt
@@ -95,6 +97,28 @@
     for (Effect *effect in _effects){
         [effect updateEffect:dt];
     }
+}
+
+-(void) startAnimating
+{
+    // HARDCODE
+    
+    // Set up list of frames
+    NSMutableArray *walkAnimFrames = [NSMutableArray array];
+    for(int i = 0; i <= 4; ++i) {
+        [walkAnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"Volt%d.png", i]]];
+    }
+    
+    // Create animation object
+    CCAnimation *walkAnim = [CCAnimation 
+                             animationWithFrames:walkAnimFrames delay:0.4f];
+    
+    CCAction *walkAction = [CCRepeatForever actionWithAction:
+                       [CCAnimate actionWithAnimation:walkAnim restoreOriginalFrame:NO]];
+    
+    [self runAction:walkAction];
 }
 
 -(void)handleCollisionWithObject:(GameObject *)object{
