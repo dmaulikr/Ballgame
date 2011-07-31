@@ -191,6 +191,7 @@
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
 		AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */; };
+		AAB6F27113E4CA3500031C64 /* MoveableWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F27013E4CA3400031C64 /* MoveableWall.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -556,6 +557,8 @@
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
 		AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/SpecifyURLViewController.xib; sourceTree = "<group>"; };
+		AAB6F26F13E4CA3400031C64 /* MoveableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableWall.h; sourceTree = "<group>"; };
+		AAB6F27013E4CA3400031C64 /* MoveableWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MoveableWall.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1042,6 +1045,8 @@
 				AA03DE0D13D777AE00BEFC7F /* Goal.mm */,
 				AA03DE0913D7779600BEFC7F /* Wall.h */,
 				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
+				AAB6F26F13E4CA3400031C64 /* MoveableWall.h */,
+				AAB6F27013E4CA3400031C64 /* MoveableWall.mm */,
 				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
 				AA03DE0113D7777000BEFC7F /* Obstacle.mm */,
 				AA03DE0213D7777000BEFC7F /* Pickup.h */,
@@ -1356,6 +1361,7 @@
 				AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */,
 				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
 				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
+				AAB6F27113E4CA3500031C64 /* MoveableWall.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

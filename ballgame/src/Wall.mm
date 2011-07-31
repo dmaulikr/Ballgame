@@ -21,6 +21,7 @@
     CGPoint p;
     p.x = [[game_object valueForKey:@"x"] floatValue];
     p.y = [[game_object valueForKey:@"y"] floatValue];
+    self.position = ccp( p.x * 2,p.y * 2);
 
 
     CGSize originalSize = [self contentSize];
@@ -39,11 +40,14 @@
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
 	bodyDef.userData = self;
+    
 	_body = world->CreateBody(&bodyDef);
+    
 	_body->SetAwake(NO);
 	
 	// Define another box shape for our dynamic body.
 	b2PolygonShape dynamicBox;
+    
     
 	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/2/PTM_RATIO);
 	
