@@ -540,9 +540,7 @@
 }
 
 -(void) update: (ccTime) t
-{	
-    NSLog(@"Position - %f, %f, ccTime - %f, delta - %f, %f", [target_ position].x, [target_ position].y, t, delta.x, delta.y);
-    NSLog(@"StartPosition - %f, %f", startPosition.x, startPosition.y);
+{
 	[target_ setPosition: ccp( (startPosition.x + delta.x * t ), (startPosition.y + delta.y * t ) )];
 }
 @end

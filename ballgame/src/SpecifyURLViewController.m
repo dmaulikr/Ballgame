@@ -41,7 +41,7 @@
 }
      
 -(void)loadFinished:(id)resultPath{
-    NSLog(@"Load Finished");
+    //NSLog(@"Load Finished");
     [_activityIndicator stopAnimating];
     [_urlTextField setEnabled:YES];
     if (resultPath == nil){

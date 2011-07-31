@@ -23,7 +23,7 @@
 -(void)switchStateChanged:(BOOL)isOn{
     if (isOn){
         //Our switch was turned on.  We should shut down...
-        NSLog(@"Gate shutting down");
+        //NSLog(@"Gate shutting down");
         self.visible = NO;
         _body->SetActive(NO);
         

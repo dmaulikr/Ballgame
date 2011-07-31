@@ -26,7 +26,7 @@
 }
 -(BOOL)eitherObjectIsEqual:(GameObject*)objectToCompare{
     if (_objectA == objectToCompare || _objectB == objectToCompare){
-        NSLog(@"One was equal");
+        //NSLog(@"One was equal");
         return YES;
     }
     return NO;

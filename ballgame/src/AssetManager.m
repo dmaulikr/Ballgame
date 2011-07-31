@@ -55,7 +55,7 @@ static AssetManager* sharedAssetManager = nil;
         [_changeDict setValue:absolutePngPath forKey:@"SpriteSheetPngName"];
         [plistDefaults release];
         plistDefaults = [_changeDict retain];
-        NSLog(@"defaults: %@", plistDefaults);
+        //NSLog(@"defaults: %@", plistDefaults);
     }
     
     return self;
@@ -71,10 +71,10 @@ static AssetManager* sharedAssetManager = nil;
         if ([[path lastPathComponent] hasSuffix:@"level"]){
             
             NSString *levelName = [[path lastPathComponent] stringByDeletingPathExtension];
-            NSLog(@"Adding Level: %@", levelName);
+            //NSLog(@"Adding Level: %@", levelName);
             NSDictionary *level = [[AssetManager sharedInstance] levelWithName:levelName];
             if ([level valueForKey:@"name"] == nil){
-                NSLog(@"Adding name key: %@", levelName);
+                //NSLog(@"Adding name key: %@", levelName);
                 level = [NSMutableDictionary dictionaryWithDictionary:level];
                 [level setValue:levelName forKey:@"name"];
             }
@@ -95,7 +95,7 @@ static AssetManager* sharedAssetManager = nil;
 
 -(BOOL)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key{
     if (_isDownloading){
-        NSLog(@"Already downloading");
+        //NSLog(@"Already downloading");
         //[NSException raise:@"Attempt to start downloading a second URL before the first finished or failed" format:@"",nil];
         return NO;
     }
@@ -111,7 +111,7 @@ static AssetManager* sharedAssetManager = nil;
     if (err != nil){
         NSLog(@"err: %@", [err description]);
     }
-    NSLog(@"URL: %@", [_placeToWrite absoluteString]);
+    //NSLog(@"URL: %@", [_placeToWrite absoluteString]);
     
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:5];
     if ([NSURLConnection canHandleRequest:theRequest]){
@@ -130,9 +130,9 @@ static AssetManager* sharedAssetManager = nil;
 
 
 -(NSDictionary*)levelWithName:(NSString*)levelName{
-    //TODO: Make this work.
+    
     NSString *pathToDefaultsPlist = [[NSBundle mainBundle] pathForResource:levelName ofType:@"level"];
-    NSLog(@"found: %@", pathToDefaultsPlist);
+    //NSLog(@"found: %@", pathToDefaultsPlist);
     NSDictionary *levelDefaults = [[NSDictionary alloc] initWithContentsOfFile:pathToDefaultsPlist];
     return [levelDefaults autorelease];
 }

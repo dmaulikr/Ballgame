@@ -5,9 +5,15 @@
 //  Created by Ryan Hart on 7/10/11.
 //
 
+
+#define DEBUG_DRAW 1
+
+
 //UI Definitions
 #define PTM_RATIO 32
+
 #define SCROLL_BORDER 150
+#define SCROLL_OUTER_BOUNDS 50
 
 #define PLAYER_Z_ORDER 10
 #define BACKGROUND_Z_ORDER -1
@@ -26,5 +32,6 @@ typedef enum {
     GameObjectIDGoal,
     GameObjectIDPickup,
     GameObjectIDSwitch,
-    GameObjectIDGate
+    GameObjectIDGate,
+    GameObjectIDChargedWall
 } GameObjectID;

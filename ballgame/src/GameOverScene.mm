@@ -36,7 +36,7 @@
     //[self addChild:_restartItem];
 }
 -(void)restartTapped:(id)sender{
-    NSLog(@"Tapped");
+    //NSLog(@"Tapped");
     [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
 }
                             

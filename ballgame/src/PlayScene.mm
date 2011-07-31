@@ -12,8 +12,6 @@
 #import "DataDefinitions.h"
 #import "GameOverScene.h"
 
-#define DEBUG_DRAW 1
-
 // enums that will be used as tags
 enum {
 	kTagTileMap = 1,
@@ -119,7 +117,7 @@ enum {
 
     
     //Initialize the Sprite Sheet
-    NSLog(@"Purging and removing");
+    //NSLog(@"Purging and removing");
     [CCSpriteFrameCache purgeSharedSpriteFrameCache];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
     NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:@"SpriteSheetPngName"]];
@@ -142,7 +140,7 @@ enum {
     _thePlayer = [self addPlayer];
     
     for (NSDictionary *game_object in [_levelInfo objectForKey:@"game_objects"]){
-        NSLog(@"Adding an object");
+        //NSLog(@"Adding an object");
         [self addGameObject:game_object];
     }
     
@@ -153,7 +151,7 @@ enum {
             GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
             for (GameObject *searchObject in _gameObjects){
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
-                    NSLog(@"Found our dependant object");
+                    //NSLog(@"Found our dependant object");
                     [depObject setDependantObject:searchObject];
                     break;
                 }
@@ -321,19 +319,6 @@ enum {
         [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
     }
     
-    // This is migrating to object.update()
-    
-	//Iterate over the bodies in the physics world
-	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
-	{
-		if (b->GetUserData() != NULL) {
-			//Synchronize the AtlasSprites position and rotation with the corresponding body
-			CCSprite *myActor = (CCSprite*)b->GetUserData();
-			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-		}	
-	}
-    
     
 #pragma mark Movement of the Scroll Node
     CGPoint currentPos = [scrollNode position];
@@ -342,20 +327,19 @@ enum {
 	// if ball moved off the edge
     
     
-
-	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && _thePlayer.position.x > 0 && velocity.x < 0){
+	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
 	}
-	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && _thePlayer.position.x < ([[_levelInfo valueForKey:@"level_width"] floatValue]) - SCROLL_BORDER && velocity.x > 0){
+	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
 	}
-	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && _thePlayer.position.y > 0 + SCROLL_BORDER && velocity.y < 0){
+	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
 	}
-	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && _thePlayer.position.y < ([[_levelInfo valueForKey:@"level_height"] floatValue] - SCROLL_BORDER) && velocity.y > 0){
+	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
 		CGPoint currentPos = [scrollNode position];
 		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
 	}
@@ -367,10 +351,10 @@ enum {
     NSSet *removedCollisions = [_previousCollisions setDifferenceFromSet:collisionSet];
     
     if ([newCollisions count] != 0){
-        NSLog(@"new: %@", [newCollisions description]);
+        //NSLog(@"new: %@", [newCollisions description]);
     }
     if ([removedCollisions count] != 0){
-        NSLog(@"removed: %@", [removedCollisions description]);
+        //NSLog(@"removed: %@", [removedCollisions description]);
     }
     
     for (GameObjectCollision *collision in newCollisions){
@@ -418,8 +402,8 @@ enum {
 		float pointX = point.x + -1*currentPos.x;
 		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
 		
-		NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
-		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+		//NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
+		//NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
 		
         
 		double vConst = .05;  // multiplier

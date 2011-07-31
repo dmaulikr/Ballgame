@@ -12,11 +12,11 @@
 @implementation Obstacle
 
 -(void)handleCollisionWithObject:(GameObject*)object{
-    NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));
+    //NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));
 }
 
 -(void)noLongerCollidingWithObject:(GameObject*)object{
-    NSLog(@"%@ moved away from %@",NSStringFromClass([self class]), NSStringFromClass([object class]));
+    //NSLog(@"%@ moved away from %@",NSStringFromClass([self class]), NSStringFromClass([object class]));
 }
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{

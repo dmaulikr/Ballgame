@@ -161,7 +161,7 @@
 		AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */; };
 		AA03DDE813D7766E00BEFC7F /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDE713D7766E00BEFC7F /* AssetManager.m */; };
 		AA03DDED13D7768200BEFC7F /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE913D7768200BEFC7F /* box.level */; };
-		AA03DDEE13D7768200BEFC7F /* DebugLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEA13D7768200BEFC7F /* DebugLevel.level */; };
+		AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEA13D7768200BEFC7F /* MoveableWall.level */; };
 		AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEB13D7768200BEFC7F /* DemoLevel.level */; };
 		AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEC13D7768200BEFC7F /* TestConvert.level */; };
 		AA03DDF513D776FA00BEFC7F /* NSSetDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDF413D776FA00BEFC7F /* NSSetDifference.m */; };
@@ -191,7 +191,9 @@
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
 		AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */; };
-		AAB6F27113E4CA3500031C64 /* MoveableWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F27013E4CA3400031C64 /* MoveableWall.mm */; };
+		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
+		AAE665B513E53956009F646A /* MoveableWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B313E53956009F646A /* MoveableWall.mm */; };
+		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -499,7 +501,7 @@
 		AA03DDE613D7766E00BEFC7F /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetManager.h; path = src/AssetManager.h; sourceTree = "<group>"; };
 		AA03DDE713D7766E00BEFC7F /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetManager.m; path = src/AssetManager.m; sourceTree = "<group>"; };
 		AA03DDE913D7768200BEFC7F /* box.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = box.level; path = levels/box.level; sourceTree = "<group>"; };
-		AA03DDEA13D7768200BEFC7F /* DebugLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DebugLevel.level; path = levels/DebugLevel.level; sourceTree = "<group>"; };
+		AA03DDEA13D7768200BEFC7F /* MoveableWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MoveableWall.level; path = levels/MoveableWall.level; sourceTree = "<group>"; };
 		AA03DDEB13D7768200BEFC7F /* DemoLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DemoLevel.level; path = levels/DemoLevel.level; sourceTree = "<group>"; };
 		AA03DDEC13D7768200BEFC7F /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestConvert.level; path = levels/TestConvert.level; sourceTree = "<group>"; };
 		AA03DDF113D776C100BEFC7F /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConfig.h; path = src/GameConfig.h; sourceTree = "<group>"; };
@@ -557,8 +559,11 @@
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
 		AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/SpecifyURLViewController.xib; sourceTree = "<group>"; };
-		AAB6F26F13E4CA3400031C64 /* MoveableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableWall.h; sourceTree = "<group>"; };
-		AAB6F27013E4CA3400031C64 /* MoveableWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MoveableWall.mm; sourceTree = "<group>"; };
+		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
+		AAE665B113E53956009F646A /* ChargedWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChargedWall.mm; path = src/ChargedWall.mm; sourceTree = "<group>"; };
+		AAE665B213E53956009F646A /* MoveableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveableWall.h; path = src/MoveableWall.h; sourceTree = "<group>"; };
+		AAE665B313E53956009F646A /* MoveableWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MoveableWall.mm; path = src/MoveableWall.mm; sourceTree = "<group>"; };
+		AAE665B613E53A58009F646A /* ChargedWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChargedWall.level; path = levels/ChargedWall.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1033,6 +1038,7 @@
 		38125BD713CA58CE001282F6 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				AAD890EF13E538DC003B3922 /* Walls */,
 				AAB6F25C13E4C47A00031C64 /* Effect.h */,
 				AAB6F25D13E4C47A00031C64 /* Effect.mm */,
 				AAB6F25E13E4C47A00031C64 /* Gate.h */,
@@ -1043,10 +1049,6 @@
 				AAB6F26313E4C47A00031C64 /* Switch.mm */,
 				AA03DE0C13D777AE00BEFC7F /* Goal.h */,
 				AA03DE0D13D777AE00BEFC7F /* Goal.mm */,
-				AA03DE0913D7779600BEFC7F /* Wall.h */,
-				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
-				AAB6F26F13E4CA3400031C64 /* MoveableWall.h */,
-				AAB6F27013E4CA3400031C64 /* MoveableWall.mm */,
 				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
 				AA03DE0113D7777000BEFC7F /* Obstacle.mm */,
 				AA03DE0213D7777000BEFC7F /* Pickup.h */,
@@ -1103,9 +1105,10 @@
 			isa = PBXGroup;
 			children = (
 				AA03DDE913D7768200BEFC7F /* box.level */,
-				AA03DDEA13D7768200BEFC7F /* DebugLevel.level */,
+				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
 				AA03DDEB13D7768200BEFC7F /* DemoLevel.level */,
 				AA03DDEC13D7768200BEFC7F /* TestConvert.level */,
+				AAE665B613E53A58009F646A /* ChargedWall.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1123,6 +1126,19 @@
 				AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AAD890EF13E538DC003B3922 /* Walls */ = {
+			isa = PBXGroup;
+			children = (
+				AAE665B013E53956009F646A /* ChargedWall.h */,
+				AAE665B113E53956009F646A /* ChargedWall.mm */,
+				AAE665B213E53956009F646A /* MoveableWall.h */,
+				AAE665B313E53956009F646A /* MoveableWall.mm */,
+				AA03DE0913D7779600BEFC7F /* Wall.h */,
+				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
+			);
+			name = Walls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1189,11 +1205,12 @@
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
 				AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */,
 				AA03DDED13D7768200BEFC7F /* box.level in Resources */,
-				AA03DDEE13D7768200BEFC7F /* DebugLevel.level in Resources */,
+				AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
 				AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */,
 				AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */,
+				AAE665B713E53A58009F646A /* ChargedWall.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1361,7 +1378,8 @@
 				AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */,
 				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
 				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
-				AAB6F27113E4CA3500031C64 /* MoveableWall.mm in Sources */,
+				AAE665B413E53956009F646A /* ChargedWall.mm in Sources */,
+				AAE665B513E53956009F646A /* MoveableWall.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1417,7 +1435,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = ballgame/libs;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1435,7 +1453,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = ballgame/libs;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

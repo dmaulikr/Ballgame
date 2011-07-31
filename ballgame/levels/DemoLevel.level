@@ -50,11 +50,11 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>805</integer>
+    <integer>303</integer>
     <key>x</key>
-    <integer>751</integer>
+    <integer>465</integer>
     <key>y</key>
-    <integer>1686</integer>
+    <integer>1690</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -96,7 +96,7 @@
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>10</integer>
+    <integer>8</integer>
     <key>name</key>
     <string>Copy of Copy of Copy of Wall 1</string>
     <key>rotation</key>
@@ -104,11 +104,11 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>704</integer>
+    <integer>235</integer>
     <key>x</key>
-    <integer>1045</integer>
+    <integer>810</integer>
     <key>y</key>
-    <integer>1208</integer>
+    <integer>1209</integer>
    </dict>
    <dict>
     <key>frame_name</key>

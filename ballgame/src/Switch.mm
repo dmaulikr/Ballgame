@@ -62,6 +62,9 @@
 }
 
 -(void)updateGameObject:(ccTime)dt{
+    
+    [super updateGameObject:dt];
+    
     //NSLog(@"Update");
     if (_charging && _charge < _maxCharge){
         float deltaCharge = _chargePerSecond * dt;
@@ -84,7 +87,7 @@
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     if ([object identifier] == GameObjectIDPlayer){
-        NSLog(@"Charging");
+        //NSLog(@"Charging");
         _charging = YES;
         _thePlayer = (Player*)object;
         //[_thePlayer setShouldCharge:NO];
@@ -94,7 +97,7 @@
 -(void)noLongerCollidingWithObject:(GameObject *)object{
     [super noLongerCollidingWithObject:object];
     if ([object identifier] == GameObjectIDPlayer){
-        NSLog(@"Not Charging");
+        //NSLog(@"Not Charging");
         _charging = NO;
         _thePlayer = nil;
         //[_thePlayer setShouldCharge:YES];
