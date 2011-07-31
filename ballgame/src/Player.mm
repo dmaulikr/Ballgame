@@ -106,16 +106,24 @@
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
-    //DONT DO THIS.  THIS IS FUCKING TERRIBLE.  We should not be querying classes.  The object should return some sort of description
+    
     NSLog(@"%@", [[object class] description]);
+    NSLog(@"%d", [object identifier]);
+    
     switch ([object identifier]){
         case GameObjectIDGoal:
-            NSLog(@"Level Completed");
+            //NSLog(@"Level Completed");
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:
             
             break;
+            
+        case GameObjectIDChargedWall:
+            _chargeLevel += ((ChargedWall*)object).chargeIncrement;
+            NSLog(@"Charge level - %f", _chargeLevel);
+            break;
+            
     }
     
     [object handleCollisionWithObject:self];

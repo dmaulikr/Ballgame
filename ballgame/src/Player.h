@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameObject.h"
+#import "ChargedWall.h"
 
 typedef enum {
     PlayerBeganLevel,
