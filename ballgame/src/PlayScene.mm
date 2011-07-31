@@ -37,6 +37,9 @@ enum {
 
 
 -(id)loadLevelWithName:(NSString *)levelName{
+    
+    [self startBackgroundMusic];
+    
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
     _collisionManager = [[CollisionManager alloc] init];
@@ -442,6 +445,22 @@ enum {
 	b2Vec2 gravity( -accelY * 10, accelX * 10);
 	
 	world->SetGravity( gravity );
+}
+
+-(void) startBackgroundMusic
+{
+    SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+
+    if(![audio isBackgroundMusicPlaying])
+    {
+        NSString *baseDirectory = [NSString string];
+        baseDirectory = NSHomeDirectory();
+        baseDirectory = [baseDirectory stringByAppendingString:@"/ballgame.app/"];
+        NSString *filename = [baseDirectory stringByAppendingString:@"Game1.mp3"];
+
+        [audio playBackgroundMusic:filename];
+    }
+
 }
 
 #pragma mark - Data Management

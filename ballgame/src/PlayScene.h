@@ -15,6 +15,7 @@
 #import "AssetManager.h"
 #import "GameStateManager.h"
 #import "CollisionManager.h"
+#import "SimpleAudioEngine.h"
 // PlayScene
 
 @interface PlayScene : CCLayer
@@ -41,5 +42,7 @@
 //Premade Levels
 +(CCScene*)debugScene;
 +(CCScene*)currentLevelScene;
+
+-(void) startBackgroundMusic;
 
 @end
