@@ -25,5 +25,6 @@ typedef enum {
     GameObjectIDObstacle,
     GameObjectIDGoal,
     GameObjectIDPickup,
-    GameObjectIDSwitch
+    GameObjectIDSwitch,
+    GameObjectIDGate
 } GameObjectID;

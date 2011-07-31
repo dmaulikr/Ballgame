@@ -32,6 +32,10 @@
     }
     return self;
 }
+
+-(NSString*)name{
+    return [_objectInfo valueForKey:@"name"];
+}
 -(void)updateGameObject:(ccTime)dt{
     //Nothing
 }
@@ -47,11 +51,17 @@
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //This does nothing.  Subclasses override this for custom initialization
     _identifier = GameObjectIDNone;
+    _objectInfo = [game_object retain];
 }
 
 -(b2Vec2)getVelocity{
     
     return _body->GetLinearVelocity();
+}
+
+-(void)dealloc{
+    [_objectInfo release];
+    [super dealloc];
 }
 
 @end

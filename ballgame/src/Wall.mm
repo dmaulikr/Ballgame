@@ -12,6 +12,7 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
 //TODO: Rotation
+    [super setupGameObject:game_object forWorld:world];
     _identifier = GameObjectIDWall;
     
     CGSize size;

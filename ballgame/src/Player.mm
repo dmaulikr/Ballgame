@@ -23,6 +23,7 @@
         [NSException raise:@"Attempt to setup a player object that doesn't have levelInfo" format:@"Make sure you set the level info for the player object before setupGameObject"];
         return;
     }
+    [super setupGameObject:game_object forWorld:world];
     _status = PlayerBeganLevel;
     
     _identifier = GameObjectIDPlayer;

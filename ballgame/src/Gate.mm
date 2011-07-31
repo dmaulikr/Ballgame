@@ -9,13 +9,24 @@
 #import "Gate.h"
 
 @implementation Gate
+@synthesize isLocked=_isLocked;
 
--(void)unlock{
-    
+-(void)setupGameObject:(NSDictionary *)game_object forWorld:(b2World *)world{
+    [super setupGameObject:game_object forWorld:world];
+    _identifier = GameObjectIDGate;
 }
 
--(void)lock{
-    
+-(void)setIsLocked:(BOOL)isLocked{
+    _isLocked = isLocked;
 }
 
+-(void)switchStateChanged:(BOOL)isOn{
+    if (isOn){
+        //Our switch was turned on.  We should shut down...
+        NSLog(@"Gate shutting down");
+        self.visible = NO;
+        _body->SetActive(NO);
+        
+    }
+}
 @end

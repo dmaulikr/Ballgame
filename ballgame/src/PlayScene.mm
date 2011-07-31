@@ -146,6 +146,21 @@ enum {
         [self addGameObject:game_object];
     }
     
+    //Now we need to resolve any dependencies any objects might have on other game objects in the world
+    for (GameObject *game_object in _gameObjects){
+        if ([game_object conformsToProtocol:@protocol(DependantObject)]){
+            //Find his dependant object and set it
+            GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
+            for (GameObject *searchObject in _gameObjects){
+                if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
+                    NSLog(@"Found our dependant object");
+                    [depObject setDependantObject:searchObject];
+                    break;
+                }
+            }
+        }
+    }
+    
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
 // If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
@@ -180,7 +195,7 @@ enum {
 	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
 	
 	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-    Player *player = [Player spriteWithSpriteFrameName:@"player_amoeba.png"];
+    Player *player = [Player spriteWithSpriteFrameName:@"Volt.png"];
 
 	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];
@@ -198,6 +213,7 @@ enum {
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
     [batch addChild:object z:OBJECT_Z_ORDER];
     [object setupGameObject:gameObject forWorld:world];
+    
     [_gameObjects addObject:object];
     return nil;
 }

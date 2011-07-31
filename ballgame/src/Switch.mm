@@ -9,7 +9,7 @@
 #import "Switch.h"
 
 @implementation Switch
-@synthesize  maxCharge=_maxCharge;
+@synthesize  maxCharge=_maxCharge, dependantObject=_dependant_object;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //TODO: Rotation
@@ -27,6 +27,8 @@
     //HARDODE
     _maxCharge = 100;
     _chargePerSecond = 20;
+    
+    _depObjectName = [game_object valueForKey:@"dependant_object_name"];
     
     CGSize originalSize = [self contentSize];
     float originalWidth = originalSize.width;
@@ -66,8 +68,10 @@
         NSLog(@"charge: %1.2f", _charge);
     }
     
-    if (_charge >= _maxCharge){
+    if (_charge >= _maxCharge && !_activated){
         [self setColor:ccGREEN];
+        [_dependant_object switchStateChanged:YES]; 
+        _activated = YES;
         
     }
 }
@@ -91,6 +95,10 @@
     }
     
    
+}
+
+-(NSString*)getDependantObjectName{
+    return _depObjectName;
 }
 
 @end

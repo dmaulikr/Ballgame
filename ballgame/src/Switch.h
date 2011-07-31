@@ -9,7 +9,13 @@
 #import "GameObject.h"
 #import "Player.h"
 
-@interface Switch : GameObject{
+@protocol Switchable
+
+-(void)switchStateChanged:(BOOL)isOn;
+
+@end
+
+@interface Switch : GameObject <DependantObject>{
     //State
     BOOL _activated;
     BOOL _charging;
@@ -21,6 +27,10 @@
     
     Player *_thePlayer;
     
+    NSString *_depObjectName;
+    id<Switchable> _dependant_object;
+    
 }
 @property (readwrite) float maxCharge;
+
 @end

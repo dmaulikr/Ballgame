@@ -8,15 +8,14 @@
   <integer>500</integer>
   <key>level_width</key>
   <integer>500</integer>
+  <key>size_grow_rate</key>
+  <integer>1</integer>
   <key>start_x</key>
   <integer>375</integer>
   <key>start_y</key>
   <integer>53</integer>
-  <key>size_grow_rate</key>
-  <integer>1</integer>
   <key>starting_size</key>
   <integer>20</integer>
-     
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>
@@ -111,24 +110,44 @@
     <key>y</key>
     <integer>250</integer>
    </dict>
-  <dict>
-      <key>frame_name</key>
-      <string>switch.png</string>
-      <key>height</key>
-      <integer>40</integer>
-      <key>name</key>
-      <string>Main Switch</string>
-      <key>rotation</key>
-      <string>0</string>
-      <key>type</key>
-      <string>Switch</string>
-      <key>width</key>
-      <integer>40</integer>
-      <key>x</key>
-      <integer>420</integer>
-      <key>y</key>
-      <integer>52</integer>
-  </dict>
+   <dict>
+    <key>dependant_object_name</key>
+    <string>switch_gate_1</string>
+    <key>frame_name</key>
+    <string>switch.png</string>
+    <key>height</key>
+    <integer>40</integer>
+    <key>name</key>
+    <string>Main Switch</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Switch</string>
+    <key>width</key>
+    <integer>40</integer>
+    <key>x</key>
+    <integer>420</integer>
+    <key>y</key>
+    <integer>52</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment.png</string>
+    <key>height</key>
+    <integer>57</integer>
+    <key>name</key>
+    <string>switch_gate_1</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Gate</string>
+    <key>width</key>
+    <integer>18</integer>
+    <key>x</key>
+    <integer>276</integer>
+    <key>y</key>
+    <integer>65</integer>
+   </dict>
   </array>
  </dict>
 </plist>
