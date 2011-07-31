@@ -193,7 +193,7 @@ enum {
 	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
 	
 	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-    Player *player = [Player spriteWithSpriteFrameName:@"Volt.png"];
+    Player *player = [Player spriteWithSpriteFrameName:@"Volt0.png"];
 
 	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];

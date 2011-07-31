@@ -1,263 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>frames</key>
-	<dict>
-		<key>Bolt.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {16, 78}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{16, 78}</string>
-			<key>spriteSourceSize</key>
-			<string>{16, 78}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{104, 260}, {16, 78}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>GreenWallSegment0.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {34, 31}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{34, 31}</string>
-			<key>spriteSourceSize</key>
-			<string>{34, 31}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{219, 310}, {34, 31}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>GreenWallSegment1.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {37, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{37, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{37, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{143, 338}, {37, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>GreenWallSegment2.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {37, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{37, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{37, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{41, 362}, {37, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>Volt.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{1, 1}, {48, 48}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{48, 48}</string>
-			<key>spriteSourceSize</key>
-			<string>{50, 50}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{206, 260}, {48, 48}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>pickup_2x.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{2, 4}, {35, 30}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{35, 30}</string>
-			<key>spriteSourceSize</key>
-			<string>{39, 38}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{182, 338}, {35, 30}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>pickup_shrink.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{2, 3}, {39, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{-1, -0}</string>
-			<key>spriteSize</key>
-			<string>{39, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{45, 46}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{256, 303}, {39, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>pickup_wings.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{1, 5}, {51, 41}}</string>
-			<key>spriteOffset</key>
-			<string>{0, 1}</string>
-			<key>spriteSize</key>
-			<string>{51, 41}</string>
-			<key>spriteSourceSize</key>
-			<string>{53, 53}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{256, 260}, {51, 41}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>player_amoeba.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{6, 8}, {82, 76}}</string>
-			<key>spriteOffset</key>
-			<string>{3, -2}</string>
-			<key>spriteSize</key>
-			<string>{82, 76}</string>
-			<key>spriteSourceSize</key>
-			<string>{88, 88}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{122, 260}, {82, 76}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>spore_blue.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{2, 0}, {37, 36}}</string>
-			<key>spriteOffset</key>
-			<string>{1, 1}</string>
-			<key>spriteSize</key>
-			<string>{37, 36}</string>
-			<key>spriteSourceSize</key>
-			<string>{39, 38}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{2, 362}, {37, 36}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>spore_purple.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{2, 0}, {37, 36}}</string>
-			<key>spriteOffset</key>
-			<string>{1, 1}</string>
-			<key>spriteSize</key>
-			<string>{37, 36}</string>
-			<key>spriteSourceSize</key>
-			<string>{39, 38}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{104, 340}, {37, 36}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>switch.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {100, 100}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{100, 100}</string>
-			<key>spriteSourceSize</key>
-			<string>{100, 100}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{2, 260}, {100, 100}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		<key>wall.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {256, 256}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{256, 256}</string>
-			<key>spriteSourceSize</key>
-			<string>{256, 256}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{2, 2}, {256, 256}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-	</dict>
-	<key>metadata</key>
-	<dict>
-		<key>format</key>
-		<integer>3</integer>
-		<key>size</key>
-		<string>{512, 512}</string>
-	</dict>
-</dict>
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Bolt.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{130,88},{16,78}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{16,78}}</string>
+                <key>sourceSize</key>
+                <string>{16,78}</string>
+            </dict>
+            <key>GreenWallSegment0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{35,0},{34,31}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{34,31}}</string>
+                <key>sourceSize</key>
+                <string>{34,31}</string>
+            </dict>
+            <key>GreenWallSegment1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{69,0},{37,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{37,32}}</string>
+                <key>sourceSize</key>
+                <string>{37,32}</string>
+            </dict>
+            <key>GreenWallSegment2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{106,0},{37,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{37,32}}</string>
+                <key>sourceSize</key>
+                <string>{37,32}</string>
+            </dict>
+            <key>Volt0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{195,40},{48,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{48,48}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
+            <key>Volt1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,88},{48,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{48,50}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
+            <key>Volt2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{99,40},{48,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{48,48}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
+            <key>Volt3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{51,40},{48,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{48,48}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
+            <key>Volt4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{147,40},{48,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{48,48}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
+            <key>pickup_2x.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{35,30}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,4},{35,30}}</string>
+                <key>sourceSize</key>
+                <string>{39,38}</string>
+            </dict>
+            <key>pickup_shrink.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{217,0},{39,40}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,3},{39,40}}</string>
+                <key>sourceSize</key>
+                <string>{45,46}</string>
+            </dict>
+            <key>pickup_wings.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,40},{51,41}}</string>
+                <key>offset</key>
+                <string>{-1,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,5},{51,41}}</string>
+                <key>sourceSize</key>
+                <string>{53,53}</string>
+            </dict>
+            <key>player_amoeba.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{48,88},{82,76}}</string>
+                <key>offset</key>
+                <string>{3,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,8},{82,76}}</string>
+                <key>sourceSize</key>
+                <string>{88,88}</string>
+            </dict>
+            <key>spore_blue.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{180,0},{37,36}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{37,36}}</string>
+                <key>sourceSize</key>
+                <string>{39,38}</string>
+            </dict>
+            <key>spore_purple.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{143,0},{37,36}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{37,36}}</string>
+                <key>sourceSize</key>
+                <string>{39,38}</string>
+            </dict>
+            <key>switch.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{146,88},{100,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,100}}</string>
+                <key>sourceSize</key>
+                <string>{100,100}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>BallGameSpriteSheet.png</string>
+            <key>size</key>
+            <string>{256,256}</string>
+            <key>textureFileName</key>
+            <string>BallGameSpriteSheet.png</string>
+        </dict>
+    </dict>
 </plist>
