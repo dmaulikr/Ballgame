@@ -27,17 +27,17 @@
     
     switch ([object identifier]){
             
-        // If the player collides into us
+        // If player collides into us
         case GameObjectIDPlayer:
             
-            // If we didn't recollide again within 1/16 a second
+            // If we didn't recollide again with 1/16 a second
             if(!selectorIsScheduled)
             {
                 selectorIsScheduled = true;
                 
                 // Change sprite to something else
                 CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
-                                        spriteFrameByName:[_objectInfo objectForKey:@"flash_frame_name"]];
+                                        spriteFrameByName:@"GreenWallSegment1.png"];
                 [self setDisplayFrame:frame];
                 
                 // Schedule a selector to change the sprite back to normal after 1/16 second
@@ -47,13 +47,12 @@
             break;
     }
     
-    // This causes infinite recursion
     //[object handleCollisionWithObject:self];
 }
 
 - (void)changeBack: (ccTime) dt
 {
-    // It's safe to collide again
+    // Safe to collide again
     selectorIsScheduled = false;
     
     // Unscehdule this selector so that it only runs once

@@ -25,8 +25,6 @@
             <dict>
                 <key>frame_name</key>
                 <string>GreenWallSegment2.png</string>
-                <key>flash_frame_name</key>
-                <string>GreenWallSegment1.png</string>
                 <key>height</key>
                 <integer>17</integer>
                 <key>name</key>
