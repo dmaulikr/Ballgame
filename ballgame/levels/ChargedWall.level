@@ -40,7 +40,7 @@
                 <key>y</key>
                 <integer>100</integer>
                 <key>charge</key>
-                <real>0.1</real>                
+                <real>10</real>                
             </dict>
         </array>
     </dict>

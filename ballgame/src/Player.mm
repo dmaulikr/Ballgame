@@ -31,17 +31,7 @@
     p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
     p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
     
-    CGSize originalSize = [self contentSize];
-    float originalWidth = originalSize.width;
-    float originalHeight = originalSize.height;
-    
-    // TODO:  put start size in level and move this to the player class
-    float newSize = [[_levelInfo valueForKey:@"starting_size"] floatValue];
-    float newScaleX = (float)(newSize) / originalWidth;
-    float newScaleY = (float)(newSize) / originalHeight;
-    [self setScaleX:newScaleX];
-    [self setScaleY:newScaleY];
-    
+    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
     
     _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
@@ -70,16 +60,15 @@
 }
 
 -(void) updateGameObject: (ccTime) dt
-{
+{    
     if (_shouldCharge){
         _chargeLevel += _growRate * dt;
     }
     //NSLog(@"chargeLevel: %1.2f", _chargeLevel);
     [super updateGameObject:dt];
     
-    
     float32 _radiusSize = (_radius + _chargeLevel/CHARGE_TO_PIXELS) ;
-    //[self setScale: _radiusSize / _radius];
+    
     //NSLog(@"scale: %1.2f", [self scale]);
     
     
@@ -95,6 +84,8 @@
         _body->DestroyFixture(f);
         _body->CreateFixture(&fixtureDef);
     }
+    
+    [self rescale:CGSizeMake(_radiusSize * 4, _radiusSize * 4)];
 
     
     //HARDCODE
@@ -108,9 +99,6 @@
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
-    
-    NSLog(@"%@", [[object class] description]);
-    NSLog(@"%d", [object identifier]);
     
     switch ([object identifier]){
         case GameObjectIDGoal:

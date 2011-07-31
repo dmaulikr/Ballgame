@@ -61,6 +61,9 @@
     //This does nothing.  Subclasses override this for custom initialization
     _identifier = GameObjectIDNone;
     _objectInfo = [game_object retain];
+    
+    originalSize = [self contentSize];
+    //originalSize = CGSizeMake([[game_object valueForKey:@"width"] floatValue], [[game_object valueForKey:@"height"] floatValue]);
 }
 
 -(b2Vec2)getVelocity{
@@ -71,6 +74,17 @@
 -(void)dealloc{
     [_objectInfo release];
     [super dealloc];
+}
+
+-(void) rescale:(CGSize)size
+{
+    float originalWidth = originalSize.width;
+    float originalHeight = originalSize.height;
+    
+    float newScaleX = size.width / originalWidth;
+    float newScaleY = size.height / originalHeight;
+    [self setScaleX:newScaleX];
+    [self setScaleY:newScaleY];
 }
 
 @end

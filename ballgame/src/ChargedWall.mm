@@ -26,7 +26,7 @@
     //NSLog(@"%@", [[object class] description]);
     switch ([object identifier]){
         case GameObjectIDGoal:
-            NSLog(@"Level Completed");
+            //NSLog(@"Level Completed");
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:

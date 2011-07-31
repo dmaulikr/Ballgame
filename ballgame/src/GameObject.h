@@ -29,6 +29,8 @@
     //Physics Info
     b2Body *_body; //I have a body!
     GameObjectID _identifier;
+    
+    CGSize originalSize;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
@@ -44,4 +46,8 @@
 -(void)handleCollisionWithObject:(GameObject*)object;
 -(void)noLongerCollidingWithObject:(GameObject*)object;
 -(void)updateGameObject:(ccTime)dt;
+
+// Rescale object based on given size
+-(void) rescale:(CGSize) size;
+
 @end

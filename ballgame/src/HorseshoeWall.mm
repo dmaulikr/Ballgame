@@ -30,18 +30,7 @@
     p.x = [[game_object valueForKey:@"x"] floatValue];
     p.y = [[game_object valueForKey:@"y"] floatValue];
     
-    
-    CGSize originalSize = [self contentSize];
-    //NSLog(@"Content Size %f, %f", originalSize.width, originalSize.height);
-    float originalWidth = originalSize.width;
-    float originalHeight = originalSize.height;
-    
-    // TODO:  put start size in level and move this to the player class
-    float newScaleX = (float)(size.width) / originalWidth;
-    float newScaleY = (float)(size.height) / originalHeight;
-    //NSLog(@"newScaleX: %f, newScaleY: %f", newScaleX, newScaleY);
-    [self setScaleX:newScaleX];
-    [self setScaleY:newScaleY];
+    [self rescale:CGSizeMake(size.width, size.height)];
     
     
     b2BodyDef bodyDef;

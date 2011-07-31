@@ -13,6 +13,7 @@
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     //TODO: Rotation
+    [super setupGameObject:game_object forWorld:world];
     _identifier = GameObjectIDSwitch;
     
     CGSize size;
@@ -30,15 +31,8 @@
     
     _depObjectName = [game_object valueForKey:@"dependant_object_name"];
     
-    CGSize originalSize = [self contentSize];
-    float originalWidth = originalSize.width;
-    float originalHeight = originalSize.height;
+    [self rescale:CGSizeMake(size.width, size.height)];
     
-    // TODO:  put start size in level and move this to the player class
-    float newScaleX = (float)(size.width) / originalWidth;
-    float newScaleY = (float)(size.height) / originalHeight;
-    [self setScaleX:newScaleX];
-    [self setScaleY:newScaleY];
     [self setColor:ccRED];
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
@@ -69,7 +63,7 @@
     if (_charging && _charge < _maxCharge){
         float deltaCharge = _chargePerSecond * dt;
         if ([_thePlayer chargeLevel] >= deltaCharge){
-            NSLog(@"Siphoning %1.2f charge from the player.", deltaCharge);
+            //NSLog(@"Siphoning %1.2f charge from the player.", deltaCharge);
             [_thePlayer setChargeLevel:[_thePlayer chargeLevel] - deltaCharge];
             _charge += deltaCharge;
         }
