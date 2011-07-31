@@ -16,7 +16,7 @@
 
 @implementation Player
 
-@synthesize levelInfo=_levelInfo, status=_status;
+@synthesize levelInfo=_levelInfo, status=_status, chargeLevel=_chargeLevel;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     if (_levelInfo == nil){
@@ -96,8 +96,8 @@
 
     
     //HARDCODE
-    if (_radius >= 50){
-        _status = PlayerDied;
+    if (_chargeLevel > 100){
+        //_status = PlayerDied;
     }
     for (Effect *effect in _effects){
         [effect updateEffect:dt];
@@ -125,9 +125,4 @@
     [super noLongerCollidingWithObject:object];
     [object noLongerCollidingWithObject:self];
 }
-
--(void) reduceCharge:(float)amount{
-    _chargeLevel -= amount;
-}
-
 @end
