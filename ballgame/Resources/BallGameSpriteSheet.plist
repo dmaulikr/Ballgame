@@ -23,7 +23,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>GreenWallSegment.png</key>
+		<key>GreenWallSegment0.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -38,7 +38,45 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{143, 338}, {34, 31}}</string>
+			<string>{{219, 310}, {34, 31}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		<key>GreenWallSegment1.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {37, 32}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{37, 32}</string>
+			<key>spriteSourceSize</key>
+			<string>{37, 32}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{143, 338}, {37, 32}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		<key>GreenWallSegment2.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {37, 32}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{37, 32}</string>
+			<key>spriteSourceSize</key>
+			<string>{37, 32}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{41, 362}, {37, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -76,7 +114,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{41, 362}, {35, 30}}</string>
+			<string>{{182, 338}, {35, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -216,10 +254,10 @@
 	</dict>
 	<key>metadata</key>
 	<dict>
-		<key>size</key>
-		<string>{512, 512}</string>
 		<key>format</key>
 		<integer>3</integer>
+		<key>size</key>
+		<string>{512, 512}</string>
 	</dict>
 </dict>
 </plist>
