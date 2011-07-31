@@ -12,7 +12,7 @@
 #import "DataDefinitions.h"
 #import "GameOverScene.h"
 
-#define DEBUG_DRAW 0
+#define DEBUG_DRAW 1
 
 // enums that will be used as tags
 enum {
@@ -226,7 +226,7 @@ enum {
 	
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [[PlayScene alloc] init];
-	[layer loadLevelWithName:@"DemoLevel"];
+	[layer loadLevelWithName:@"DebugLevel"];
     //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -304,6 +304,9 @@ enum {
 	if (_thePlayer.status == PlayerCompletedLevel || _thePlayer.status == PlayerDied){
         [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
     }
+    
+    // This is migrating to object.update()
+    
 	//Iterate over the bodies in the physics world
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
@@ -314,6 +317,7 @@ enum {
 			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 		}	
 	}
+    
     
 #pragma mark Movement of the Scroll Node
     CGPoint currentPos = [scrollNode position];
