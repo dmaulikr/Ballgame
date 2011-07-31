@@ -28,7 +28,7 @@ typedef enum {
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
 @property (readonly) PlayerStatus status;
+@property (readwrite) float chargeLevel;
 
 -(void) updateGameObject: (ccTime) dt;
--(void) reduceCharge:(float)amount;
 @end
