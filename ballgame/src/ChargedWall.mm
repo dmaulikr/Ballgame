@@ -17,25 +17,52 @@
     _identifier = GameObjectIDChargedWall;
     
     chargeIncrement = [[game_object valueForKey:@"charge"] floatValue];
+    
+    selectorIsScheduled = false;
 }
 
-/*
+
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     
-    //NSLog(@"%@", [[object class] description]);
     switch ([object identifier]){
-        case GameObjectIDGoal:
-            //NSLog(@"Level Completed");
-            _status = PlayerCompletedLevel;
-            break;
-        case GameObjectIDSwitch:
+            
+        // If player collides into us
+        case GameObjectIDPlayer:
+            
+            // If we didn't recollide again with 1/16 a second
+            if(!selectorIsScheduled)
+            {
+                selectorIsScheduled = true;
+                
+                // Change sprite to something else
+                CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
+                                        spriteFrameByName:@"GreenWallSegment1.png"];
+                [self setDisplayFrame:frame];
+                
+                // Schedule a selector to change the sprite back to normal after 1/16 second
+                [self schedule:@selector(changeBack:) interval:.125];
+            }
             
             break;
     }
     
-    [object handleCollisionWithObject:self];
+    //[object handleCollisionWithObject:self];
 }
- */
+
+- (void)changeBack: (ccTime) dt
+{
+    // Safe to collide again
+    selectorIsScheduled = false;
+    
+    // Unscehdule this selector so that it only runs once
+    [self unschedule:@selector(eventHappend:)];
+    
+    // Change sprite back to normal
+    CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
+                            spriteFrameByName:@"GreenWallSegment2.png"];
+    [self setDisplayFrame:frame];
+}
+
 
 @end

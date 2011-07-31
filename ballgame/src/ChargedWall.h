@@ -11,6 +11,7 @@
 @interface ChargedWall : Wall
 {
     float chargeIncrement;
+    bool selectorIsScheduled;
 }
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;

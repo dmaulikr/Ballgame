@@ -24,7 +24,7 @@
         <array>
             <dict>
                 <key>frame_name</key>
-                <string>wall.png</string>
+                <string>GreenWallSegment2.png</string>
                 <key>height</key>
                 <integer>17</integer>
                 <key>name</key>
