@@ -72,6 +72,8 @@
 
 -(void) updateGameObject: (ccTime) dt
 {
+    [super updateGameObject:dt];
+    
     float oldRadius = _radius;
     _radius += (_growRate * dt);
     _chargeLevel += _growRate;

@@ -35,8 +35,18 @@
 -(NSString*)name{
     return [_objectInfo valueForKey:@"name"];
 }
+
 -(void)updateGameObject:(ccTime)dt{
-    //Nothing
+    
+    [self syncPosition];
+
+}
+
+-(void) syncPosition
+{
+    //Synchronize the position and rotation with the corresponding box2d body
+    self.position = CGPointMake( _body->GetPosition().x * PTM_RATIO, _body->GetPosition().y * PTM_RATIO);
+    self.rotation = -1 * CC_RADIANS_TO_DEGREES(_body->GetAngle());
 }
 
 -(void)handleCollisionWithObject:(GameObject*)object{

@@ -36,6 +36,10 @@
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
+
+// Sync position of sprite to match box2d object.  Subclasses may override this to do this opposite.
+-(void)syncPosition;
+
 -(b2Vec2)getVelocity;
 -(void)handleCollisionWithObject:(GameObject*)object;
 -(void)noLongerCollidingWithObject:(GameObject*)object;

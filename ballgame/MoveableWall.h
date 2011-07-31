@@ -13,4 +13,7 @@
     NSMutableArray *positionPoints;    
 }
 
+// helper function
+-(id) actionMutableArray: (NSMutableArray*) _actionList;
+
 @end

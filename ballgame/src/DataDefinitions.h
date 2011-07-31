@@ -5,6 +5,10 @@
 //  Created by Ryan Hart on 7/10/11.
 //
 
+
+#define DEBUG_DRAW 0
+
+
 //UI Definitions
 #define PTM_RATIO 32
 #define SCROLL_BORDER 150

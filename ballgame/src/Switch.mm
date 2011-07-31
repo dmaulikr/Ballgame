@@ -62,6 +62,9 @@
 }
 
 -(void)updateGameObject:(ccTime)dt{
+    
+    [super updateGameObject:dt];
+    
     //NSLog(@"Update");
     if (_charging && _charge < _maxCharge){
         _charge += _chargePerSecond * dt;
