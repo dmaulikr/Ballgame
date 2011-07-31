@@ -15,15 +15,6 @@
 		381259F913CA564E001282F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381259F813CA564E001282F6 /* UIKit.framework */; };
 		381259FB13CA564E001282F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381259FA13CA564E001282F6 /* Foundation.framework */; };
 		381259FD13CA564E001282F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381259FC13CA564E001282F6 /* CoreGraphics.framework */; };
-		38125A0113CA564E001282F6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0013CA564E001282F6 /* Default.png */; };
-		38125A0313CA564E001282F6 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0213CA564E001282F6 /* fps_images.png */; };
-		38125A0513CA564E001282F6 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0413CA564E001282F6 /* Icon-72.png */; };
-		38125A0713CA564E001282F6 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0613CA564E001282F6 /* Icon-Small-50.png */; };
-		38125A0913CA564E001282F6 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0813CA564E001282F6 /* Icon-Small.png */; };
-		38125A0B13CA564E001282F6 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0A13CA564E001282F6 /* Icon-Small@2x.png */; };
-		38125A0D13CA564E001282F6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0C13CA564E001282F6 /* Icon.png */; };
-		38125A0F13CA564E001282F6 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125A0E13CA564E001282F6 /* Icon@2x.png */; };
-		38125A1213CA564E001282F6 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 38125A1113CA564E001282F6 /* iTunesArtwork */; };
 		38125A1613CA564E001282F6 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125A1513CA564E001282F6 /* CCAction.m */; };
 		38125A1913CA564E001282F6 /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125A1813CA564E001282F6 /* CCActionCamera.m */; };
 		38125A1C13CA564E001282F6 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38125A1B13CA564E001282F6 /* CCActionEase.m */; };
@@ -155,10 +146,8 @@
 		38125BAA13CA5650001282F6 /* b2PulleyJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38125BA913CA5650001282F6 /* b2PulleyJoint.cpp */; };
 		38125BAD13CA5651001282F6 /* b2RevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38125BAC13CA5651001282F6 /* b2RevoluteJoint.cpp */; };
 		38125BB013CA5651001282F6 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38125BAF13CA5651001282F6 /* b2WeldJoint.cpp */; };
-		38125BC413CA5651001282F6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BC313CA5651001282F6 /* blocks.png */; };
 		38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */; };
 		38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */; };
-		AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */; };
 		AA03DDE813D7766E00BEFC7F /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDE713D7766E00BEFC7F /* AssetManager.m */; };
 		AA03DDED13D7768200BEFC7F /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE913D7768200BEFC7F /* box.level */; };
 		AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEA13D7768200BEFC7F /* MoveableWall.level */; };
@@ -184,13 +173,24 @@
 		AA03DE2D13D778A200BEFC7F /* DebugConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2713D778A200BEFC7F /* DebugConfigurationViewController.m */; };
 		AA03DE2E13D778A200BEFC7F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2913D778A200BEFC7F /* RootViewController.m */; };
 		AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */; };
-		AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F25513E4BABD00031C64 /* metalbackground.jpg */; };
+		AA10975F13E613D8006445B2 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975913E613D8006445B2 /* Icon-72.png */; };
+		AA10976013E613D8006445B2 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975A13E613D8006445B2 /* Icon-Small-50.png */; };
+		AA10976113E613D8006445B2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975B13E613D8006445B2 /* Icon-Small.png */; };
+		AA10976213E613D8006445B2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975C13E613D8006445B2 /* Icon-Small@2x.png */; };
+		AA10976313E613D8006445B2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975D13E613D8006445B2 /* Icon.png */; };
+		AA10976413E613D8006445B2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10975E13E613D8006445B2 /* Icon@2x.png */; };
+		AA10976713E613E2006445B2 /* metalbackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA10976613E613E2006445B2 /* metalbackground.jpg */; };
+		AA10976C13E613FA006445B2 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10976813E613FA006445B2 /* blocks.png */; };
+		AA10976D13E613FA006445B2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10976913E613FA006445B2 /* Default.png */; };
+		AA10976E13E613FA006445B2 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA10976A13E613FA006445B2 /* fps_images.png */; };
+		AA10976F13E613FA006445B2 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = AA10976B13E613FA006445B2 /* iTunesArtwork */; };
+		AA10977113E6140A006445B2 /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA10977013E6140A006445B2 /* GameDefaults.plist */; };
+		AA10977313E61415006445B2 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA10977213E61415006445B2 /* SpecifyURLViewController.xib */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
-		AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B513E53956009F646A /* MoveableWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B313E53956009F646A /* MoveableWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -206,16 +206,7 @@
 		381259F813CA564E001282F6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		381259FA13CA564E001282F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		381259FC13CA564E001282F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		38125A0013CA564E001282F6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
-		38125A0213CA564E001282F6 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
-		38125A0413CA564E001282F6 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/Icon-72.png"; sourceTree = "<group>"; };
-		38125A0613CA564E001282F6 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
-		38125A0813CA564E001282F6 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/Icon-Small.png"; sourceTree = "<group>"; };
-		38125A0A13CA564E001282F6 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Resources/Icon-Small@2x.png"; sourceTree = "<group>"; };
-		38125A0C13CA564E001282F6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
-		38125A0E13CA564E001282F6 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		38125A1013CA564E001282F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		38125A1113CA564E001282F6 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		38125A1413CA564E001282F6 /* CCAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCAction.h; path = libs/cocos2d/CCAction.h; sourceTree = "<group>"; };
 		38125A1513CA564E001282F6 /* CCAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CCAction.m; path = libs/cocos2d/CCAction.m; sourceTree = "<group>"; };
 		38125A1713CA564E001282F6 /* CCActionCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCActionCamera.h; path = libs/cocos2d/CCActionCamera.h; sourceTree = "<group>"; };
@@ -494,10 +485,8 @@
 		38125BAE13CA5651001282F6 /* b2RevoluteJoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = b2RevoluteJoint.h; path = libs/Box2D/Dynamics/Joints/b2RevoluteJoint.h; sourceTree = "<group>"; };
 		38125BAF13CA5651001282F6 /* b2WeldJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = b2WeldJoint.cpp; path = libs/Box2D/Dynamics/Joints/b2WeldJoint.cpp; sourceTree = "<group>"; };
 		38125BB113CA5651001282F6 /* b2WeldJoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = b2WeldJoint.h; path = libs/Box2D/Dynamics/Joints/b2WeldJoint.h; sourceTree = "<group>"; };
-		38125BC313CA5651001282F6 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BallGameSpriteSheet.plist; path = ballgame/Resources/BallGameSpriteSheet.plist; sourceTree = "<group>"; };
 		38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BallGameSpriteSheet.png; path = ballgame/Resources/BallGameSpriteSheet.png; sourceTree = "<group>"; };
-		AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDefaults.plist; path = ballgame/resources/GameDefaults.plist; sourceTree = "<group>"; };
 		AA03DDE613D7766E00BEFC7F /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetManager.h; path = src/AssetManager.h; sourceTree = "<group>"; };
 		AA03DDE713D7766E00BEFC7F /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetManager.m; path = src/AssetManager.m; sourceTree = "<group>"; };
 		AA03DDE913D7768200BEFC7F /* box.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = box.level; path = levels/box.level; sourceTree = "<group>"; };
@@ -547,7 +536,19 @@
 		AA03DE2913D778A200BEFC7F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/RootViewController.m; sourceTree = "<group>"; };
 		AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpecifyURLViewController.h; path = src/SpecifyURLViewController.h; sourceTree = "<group>"; };
 		AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecifyURLViewController.m; path = src/SpecifyURLViewController.m; sourceTree = "<group>"; };
-		AAB6F25513E4BABD00031C64 /* metalbackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = metalbackground.jpg; path = Resources/metalbackground.jpg; sourceTree = "<group>"; };
+		AA10975913E613D8006445B2 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/icons/Icon-72.png"; sourceTree = "<group>"; };
+		AA10975A13E613D8006445B2 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/icons/Icon-Small-50.png"; sourceTree = "<group>"; };
+		AA10975B13E613D8006445B2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/icons/Icon-Small.png"; sourceTree = "<group>"; };
+		AA10975C13E613D8006445B2 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Resources/icons/Icon-Small@2x.png"; sourceTree = "<group>"; };
+		AA10975D13E613D8006445B2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/icons/Icon.png; sourceTree = "<group>"; };
+		AA10975E13E613D8006445B2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/icons/Icon@2x.png"; sourceTree = "<group>"; };
+		AA10976613E613E2006445B2 /* metalbackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = metalbackground.jpg; path = Resources/backgrounds/metalbackground.jpg; sourceTree = "<group>"; };
+		AA10976813E613FA006445B2 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/other/blocks.png; sourceTree = "<group>"; };
+		AA10976913E613FA006445B2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/other/Default.png; sourceTree = "<group>"; };
+		AA10976A13E613FA006445B2 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/other/fps_images.png; sourceTree = "<group>"; };
+		AA10976B13E613FA006445B2 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/other/iTunesArtwork; sourceTree = "<group>"; };
+		AA10977013E6140A006445B2 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDefaults.plist; path = ballgame/Resources/other/GameDefaults.plist; sourceTree = "<group>"; };
+		AA10977213E61415006445B2 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/other/SpecifyURLViewController.xib; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
@@ -558,7 +559,6 @@
 		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
-		AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecifyURLViewController.xib; path = Resources/SpecifyURLViewController.xib; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
 		AAE665B113E53956009F646A /* ChargedWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChargedWall.mm; path = src/ChargedWall.mm; sourceTree = "<group>"; };
 		AAE665B213E53956009F646A /* MoveableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveableWall.h; path = src/MoveableWall.h; sourceTree = "<group>"; };
@@ -665,18 +665,18 @@
 		381259FF13CA564E001282F6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AAB6F25513E4BABD00031C64 /* metalbackground.jpg */,
-				38125A0013CA564E001282F6 /* Default.png */,
-				38125A0213CA564E001282F6 /* fps_images.png */,
-				38125A0413CA564E001282F6 /* Icon-72.png */,
-				38125A0613CA564E001282F6 /* Icon-Small-50.png */,
-				38125A0813CA564E001282F6 /* Icon-Small.png */,
-				38125A0A13CA564E001282F6 /* Icon-Small@2x.png */,
-				38125A0C13CA564E001282F6 /* Icon.png */,
-				38125A0E13CA564E001282F6 /* Icon@2x.png */,
+				AA10976813E613FA006445B2 /* blocks.png */,
+				AA10976913E613FA006445B2 /* Default.png */,
+				AA10976A13E613FA006445B2 /* fps_images.png */,
+				AA10976B13E613FA006445B2 /* iTunesArtwork */,
+				AA10976613E613E2006445B2 /* metalbackground.jpg */,
+				AA10975913E613D8006445B2 /* Icon-72.png */,
+				AA10975A13E613D8006445B2 /* Icon-Small-50.png */,
+				AA10975B13E613D8006445B2 /* Icon-Small.png */,
+				AA10975C13E613D8006445B2 /* Icon-Small@2x.png */,
+				AA10975D13E613D8006445B2 /* Icon.png */,
+				AA10975E13E613D8006445B2 /* Icon@2x.png */,
 				38125A1013CA564E001282F6 /* Info.plist */,
-				38125A1113CA564E001282F6 /* iTunesArtwork */,
-				38125BC313CA5651001282F6 /* blocks.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1074,7 +1074,7 @@
 		387E357513D38BC4006CB9AD /* UI Constructs */ = {
 			isa = PBXGroup;
 			children = (
-				AAB6F26D13E4C54800031C64 /* SpecifyURLViewController.xib */,
+				AA10977213E61415006445B2 /* SpecifyURLViewController.xib */,
 			);
 			name = "UI Constructs";
 			sourceTree = "<group>";
@@ -1093,7 +1093,7 @@
 		387E357F13D3A017006CB9AD /* Plists and Defaults */ = {
 			isa = PBXGroup;
 			children = (
-				AA03DDE413D7764B00BEFC7F /* GameDefaults.plist */,
+				AA10977013E6140A006445B2 /* GameDefaults.plist */,
 				38125BF413CA6080001282F6 /* BallGameSpriteSheet.plist */,
 				38125BF513CA6080001282F6 /* BallGameSpriteSheet.png */,
 			);
@@ -1191,26 +1191,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38125A0113CA564E001282F6 /* Default.png in Resources */,
-				38125A0313CA564E001282F6 /* fps_images.png in Resources */,
-				38125A0513CA564E001282F6 /* Icon-72.png in Resources */,
-				38125A0713CA564E001282F6 /* Icon-Small-50.png in Resources */,
-				38125A0913CA564E001282F6 /* Icon-Small.png in Resources */,
-				38125A0B13CA564E001282F6 /* Icon-Small@2x.png in Resources */,
-				38125A0D13CA564E001282F6 /* Icon.png in Resources */,
-				38125A0F13CA564E001282F6 /* Icon@2x.png in Resources */,
-				38125A1213CA564E001282F6 /* iTunesArtwork in Resources */,
-				38125BC413CA5651001282F6 /* blocks.png in Resources */,
 				38125BF613CA6080001282F6 /* BallGameSpriteSheet.plist in Resources */,
 				38125BF713CA6080001282F6 /* BallGameSpriteSheet.png in Resources */,
-				AA03DDE513D7764B00BEFC7F /* GameDefaults.plist in Resources */,
 				AA03DDED13D7768200BEFC7F /* box.level in Resources */,
 				AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
 				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
-				AAB6F25613E4BABD00031C64 /* metalbackground.jpg in Resources */,
-				AAB6F26E13E4C54800031C64 /* SpecifyURLViewController.xib in Resources */,
 				AAE665B713E53A58009F646A /* ChargedWall.level in Resources */,
+				AA10975F13E613D8006445B2 /* Icon-72.png in Resources */,
+				AA10976013E613D8006445B2 /* Icon-Small-50.png in Resources */,
+				AA10976113E613D8006445B2 /* Icon-Small.png in Resources */,
+				AA10976213E613D8006445B2 /* Icon-Small@2x.png in Resources */,
+				AA10976313E613D8006445B2 /* Icon.png in Resources */,
+				AA10976413E613D8006445B2 /* Icon@2x.png in Resources */,
+				AA10976713E613E2006445B2 /* metalbackground.jpg in Resources */,
+				AA10976C13E613FA006445B2 /* blocks.png in Resources */,
+				AA10976D13E613FA006445B2 /* Default.png in Resources */,
+				AA10976E13E613FA006445B2 /* fps_images.png in Resources */,
+				AA10976F13E613FA006445B2 /* iTunesArtwork in Resources */,
+				AA10977113E6140A006445B2 /* GameDefaults.plist in Resources */,
+				AA10977313E61415006445B2 /* SpecifyURLViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
