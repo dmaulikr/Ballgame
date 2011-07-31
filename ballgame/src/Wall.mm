@@ -52,7 +52,7 @@
 	fixtureDef.shape = &dynamicBox;	
 	fixtureDef.density = 0.0f;
 	fixtureDef.friction = 0.3f;
-	_currentFixture = _body->CreateFixture(&fixtureDef);
+	_body->CreateFixture(&fixtureDef);
    
 }
 

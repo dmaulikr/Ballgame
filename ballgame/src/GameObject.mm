@@ -13,14 +13,13 @@
 
 @implementation GameObject
 
-@synthesize defaults, body=_body, currentFixture=_currentFixture, identifier=_identifier;
+@synthesize defaults, body=_body, identifier=_identifier;
 
 
 -(id)copyWithZone:(NSZone *)zone{
     GameObject *copy = [[GameObject alloc] init];
     [copy setDefaults:self.defaults];
     [copy setBody:self.body];
-    [copy setCurrentFixture:self.currentFixture];
     return [copy autorelease];
 }
 // necessary for sub-classing CCSprite to work for some reason

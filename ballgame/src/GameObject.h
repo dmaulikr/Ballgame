@@ -28,12 +28,10 @@
     
     //Physics Info
     b2Body *_body; //I have a body!
-    b2Fixture *_currentFixture; //I have a .... fixture?
     GameObjectID _identifier;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
-@property (readwrite) b2Fixture *currentFixture;
 @property(nonatomic, retain) NSDictionary *defaults;
 
 -(NSString*)name;

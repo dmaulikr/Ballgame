@@ -67,7 +67,7 @@
 	fixtureDef.shape = &dynamicPolygon;	
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
-	_currentFixture= _body->CreateFixture(&fixtureDef);
+	_body->CreateFixture(&fixtureDef);
 }
 
 -(void) updateGameObject: (ccTime) dt
@@ -78,16 +78,20 @@
     
     [self setScale: [self scale] * _radius/oldRadius];
     
-    b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = _radius / PTM_RATIO;
     
-    b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicCircle;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.30f;
-	_body->DestroyFixture(_currentFixture);
-	_currentFixture = _body->CreateFixture(&fixtureDef);
-    //NSLog(@"New size - %f.  Scaling factor - %f", _radius, _radius/oldRadius);
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) 
+    {
+        b2CircleShape dynamicCircle;
+        dynamicCircle.m_radius = _radius / PTM_RATIO;
+        
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &dynamicCircle;	
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.30f;
+        _body->DestroyFixture(f);
+        _body->CreateFixture(&fixtureDef);
+    }
+
     
     //HARDCODE
     if (_radius >= 50){
