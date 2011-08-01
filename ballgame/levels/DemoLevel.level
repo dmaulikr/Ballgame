@@ -130,7 +130,7 @@
    </dict>
    <dict>
     <key>charge_per_second</key>
-    <integer>20</integer>
+    <integer>10</integer>
     <key>dependant_object_name</key>
     <string>gate1</string>
     <key>frame_name</key>
@@ -138,7 +138,7 @@
     <key>height</key>
     <integer>47</integer>
     <key>max_charge</key>
-    <integer>30</integer>
+    <integer>15</integer>
     <key>name</key>
     <string>firstDoorSwitch</string>
     <key>rotation</key>
@@ -150,7 +150,7 @@
     <key>x</key>
     <integer>568</integer>
     <key>y</key>
-    <integer>1929</integer>
+    <integer>1930</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -334,7 +334,7 @@
    </dict>
    <dict>
     <key>charge_per_second</key>
-    <integer>20</integer>
+    <integer>10</integer>
     <key>dependant_object_name</key>
     <string>gate3</string>
     <key>frame_name</key>
@@ -342,7 +342,7 @@
     <key>height</key>
     <integer>47</integer>
     <key>max_charge</key>
-    <integer>30</integer>
+    <integer>15</integer>
     <key>name</key>
     <string>switch2</string>
     <key>rotation</key>
@@ -354,7 +354,7 @@
     <key>x</key>
     <integer>551</integer>
     <key>y</key>
-    <integer>1496</integer>
+    <integer>1497</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -440,13 +440,13 @@
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
-    <string>Wall</string>
+    <string>ChargedWall</string>
     <key>width</key>
     <integer>48</integer>
     <key>x</key>
     <integer>512</integer>
     <key>y</key>
-    <integer>1002</integer>
+    <integer>1003</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -496,11 +496,11 @@
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
-    <string>Wall</string>
+    <string>ChargedWall</string>
     <key>width</key>
     <integer>557</integer>
     <key>x</key>
-    <integer>770</integer>
+    <integer>769</integer>
     <key>y</key>
     <integer>168</integer>
    </dict>
@@ -524,7 +524,7 @@
    </dict>
    <dict>
     <key>charge_per_second</key>
-    <integer>20</integer>
+    <integer>10</integer>
     <key>dependant_object_name</key>
     <string>gate2</string>
     <key>frame_name</key>
@@ -532,7 +532,7 @@
     <key>height</key>
     <integer>47</integer>
     <key>max_charge</key>
-    <integer>30</integer>
+    <integer>15</integer>
     <key>name</key>
     <string>Copy of switch2</string>
     <key>rotation</key>
@@ -544,7 +544,7 @@
     <key>x</key>
     <integer>1794</integer>
     <key>y</key>
-    <integer>181</integer>
+    <integer>182</integer>
    </dict>
    <dict>
     <key>frame_name</key>
