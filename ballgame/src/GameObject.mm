@@ -39,7 +39,7 @@
 -(void)updateGameObject:(ccTime)dt{
     
     [self syncPosition];
-
+    
 }
 
 -(void) syncPosition
@@ -58,12 +58,21 @@
 }
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
-    //This does nothing.  Subclasses override this for custom initialization
+    
+    // Used for managing collisions
     _identifier = GameObjectIDNone;
+    
+    // Save the object properties for later use
     _objectInfo = [game_object retain];
     
+    // Save original size for use in resize() function
     originalSize = [self contentSize];
-    //originalSize = CGSizeMake([[game_object valueForKey:@"width"] floatValue], [[game_object valueForKey:@"height"] floatValue]);
+    
+    // Establish rotation
+    float degAngle = [[_objectInfo valueForKey:@"rotation"] floatValue];
+    //float angle = CC_DEGREES_TO_RADIANS(degAngle);
+    //[self setRotation:degAngle];
+                                              
 }
 
 -(b2Vec2)getVelocity{

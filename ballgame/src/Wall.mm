@@ -30,7 +30,8 @@
 	bodyDef.userData = self;
     
 	_body = world->CreateBody(&bodyDef);
-    
+    float angle = CC_DEGREES_TO_RADIANS(([[game_object valueForKey:@"rotation"] floatValue]));
+    _body->SetTransform(_body->GetPosition(), angle);
 	_body->SetAwake(NO);
 	
 	// Define another box shape for our dynamic body.

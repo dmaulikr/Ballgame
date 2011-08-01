@@ -35,6 +35,7 @@
             {
                 selectorIsScheduled = true;
                 
+                // HARDCODED NAME
                 // Change sprite to something else
                 CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
                                         spriteFrameByName:@"GreenWallSegment1.png"];

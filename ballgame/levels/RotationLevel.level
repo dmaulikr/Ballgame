@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>
+ <dict>
+  <key>background_texture</key>
+  <string>nope</string>
+  <key>description</key>
+  <string>Box Level</string>
+  <key>level_height</key>
+  <integer>500</integer>
+  <key>level_width</key>
+  <integer>500</integer>
+  <key>size_grow_rate</key>
+  <integer>5</integer>
+  <key>start_x</key>
+  <integer>375</integer>
+  <key>start_y</key>
+  <integer>53</integer>
+  <key>starting_size</key>
+  <integer>20</integer>
+  <key>world</key>
+  <string>null</string>
+  <key>game_objects</key>
+  <array>
+   <dict>
+    <key>frame_name</key>
+    <string>pickup_wings.png</string>
+    <key>height</key>
+    <integer>25</integer>
+    <key>name</key>
+    <string>Goal1</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Goal</string>
+    <key>width</key>
+    <integer>25</integer>
+    <key>x</key>
+    <integer>246</integer>
+    <key>y</key>
+    <integer>52</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>305</integer>
+    <key>name</key>
+    <string>Copy of Copy of Wall 1</string>
+    <key>rotation</key>
+    <integer>135</integer>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>5</integer>
+    <key>x</key>
+    <integer>370</integer>
+    <key>y</key>
+    <integer>260</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>305</integer>
+    <key>name</key>
+    <string>Copy of Copy of Copy of Wall 1</string>
+    <key>rotation</key>
+    <integer>45</integer>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>5</integer>
+    <key>x</key>
+    <integer>142</integer>
+    <key>y</key>
+    <integer>259</integer>
+   </dict>
+  </array>
+ </dict>
+</plist>

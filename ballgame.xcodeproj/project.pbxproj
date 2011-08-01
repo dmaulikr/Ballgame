@@ -189,6 +189,8 @@
 		AA10977D13E6221E006445B2 /* Game1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA10977C13E6221E006445B2 /* Game1.mp3 */; };
 		AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */; };
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
+		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
+		AA10978713E630CB006445B2 /* test.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978513E630CA006445B2 /* test.level */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */; };
@@ -555,6 +557,8 @@
 		AA10977C13E6221E006445B2 /* Game1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Game1.mp3; path = Resources/sound/music/Game1.mp3; sourceTree = "<group>"; };
 		AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ChargedWallCollision.wav; path = Resources/sound/fx/ChargedWallCollision.wav; sourceTree = "<group>"; };
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
+		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
+		AA10978513E630CA006445B2 /* test.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test.level; path = levels/test.level; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
@@ -1111,6 +1115,8 @@
 		AA03DDE113D7743F00BEFC7F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				AA10978413E630CA006445B2 /* RotationLevel.level */,
+				AA10978513E630CA006445B2 /* test.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
 				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
 				AA03DDEB13D7768200BEFC7F /* DemoLevel.level */,
@@ -1231,6 +1237,8 @@
 				AA10977D13E6221E006445B2 /* Game1.mp3 in Resources */,
 				AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */,
 				AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */,
+				AA10978613E630CA006445B2 /* RotationLevel.level in Resources */,
+				AA10978713E630CB006445B2 /* test.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
