@@ -21,6 +21,7 @@ typedef enum {
     float _growRate;
     float _radius;
     float _chargeLevel;
+    int _maxSpeed;
     
     NSDictionary *_levelInfo;
     

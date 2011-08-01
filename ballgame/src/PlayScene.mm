@@ -169,12 +169,20 @@ enum {
     
     // background texture
 	//CGSize winSize = [CCDirector sharedDirector].winSize;
-	int NUM_TILES = 1;
+    int NUM_TILES = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+        //[background setScale:[background scale] * 2];
+        NUM_TILES = 2;
+    }
 	//int IMAGE_SIZE = 512;
 	for(int i = 0; i < NUM_TILES; i++)
 		for(int j = 0; j < NUM_TILES; j++)
 		{
 			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
+//            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+//                [background setScale:[background scale] *.5];
+//            }
+            background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
 			//background.position = ccp(winSize.width/2, winSize.height/2);
 			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
 			
@@ -442,7 +450,7 @@ enum {
 	
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
-	b2Vec2 gravity( -accelY * 10, accelX * 10);
+	b2Vec2 gravity( -accelY * 30, accelX * 30);
 	
 	world->SetGravity( gravity );
 }

@@ -8,6 +8,8 @@
 
 #import "Player.h"
 #import "Goal.h"
+#import "AssetManager.h"
+
 #define CHARGE_TO_PIXELS 3
 @interface Player ()
 
@@ -35,6 +37,7 @@
     
     _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
+    _maxSpeed = [[[AssetManager defaults] valueForKey:@"max_speed"] intValue];
     _chargeLevel = 0.0;
     _shouldCharge = YES;
     
@@ -89,6 +92,13 @@
     
     [self rescale:CGSizeMake(_radiusSize * 4, _radiusSize * 4)];
 
+    //LIMIT MAX VELOCITY
+    const b2Vec2 velocity = _body->GetLinearVelocity();
+    const float32 speed = velocity.Length();
+    
+    if (speed > _maxSpeed){
+        _body->SetLinearVelocity((_maxSpeed/speed) * velocity);
+    }
     
     //HARDCODE
     if (_chargeLevel > 100){

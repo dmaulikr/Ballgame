@@ -9,13 +9,13 @@
   <key>level_width</key>
   <integer>2000</integer>
   <key>size_grow_rate</key>
-  <integer>1</integer>
+  <integer>2</integer>
   <key>start_x</key>
   <integer>1863</integer>
   <key>start_y</key>
   <integer>1917</integer>
   <key>starting_size</key>
-  <integer>30</integer>
+  <integer>20</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>
@@ -430,7 +430,7 @@
    </dict>
    <dict>
     <key>charge</key>
-    <string>null</string>
+    <integer>10</integer>
     <key>frame_name</key>
     <string>GreenWallSegment2.png</string>
     <key>height</key>
@@ -486,7 +486,7 @@
    </dict>
    <dict>
     <key>charge</key>
-    <string>null</string>
+    <integer>10</integer>
     <key>frame_name</key>
     <string>GreenWallSegment2.png</string>
     <key>height</key>

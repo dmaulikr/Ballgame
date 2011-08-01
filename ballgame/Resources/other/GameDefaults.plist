@@ -15,5 +15,7 @@
 	<string>BallGameSpriteSheet.plist</string>
 	<key>SpriteSheetPngName</key>
 	<string>BallGameSpriteSheet.png</string>
+	<key>max_speed</key>
+	<integer>10</integer>
 </dict>
 </plist>

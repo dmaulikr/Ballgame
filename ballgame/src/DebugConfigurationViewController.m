@@ -9,6 +9,7 @@
 #import "DebugConfigurationViewController.h"
 #import "CCDirector.h"
 #import "SpecifyURLViewController.h"
+#import "SettingsViewController.h"
 
 @implementation DebugConfigurationViewController
 
@@ -18,7 +19,7 @@
     if (self) {
         // Custom initialization
         
-        cellTitles = [[NSArray arrayWithObjects:@"Dismiss", @"LoadSpriteSheetImage", @"LoadSpriteSheetPlist",nil] retain];
+        cellTitles = [[NSArray arrayWithObjects:@"Dismiss", @"Settings", @"LoadSpriteSheetImage", @"LoadSpriteSheetPlist",nil] retain];
         
 //        cellActions = [[NSArray arrayWithObjects:
 //                       Block_copy(^(){
@@ -106,7 +107,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
         case 0:
-            return @"Asset Loading";
+            return @"Settings";
             break;
         case 1:
             return @"Levels";
@@ -207,6 +208,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SpecifyURLViewController *urlViewController;
+    SettingsViewController *settingsVC;
     if ([indexPath section] == 0){
         switch ([indexPath row]) {
             case 0:
@@ -214,10 +216,15 @@
                 [self.navigationController popViewControllerAnimated:NO];
                 break;
             case 1:
+                settingsVC = [[SettingsViewController alloc] init];
+                [self.navigationController pushViewController:settingsVC animated:YES];
+                [settingsVC release];
+                break;
+            case 2:
                 urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPngName"];
                 [self.navigationController pushViewController:urlViewController animated:YES];
                 break;
-            case 2:
+            case 3:
                 urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPlistName"];
                 [self.navigationController pushViewController:urlViewController animated:YES];
             default:
