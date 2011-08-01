@@ -11,9 +11,9 @@
   <key>size_grow_rate</key>
   <integer>1</integer>
   <key>start_x</key>
-  <integer>1279</integer>
+  <integer>1266</integer>
   <key>start_y</key>
-  <integer>1881</integer>
+  <integer>1483</integer>
   <key>starting_size</key>
   <integer>30</integer>
   <key>world</key>
@@ -24,7 +24,7 @@
     <key>frame_name</key>
     <string>pickup_wings.png</string>
     <key>height</key>
-    <integer>115</integer>
+    <integer>57</integer>
     <key>name</key>
     <string>Goal1</string>
     <key>rotation</key>
@@ -32,17 +32,17 @@
     <key>type</key>
     <string>Goal</string>
     <key>width</key>
-    <integer>149</integer>
+    <integer>119</integer>
     <key>x</key>
-    <integer>392</integer>
+    <integer>367</integer>
     <key>y</key>
-    <integer>210</integer>
+    <integer>395</integer>
    </dict>
    <dict>
     <key>frame_name</key>
     <string>wall.png</string>
     <key>height</key>
-    <integer>10</integer>
+    <integer>5</integer>
     <key>name</key>
     <string>Wall 1</string>
     <key>rotation</key>
@@ -50,11 +50,11 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>303</integer>
+    <integer>529</integer>
     <key>x</key>
-    <integer>465</integer>
+    <integer>578</integer>
     <key>y</key>
-    <integer>1690</integer>
+    <string>1692.5</string>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -124,9 +124,9 @@
     <key>width</key>
     <integer>10</integer>
     <key>x</key>
-    <integer>1140</integer>
+    <integer>1051</integer>
     <key>y</key>
-    <integer>1849</integer>
+    <integer>1680</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -178,9 +178,9 @@
     <key>width</key>
     <integer>154</integer>
     <key>x</key>
-    <integer>1230</integer>
+    <integer>1169</integer>
     <key>y</key>
-    <integer>1765</integer>
+    <integer>1667</integer>
    </dict>
    <dict>
     <key>frame_name</key>

@@ -169,9 +169,11 @@ void MainWindow::loadSpritePlist()
         n = n.nextSibling();
         QDomNode m = n.firstChild();
 
-        // 13 is the index of the Rect string in the sub-dicts.
-        for(int i = 0; i < 13; i++)
+        // 2 is the index of the Rect string in the sub-dicts.
+        for(int i = 0; i < 1; i++)
             m = m.nextSibling();
+
+        //qDebug(m.toElement().text().toAscii());
 
         QDomElement f = m.toElement();
         itemRect = strToRect(qPrintable(f.text()));
@@ -809,14 +811,19 @@ void MainWindow::deleteLevelPropertyClicked()
 // Helper function to convert string to rect
 QRect MainWindow::strToRect(QString in)
 {
-    in.replace("{", "");
-    in.replace("}", "");
-    in.replace(",", "");
+    in.replace("{", " ");
+    in.replace("}", " ");
+    in.replace(",", " ");
+
+    // Replace all whitespace with a single space
+    in.replace(QRegExp("\\s+"), " ");
 
     QStringList strL = in.split(" ");
-    Q_ASSERT_X(strL.length() == 4, "MainWindow::strToRect", "strL does not have 4 strings!");
 
-    return QRect(strL.at(0).toInt(),strL.at(1).toInt(), strL.at(2).toInt(), strL.at(3).toInt() );
+    // For some reason, strL(0) and strL(last) are some kind of empty string
+    Q_ASSERT_X(strL.length() == 6, "MainWindow::strToRect", "strL does not have 4 strings!");
+
+    return QRect(strL.at(1).toInt(),strL.at(2).toInt(), strL.at(3).toInt(), strL.at(4).toInt() );
 }
 
 void MainWindow::quit()
