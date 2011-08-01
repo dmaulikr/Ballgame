@@ -27,10 +27,13 @@
 }
 
 -(void)loadScene{
+    
+    CGSize s = [[CCDirector sharedDirector] winSize];
+    
     CCMenuItem *_playItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Play" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(playTapped:)];
-    [_playItem setPosition:ccp(100, 250)];
+    [_playItem setPosition:ccp(s.width / 2, s.height * 2/3)];
     CCMenuItem *_debugItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Debug" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(debugTapped:)];
-    [_debugItem setPosition:ccp(400, 250)];
+    [_debugItem setPosition:ccp(s.width / 2, s.height * 1/3)];
     
     CCMenu *_menu = [CCMenu menuWithItems:_playItem,_debugItem, nil];
     [_menu setPosition:ccp(0,0)];

@@ -163,7 +163,6 @@
 		AA03DE0B13D7779600BEFC7F /* Wall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0A13D7779600BEFC7F /* Wall.mm */; };
 		AA03DE0E13D777AE00BEFC7F /* Goal.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE0D13D777AE00BEFC7F /* Goal.mm */; };
 		AA03DE1113D777D500BEFC7F /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1013D777D500BEFC7F /* GameOverScene.mm */; };
-		AA03DE1613D777EC00BEFC7F /* HighScoresScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1313D777EC00BEFC7F /* HighScoresScene.mm */; };
 		AA03DE1713D777EC00BEFC7F /* LevelSelectorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1513D777EC00BEFC7F /* LevelSelectorScene.m */; };
 		AA03DE1A13D7780600BEFC7F /* PlayScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1913D7780600BEFC7F /* PlayScene.mm */; };
 		AA03DE1D13D7782C00BEFC7F /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DE1C13D7782C00BEFC7F /* GLES-Render.mm */; };
@@ -190,6 +189,7 @@
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
 		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
 		AA10978713E630CB006445B2 /* test.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978513E630CA006445B2 /* test.level */; };
+		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */; };
@@ -525,8 +525,6 @@
 		AA03DE0D13D777AE00BEFC7F /* Goal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Goal.mm; path = src/Goal.mm; sourceTree = "<group>"; };
 		AA03DE0F13D777D500BEFC7F /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameOverScene.h; path = src/GameOverScene.h; sourceTree = "<group>"; };
 		AA03DE1013D777D500BEFC7F /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameOverScene.mm; path = src/GameOverScene.mm; sourceTree = "<group>"; };
-		AA03DE1213D777EC00BEFC7F /* HighScoresScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighScoresScene.h; path = src/HighScoresScene.h; sourceTree = "<group>"; };
-		AA03DE1313D777EC00BEFC7F /* HighScoresScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HighScoresScene.mm; path = src/HighScoresScene.mm; sourceTree = "<group>"; };
 		AA03DE1413D777EC00BEFC7F /* LevelSelectorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelSelectorScene.h; path = src/LevelSelectorScene.h; sourceTree = "<group>"; };
 		AA03DE1513D777EC00BEFC7F /* LevelSelectorScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LevelSelectorScene.m; path = src/LevelSelectorScene.m; sourceTree = "<group>"; };
 		AA03DE1813D7780600BEFC7F /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayScene.h; path = src/PlayScene.h; sourceTree = "<group>"; };
@@ -562,6 +560,7 @@
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
 		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
 		AA10978513E630CA006445B2 /* test.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test.level; path = levels/test.level; sourceTree = "<group>"; };
+		AA583A2013E64B11004954E9 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu_texture.jpg; path = Resources/backgrounds/menu_texture.jpg; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
@@ -1047,8 +1046,6 @@
 				AA03DE2213D7788000BEFC7F /* SplashScene.mm */,
 				AA03DE1813D7780600BEFC7F /* PlayScene.h */,
 				AA03DE1913D7780600BEFC7F /* PlayScene.mm */,
-				AA03DE1213D777EC00BEFC7F /* HighScoresScene.h */,
-				AA03DE1313D777EC00BEFC7F /* HighScoresScene.mm */,
 				AA03DE1413D777EC00BEFC7F /* LevelSelectorScene.h */,
 				AA03DE1513D777EC00BEFC7F /* LevelSelectorScene.m */,
 				AA03DE0F13D777D500BEFC7F /* GameOverScene.h */,
@@ -1408,7 +1405,6 @@
 				AA03DE0B13D7779600BEFC7F /* Wall.mm in Sources */,
 				AA03DE0E13D777AE00BEFC7F /* Goal.mm in Sources */,
 				AA03DE1113D777D500BEFC7F /* GameOverScene.mm in Sources */,
-				AA03DE1613D777EC00BEFC7F /* HighScoresScene.mm in Sources */,
 				AA03DE1713D777EC00BEFC7F /* LevelSelectorScene.m in Sources */,
 				AA03DE1A13D7780600BEFC7F /* PlayScene.mm in Sources */,
 				AA03DE1D13D7782C00BEFC7F /* GLES-Render.mm in Sources */,

@@ -66,13 +66,7 @@
     _objectInfo = [game_object retain];
     
     // Save original size for use in resize() function
-    originalSize = [self contentSize];
-    
-    // Establish rotation
-    float degAngle = [[_objectInfo valueForKey:@"rotation"] floatValue];
-    //float angle = CC_DEGREES_TO_RADIANS(degAngle);
-    //[self setRotation:degAngle];
-                                              
+    originalSize = [self contentSize];                                              
 }
 
 -(b2Vec2)getVelocity{

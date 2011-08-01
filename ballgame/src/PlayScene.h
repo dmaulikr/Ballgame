@@ -15,6 +15,7 @@
 #import "AssetManager.h"
 #import "GameStateManager.h"
 #import "CollisionManager.h"
+#import "SplashScene.h"
 #import "SimpleAudioEngine.h"
 // PlayScene
 
@@ -36,6 +37,12 @@
     //Sublayers
     CCLayer *scrollNode;
     
+    // Pausing
+    CCLayer *pauseLayer;
+    CCSprite *_pauseScreen;
+    CCMenu *_pauseScreenMenu;
+    bool gameIsPaused;
+    
 }
 -(id)loadLevelWithName:(NSString*)levelName;
 
@@ -44,5 +51,7 @@
 +(CCScene*)currentLevelScene;
 
 -(void) startBackgroundMusic;
+
+-(void) showPauseMenu;
 
 @end

@@ -17,6 +17,7 @@ enum {
 	kTagTileMap = 1,
 	kTagBatchNode = 1,
 	kTagAnimation1 = 1,
+    kTagPauseMenu = 1337,
 };
 
 @interface PlayScene ()
@@ -39,6 +40,7 @@ enum {
 -(id)loadLevelWithName:(NSString *)levelName{
     
     [self startBackgroundMusic];
+    gameIsPaused = false;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
@@ -55,7 +57,7 @@ enum {
     self.isAccelerometerEnabled = YES;
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
-    CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
+    //CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
     
     // Define the gravity vector.
     b2Vec2 gravity;
@@ -140,7 +142,7 @@ enum {
     [self addChild:scrollNode];
     
     //Add the game Objects
-    _thePlayer = [self addPlayer];
+    _thePlayer = [[self addPlayer] retain];
     
     for (NSDictionary *game_object in [_levelInfo objectForKey:@"game_objects"]){
         //NSLog(@"Adding an object");
@@ -405,6 +407,16 @@ enum {
 {
 	for( UITouch *touch in touches ) {
 		
+        // If double tapped
+        if(touch.tapCount > 1)
+        {
+            if(!gameIsPaused)
+                [self showPauseMenu];
+            
+            // Assuming no multi-touch
+            return;
+        }
+        
 		CGPoint currentPos = [scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
 		
@@ -467,6 +479,61 @@ enum {
 
 }
 
+-(void) showPauseMenu
+{
+    gameIsPaused = true;
+    
+    CGSize s = [[CCDirector sharedDirector] winSize];
+    
+    // Pause stuff
+    [[CCDirector sharedDirector] pause];
+    //[[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+    
+    // Create black background layer that's slightly transparent
+    pauseLayer = [CCLayerColor layerWithColor: ccc4(0, 0, 0, 170) width: s.width height: s.height];
+    pauseLayer.position = CGPointZero;
+    
+    // Add layer to the game scene
+    [self addChild: pauseLayer z:PAUSE_MENU_Z_ORDER tag:kTagPauseMenu];
+    
+    // Create menu items
+    CCMenuItem *_resumeItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Resume Game" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(resumeTapped:)];
+    [_resumeItem setPosition:ccp(s.width/2, s.height * 2/3)];
+    CCMenuItem *_quitItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Quit to Main Menu" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(quitTapped:)];
+    [_quitItem setPosition:ccp(s.width/2, s.height * 1/3)];
+    
+    // Create menu
+    CCMenu *_menu = [CCMenu menuWithItems:_resumeItem,_quitItem, nil];
+    [_menu setPosition:ccp(0,0)];
+    
+    // Add menu to pause layer
+    [pauseLayer addChild:_menu z:10];
+}
+
+-(void)resumeTapped:(id)sender
+{
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Allow pausing again
+    gameIsPaused = false;
+}
+
+-(void)quitTapped:(id)sender
+{
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Return to Main Menu
+    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
+}
+    
 #pragma mark - Data Management
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
@@ -479,6 +546,7 @@ enum {
     
     [_levelInfo release];
     [_gameObjects release];
+    [_thePlayer release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
