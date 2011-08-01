@@ -686,6 +686,7 @@
 				BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */,
 				BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */,
 				BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */,
+				AA583A2013E64B11004954E9 /* menu_texture.jpg */,
 				AA10978313E62A15006445B2 /* Sound */,
 				AA10976813E613FA006445B2 /* blocks.png */,
 				AA10976913E613FA006445B2 /* Default.png */,
@@ -1253,6 +1254,7 @@
 				BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */,
 				BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */,
 				BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */,
+				AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
