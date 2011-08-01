@@ -453,12 +453,8 @@ enum {
 
     if(![audio isBackgroundMusicPlaying])
     {
-        NSString *baseDirectory = [NSString string];
-        baseDirectory = NSHomeDirectory();
-        baseDirectory = [baseDirectory stringByAppendingString:@"/ballgame.app/"];
-        NSString *filename = [baseDirectory stringByAppendingString:@"Game1.mp3"];
-
-        [audio playBackgroundMusic:filename];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Game1" ofType:@"mp3"];
+        [audio playBackgroundMusic:path];
     }
 
 }

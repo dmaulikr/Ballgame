@@ -42,6 +42,13 @@
                 
                 // Schedule a selector to change the sprite back to normal after 1/16 second
                 [self schedule:@selector(changeBack:) interval:.125];
+                
+                // Play sound effect
+                // HARDCODED SOUND EFFECT NAME
+                SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+                NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
+                [audio playEffect:path];
+
             }
             
             break;

@@ -75,6 +75,12 @@
         [_dependant_object switchStateChanged:YES]; 
         _activated = YES;
         
+        // Play sound effect
+        // HARDCODED SOUND EFFECT NAME
+        SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
+        [audio playEffect:path];
+        
     }
 }
 

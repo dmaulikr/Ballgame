@@ -7,6 +7,7 @@
 //
 
 #import "Wall.h"
+#import "SimpleAudioEngine.h"
 
 @interface ChargedWall : Wall
 {
