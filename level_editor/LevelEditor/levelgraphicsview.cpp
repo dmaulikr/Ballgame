@@ -70,7 +70,7 @@ void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
     if(!resizing)
     {
         draggedItem->setPos(pos);
-        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size());
+        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), true);
     }
     else
     {
@@ -100,7 +100,7 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     if(!resizing)
     {
         draggedItem->setPos(pos);
-        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size());
+        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), false);
     }
     else
     {

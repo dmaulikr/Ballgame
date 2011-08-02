@@ -15,10 +15,18 @@
 #include <QFileDialog>
 #include <QtCore/qmath.h>
 #include <QScrollBar>
+#include <QMessageBox>
+#include <QStack>
 
 namespace Ui {
     class MainWindow;
 }
+
+struct UndoObject
+{
+    QMap<QString, QString> levelPlist;
+    QList< QMap<QString, QString> > levelObjects;
+};
 
 class MainWindow : public QMainWindow
 {
@@ -37,8 +45,12 @@ private slots:
     void newLevel();
     void quit();
 
+    // Edit Menu
+    void undoClicked();
+    void redoClicked();
+
     // From LevelGraphicsView
-    void objectChanged(QString, int, QPointF, QSizeF);
+    void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
     void needToRescale(QString, int, double, double, bool);
 
@@ -83,6 +95,12 @@ private:
     bool initializing;
 
     QString currentFileName;
+
+    // Undo functionality
+    QStack<UndoObject> undoStack;
+    QStack<UndoObject> redoStack;
+    void pushUndo(bool clearRedoStack = true);
+    void popUndo();
 
 
 };

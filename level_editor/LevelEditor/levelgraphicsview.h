@@ -20,7 +20,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
 
 signals:
-    void objectChanged(QString, int, QPointF, QSizeF);
+    void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
     void needToRescale(QString, int, double, double, bool);
 

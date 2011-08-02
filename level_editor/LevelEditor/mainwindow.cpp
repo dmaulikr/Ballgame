@@ -10,6 +10,7 @@
 #include "ui_mainwindow.h"
 
 #define MINIMUM_WALL_THICKENESS 5
+#define MAX_UNDO_LIMIT 100
 
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
@@ -36,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     noEmit = false;
 
-    connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF)));
+    connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF, bool)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF, bool)));
     connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
     connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, bool)));
 
@@ -68,7 +69,6 @@ void MainWindow::loadFile()
     scene = new QGraphicsScene();
     updateGraphics();
     initializing = false;
-
 }
 
 void MainWindow::updateGraphics()
@@ -200,6 +200,9 @@ void MainWindow::objectChanged(QTableWidgetItem* newItem)
         return;
     noEmit = true;
 
+    // Push an Undo object
+    pushUndo();
+
     // iterate to the changed row
     QMap<QString, QString>::const_iterator it = levelObjects[objId].constBegin();
     for(int i = 0; i < row; i++)
@@ -234,6 +237,9 @@ void MainWindow::levelPlistChanged(QTableWidgetItem* newItem)
         return;
     noEmit = true;
 
+    // Push an Undo object
+    pushUndo();
+
     int row = ui->levelPlistTableWidget->currentRow();
 
     // iterate to the changed row
@@ -261,6 +267,9 @@ void MainWindow::levelPlistChanged(QTableWidgetItem* newItem)
 
 void MainWindow::objectSelected(QString type, int id)
 {
+    // Push Undo object
+    pushUndo();
+
     if(type == "object")
     {
         ui->objectSelectorComboBox->setCurrentIndex(id);
@@ -268,10 +277,9 @@ void MainWindow::objectSelected(QString type, int id)
     }
 }
 
-void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool doublesOK)
+void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool objectStillDragging)
 {
     // ToDo:  rescale player
-
     int x = levelObjects[id].value("width").toFloat() * scaleX;
     int y = levelObjects[id].value("height").toFloat() * scaleY;
 
@@ -287,7 +295,7 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     float sPXn = (float)(oldX + dX/2);
     float sPYn = (float)(oldY - dY/2);
 
-    if(!doublesOK)
+    if(!objectStillDragging)
     {
         sPXn = (int)sPXn;
         sPYn = (int)sPYn;
@@ -313,10 +321,8 @@ void MainWindow::needToRescale(QString type, int id, double scaleX, double scale
     updateObjectTable(id);
 }
 
-void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size)
+void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, bool objectStillDragging)
 {
-    //qDebug() << type << " " << id << " " << pos  << " " << size << endl;
-
     if(type == "player")
     {
         levelPlist.insert("start_x", QString::number(pos.x() + (int)(size.width() / 2)));
@@ -408,6 +414,9 @@ void MainWindow::rotationSliderMoved(int value)
         return;
     noEmit = true;
 
+    // Push an Undo object
+    pushUndo();
+
     float rot = (value * 360.0 / 99);  // dividing by 99 instead of 100 so that 360 can actually be reached
     int rotation = (int)rot / 5 * 5;  // round to the nearest 5
 
@@ -459,6 +468,9 @@ void MainWindow::updateObjectTable(int objId)
 
 void MainWindow::wallThicknessClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     int thickness = ui->wallThicknessEdit->text().toInt();
 
     if(thickness <= 0) // invalid input
@@ -680,6 +692,9 @@ void MainWindow::loadLevelPlist(QString level)
 
 void MainWindow::addPropertyClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     int objId = ui->objectSelectorComboBox->currentIndex();
 
     if(objId == -1) // nothing selected
@@ -696,6 +711,9 @@ void MainWindow::addPropertyClicked()
 
 void MainWindow::deletePropertyClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     int row = ui->objectsTableWidget->currentRow();
     int objId = ui->objectSelectorComboBox->currentIndex();
 
@@ -717,6 +735,9 @@ void MainWindow::deletePropertyClicked()
 
 void MainWindow::newObjectClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     levelObjects.append(QMap<QString, QString>());
 
     updateGraphics();
@@ -728,6 +749,9 @@ void MainWindow::newObjectClicked()
 
 void MainWindow::copyObjectClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     int index = ui->objectSelectorComboBox->currentIndex();
     if(index == -1) // nothing selected
         return;
@@ -744,6 +768,9 @@ void MainWindow::copyObjectClicked()
 
 void MainWindow::deleteObjectClicked()
 {
+    // Push an Undo object
+    pushUndo();
+
     int index = ui->objectSelectorComboBox->currentIndex();
     if(index == -1) // nothing selected
         return;
@@ -770,6 +797,9 @@ void MainWindow::addLevelPropertyClicked()
         return;
     noEmit = true;
 
+    // Push an Undo object
+    pushUndo();
+
     levelPlist.insert("new_property", "null");
 
     updateGraphics();
@@ -790,6 +820,9 @@ void MainWindow::deleteLevelPropertyClicked()
         return;
     noEmit = true;
 
+    // Push an Undo object
+    pushUndo();
+
     // iterate to the deleted row
     QMap<QString, QString>::const_iterator it = levelPlist.constBegin();
     for(int i = 0; i < row; i++)
@@ -801,11 +834,106 @@ void MainWindow::deleteLevelPropertyClicked()
     updateLevelPlistTable();
 
     noEmit = false;
+}
 
+void MainWindow::pushUndo(bool clearRedoStack)
+{
+    // Save current state as an UndoObject
+    UndoObject u;
+    u.levelObjects = levelObjects;
+    u.levelPlist = levelPlist;
 
+    // Push undo object onto undo stack
+    undoStack.push(u);
 
+    // Clear redo stack
+    if(clearRedoStack)
+        redoStack.clear();
 
+    // Clear out bottom of undo stack if necessary
+    while(undoStack.count() > MAX_UNDO_LIMIT)
+    {
+        undoStack.pop_front();
+    }
 
+    //qDebug(QString("Pushed Undo - %1").arg(undoStack.count()).toAscii());
+}
+
+void MainWindow::popUndo()
+{
+
+    if(!undoStack.isEmpty())
+    {
+        UndoObject u = undoStack.pop();
+
+        // Redo functionality
+        UndoObject r;
+        r.levelObjects = levelObjects;
+        r.levelPlist = levelPlist;
+        redoStack.push(r);
+
+        // Restore state from undo object
+        levelObjects = u.levelObjects;
+        levelPlist = u.levelPlist;
+
+        // Make sure we don't end up in an infinite loop
+        noEmit = true;
+
+        // Update stuff to reflect new state
+        updateGraphics();
+        updateObjectComboBox();
+        updateLevelPlistTable();
+        //updateObjectTable(0);
+
+        noEmit = false;
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Nothing to undo!");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+    }
+
+    //qDebug(QString("Popped Undo - %1").arg(undoStack.count()).toAscii());
+}
+
+void MainWindow::undoClicked()
+{
+    popUndo();
+}
+
+void MainWindow::redoClicked()
+{
+    if(!redoStack.isEmpty())
+    {
+        UndoObject r = redoStack.pop();
+
+        // Push current state to undo stack
+        pushUndo(false);
+
+        // Restore state from undo object
+        levelObjects = r.levelObjects;
+        levelPlist = r.levelPlist;
+
+        // Make sure we don't end up in an infinite loop
+        noEmit = true;
+
+        // Update stuff to reflect new state
+        updateGraphics();
+        updateObjectComboBox();
+        updateLevelPlistTable();
+        //updateObjectTable(0);
+
+        noEmit = false;
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Nothing to redo!");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+    }
 }
 
 // Helper function to convert string to rect
