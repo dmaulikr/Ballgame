@@ -144,7 +144,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="layoutWidget">
+         <widget class="QWidget" name="layoutWidget1">
           <property name="geometry">
            <rect>
             <x>270</x>
@@ -259,6 +259,8 @@
     </property>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionDelete"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -312,6 +314,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
  </widget>
@@ -629,6 +639,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionDelete</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>deleteClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -650,5 +676,6 @@
   <slot>wallThicknessClicked()</slot>
   <slot>undoClicked()</slot>
   <slot>redoClicked()</slot>
+  <slot>deleteClicked()</slot>
  </slots>
 </ui>

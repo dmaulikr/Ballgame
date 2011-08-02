@@ -275,6 +275,9 @@ void MainWindow::objectSelected(QString type, int id)
         ui->objectSelectorComboBox->setCurrentIndex(id);
         updateObjectTable(id);
     }
+
+    ui->levelPlistTableWidget->setCurrentCell(-1, -1);
+    ui->objectsTableWidget->setCurrentCell(-1, -1);
 }
 
 void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool objectStillDragging)
@@ -939,6 +942,35 @@ void MainWindow::redoClicked()
         msgBox.setText("Nothing to redo!");
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.exec();
+    }
+}
+
+void MainWindow::deleteClicked()
+{
+    // If we are in the objects tab
+    if(ui->tabWidget->currentIndex() == 0)
+    {
+        int index = ui->objectsTableWidget->currentRow();
+
+        // If something is selected
+        if(index != -1)
+            deletePropertyClicked();
+
+        else
+            deleteObjectClicked();
+    }
+
+    // Else we are in the level properties tab
+    else
+    {
+        int index = ui->levelPlistTableWidget->currentRow();
+
+        // If something is selected
+        if(index != -1)
+            deleteLevelPropertyClicked();
+
+        else
+            deleteObjectClicked();
     }
 }
 

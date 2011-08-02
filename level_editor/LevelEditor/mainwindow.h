@@ -49,6 +49,7 @@ private slots:
     // Edit Menu
     void undoClicked();
     void redoClicked();
+    void deleteClicked();
 
     // From LevelGraphicsView
     void objectChanged(QString, int, QPointF, QSizeF, bool);
@@ -102,8 +103,6 @@ private:
     QStack<UndoObject> redoStack;
     void pushUndo(bool clearRedoStack = true);
     void popUndo();
-
-
 };
 
 #endif // MAINWINDOW_H
