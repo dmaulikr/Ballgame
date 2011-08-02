@@ -12,6 +12,10 @@
 @interface SettingsViewController : UIViewController{
     IBOutlet UISlider *_maxSpeedSlider;
     IBOutlet UILabel *_maxSpeedLabel;
+    
+    IBOutlet UISlider *_worldGravitySlider;
+    IBOutlet UILabel *_worldGravityLabel;
 }
 -(IBAction)maxSpeedValueChanged;
+-(IBAction)worldGravityChanged:(id)sender;
 @end

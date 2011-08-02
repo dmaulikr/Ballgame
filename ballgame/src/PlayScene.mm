@@ -339,23 +339,26 @@ enum {
     b2Vec2 velocity = [_thePlayer getVelocity];
 	// if ball moved off the edge
     
+    //Center the scroll node on the player's position...sort of =)
+    [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
     
-	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
-		CGPoint currentPos = [scrollNode position];
-		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-	}
-	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
-		CGPoint currentPos = [scrollNode position];
-		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-	}
-	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
-		CGPoint currentPos = [scrollNode position];
-		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-	}
-	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
-		CGPoint currentPos = [scrollNode position];
-		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-	}
+    //DEPRECATED SCROLLING CODE
+//	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
+//		CGPoint currentPos = [scrollNode position];
+//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
+//	}
+//	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
+//		CGPoint currentPos = [scrollNode position];
+//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
+//	}
+//	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
+//		CGPoint currentPos = [scrollNode position];
+//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
+//	}
+//	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
+//		CGPoint currentPos = [scrollNode position];
+//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
+//	}
 }
 
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt{
@@ -450,7 +453,7 @@ enum {
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
 	static float prevX=0, prevY=0;
-	
+	static int gravAdjustment = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
 	//#define kFilterFactor 0.05f
 #define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
 	
@@ -460,9 +463,10 @@ enum {
 	prevX = accelX;
 	prevY = accelY;
 	
+    
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
-	b2Vec2 gravity( -accelY * 30, accelX * 30);
+	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
 	
 	world->SetGravity( gravity );
 }

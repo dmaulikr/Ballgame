@@ -19,6 +19,12 @@
     return self;
 }
 
+-(IBAction)worldGravityChanged:(id)sender{
+    NSNumber *newGravity = [NSNumber numberWithFloat:[_worldGravitySlider value]];
+    [[AssetManager defaults] setValue:newGravity forKey:@"world_gravity"];
+    [_worldGravityLabel setText:[NSString stringWithFormat:@"%i", [newGravity intValue]]];
+}
+
 -(IBAction)maxSpeedValueChanged{
     NSNumber *newSpeed =  [NSNumber numberWithFloat:[_maxSpeedSlider value]];
     [[AssetManager defaults] setValue:newSpeed forKey:@"max_speed"];
@@ -42,6 +48,10 @@
     int defaultsMaxSpeed = [[[AssetManager defaults] valueForKey:@"max_speed"] intValue];
     [_maxSpeedSlider setValue:defaultsMaxSpeed];
     [_maxSpeedLabel setText:[NSString stringWithFormat:@"%i", defaultsMaxSpeed]];
+    
+    int defaultsWorldGravity = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
+    [_worldGravitySlider setValue:defaultsWorldGravity];
+    [_worldGravityLabel setText:[NSString stringWithFormat:@"%i", defaultsWorldGravity]];
                     
 }
 
