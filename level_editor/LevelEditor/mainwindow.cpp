@@ -842,6 +842,7 @@ void MainWindow::pushUndo(bool clearRedoStack)
     UndoObject u;
     u.levelObjects = levelObjects;
     u.levelPlist = levelPlist;
+    u.currentObject = ui->objectSelectorComboBox->currentIndex();
 
     // Push undo object onto undo stack
     undoStack.push(u);
@@ -870,11 +871,13 @@ void MainWindow::popUndo()
         UndoObject r;
         r.levelObjects = levelObjects;
         r.levelPlist = levelPlist;
+        r.currentObject = ui->objectSelectorComboBox->currentIndex();
         redoStack.push(r);
 
         // Restore state from undo object
         levelObjects = u.levelObjects;
         levelPlist = u.levelPlist;
+        int currentObj = u.currentObject;
 
         // Make sure we don't end up in an infinite loop
         noEmit = true;
@@ -883,7 +886,8 @@ void MainWindow::popUndo()
         updateGraphics();
         updateObjectComboBox();
         updateLevelPlistTable();
-        //updateObjectTable(0);
+        updateObjectTable(currentObj);
+        ui->objectSelectorComboBox->setCurrentIndex(currentObj);
 
         noEmit = false;
     }
@@ -915,6 +919,7 @@ void MainWindow::redoClicked()
         // Restore state from undo object
         levelObjects = r.levelObjects;
         levelPlist = r.levelPlist;
+        int currentObj = r.currentObject;
 
         // Make sure we don't end up in an infinite loop
         noEmit = true;
@@ -923,7 +928,8 @@ void MainWindow::redoClicked()
         updateGraphics();
         updateObjectComboBox();
         updateLevelPlistTable();
-        //updateObjectTable(0);
+        updateObjectTable(currentObj);
+        ui->objectSelectorComboBox->setCurrentIndex(currentObj);
 
         noEmit = false;
     }

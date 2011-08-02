@@ -26,6 +26,7 @@ struct UndoObject
 {
     QMap<QString, QString> levelPlist;
     QList< QMap<QString, QString> > levelObjects;
+    int currentObject;
 };
 
 class MainWindow : public QMainWindow
