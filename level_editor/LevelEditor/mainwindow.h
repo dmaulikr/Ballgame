@@ -17,6 +17,7 @@
 #include <QScrollBar>
 #include <QMessageBox>
 #include <QStack>
+#include <QVariant>
 
 namespace Ui {
     class MainWindow;
@@ -25,7 +26,7 @@ namespace Ui {
 struct UndoObject
 {
     QMap<QString, QString> levelPlist;
-    QList< QMap<QString, QString> > levelObjects;
+    QList< QMap<QString, QVariant> > levelObjects;
     int currentObject;
 };
 
@@ -91,7 +92,7 @@ private:
     QImage spriteSheet;
     QMap<QString, QRect> spriteSheetLocations;
     QMap<QString, QString> levelPlist;
-    QList< QMap<QString, QString> > levelObjects;
+    QList< QMap<QString, QVariant> > levelObjects;
 
     bool noEmit;
     bool initializing;

@@ -99,7 +99,7 @@ void MainWindow::updateGraphics()
     for(int i = 0; i < levelObjects.length(); i++)
     {
         QRect objRect;
-        objRect = spriteSheetLocations.value(levelObjects.at(i).value("frame_name"));
+        objRect = spriteSheetLocations.value(levelObjects.at(i).value("frame_name").toString());
 
         //Q_ASSERT_X(objRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
         QImage img = spriteSheet.copy(objRect);
@@ -204,7 +204,7 @@ void MainWindow::objectChanged(QTableWidgetItem* newItem)
     pushUndo();
 
     // iterate to the changed row
-    QMap<QString, QString>::const_iterator it = levelObjects[objId].constBegin();
+    QMap<QString, QVariant>::const_iterator it = levelObjects[objId].constBegin();
     for(int i = 0; i < row; i++)
         ++it;
 
@@ -214,7 +214,7 @@ void MainWindow::objectChanged(QTableWidgetItem* newItem)
     }
     else if(column == 0)
     {
-        QString value = levelObjects[objId].value(it.key());
+        QString value = levelObjects[objId].value(it.key()).toString();
         levelObjects[objId].remove(it.key());
         levelObjects[objId].insert(newItem->text(), value);
     }
@@ -388,7 +388,7 @@ void MainWindow::updateObjectComboBox()
     comboBox->clear();
     for(int i = 0; i < levelObjects.count(); i++)
     {
-        comboBox->addItem(QString(levelObjects.at(i).value("type") + " - " + levelObjects.at(i).value("name")));
+        comboBox->addItem(QString(levelObjects.at(i).value("type").toString() + " - " + levelObjects.at(i).value("name").toString()));
     }
 
     if(previousSize == comboBox->count())
@@ -450,17 +450,39 @@ void MainWindow::updateObjectTable(int objId)
     table->setRowCount(0);
 
 
-    QMap<QString, QString>::const_iterator it;
+    QMap<QString, QVariant>::const_iterator it;
     for (it = levelObjects.at(objId).constBegin(); it != levelObjects.at(objId).constEnd(); ++it)
     {
         rowCount++;
         table->setRowCount(rowCount);
 
         table->setItem(rowCount-1, 0, new QTableWidgetItem(it.key()));
-        table->setItem(rowCount-1, 1, new QTableWidgetItem(it.value()));
+
+        if(it.value().type() == QVariant::String)
+        {
+            table->setItem(rowCount-1, 1, new QTableWidgetItem(it.value().toString()));
+        }
+        else if(it.value().type() == QVariant::List)
+        {
+            // Display contents of list here
+            /*
+            QString out;
+            QList<QVariant> list = it.value().toList();
+            for(int i = 0; i < list.count(); i++)
+            {
+                out +=
+            }
+            */
+
+            table->setItem(rowCount-1, 1, new QTableWidgetItem(QString("can't display")));
+        }
+        else
+        {
+            Q_ASSERT_X(false, "MainWindow::updateObjectTable", "Unknown QVariant type!");
+        }
     }
 
-    QString rotationStr = levelObjects[objId].value("rotation", "nil");
+    QString rotationStr = levelObjects[objId].value("rotation", "nil").toString();
     if(rotationStr != "nil"){
         int rotation = rotationStr.toInt();
         ui->rotationLabel->setText(QString("Rotation - " + QString::number(rotation) + " degrees").toAscii());
@@ -481,7 +503,7 @@ void MainWindow::wallThicknessClicked()
 
     for(int i = 0; i < levelObjects.count(); i++)
     {
-        if(levelObjects[i].value("type").toLower() == "wall")
+        if(levelObjects[i].value("type").toString().toLower() == "wall")
         {
             bool xSmaller = true;
             if(levelObjects[i].value("height").toInt() < levelObjects[i].value("width").toInt())
@@ -505,7 +527,7 @@ void MainWindow::newLevel()
     currentFileName = "";
 
     levelPlist = QMap<QString, QString>();
-    levelObjects = QList< QMap<QString, QString> >();
+    levelObjects = QList< QMap<QString, QVariant> >();
 
     updateGraphics();
     clearObjectTable();
@@ -581,7 +603,7 @@ void MainWindow::saveLevelPlist(QString filename)
         QDomElement dict = doc.createElement("dict");
         array.appendChild(dict);
 
-        QMap<QString, QString>::const_iterator i;
+        QMap<QString, QVariant>::const_iterator i;
         for (i = levelObjects.at(j).constBegin(); i != levelObjects.at(j).constEnd(); ++i)
         {
             tag = doc.createElement("key");
@@ -593,10 +615,46 @@ void MainWindow::saveLevelPlist(QString filename)
             tag = doc.createElement("string");
             if(i.value().toInt() != 0)
                 tag = doc.createElement("integer");
-            dict.appendChild(tag);
 
-            t = doc.createTextNode(i.value());
-            tag.appendChild(t);
+            // if not a list
+            if(i.value().toList().count() == 0)
+            {
+                t = doc.createTextNode(i.value().toString());
+                dict.appendChild(tag);
+                tag.appendChild(t);
+            }
+            else
+            {
+                QDomElement innerArray = doc.createElement("array");
+                dict.appendChild(innerArray);
+
+                QList<QVariant> list = i.value().toList();
+                for(int k = 0; k < list.count(); k++)
+                {
+                    QDomElement innerDict = doc.createElement("dict");
+                    innerArray.appendChild(innerDict);
+
+                    QMap<QString, QVariant>::const_iterator it;
+                    for (it = list.at(k).toMap().constBegin(); it != list.at(k).toMap().constEnd(); ++it)
+                    {
+                        tag = doc.createElement("key");
+                        innerDict.appendChild(tag);
+
+                        t = doc.createTextNode(it.key());
+                        tag.appendChild(t);
+
+                        tag = doc.createElement("string");
+                        if(it.value().toInt() != 0)
+                            tag = doc.createElement("integer");
+
+                        t = doc.createTextNode(it.value().toString());
+                        innerDict.appendChild(tag);
+                        tag.appendChild(t);
+                    }
+                }
+            }
+
+
         }
     }
 
@@ -657,7 +715,7 @@ void MainWindow::loadLevelPlist(QString level)
                 QDomNode m = n.firstChild();
                 while(!m.isNull())
                 {
-                    QMap<QString, QString> newHash;
+                    QMap<QString, QVariant> newHash;
                     QDomNode o = m.firstChild();
                     while(!o.isNull())
                     {
@@ -674,7 +732,48 @@ void MainWindow::loadLevelPlist(QString level)
                             itemContents = qPrintable(f.text());
                             itemTag = qPrintable(f.tagName());
 
-                            newHash.insert(itemName, itemContents);
+                            // Currently, moving wall positions is the only possibility of an array, so I'm assuming we have an array of dicts.
+                            if(itemTag == "array")
+                            {
+                                QList< QVariant > subList;
+                                QDomNode x = o.firstChild();
+                                while(!x.isNull())
+                                {
+                                    QMap<QString, QVariant> newMap;
+                                    QDomNode p = x.firstChild();
+                                    while(!p.isNull())
+                                    {
+                                        QDomElement g = p.toElement(); // try to convert the node to an element.
+                                        if(!g.isNull()) {
+
+                                            itemName = qPrintable(g.text()); // the node really is an element.
+                                            itemTag = qPrintable(g.tagName());
+
+                                            Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Level object tag should be a key, but isn't!");
+
+                                            p = p.nextSibling();
+                                            g = p.toElement();
+                                            itemContents = qPrintable(g.text());
+                                            itemTag = qPrintable(g.tagName());
+
+                                            newMap.insert(itemName, itemContents);
+
+                                            p = p.nextSibling();
+                                        }
+                                    } // while object dict is not done
+
+                                    subList.append(newMap);
+                                    x = x.nextSibling();
+                                }
+
+                                // Hardcoded "positions" for now
+                                newHash.insert("positions", subList);
+                                qDebug() << subList;
+                            }
+                            else // assuming its a string
+                            {
+                                newHash.insert(itemName, itemContents);
+                            }
 
                             o = o.nextSibling();
                         }
@@ -724,7 +823,7 @@ void MainWindow::deletePropertyClicked()
         return;
 
     // iterate to the deleted row
-    QMap<QString, QString>::const_iterator it = levelObjects[objId].constBegin();
+    QMap<QString, QVariant>::const_iterator it = levelObjects[objId].constBegin();
     for(int i = 0; i < row; i++)
         ++it;
 
@@ -741,7 +840,7 @@ void MainWindow::newObjectClicked()
     // Push an Undo object
     pushUndo();
 
-    levelObjects.append(QMap<QString, QString>());
+    levelObjects.append(QMap<QString, QVariant>());
 
     updateGraphics();
     updateObjectComboBox();
@@ -759,10 +858,10 @@ void MainWindow::copyObjectClicked()
     if(index == -1) // nothing selected
         return;
 
-    levelObjects.append(QMap<QString, QString>(levelObjects[index]));
+    levelObjects.append(QMap<QString, QVariant>(levelObjects[index]));
 
     // Rename copy
-    QString newName = levelObjects[levelObjects.count()-1].value("name");
+    QString newName = levelObjects[levelObjects.count()-1].value("name").toString();
 
     // Determine how many digits the number at the end is (could be 0)
     int count = 0;
