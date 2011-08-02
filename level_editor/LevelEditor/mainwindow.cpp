@@ -761,7 +761,45 @@ void MainWindow::copyObjectClicked()
 
     levelObjects.append(QMap<QString, QString>(levelObjects[index]));
 
-    levelObjects[levelObjects.count()-1].insert("name", QString("Copy of " + levelObjects[levelObjects.count()-1].value("name")));
+    // Rename copy
+    QString newName = levelObjects[levelObjects.count()-1].value("name");
+
+    // Determine how many digits the number at the end is (could be 0)
+    int count = 0;
+    while(newName.right(count+1).toInt() != 0)
+    {
+        count++;
+    }
+
+    // Trim number off the end of the string
+    newName = newName.left(newName.length() - count);
+
+    // If the last character is not a space, add one
+    if(newName.right(1) != " ")
+        newName = newName + " ";
+
+    // Find first name that doesn't exist yet
+    count = 1;
+    bool found;
+    do
+    {
+        count++;
+        found = false;
+        QString tempStr = newName;
+        tempStr.append(QString("%1").arg(count));
+        for(int i = 0; i < levelObjects.count(); i++)
+        {
+            if(levelObjects[i].value("name") == tempStr)
+            {
+                found = true;
+                continue;
+            }
+        }
+    } while(found);
+
+    newName.append(QString("%1").arg(count));
+
+    levelObjects[levelObjects.count()-1].insert("name", newName);
     updateGraphics();
     updateObjectComboBox();
 
