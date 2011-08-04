@@ -1019,6 +1019,10 @@ void MainWindow::deleteLevelPropertyClicked()
 
 void MainWindow::pushUndo(bool clearRedoStack)
 {
+    // Save backup
+    if(currentFileName != "")
+        saveLevelPlist(QString(currentFileName + ".backup"));
+
     // Save current state as an UndoObject
     UndoObject u;
     u.levelObjects = levelObjects;

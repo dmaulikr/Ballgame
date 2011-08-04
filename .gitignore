@@ -18,3 +18,5 @@ level_editor/old
 ballgame/.DS_Store
 
 .DS_Store
+
+*.backup
