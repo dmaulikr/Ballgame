@@ -12,6 +12,9 @@
 #define MINIMUM_WALL_THICKENESS 5
 #define MAX_UNDO_LIMIT 100
 
+// The amount by which an object is translated from the original when it's copy/pasted
+#define COPY_POSITION_INCREMENT 25
+
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
 #define PATH_SPRITE_PLIST "../../../../../ballgame/Resources/BallGameSpriteSheet.plist"
@@ -41,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
     connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, bool)));
 
+    copyObject = -1;
+    selectedObject = -1;
 }
 
 void MainWindow::loadFile()
@@ -274,10 +279,15 @@ void MainWindow::objectSelected(QString type, int id)
     {
         ui->objectSelectorComboBox->setCurrentIndex(id);
         updateObjectTable(id);
+
+        // For copy/paste
+        selectedObject = id;
     }
 
     ui->levelPlistTableWidget->setCurrentCell(-1, -1);
     ui->objectsTableWidget->setCurrentCell(-1, -1);
+
+
 }
 
 void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool objectStillDragging)
@@ -603,7 +613,7 @@ void MainWindow::saveLevelPlistAs()
 
 void MainWindow::saveLevelPlist(QString filename)
 {
-    qDebug(filename.toAscii());
+    //qDebug(filename.toAscii());
     QDomDocument doc("plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"");
     QDomElement root = doc.createElement("plist");
     doc.appendChild(root);
@@ -899,6 +909,14 @@ void MainWindow::copyObjectClicked()
     if(index == -1) // nothing selected
         return;
 
+    createCopyOfObject(index);
+
+    ui->objectSelectorComboBox->setCurrentIndex(levelObjects.count()-1);
+    updateObjectTable(levelObjects.count() - 1);
+}
+
+void MainWindow::createCopyOfObject(int index)
+{
     levelObjects.append(QMap<QString, QVariant>(levelObjects[index]));
 
     // Rename copy
@@ -939,12 +957,17 @@ void MainWindow::copyObjectClicked()
 
     newName.append(QString("%1").arg(count));
 
+    // Update name
     levelObjects[levelObjects.count()-1].insert("name", newName);
+
+    // Increment x and y by some amount
+    int newX = levelObjects[levelObjects.count()-1].value("x").toInt() + COPY_POSITION_INCREMENT;
+    int newY = levelObjects[levelObjects.count()-1].value("y").toInt() + COPY_POSITION_INCREMENT;
+    levelObjects[levelObjects.count()-1].insert("x", QString("%1").arg(newX));
+    levelObjects[levelObjects.count()-1].insert("y", QString("%1").arg(newY));
+
     updateGraphics();
     updateObjectComboBox();
-
-    ui->objectSelectorComboBox->setCurrentIndex(levelObjects.count()-1);
-    updateObjectTable(levelObjects.count() - 1);
 }
 
 void MainWindow::deleteObjectClicked()
@@ -970,6 +993,10 @@ void MainWindow::deleteObjectClicked()
     {
         clearObjectTable();
     }
+
+    // Make sure we can't paste anything after this without re-copying
+    copyObject = -1;
+    selectedObject = -1;
 }
 
 void MainWindow::addLevelPropertyClicked()
@@ -1153,6 +1180,20 @@ void MainWindow::deleteClicked()
 
         else
             deleteObjectClicked();
+    }
+}
+
+void MainWindow::copyClicked()
+{
+    copyObject = selectedObject;
+}
+
+void MainWindow::pasteClicked()
+{
+    // If something was copied
+    if(copyObject != -1)
+    {
+        createCopyOfObject(copyObject);
     }
 }
 

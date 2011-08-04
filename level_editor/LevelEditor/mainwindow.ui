@@ -260,6 +260,9 @@
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
     <addaction name="separator"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
     <addaction name="actionDelete"/>
    </widget>
    <addaction name="menuFile"/>
@@ -322,6 +325,22 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>
@@ -671,6 +690,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionCopy</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>copyClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPaste</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pasteClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -694,5 +745,7 @@
   <slot>redoClicked()</slot>
   <slot>deleteClicked()</slot>
   <slot>objectTableClicked(int,int)</slot>
+  <slot>copyClicked()</slot>
+  <slot>pasteClicked()</slot>
  </slots>
 </ui>

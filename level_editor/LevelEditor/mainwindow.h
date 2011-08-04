@@ -53,6 +53,8 @@ private slots:
     void undoClicked();
     void redoClicked();
     void deleteClicked();
+    void copyClicked();
+    void pasteClicked();
 
     // From LevelGraphicsView
     void objectChanged(QString, int, QPointF, QSizeF, bool);
@@ -110,6 +112,11 @@ private:
     QStack<UndoObject> redoStack;
     void pushUndo(bool clearRedoStack = true);
     void popUndo();
+
+    // Copy/paste functionality
+    void createCopyOfObject(int index);
+    int selectedObject;
+    int copyObject;
 };
 
 #endif // MAINWINDOW_H
