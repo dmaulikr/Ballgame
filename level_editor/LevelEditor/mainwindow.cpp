@@ -393,9 +393,6 @@ void MainWindow::updateObjectComboBox()
 
     if(previousSize == comboBox->count())
         comboBox->setCurrentIndex(previousIndex);
-
-
-
 }
 
 void MainWindow::clearObjectTable()
@@ -474,7 +471,7 @@ void MainWindow::updateObjectTable(int objId)
             }
             */
 
-            table->setItem(rowCount-1, 1, new QTableWidgetItem(QString("can't display")));
+            table->setItem(rowCount-1, 1, new QTableWidgetItem(QString("Click to edit")));
         }
         else
         {
@@ -489,6 +486,30 @@ void MainWindow::updateObjectTable(int objId)
 
         ui->rotationSlider->setValue(rotation / 3.6);
     }
+}
+
+void MainWindow::objectTableClicked(int x, int y)
+{
+    int objId = ui->objectSelectorComboBox->currentIndex();
+
+    // Iterate to correct item
+    QMap<QString, QVariant>::const_iterator it = levelObjects.at(objId).constBegin();
+    for (int i = 0; i < x; i++)
+    {
+        it++;
+    }
+
+    // If item is not a list, don't do anything.
+    if(it.value().type() != QVariant::List)
+    {
+        return;
+    }
+
+    // Otherwise, open up a new window and pass some stuff to it
+    Qt::WindowFlags flags = Qt::Window;
+    SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
+    sub->loadData(it.value().toList(), objId, x, this);
+    sub->show();
 }
 
 void MainWindow::wallThicknessClicked()
@@ -518,6 +539,25 @@ void MainWindow::wallThicknessClicked()
 
     updateGraphics();
     updateObjectTable(ui->objectSelectorComboBox->currentIndex());
+}
+
+void MainWindow::doneEditingSublist(QList<QVariant> list, int objId, int objProp)
+{
+    qDebug("Signal received!");
+
+    // iterate to the changed row
+    QMap<QString, QVariant>::iterator it = levelObjects[objId].begin();
+    for(int i = 0; i < objProp; i++)
+        ++it;
+
+    QString name = it.key();
+
+    levelObjects[objId].insert(name, list);
+
+    updateGraphics();
+    updateObjectComboBox();
+    updateObjectTable(ui->objectSelectorComboBox->currentIndex());
+
 }
 
 void MainWindow::newLevel()
@@ -681,6 +721,7 @@ void MainWindow::loadLevelPlist(QString level)
     file.close();
 
     QString itemName = "null";
+    QString itemName2 = "null";
     QString itemContents = "null";
     QString itemTag = "null";
 
@@ -746,7 +787,7 @@ void MainWindow::loadLevelPlist(QString level)
                                         QDomElement g = p.toElement(); // try to convert the node to an element.
                                         if(!g.isNull()) {
 
-                                            itemName = qPrintable(g.text()); // the node really is an element.
+                                            itemName2 = qPrintable(g.text()); // the node really is an element.
                                             itemTag = qPrintable(g.tagName());
 
                                             Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Level object tag should be a key, but isn't!");
@@ -756,7 +797,7 @@ void MainWindow::loadLevelPlist(QString level)
                                             itemContents = qPrintable(g.text());
                                             itemTag = qPrintable(g.tagName());
 
-                                            newMap.insert(itemName, itemContents);
+                                            newMap.insert(itemName2, itemContents);
 
                                             p = p.nextSibling();
                                         }
@@ -767,8 +808,8 @@ void MainWindow::loadLevelPlist(QString level)
                                 }
 
                                 // Hardcoded "positions" for now
-                                newHash.insert("positions", subList);
-                                qDebug() << subList;
+                                newHash.insert(itemName, subList);
+                                //qDebug() << subList;
                             }
                             else // assuming its a string
                             {

@@ -12,9 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    levelgraphicsview.cpp
+    levelgraphicsview.cpp \
+    subarrayeditwindow.cpp
 
 HEADERS  += mainwindow.h \
-    levelgraphicsview.h
+    levelgraphicsview.h \
+    subarrayeditwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    subarrayeditwindow.ui

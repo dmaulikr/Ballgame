@@ -19,6 +19,8 @@
 #include <QStack>
 #include <QVariant>
 
+#include "subarrayeditwindow.h"
+
 namespace Ui {
     class MainWindow;
 }
@@ -72,6 +74,10 @@ private slots:
     void objectChanged(QTableWidgetItem*);
     void updateObjectTable(int id);
     void rotationSliderMoved(int);
+    void objectTableClicked(int, int);
+
+    // Other window
+    void doneEditingSublist(QList<QVariant>, int, int);
 
 
 private:

@@ -655,6 +655,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>objectsTableWidget</sender>
+   <signal>cellClicked(int,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>objectTableClicked(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>levelPlistChanged(QTableWidgetItem*)</slot>
@@ -677,5 +693,6 @@
   <slot>undoClicked()</slot>
   <slot>redoClicked()</slot>
   <slot>deleteClicked()</slot>
+  <slot>objectTableClicked(int,int)</slot>
  </slots>
 </ui>
