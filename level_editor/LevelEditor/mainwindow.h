@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <QStack>
 #include <QVariant>
+#include <QDir>
 
 #include "subarrayeditwindow.h"
 
@@ -77,6 +78,7 @@ private slots:
     void updateObjectTable(int id);
     void rotationSliderMoved(int);
     void objectTableClicked(int, int);
+    void newObjectClicked(QModelIndex);
 
     // Other window
     void doneEditingSublist(QList<QVariant>, int, int);
@@ -117,6 +119,10 @@ private:
     void createCopyOfObject(int index);
     int selectedObject;
     int copyObject;
+
+    // Create new object functionality
+    void populateNewObjectList();
+    QMap<QString, QVariant> loadObjectFromTemplateFile(QString filename);
 };
 
 #endif // MAINWINDOW_H

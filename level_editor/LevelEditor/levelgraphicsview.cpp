@@ -16,7 +16,6 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
             return;
         }
 
-
         //qDebug() << "You clicked on item" << item;
         draggedItem = item;
 

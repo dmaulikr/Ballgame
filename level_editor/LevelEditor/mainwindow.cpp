@@ -20,12 +20,14 @@
 #define PATH_SPRITE_PLIST "../../../../../ballgame/Resources/BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "../../../../../ballgame/Resources/BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "../../../../../ballgame/levels/DebugLevel.level"
-#define PATH_BALLGAME_DIR "../../../../../ballgame/levels"
+#define PATH_BALLGAME_DIR "../../../../../ballgame/levels/"
+#define PATH_OBJECT_TEMPLATES "../../../../object_templates/"
 #else // assuming you're on Windows
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "..\\..\\ballgame\\levels\\DebugLevel.level"
 #define PATH_BALLGAME_DIR "..\\..\\ballgame\\"
+#define PATH_OBJECT_TEMPLATES "..\\object_templates\\"
 #endif
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -46,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     copyObject = -1;
     selectedObject = -1;
+
+    populateNewObjectList();
 }
 
 void MainWindow::loadFile()
@@ -524,6 +528,8 @@ void MainWindow::objectTableClicked(int x, int y)
 
 void MainWindow::wallThicknessClicked()
 {
+    qDebug("Triggered");
+
     // Push an Undo object
     pushUndo();
 
@@ -534,7 +540,7 @@ void MainWindow::wallThicknessClicked()
 
     for(int i = 0; i < levelObjects.count(); i++)
     {
-        if(levelObjects[i].value("type").toString().toLower() == "wall")
+        if(levelObjects[i].value("type").toString().toLower().contains("wall"))
         {
             bool xSmaller = true;
             if(levelObjects[i].value("height").toInt() < levelObjects[i].value("width").toInt())
@@ -1195,6 +1201,148 @@ void MainWindow::pasteClicked()
     {
         createCopyOfObject(copyObject);
     }
+}
+
+void MainWindow::populateNewObjectList()
+{
+    ui->newObjectListWidget->clear();
+
+    // Get list of files in directory
+    QDir dir = QDir(PATH_OBJECT_TEMPLATES);
+    dir.setFilter(QDir::Files);
+    QList<QString> fileList = dir.entryList();
+
+    // Add each filename to the list
+    for(int i = 0; i < fileList.count(); i++)
+    {
+        QString name = fileList[i];
+
+        // If it's not a .template file, skip it
+        int index = name.lastIndexOf(".template");
+        if(index == -1)
+            continue;
+
+        // Get rid of ".template" at the end
+        name = name.left(index);
+
+        // Add it to the list
+        ui->newObjectListWidget->addItem(name);
+    }
+}
+
+void MainWindow::newObjectClicked(QModelIndex index)
+{
+    // Make sure we can undo this later
+    pushUndo();
+
+    // Get filename of object template
+    QString filename = QString(PATH_OBJECT_TEMPLATES + ui->newObjectListWidget->currentItem()->text() + ".template");
+
+    // Construct new object from template file
+    QMap<QString, QVariant> newObject = loadObjectFromTemplateFile(filename);
+
+    // Get center of viewport
+    QRect rect = ui->graphicsView->rect();
+    int newX = ui->graphicsView->horizontalScrollBar()->value() + rect.width() / 2;
+    int newY = levelPlist.value("level_height").toInt() - ui->graphicsView->verticalScrollBar()->value() - rect.height() / 2;
+
+    // Set object's x/y to center of viewport
+    if(newObject.contains("x"))
+        newObject.insert("x", QString("%1").arg(newX));
+    if(newObject.contains("y"))
+        newObject.insert("y", QString("%1").arg(newY));
+
+    // Add new object to levelObjects
+    levelObjects.append(newObject);
+
+    // Update display
+    ui->objectSelectorComboBox->setCurrentIndex(ui->objectSelectorComboBox->count() - 1);
+    updateGraphics();
+    updateObjectComboBox();
+}
+
+QMap<QString, QVariant> MainWindow::loadObjectFromTemplateFile(QString filename)
+{
+    QDomDocument doc("New Object");
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+        return QMap<QString, QVariant>();
+    if (!doc.setContent(&file)) {
+        file.close();
+        return QMap<QString, QVariant>();
+    }
+    file.close();
+
+    QMap<QString, QVariant> newObject;
+    QString itemName = "null";
+    QString itemName2 = "null";
+    QString itemContents = "null";
+    QString itemTag = "null";
+
+    // print out the element names of all elements that are direct children
+    // of the outermost element.
+    QDomElement docElem = doc.documentElement();
+
+    QDomNode n = docElem.firstChild();
+    n = n.firstChild();
+    while(!n.isNull()) {
+        QDomElement e = n.toElement(); // try to convert the node to an element.
+        if(!e.isNull()) {
+
+            itemName = qPrintable(e.text()); // the node really is an element.
+            itemTag = qPrintable(e.tagName());
+
+            Q_ASSERT_X(itemTag == "key", "MainWindow::loadObjectFromTemplateFile", "Tag should be a key, but isn't!");
+
+            n = n.nextSibling();
+            e = n.toElement();
+            itemContents = qPrintable(e.text());
+            itemTag = qPrintable(e.tagName());
+            if(itemTag != "array")
+            {
+                newObject.insert(itemName, itemContents);
+            }
+            else
+            {
+                QList< QVariant > subList;
+                QDomNode x = e.firstChild(); // guessing here...
+                while(!x.isNull())
+                {
+                    QMap<QString, QVariant> newMap;
+                    QDomNode p = x.firstChild();
+                    while(!p.isNull())
+                    {
+                        QDomElement g = p.toElement(); // try to convert the node to an element.
+                        if(!g.isNull()) {
+
+                            itemName2 = qPrintable(g.text()); // the node really is an element.
+                            itemTag = qPrintable(g.tagName());
+
+                            Q_ASSERT_X(itemTag == "key", "MainWindow::loadLevelPlist", "Level object tag should be a key, but isn't!");
+
+                            p = p.nextSibling();
+                            g = p.toElement();
+                            itemContents = qPrintable(g.text());
+                            itemTag = qPrintable(g.tagName());
+
+                            newMap.insert(itemName2, itemContents);
+
+                            p = p.nextSibling();
+                        }
+                    } // while object dict is not done
+
+                    subList.append(newMap);
+                    x = x.nextSibling();
+                }
+
+                newObject.insert(itemName, subList);
+            }
+
+            n = n.nextSibling();
+        }
+    }
+
+    return newObject;
 }
 
 // Helper function to convert string to rect
