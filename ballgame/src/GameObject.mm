@@ -27,9 +27,7 @@
 }
 
 -(void)updateGameObject:(ccTime)dt{
-    
     [self syncPosition];
-    
 }
 
 -(void) syncPosition
