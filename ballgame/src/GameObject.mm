@@ -21,14 +21,6 @@
     [copy setBody:self.body];
     return [copy autorelease];
 }
-// necessary for sub-classing CCSprite to work for some reason
--(id) initWithTexture:(CCTexture2D*)texture rect:(CGRect)rect
-{
-    if( (self=[super initWithTexture:texture rect:rect]))
-    {
-    }
-    return self;
-}
 
 -(NSString*)name{
     return [_objectInfo valueForKey:@"name"];
