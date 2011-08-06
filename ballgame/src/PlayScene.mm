@@ -334,31 +334,11 @@ enum {
     
     
 #pragma mark Movement of the Scroll Node
-    CGPoint currentPos = [scrollNode position];
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    b2Vec2 velocity = [_thePlayer getVelocity];
 	// if ball moved off the edge
     
     //Center the scroll node on the player's position...sort of =)
     [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
-    
-    //DEPRECATED SCROLLING CODE
-//	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-//	}
-//	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-//	}
-//	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-//	}
-//	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-//	}
 }
 
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt{
