@@ -22,7 +22,7 @@ enum {
 
 @interface PlayScene ()
 
--(Player*) addPlayer;
+-(Player*)addPlayer;
 -(id)addGameObject:(NSDictionary *)gameObject;
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
 @end
@@ -105,8 +105,6 @@ enum {
     groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
-    
-     
     // left
     groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2(0,0));
     groundBody->CreateFixture(&groundBox,0);
@@ -116,13 +114,33 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
     
     
+#pragma mark Load the Background
+    // If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
+#if !DEBUG_DRAW
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    // background texture
+	//CGSize winSize = [CCDirector sharedDirector].winSize;
+    int NUM_TILES = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+        //[background setScale:[background scale] * 2];
+        NUM_TILES = 2;
+    }
+	//int IMAGE_SIZE = 512;
+	for(int i = 0; i < NUM_TILES; i++)
+		for(int j = 0; j < NUM_TILES; j++)
+		{
+            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
+            background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
+			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
+			
+		}
+#endif
     
 #pragma mark Game Object Initialization
     
-
-    
     //Initialize the Sprite Sheet
-    //NSLog(@"Purging and removing");
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     [CCSpriteFrameCache purgeSharedSpriteFrameCache];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
     NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:@"SpriteSheetPngName"]];
@@ -166,31 +184,6 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
-// If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
-#if !DEBUG_DRAW
-    
-    // background texture
-	//CGSize winSize = [CCDirector sharedDirector].winSize;
-    int NUM_TILES = 1;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
-        //[background setScale:[background scale] * 2];
-        NUM_TILES = 2;
-    }
-	//int IMAGE_SIZE = 512;
-	for(int i = 0; i < NUM_TILES; i++)
-		for(int j = 0; j < NUM_TILES; j++)
-		{
-			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
-//            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-//                [background setScale:[background scale] *.5];
-//            }
-            background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
-			//background.position = ccp(winSize.width/2, winSize.height/2);
-			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
-			
-			//[voidNode addChild:background z:-1 parallaxRatio:ccp(0.1f,0.1f) positionOffset:CGPointZero];
-		}
-#endif
     
     
 #pragma mark Initialize the game loop
@@ -229,9 +222,6 @@ enum {
     return nil;
 }
 
-
-
-
 #pragma mark - Premade Scenes
 +(CCScene*)currentLevelScene{
     CCScene *scene = [CCScene node];
@@ -239,7 +229,6 @@ enum {
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadCurrentLevel];
-    //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	[layer release];
@@ -254,7 +243,6 @@ enum {
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadLevelWithName:@"DebugLevel"];
-    //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	[layer release];
@@ -405,21 +393,24 @@ enum {
 		
         CGSize screenSize = [CCDirector sharedDirector].winSize;
         
-		float pointX = point.x + -1*currentPos.x;
-		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
+		float pointX = -1*point.x / screenSize.height;
+		float pointY = point.y / screenSize.width;
 		
-		//NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
-		//NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+//        pointX /= screenSize.width;
+//        pointY /= screenSize.height;
+        
+		NSLog(@"%1.2f, %1.2f",pointX,pointY);
+		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
 		
         
-		double vConst = .05;  // multiplier
+		double vConst = 1;  // multiplier
 		
 		b2Body* b = [_thePlayer body];
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(pointX-objectX) ;
-		float accelY = vConst*(pointY-objectY);
+		float accelX = vConst*(point.x);
+		float accelY = vConst*(point.y);
 		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
 		
 		b2Vec2 v(accelX, accelY);	
