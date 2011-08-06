@@ -13,12 +13,11 @@
 
 @implementation GameObject
 
-@synthesize defaults, body=_body, identifier=_identifier;
+@synthesize body=_body, identifier=_identifier;
 
 
 -(id)copyWithZone:(NSZone *)zone{
     GameObject *copy = [[GameObject alloc] init];
-    [copy setDefaults:self.defaults];
     [copy setBody:self.body];
     return [copy autorelease];
 }
@@ -27,7 +26,6 @@
 {
     if( (self=[super initWithTexture:texture rect:rect]))
     {
-        defaults = [[AssetManager sharedInstance] getDefaults];
     }
     return self;
 }

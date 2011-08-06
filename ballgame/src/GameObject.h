@@ -19,8 +19,6 @@
 @end
 
 @interface GameObject : CCSprite <NSCopying> {
-    
-    NSDictionary *defaults;
     NSDictionary *_objectInfo;
     
     //Game State Info
@@ -34,7 +32,6 @@
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
-@property(nonatomic, retain) NSDictionary *defaults;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
