@@ -140,12 +140,12 @@
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:
-            
             break;
-            
         case GameObjectIDChargedWall:
             _chargeLevel += ((ChargedWall*)object).chargeIncrement;
             NSLog(@"Charge level - %f", _chargeLevel);
+            break;
+        default:
             break;
             
     }
