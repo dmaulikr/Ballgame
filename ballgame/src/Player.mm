@@ -111,8 +111,7 @@
 
 -(void) startAnimating
 {
-    // HARDCODE
-    
+    // HARDCODE - The spriteFrameName shouldn't be hardcoded.
     // Set up list of frames
     NSMutableArray *walkAnimFrames = [NSMutableArray array];
     for(int i = 0; i <= 4; ++i) {
@@ -136,7 +135,6 @@
     
     switch ([object identifier]){
         case GameObjectIDGoal:
-            //NSLog(@"Level Completed");
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:

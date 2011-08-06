@@ -15,5 +15,4 @@
 }
 @property (readwrite) BOOL isLocked;
 
-
 @end

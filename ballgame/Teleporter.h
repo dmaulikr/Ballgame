@@ -8,6 +8,8 @@
 
 #import "GameObject.h"
 
-@interface Teleporter : GameObject
+@interface Teleporter : GameObject{
+    BOOL _disableCollisionsFromRecentTeleport;
+}
 
 @end

@@ -16,9 +16,6 @@
     _identifier = GameObjectIDGate;
 }
 
--(void)setIsLocked:(BOOL)isLocked{
-    _isLocked = isLocked;
-}
 
 -(void)switchStateChanged:(BOOL)isOn{
     if (isOn){
