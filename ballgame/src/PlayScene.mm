@@ -130,7 +130,8 @@ enum {
 		for(int j = 0; j < NUM_TILES; j++)
 		{
             [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
+            // ToDo:  make the background dependend on which hardware it's running on
+			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground_iPhone@2x.png"];
             background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
 			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
 			
@@ -384,24 +385,16 @@ enum {
             if(!gameIsPaused)
                 [self showPauseMenu];
             
-            // Assuming no multi-touch
+            // Assuming there's no multi-touch
             return;
         }
         
 		CGPoint currentPos = [scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
-		
-        CGSize screenSize = [CCDirector sharedDirector].winSize;
         
-		float pointX = -1*point.x / screenSize.height;
-		float pointY = point.y / screenSize.width;
-		
-//        pointX /= screenSize.width;
-//        pointY /= screenSize.height;
-        
-		NSLog(@"%1.2f, %1.2f",pointX,pointY);
-		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
-		
+        // X and Y of point are flipped for some reason
+        float pointX = point.y + -1*currentPos.x;
+		float pointY = point.x + -1*currentPos.y;
         
 		double vConst = 1;  // multiplier
 		
@@ -409,9 +402,17 @@ enum {
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(point.x);
-		float accelY = vConst*(point.y);
-		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
+		float accelX = vConst*(pointX - objectX);
+		float accelY = vConst*(pointY - objectY);
+        
+        /*
+        NSLog(@"Click location %1.2f, %1.2f",pointX,pointY);
+		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+        NSLog(@"ScrollNode Pos %1.2f, %1.2f", currentPos.x, currentPos.y);
+        NSLog(@"Object position %1.2f, %1.2f", objectX, objectY);
+        NSLog(@"Acceleration %1.2f, %1.2f", accelX, accelY);
+        NSLog(@" ");
+         */
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();

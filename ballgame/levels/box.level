@@ -36,9 +36,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>100</integer>
+    <integer>136</integer>
     <key>y</key>
-    <integer>100</integer>
+    <integer>65</integer>
    </dict>
    <dict>
     <key>frame_name</key>

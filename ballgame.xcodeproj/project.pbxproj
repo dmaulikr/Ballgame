@@ -1207,6 +1207,7 @@
 		381259E113CA564E001282F6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = NoName;
 			};
 			buildConfigurationList = 381259E413CA564E001282F6 /* Build configuration list for PBXProject "ballgame" */;
