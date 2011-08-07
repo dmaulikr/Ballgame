@@ -50,8 +50,6 @@
 +(CCScene*)debugScene;
 +(CCScene*)currentLevelScene;
 
--(void) startBackgroundMusic;
-
 -(void) showPauseMenu;
 
 @end

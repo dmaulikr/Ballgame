@@ -7,6 +7,7 @@
 //
 
 #import "ChargedWall.h"
+#import "AssetManager.h"
 
 @implementation ChargedWall
 @synthesize chargeIncrement;
@@ -46,9 +47,12 @@
                 
                 // Play sound effect
                 // HARDCODED SOUND EFFECT NAME
-                SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-                NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
-                [audio playEffect:path];
+                if([AssetManager settingsEffectsOn])
+                {
+                    SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+                    NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
+                    [audio playEffect:path];
+                }
 
             }
             

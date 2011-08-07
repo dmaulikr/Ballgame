@@ -36,3 +36,5 @@ typedef enum {
     GameObjectIDChargedWall,
     GameObjectIDTeleporter
 } GameObjectID;
+
+#define BACKGROUND_MUSIC @"Game1"

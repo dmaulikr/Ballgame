@@ -194,6 +194,7 @@
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
+		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
 		BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */; };
@@ -568,6 +569,8 @@
 		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
+		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
+		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
 		AAE665B113E53956009F646A /* ChargedWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChargedWall.mm; path = src/ChargedWall.mm; sourceTree = "<group>"; };
 		AAE665B613E53A58009F646A /* ChargedWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChargedWall.level; path = levels/ChargedWall.level; sourceTree = "<group>"; };
@@ -1040,6 +1043,8 @@
 		38125BD613CA5806001282F6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				AAD1C7F013EF407700F639C3 /* SettingsScene.h */,
+				AAD1C7F113EF407700F639C3 /* SettingsScene.mm */,
 				AA03DE2113D7788000BEFC7F /* SplashScene.h */,
 				AA03DE2213D7788000BEFC7F /* SplashScene.mm */,
 				AA03DE1813D7780600BEFC7F /* PlayScene.h */,
@@ -1419,6 +1424,7 @@
 				AAE665B413E53956009F646A /* ChargedWall.mm in Sources */,
 				BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */,
 				BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */,
+				AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

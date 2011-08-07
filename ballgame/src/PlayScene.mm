@@ -38,9 +38,7 @@ enum {
 
 
 -(id)loadLevelWithName:(NSString *)levelName{
-#if kAllowsAudio
-    [self startBackgroundMusic];
-#endif
+
     gameIsPaused = false;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
@@ -448,18 +446,6 @@ enum {
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
 	
 	world->SetGravity( gravity );
-}
-
--(void) startBackgroundMusic
-{
-    SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-
-    if(![audio isBackgroundMusicPlaying])
-    {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Game1" ofType:@"mp3"];
-        [audio playBackgroundMusic:path];
-    }
-
 }
 
 -(void) showPauseMenu

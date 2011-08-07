@@ -7,6 +7,7 @@
 //
 
 #import "Switch.h"
+#import "AssetManager.h"
 
 @implementation Switch
 @synthesize  maxCharge=_maxCharge, dependantObject=_dependant_object;
@@ -60,9 +61,12 @@
         
         // Play sound effect
         // HARDCODED SOUND EFFECT NAME
-        SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
-        [audio playEffect:path];
+        if([AssetManager settingsEffectsOn])
+        {
+            SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
+            [audio playEffect:path];
+        }
         
     }
 }
