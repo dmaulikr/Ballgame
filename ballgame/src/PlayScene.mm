@@ -399,22 +399,27 @@ enum {
 		CGPoint currentPos = [scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
         
-		float pointX = point.x + -1*currentPos.x;
-		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
-		
-		//NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
-		//NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
-		
+        // X and Y of point are flipped for some reason
+        float pointX = point.y + -1*currentPos.x;
+		float pointY = point.x + -1*currentPos.y;
         
-		double vConst = .05;  // multiplier
+		double vConst = 1;  // multiplier
 		
 		b2Body* b = [_thePlayer body];
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(pointX-objectX) ;
-		float accelY = vConst*(pointY-objectY);
-		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
+		float accelX = vConst*(pointX - objectX);
+		float accelY = vConst*(pointY - objectY);
+        
+        /*
+        NSLog(@"Click location %1.2f, %1.2f",pointX,pointY);
+		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+        NSLog(@"ScrollNode Pos %1.2f, %1.2f", currentPos.x, currentPos.y);
+        NSLog(@"Object position %1.2f, %1.2f", objectX, objectY);
+        NSLog(@"Acceleration %1.2f, %1.2f", accelX, accelY);
+        NSLog(@" ");
+         */
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();
