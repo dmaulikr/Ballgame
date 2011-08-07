@@ -135,7 +135,8 @@ enum {
 		for(int j = 0; j < NUM_TILES; j++)
 		{
             [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
+            // ToDo:  make the background dependend on which hardware it's running on
+			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground_iPhone@2x.png"];
             background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
 			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
 			
@@ -391,14 +392,12 @@ enum {
             if(!gameIsPaused)
                 [self showPauseMenu];
             
-            // Assuming no multi-touch
+            // Assuming there's no multi-touch
             return;
         }
         
 		CGPoint currentPos = [scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
-		
-        CGSize screenSize = [CCDirector sharedDirector].winSize;
         
 		float pointX = point.x + -1*currentPos.x;
 		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
