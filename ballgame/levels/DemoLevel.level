@@ -589,7 +589,7 @@
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
-    <string>MoveableWall</string>
+    <string>Wall</string>
     <key>width</key>
     <integer>79</integer>
     <key>x</key>

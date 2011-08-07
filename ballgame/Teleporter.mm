@@ -57,6 +57,7 @@
                                self.position.y/PTM_RATIO);
     b2Body *body = [player body];
     body->SetTransform(b2Position, 0);
+    [player setPosition:[self position]];
 }
 
 -(NSString*)getDependantObjectName{
