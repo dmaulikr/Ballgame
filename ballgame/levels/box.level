@@ -29,16 +29,31 @@
     <integer>25</integer>
     <key>name</key>
     <string>Goal1</string>
+    <key>positions</key>
+    <array>
+     <dict>
+      <key>x</key>
+      <integer>100</integer>
+      <key>y</key>
+      <integer>60</integer>
+     </dict>
+     <dict>
+      <key>x</key>
+      <integer>225</integer>
+      <key>y</key>
+      <integer>60</integer>
+     </dict>
+    </array>
     <key>rotation</key>
-    <string>0</string>
+    <string>30</string>
     <key>type</key>
     <string>Goal</string>
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>136</integer>
+    <integer>100</integer>
     <key>y</key>
-    <integer>65</integer>
+    <integer>60</integer>
    </dict>
    <dict>
     <key>frame_name</key>

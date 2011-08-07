@@ -29,11 +29,6 @@
     _status = PlayerBeganLevel;
     
     _identifier = GameObjectIDPlayer;
-    CGPoint p;
-    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
-    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
-    
-    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
     
     _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
@@ -41,7 +36,29 @@
     _chargeLevel = 0.0;
     _shouldCharge = YES;
     
+    [self startAnimating];
+}
+
+
+-(void) setupSprite
+{
+    CGPoint p;
+    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
+    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
+    
+    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
+    
 	self.position = ccp( p.x,p.y );
+    
+    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+
+}
+
+-(void) setupBody:(b2World*) world
+{
+    CGPoint p;
+    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
+    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -52,7 +69,7 @@
 	
 	// Define another box shape for our dynamic body.
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = _radius / PTM_RATIO;
+	dynamicCircle.m_radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2 / PTM_RATIO;
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -60,9 +77,8 @@
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 	_body->CreateFixture(&fixtureDef);
-    
-    [self startAnimating];
 }
+
 
 -(void) updateGameObject: (ccTime) dt
 {    

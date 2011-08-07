@@ -29,12 +29,24 @@
     GameObjectID _identifier;
     
     CGSize originalSize;
+    
+    // Stores whether fixtureDef.isSensor should be set while creating b2fixture.
+    // Default is no, but is overridden to yes for switches
+    bool isSensor;
+    
+    // Moveable objects functionality
+    bool isMoveable;
+    NSMutableArray *positionPoints;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
+
+// Setup functions
+-(void) setupSprite;
+-(void) setupBody:(b2World*) world;
 
 // Sync position of sprite to match box2d object.  Subclasses may override this to do this opposite.
 -(void)syncPosition;
@@ -46,5 +58,10 @@
 
 // Rescale object based on given size
 -(void) rescale:(CGSize) size;
+
+// For Moveable Objects
+-(void) setupMoveable;
+// helper function
+-(id) actionMutableArray: (NSMutableArray*) _actionList;
 
 @end

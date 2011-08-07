@@ -13,9 +13,9 @@
   <key>size_grow_rate</key>
   <integer>1</integer>
   <key>start_x</key>
-  <integer>250</integer>
+  <integer>236</integer>
   <key>start_y</key>
-  <integer>250</integer>
+  <integer>279</integer>
   <key>starting_size</key>
   <integer>20</integer>
   <key>world</key>
@@ -59,13 +59,31 @@
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
-    <string>MoveableWall</string>
+    <string>Wall</string>
     <key>width</key>
     <integer>292</integer>
     <key>x</key>
     <integer>240</integer>
     <key>y</key>
     <integer>180</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>name</key>
+    <string></string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>150</integer>
+    <key>x</key>
+    <integer>241</integer>
+    <key>y</key>
+    <integer>254</integer>
    </dict>
   </array>
  </dict>

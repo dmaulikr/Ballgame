@@ -13,6 +13,7 @@
 
 -(void)setupGameObject:(NSDictionary *)game_object forWorld:(b2World *)world{
     [super setupGameObject:game_object forWorld:world];
+    
     _identifier = GameObjectIDGate;
 }
 

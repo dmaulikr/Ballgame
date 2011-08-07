@@ -192,11 +192,9 @@
 		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
-		AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
-		AAE665B513E53956009F646A /* MoveableWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B313E53956009F646A /* MoveableWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
 		BF270F3B13E64815002BDBB7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF270F3913E64814002BDBB7 /* SettingsViewController.m */; };
 		BF270F3C13E64815002BDBB7 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3A13E64814002BDBB7 /* SettingsViewController.xib */; };
@@ -566,16 +564,12 @@
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
 		AAB6F25F13E4C47A00031C64 /* Gate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Gate.mm; path = src/Gate.mm; sourceTree = "<group>"; };
-		AAB6F26013E4C47A00031C64 /* HorseshoeWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorseshoeWall.h; path = src/HorseshoeWall.h; sourceTree = "<group>"; };
-		AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HorseshoeWall.mm; path = src/HorseshoeWall.mm; sourceTree = "<group>"; };
 		AAB6F26213E4C47A00031C64 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Switch.h; path = src/Switch.h; sourceTree = "<group>"; };
 		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
 		AAE665B113E53956009F646A /* ChargedWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChargedWall.mm; path = src/ChargedWall.mm; sourceTree = "<group>"; };
-		AAE665B213E53956009F646A /* MoveableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveableWall.h; path = src/MoveableWall.h; sourceTree = "<group>"; };
-		AAE665B313E53956009F646A /* MoveableWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MoveableWall.mm; path = src/MoveableWall.mm; sourceTree = "<group>"; };
 		AAE665B613E53A58009F646A /* ChargedWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChargedWall.level; path = levels/ChargedWall.level; sourceTree = "<group>"; };
 		BF270F3813E64814002BDBB7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BF270F3913E64814002BDBB7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -1064,8 +1058,6 @@
 				AAD890EF13E538DC003B3922 /* Walls */,
 				AAB6F25C13E4C47A00031C64 /* Effect.h */,
 				AAB6F25D13E4C47A00031C64 /* Effect.mm */,
-				AAB6F26013E4C47A00031C64 /* HorseshoeWall.h */,
-				AAB6F26113E4C47A00031C64 /* HorseshoeWall.mm */,
 				AAB6F26213E4C47A00031C64 /* Switch.h */,
 				AAB6F26313E4C47A00031C64 /* Switch.mm */,
 				AA03DE0C13D777AE00BEFC7F /* Goal.h */,
@@ -1173,8 +1165,6 @@
 				AAB6F25F13E4C47A00031C64 /* Gate.mm */,
 				AAE665B013E53956009F646A /* ChargedWall.h */,
 				AAE665B113E53956009F646A /* ChargedWall.mm */,
-				AAE665B213E53956009F646A /* MoveableWall.h */,
-				AAE665B313E53956009F646A /* MoveableWall.mm */,
 				AA03DE0913D7779600BEFC7F /* Wall.h */,
 				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
 			);
@@ -1424,11 +1414,9 @@
 				AA03DE2F13D778A200BEFC7F /* SpecifyURLViewController.m in Sources */,
 				AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */,
 				AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */,
-				AAB6F26613E4C47A00031C64 /* HorseshoeWall.mm in Sources */,
 				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
 				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
 				AAE665B413E53956009F646A /* ChargedWall.mm in Sources */,
-				AAE665B513E53956009F646A /* MoveableWall.mm in Sources */,
 				BF270F3B13E64815002BDBB7 /* SettingsViewController.m in Sources */,
 				BFFAF38213EDEAC100414CFA /* Teleporter.mm in Sources */,
 			);

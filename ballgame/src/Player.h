@@ -35,6 +35,9 @@ typedef enum {
 
 -(void) updateGameObject: (ccTime) dt;
 
+// Setup functions
+-(void) setupSprite;
+-(void) setupBody:(b2World *)world;
 -(void) startAnimating;
   
 @end
