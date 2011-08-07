@@ -38,8 +38,9 @@ enum {
 
 
 -(id)loadLevelWithName:(NSString *)levelName{
-    
+#if kAllowsAudio
     [self startBackgroundMusic];
+#endif
     gameIsPaused = false;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
@@ -393,31 +394,28 @@ enum {
 		
         CGSize screenSize = [CCDirector sharedDirector].winSize;
         
-		float pointX = -1*point.x / screenSize.height;
-		float pointY = point.y / screenSize.width;
+		float pointX = point.x + -1*currentPos.x;
+		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
 		
-//        pointX /= screenSize.width;
-//        pointY /= screenSize.height;
-        
-		NSLog(@"%1.2f, %1.2f",pointX,pointY);
-		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+		//NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
+		//NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
 		
         
-		double vConst = 1;  // multiplier
+		double vConst = .05;  // multiplier
 		
 		b2Body* b = [_thePlayer body];
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(point.x);
-		float accelY = vConst*(point.y);
+		float accelX = vConst*(pointX-objectX) ;
+		float accelY = vConst*(pointY-objectY);
 		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();
         v *= 10;
 		b->SetLinearVelocity(v);
-         
+        
 	}	
 }
 
