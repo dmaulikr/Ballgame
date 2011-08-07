@@ -26,7 +26,7 @@
     <key>height</key>
     <integer>37</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall1</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -44,7 +44,7 @@
     <key>height</key>
     <integer>49</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall2</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -62,7 +62,7 @@
     <key>height</key>
     <integer>182</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall3</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -80,7 +80,7 @@
     <key>height</key>
     <integer>34</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall4</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -98,7 +98,7 @@
     <key>height</key>
     <integer>37</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall5</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -116,7 +116,7 @@
     <key>height</key>
     <integer>152</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall6</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -158,7 +158,7 @@
     <key>height</key>
     <integer>1591</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall7</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -176,7 +176,7 @@
     <key>height</key>
     <integer>156</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall8</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -194,7 +194,7 @@
     <key>height</key>
     <integer>75</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall9</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -266,7 +266,7 @@
     <key>height</key>
     <integer>24</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall10</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -284,7 +284,7 @@
     <key>height</key>
     <integer>1994</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall11</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -302,7 +302,7 @@
     <key>height</key>
     <integer>112</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall12</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -320,7 +320,7 @@
     <key>height</key>
     <integer>34</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall13</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -352,9 +352,9 @@
     <key>width</key>
     <integer>50</integer>
     <key>x</key>
-    <integer>551</integer>
+    <integer>545</integer>
     <key>y</key>
-    <integer>1497</integer>
+    <integer>1498</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -362,7 +362,7 @@
     <key>height</key>
     <integer>1024</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall14</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -380,7 +380,7 @@
     <key>height</key>
     <integer>90</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall15</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -398,7 +398,7 @@
     <key>height</key>
     <integer>67</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall16</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -416,7 +416,7 @@
     <key>height</key>
     <integer>62</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall17</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -436,7 +436,7 @@
     <key>height</key>
     <integer>699</integer>
     <key>name</key>
-    <integer>5</integer>
+    <string>ChargedWall1</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -454,7 +454,7 @@
     <key>height</key>
     <integer>62</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall18</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -472,7 +472,7 @@
     <key>height</key>
     <integer>62</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall19</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -492,7 +492,7 @@
     <key>height</key>
     <integer>102</integer>
     <key>name</key>
-    <string>Copy of 5</string>
+    <string>ChargedWall2</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -510,7 +510,7 @@
     <key>height</key>
     <integer>1724</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>Wall20</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -534,7 +534,7 @@
     <key>max_charge</key>
     <integer>15</integer>
     <key>name</key>
-    <string>Copy of switch2</string>
+    <string>gate4</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -552,7 +552,7 @@
     <key>height</key>
     <integer>1482</integer>
     <key>name</key>
-    <string>Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Copy of Wall 1</string>
+    <string>wall21</string>
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
@@ -570,7 +570,7 @@
     <key>height</key>
     <integer>19</integer>
     <key>name</key>
-    <string>Wall</string>
+    <string>MovingWall1</string>
     <key>positions</key>
     <array>
      <dict>
@@ -596,6 +596,46 @@
     <integer>1669</integer>
     <key>y</key>
     <integer>1514</integer>
+   </dict>
+   <dict>
+    <key>dependant_object_name</key>
+    <string>TeleA</string>
+    <key>frame_name</key>
+    <string>switch.png</string>
+    <key>height</key>
+    <integer>47</integer>
+    <key>name</key>
+    <string>TeleB</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Teleporter</string>
+    <key>width</key>
+    <integer>50</integer>
+    <key>x</key>
+    <integer>954</integer>
+    <key>y</key>
+    <integer>1504</integer>
+   </dict>
+   <dict>
+    <key>dependant_object_name</key>
+    <string>TeleB</string>
+    <key>frame_name</key>
+    <string>switch.png</string>
+    <key>height</key>
+    <integer>47</integer>
+    <key>name</key>
+    <string>TeleA</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Teleporter</string>
+    <key>width</key>
+    <integer>50</integer>
+    <key>x</key>
+    <integer>1148</integer>
+    <key>y</key>
+    <integer>1506</integer>
    </dict>
   </array>
  </dict>

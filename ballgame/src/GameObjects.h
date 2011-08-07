@@ -12,3 +12,5 @@
 #import "Obstacle.h"
 #import "Wall.h"
 #import "Goal.h"
+#import "Switch.h"
+#import "Teleporter.h"

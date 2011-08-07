@@ -38,11 +38,16 @@ enum {
 
 
 -(id)loadLevelWithName:(NSString *)levelName{
-    
+#if kAllowsAudio
     [self startBackgroundMusic];
+#endif
     gameIsPaused = false;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
+    if (_levelInfo == nil){
+        [NSException raise:@"Loading the Level Failed" format:@"The level file was not setup correctly"];
+        return nil;
+    }
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
@@ -174,6 +179,8 @@ enum {
             //Find his dependant object and set it
             GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
             for (GameObject *searchObject in _gameObjects){
+                NSLog(@"Search Object Name: %@", [searchObject name]);
+                
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
                     //NSLog(@"Found our dependant object");
                     [depObject setDependantObject:searchObject];
@@ -418,7 +425,7 @@ enum {
         v.Normalize();
         v *= 10;
 		b->SetLinearVelocity(v);
-         
+        
 	}	
 }
 
