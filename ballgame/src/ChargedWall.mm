@@ -8,6 +8,7 @@
 
 #import "ChargedWall.h"
 #import "AssetManager.h"
+#import "Player.h"
 
 @implementation ChargedWall
 @synthesize chargeIncrement;
@@ -53,7 +54,12 @@
                     NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
                     [audio playEffect:path];
                 }
-
+                
+                // Send player flying away.  Limit to player's velocity is annoying.
+                b2Vec2 impulseDirection(0, 1000);
+                
+                b2Vec2 impulseLocation = [object getBody]->GetPosition();
+                [object getBody]->ApplyLinearImpulse(impulseDirection, impulseLocation);
             }
             
             break;
