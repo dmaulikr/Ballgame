@@ -40,6 +40,7 @@
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
+@property (readonly) CGSize size;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
@@ -52,6 +53,8 @@
 -(void)syncPosition;
 
 -(b2Vec2)getVelocity;
+-(b2Body*) getBody;
+
 -(void)handleCollisionWithObject:(GameObject*)object;
 -(void)noLongerCollidingWithObject:(GameObject*)object;
 -(void)updateGameObject:(ccTime)dt;
