@@ -6,7 +6,7 @@
 //
 
 
-#define DEBUG_DRAW 1
+#define DEBUG_DRAW 0
 
 
 //UI Definitions

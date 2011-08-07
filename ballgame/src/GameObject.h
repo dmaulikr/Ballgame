@@ -40,7 +40,6 @@
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
-@property (readonly) CGSize size;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;

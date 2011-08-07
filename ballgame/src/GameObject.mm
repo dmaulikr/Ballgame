@@ -102,7 +102,7 @@
     p.x = [[_objectInfo valueForKey:@"x"] floatValue];
     p.y = [[_objectInfo valueForKey:@"y"] floatValue];
     
-
+    CGSize size;
     size.width = [[_objectInfo valueForKey:@"width"] floatValue];
     size.height = [[_objectInfo valueForKey:@"height"] floatValue];
     
