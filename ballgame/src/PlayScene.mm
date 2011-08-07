@@ -177,7 +177,6 @@ enum {
             //Find his dependant object and set it
             GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
             for (GameObject *searchObject in _gameObjects){
-                NSLog(@"Search Object Name: %@", [searchObject name]);
                 
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
                     //NSLog(@"Found our dependant object");
