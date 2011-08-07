@@ -79,19 +79,19 @@
 	_body->CreateFixture(&fixtureDef);
 }
 
+-(BOOL)isStuck{
+    //TODO: Figure this out
+    return NO;
+}
 
 -(void) updateGameObject: (ccTime) dt
 {    
     if (_shouldCharge){
         _chargeLevel += _growRate * dt;
     }
-    //NSLog(@"chargeLevel: %1.2f", _chargeLevel);
     [super updateGameObject:dt];
     
     float32 _radiusSize = (_radius + _chargeLevel/CHARGE_TO_PIXELS) ;
-    
-    //NSLog(@"scale: %1.2f", [self scale]);
-    
     
     for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) 
     {
@@ -117,7 +117,7 @@
     }
     
     //HARDCODE
-    if (_chargeLevel > 100){
+    if (_chargeLevel > 100 || [self isStuck]){
         _status = PlayerDied;
     }
     for (Effect *effect in _effects){
