@@ -196,12 +196,12 @@
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
-		BF270F3B13E64815002BDBB7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF270F3913E64814002BDBB7 /* SettingsViewController.m */; };
-		BF270F3C13E64815002BDBB7 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3A13E64814002BDBB7 /* SettingsViewController.xib */; };
+		BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */; };
+		BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF05488713EF0D8B00FAF6E5 /* SettingsViewController.m */; };
+		BF05488A13EF0D8B00FAF6E5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF05488813EF0D8B00FAF6E5 /* SettingsViewController.xib */; };
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
-		BFFAF38213EDEAC100414CFA /* Teleporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFFAF38113EDEAC100414CFA /* Teleporter.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -571,14 +571,14 @@
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
 		AAE665B113E53956009F646A /* ChargedWall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChargedWall.mm; path = src/ChargedWall.mm; sourceTree = "<group>"; };
 		AAE665B613E53A58009F646A /* ChargedWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChargedWall.level; path = levels/ChargedWall.level; sourceTree = "<group>"; };
-		BF270F3813E64814002BDBB7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		BF270F3913E64814002BDBB7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		BF270F3A13E64814002BDBB7 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		BF05488313EF0D7B00FAF6E5 /* Teleporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Teleporter.h; path = src/Teleporter.h; sourceTree = "<group>"; };
+		BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Teleporter.mm; path = src/Teleporter.mm; sourceTree = "<group>"; };
+		BF05488613EF0D8B00FAF6E5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = src/SettingsViewController.h; sourceTree = "<group>"; };
+		BF05488713EF0D8B00FAF6E5 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = src/SettingsViewController.m; sourceTree = "<group>"; };
+		BF05488813EF0D8B00FAF6E5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = src/SettingsViewController.xib; sourceTree = "<group>"; };
 		BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPad.png; path = Resources/backgrounds/metalbackground_iPad.png; sourceTree = "<group>"; };
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
-		BFFAF38013EDEAC100414CFA /* Teleporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teleporter.h; sourceTree = "<group>"; };
-		BFFAF38113EDEAC100414CFA /* Teleporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Teleporter.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1068,11 +1068,11 @@
 				AA03DE0313D7777000BEFC7F /* Pickup.mm */,
 				AA03DE0413D7777000BEFC7F /* Player.h */,
 				AA03DE0513D7777000BEFC7F /* Player.mm */,
+				BF05488313EF0D7B00FAF6E5 /* Teleporter.h */,
+				BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */,
 				AA03DDFC13D7775000BEFC7F /* GameObject.h */,
 				AA03DDFD13D7775000BEFC7F /* GameObject.mm */,
 				AA03DDFE13D7775000BEFC7F /* GameObjects.h */,
-				BFFAF38013EDEAC100414CFA /* Teleporter.h */,
-				BFFAF38113EDEAC100414CFA /* Teleporter.mm */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -1141,9 +1141,9 @@
 				AA03DE2913D778A200BEFC7F /* RootViewController.m */,
 				AA03DE2A13D778A200BEFC7F /* SpecifyURLViewController.h */,
 				AA03DE2B13D778A200BEFC7F /* SpecifyURLViewController.m */,
-				BF270F3813E64814002BDBB7 /* SettingsViewController.h */,
-				BF270F3913E64814002BDBB7 /* SettingsViewController.m */,
-				BF270F3A13E64814002BDBB7 /* SettingsViewController.xib */,
+				BF05488613EF0D8B00FAF6E5 /* SettingsViewController.h */,
+				BF05488713EF0D8B00FAF6E5 /* SettingsViewController.m */,
+				BF05488813EF0D8B00FAF6E5 /* SettingsViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1246,11 +1246,11 @@
 				AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */,
 				AA10978613E630CA006445B2 /* RotationLevel.level in Resources */,
 				AA10978713E630CB006445B2 /* test.level in Resources */,
-				BF270F3C13E64815002BDBB7 /* SettingsViewController.xib in Resources */,
 				BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */,
 				BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */,
 				BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */,
 				AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */,
+				BF05488A13EF0D8B00FAF6E5 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1417,8 +1417,8 @@
 				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
 				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
 				AAE665B413E53956009F646A /* ChargedWall.mm in Sources */,
-				BF270F3B13E64815002BDBB7 /* SettingsViewController.m in Sources */,
-				BFFAF38213EDEAC100414CFA /* Teleporter.mm in Sources */,
+				BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */,
+				BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
