@@ -33,5 +33,6 @@ typedef enum {
     GameObjectIDPickup,
     GameObjectIDSwitch,
     GameObjectIDGate,
-    GameObjectIDChargedWall
+    GameObjectIDChargedWall,
+    GameObjectIDTeleporter
 } GameObjectID;

@@ -53,6 +53,8 @@
             }
             
             break;
+        default:
+            break;
     }
     
     //[object handleCollisionWithObject:self];

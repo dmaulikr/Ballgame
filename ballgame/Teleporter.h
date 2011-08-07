@@ -7,9 +7,16 @@
 //
 
 #import "GameObject.h"
+#import "Player.h"
 
-@interface Teleporter : GameObject{
+@interface Teleporter : GameObject <DependantObject>{
     BOOL _disableCollisionsFromRecentTeleport;
+    BOOL _isReceiver;
+
+    NSString *_dependantObjectName;
+    Teleporter* _dependantObject;
 }
+
+-(void)teleportPlayer:(Player*)player;
 
 @end

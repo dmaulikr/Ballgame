@@ -23,6 +23,9 @@
     p.x = [[game_object valueForKey:@"x"] floatValue];
     p.y = [[game_object valueForKey:@"y"] floatValue];
     
+    [self rescale:CGSizeMake(size.width, size.height)];
+    [self setColor:ccRED];
+    
     //Switches start uncharged
     _charge = 0.0;
     
@@ -31,9 +34,6 @@
     
     _depObjectName = [game_object valueForKey:@"dependant_object_name"];
     
-    [self rescale:CGSizeMake(size.width, size.height)];
-    
-    [self setColor:ccRED];
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
 	bodyDef.userData = self;
