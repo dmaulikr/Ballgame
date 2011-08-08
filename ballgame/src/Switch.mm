@@ -55,19 +55,22 @@
     }
     
     if (_charge >= _maxCharge && !_activated){
-        [self setColor:ccGREEN];
-        [_dependant_object switchStateChanged:YES]; 
-        _activated = YES;
-        
-        // Play sound effect
-        // HARDCODED SOUND EFFECT NAME
-        if([AssetManager settingsEffectsOn])
-        {
-            SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
-            [audio playEffect:path];
-        }
-        
+        [self switchBecameOn];
+    }
+}
+
+-(void) switchBecameOn{
+    [self setColor:ccGREEN];
+    [_dependant_object switchStateChanged:YES]; 
+    _activated = YES;
+    
+    // Play sound effect
+    // HARDCODED SOUND EFFECT NAME
+    if([AssetManager settingsEffectsOn])
+    {
+        SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
+        [audio playEffect:path];
     }
 }
 

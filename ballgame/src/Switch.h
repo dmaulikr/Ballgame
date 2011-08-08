@@ -31,9 +31,9 @@
     id<Switchable> _dependant_object;
     
 }
-
--(void) setupBody:(b2World *)world;
-
 @property (readwrite) float maxCharge;
+-(void) setupBody:(b2World *)world;
+-(void) switchBecameOn;
+
 
 @end
