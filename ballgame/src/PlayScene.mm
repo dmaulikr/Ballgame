@@ -222,9 +222,7 @@ enum {
     NSString *frameName = [gameObject objectForKey:@"frame_name"];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
-    NSLog(@"retain count add: %i", [object retainCount]);
     [batch addChild:object z:OBJECT_Z_ORDER];
-    NSLog(@"retain count add: %i", [object retainCount]);
     [object setupGameObject:gameObject forWorld:world];
     
     [_gameObjects addObject:object];
