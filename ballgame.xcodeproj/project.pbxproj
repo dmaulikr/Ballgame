@@ -195,8 +195,9 @@
 		AAB9D58313F8571E0011EBFF /* ions.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D58213F8571E0011EBFF /* ions.level */; };
 		AAB9D58D13F859360011EBFF /* Ion.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58C13F859360011EBFF /* Ion.mm */; };
 		AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58F13F88B9D0011EBFF /* Collectible.mm */; };
-		AAB9D59313F8924D0011EBFF /* Bumper.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D59213F8924D0011EBFF /* Bumper.m */; };
+		AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D59213F8924D0011EBFF /* Bumper.mm */; };
 		AAB9D59513F892770011EBFF /* Bumper.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D59413F892770011EBFF /* Bumper.level */; };
+		AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */; };
 		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -577,8 +578,9 @@
 		AAB9D58E13F88B9C0011EBFF /* Collectible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collectible.h; path = src/Collectible.h; sourceTree = "<group>"; };
 		AAB9D58F13F88B9D0011EBFF /* Collectible.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Collectible.mm; path = src/Collectible.mm; sourceTree = "<group>"; };
 		AAB9D59113F8924D0011EBFF /* Bumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bumper.h; sourceTree = "<group>"; };
-		AAB9D59213F8924D0011EBFF /* Bumper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bumper.m; sourceTree = "<group>"; };
+		AAB9D59213F8924D0011EBFF /* Bumper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bumper.mm; sourceTree = "<group>"; };
 		AAB9D59413F892770011EBFF /* Bumper.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bumper.level; path = levels/Bumper.level; sourceTree = "<group>"; };
+		AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Metal_Ting.wav; path = Resources/sound/fx/Metal_Ting.wav; sourceTree = "<group>"; };
 		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
 		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 		AA10978313E62A15006445B2 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */,
 				AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */,
 				AA10978013E62A0F006445B2 /* SwitchOn.wav */,
 				AA10977C13E6221E006445B2 /* Game1.mp3 */,
@@ -1196,7 +1199,7 @@
 				AA03DE0913D7779600BEFC7F /* Wall.h */,
 				AA03DE0A13D7779600BEFC7F /* Wall.mm */,
 				AAB9D59113F8924D0011EBFF /* Bumper.h */,
-				AAB9D59213F8924D0011EBFF /* Bumper.m */,
+				AAB9D59213F8924D0011EBFF /* Bumper.mm */,
 			);
 			name = Walls;
 			sourceTree = "<group>";
@@ -1292,6 +1295,7 @@
 				BF05488A13EF0D8B00FAF6E5 /* SettingsViewController.xib in Resources */,
 				AAB9D58313F8571E0011EBFF /* ions.level in Resources */,
 				AAB9D59513F892770011EBFF /* Bumper.level in Resources */,
+				AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,7 +1468,7 @@
 				BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */,
 				AAB9D58D13F859360011EBFF /* Ion.mm in Sources */,
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
-				AAB9D59313F8924D0011EBFF /* Bumper.m in Sources */,
+				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
