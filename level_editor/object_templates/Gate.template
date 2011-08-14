@@ -3,15 +3,15 @@
 <plist>   
 	<dict>
 		<key>frame_name</key>
-		<string>GreenWallSegment0.png</string>
+		<string>GreenWallSegment2.png</string>
 		<key>height</key>
 		<integer>20</integer>
 		<key>name</key>
-		<string>wall</string>
+		<string>gate</string>
 		<key>rotation</key>
 		<string>0</string>
 		<key>type</key>
-		<string>Wall</string>
+		<string>Gate</string>
 		<key>width</key>
 		<integer>150</integer>
 		<key>x</key>
