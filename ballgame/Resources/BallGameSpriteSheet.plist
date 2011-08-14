@@ -121,6 +121,19 @@
                 <key>sourceSize</key>
                 <string>{50,50}</string>
             </dict>
+            <key>ion.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{100,212},{100,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,100}}</string>
+                <key>sourceSize</key>
+                <string>{100,100}</string>
+            </dict>
             <key>pickup_2x.png</key>
             <dict>
                 <key>frame</key>
@@ -215,7 +228,7 @@
             <key>switch.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{100,212},{100,100}}</string>
+                <string>{{2,314},{100,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +241,7 @@
             <key>wall.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,314},{120,128}}</string>
+                <string>{{104,314},{120,128}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -247,6 +260,8 @@
             <string>BallGameSpriteSheet.png</string>
             <key>size</key>
             <string>{256,512}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:1c2f14641e0177ded9031eaabf890911$</string>
             <key>textureFileName</key>
             <string>BallGameSpriteSheet.png</string>
         </dict>
