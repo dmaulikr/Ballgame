@@ -582,9 +582,10 @@ void MainWindow::newLevel()
 
     currentFileName = "";
 
-    levelPlist = QMap<QString, QString>();
-    levelObjects = QList< QMap<QString, QVariant> >();
-
+    //levelPlist = QMap<QString, QString>();
+    //levelObjects = QList< QMap<QString, QVariant> >();
+    QString levelPlistPath = QString(PATH_OBJECT_TEMPLATES) + QString("TemplateLevel.level");
+    loadLevelPlist(levelPlistPath);
     updateGraphics();
     clearObjectTable();
     updateLevelPlistTable();
