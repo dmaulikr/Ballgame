@@ -13,9 +13,9 @@
   <key>size_grow_rate</key>
   <integer>5</integer>
   <key>start_x</key>
-  <integer>141</integer>
+  <integer>146</integer>
   <key>start_y</key>
-  <integer>224</integer>
+  <integer>233</integer>
   <key>starting_size</key>
   <integer>20</integer>
   <key>world</key>
@@ -36,7 +36,7 @@
     <key>width</key>
     <integer>231</integer>
     <key>x</key>
-    <integer>145</integer>
+    <integer>144</integer>
     <key>y</key>
     <integer>139</integer>
    </dict>
@@ -132,9 +132,9 @@
    </dict>
    <dict>
     <key>frame_name</key>
-    <string>GreenWallSegment0.png</string>
+    <string>GreenWallSegment1.png</string>
     <key>height</key>
-    <integer>27</integer>
+    <integer>28</integer>
     <key>name</key>
     <string>gate1</string>
     <key>rotation</key>
@@ -142,11 +142,11 @@
     <key>type</key>
     <string>Gate</string>
     <key>width</key>
-    <integer>269</integer>
+    <integer>274</integer>
     <key>x</key>
-    <integer>750</integer>
+    <integer>752</integer>
     <key>y</key>
-    <integer>162</integer>
+    <integer>161</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -204,7 +204,7 @@
     <key>width</key>
     <integer>39</integer>
     <key>x</key>
-    <integer>873</integer>
+    <integer>871</integer>
     <key>y</key>
     <integer>409</integer>
    </dict>
@@ -299,6 +299,260 @@
     <integer>542</integer>
     <key>y</key>
     <integer>573</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>654</integer>
+    <key>name</key>
+    <string>static10 2</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>96</integer>
+    <key>x</key>
+    <integer>1244</integer>
+    <key>y</key>
+    <integer>333</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>95</integer>
+    <key>name</key>
+    <string>static10 4</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>302</integer>
+    <key>x</key>
+    <integer>1045</integer>
+    <key>y</key>
+    <integer>614</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>95</integer>
+    <key>name</key>
+    <string>static10 6</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>302</integer>
+    <key>x</key>
+    <integer>1041</integer>
+    <key>y</key>
+    <integer>48</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>961</integer>
+    <key>y</key>
+    <integer>508</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 2</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>961</integer>
+    <key>y</key>
+    <integer>425</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 3</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>961</integer>
+    <key>y</key>
+    <integer>355</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 4</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>962</integer>
+    <key>y</key>
+    <integer>284</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 5</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>952</integer>
+    <key>y</key>
+    <integer>204</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 6</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>923</integer>
+    <key>y</key>
+    <integer>119</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 7</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>986</integer>
+    <key>y</key>
+    <integer>119</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 8</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>1047</integer>
+    <key>y</key>
+    <integer>119</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 9</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>1105</integer>
+    <key>y</key>
+    <integer>122</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>20</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion 10</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>20</integer>
+    <key>x</key>
+    <integer>1162</integer>
+    <key>y</key>
+    <integer>120</integer>
    </dict>
   </array>
  </dict>
