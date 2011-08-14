@@ -6,7 +6,7 @@
 //
 
 
-#define DEBUG_DRAW 0
+#define DEBUG_DRAW 1
 
 
 //UI Definitions
@@ -34,7 +34,9 @@ typedef enum {
     GameObjectIDSwitch,
     GameObjectIDGate,
     GameObjectIDChargedWall,
-    GameObjectIDTeleporter
+    GameObjectIDTeleporter,
+    GameObjectIDIon
 } GameObjectID;
 
 #define BACKGROUND_MUSIC @"Game1"
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>
+<dict>
+    <key>description</key>
+    <string>Debug Level</string>
+    <key>background_texture</key>
+    <string>nope</string>
+    <key>level_height</key>
+    <integer>500</integer>
+    <key>level_width</key>
+    <integer>500</integer>
+    <key>size_grow_rate</key>
+    <integer>1</integer>
+    <key>start_x</key>
+    <integer>250</integer>
+    <key>start_y</key>
+    <integer>250</integer>
+    <key>starting_size</key>
+    <integer>20</integer>
+    <key>world</key>
+    <string>null</string>
+    <key>game_objects</key>
+    <array>
+        <dict>
+            <key>frame_name</key>
+            <string>switch.png</string>
+            <key>name</key>
+            <string>Small Ion</string>
+            <key>rotation</key>
+            <string>0</string>
+            <key>type</key>
+            <string>Ion</string>
+            <key>x</key>
+            <integer>100</integer>
+            <key>y</key>
+            <integer>100</integer>
+            <key>ion_size</key>
+            <real>0</real>                
+        </dict>
+    </array>
+</dict>
+</plist>

@@ -13,7 +13,7 @@
 
 @implementation GameObject
 
-@synthesize body=_body, identifier=_identifier;
+@synthesize body=_body, identifier=_identifier, flaggedForDeletion;
 
 
 -(id)copyWithZone:(NSZone *)zone{
@@ -64,6 +64,10 @@
     // Save original size for use in resize() function
     originalSize = [self contentSize];
     
+    // This is overwritten in Ions
+    objectSize.width = [[_objectInfo valueForKey:@"width"] floatValue];
+    objectSize.height = [[_objectInfo valueForKey:@"height"] floatValue];
+    
     // Setup size and position of sprite based on _objectInfo
     [self setupSprite];
     
@@ -79,32 +83,29 @@
     // Setup movable object if necessary
     if(isMoveable)
         [self setupMoveable];
+    
+    // Make sure we don't delete this object immediately :P
+    flaggedForDeletion = false;
 }
 
 -(void) setupSprite
 {
-    CGSize size;
-    size.width = [[_objectInfo valueForKey:@"width"] floatValue];
-    size.height = [[_objectInfo valueForKey:@"height"] floatValue];
     CGPoint p;
     p.x = [[_objectInfo valueForKey:@"x"] floatValue];
     p.y = [[_objectInfo valueForKey:@"y"] floatValue];
     self.position = ccp( p.x * 2,p.y * 2);
     
-    [self rescale:CGSizeMake(size.width, size.height)];
+    [self rescale:CGSizeMake(objectSize.width, objectSize.height)];
     
     self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
 }
+
 
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
     p.x = [[_objectInfo valueForKey:@"x"] floatValue];
     p.y = [[_objectInfo valueForKey:@"y"] floatValue];
-    
-    CGSize size;
-    size.width = [[_objectInfo valueForKey:@"width"] floatValue];
-    size.height = [[_objectInfo valueForKey:@"height"] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
@@ -118,7 +119,7 @@
 	// Define another box shape for our dynamic body.
 	b2PolygonShape dynamicBox;
     
-	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/2/PTM_RATIO);
+	dynamicBox.SetAsBox(objectSize.width/PTM_RATIO/2 ,objectSize.height/2/PTM_RATIO);
 	
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -194,7 +195,9 @@
 }
 
 -(void)dealloc{
+    
     [_objectInfo release];
+    //TODO: Destroy all info about the object that we have created.
     [super dealloc];
 }
 
@@ -208,5 +211,7 @@
     [self setScaleX:newScaleX];
     [self setScaleY:newScaleY];
 }
+
+
 
 @end

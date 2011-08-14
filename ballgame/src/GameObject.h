@@ -34,12 +34,19 @@
     // Default is no, but is overridden to yes for switches
     bool isSensor;
     
+    // Used only for ions at the moment, but could be used for other stuff later.
+    CGSize objectSize;
+    
     // Moveable objects functionality
     bool isMoveable;
     NSMutableArray *positionPoints;
+    
+    // This is checked at the end of each game loop to see if this object needs to go away
+    bool flaggedForDeletion;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
+@property (readwrite) bool flaggedForDeletion;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;

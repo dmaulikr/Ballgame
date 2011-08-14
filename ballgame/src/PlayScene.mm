@@ -25,6 +25,8 @@ enum {
 -(Player*)addPlayer;
 -(id)addGameObject:(NSDictionary *)gameObject;
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
+-(void)sanitizeCollisionSetForObject:(GameObject*)gameObj;
+
 @end
 
 // HelloWorldLayer implementation
@@ -220,7 +222,9 @@ enum {
     NSString *frameName = [gameObject objectForKey:@"frame_name"];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
+    NSLog(@"retain count add: %i", [object retainCount]);
     [batch addChild:object z:OBJECT_Z_ORDER];
+    NSLog(@"retain count add: %i", [object retainCount]);
     [object setupGameObject:gameObject forWorld:world];
     
     [_gameObjects addObject:object];
@@ -332,6 +336,24 @@ enum {
     
     //Center the scroll node on the player's position...sort of =)
     [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
+    
+    // Clean up objects that need to be deleted :(
+    for(int i = 0; i < [_gameObjects count]; i++)
+    {
+        GameObject *obj = [_gameObjects objectAtIndex:i];
+        if(obj.flaggedForDeletion)
+        {   
+            //Remove the object from our list of game objects and all parent nodes
+            //Also remove the box2d representation from the world.
+            [_gameObjects removeObjectAtIndex:i];
+            CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+            [batch removeChild:obj cleanup:YES];
+            world->DestroyBody([obj getBody]);
+            i--;
+            [self sanitizeCollisionSetForObject:obj];
+        }
+    }
+    
 }
 
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt{
@@ -361,6 +383,21 @@ enum {
     [_previousCollisions release];
     _previousCollisions = [collisionSet copy];
     
+}
+
+-(void)sanitizeCollisionSetForObject:(GameObject*)gameObj{
+    //This is necessary since we generate events by looking into the past but we may have to remove an object from the past
+    //If we release it....This seems so wrong...
+    NSMutableSet *newPreviousItems = [NSMutableSet setWithSet:_previousCollisions];
+    for (GameObjectCollision *collision in _previousCollisions){
+        if ([collision eitherObjectIsEqual:gameObj]){
+            NSLog(@"Found a collision holding onto this object");
+            [newPreviousItems removeObject:collision];
+        }
+    }
+        [_previousCollisions release];
+        _previousCollisions = [newPreviousItems copy];
+
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

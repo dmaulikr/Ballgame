@@ -192,6 +192,8 @@
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
+		AAB9D58313F8571E0011EBFF /* ions.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D58213F8571E0011EBFF /* ions.level */; };
+		AAB9D58D13F859360011EBFF /* Ion.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58C13F859360011EBFF /* Ion.mm */; };
 		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -566,6 +568,9 @@
 		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
 		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
 		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
+		AAB9D58213F8571E0011EBFF /* ions.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ions.level; path = levels/ions.level; sourceTree = "<group>"; };
+		AAB9D58B13F859360011EBFF /* Ion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ion.h; path = src/Ion.h; sourceTree = "<group>"; };
+		AAB9D58C13F859360011EBFF /* Ion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Ion.mm; path = src/Ion.mm; sourceTree = "<group>"; };
 		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
 		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
@@ -1059,7 +1064,8 @@
 		38125BD713CA58CE001282F6 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BF56D74313EF652A0072E3C5 /* Switch */,
+				AAB9D58913F858FD0011EBFF /* Pickups */,
+				BF56D74313EF652A0072E3C5 /* Switches */,
 				AAD890EF13E538DC003B3922 /* Walls */,
 				AAB6F25C13E4C47A00031C64 /* Effect.h */,
 				AAB6F25D13E4C47A00031C64 /* Effect.mm */,
@@ -1067,8 +1073,6 @@
 				AA03DE0D13D777AE00BEFC7F /* Goal.mm */,
 				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
 				AA03DE0113D7777000BEFC7F /* Obstacle.mm */,
-				AA03DE0213D7777000BEFC7F /* Pickup.h */,
-				AA03DE0313D7777000BEFC7F /* Pickup.mm */,
 				AA03DE0413D7777000BEFC7F /* Player.h */,
 				AA03DE0513D7777000BEFC7F /* Player.mm */,
 				BF05488313EF0D7B00FAF6E5 /* Teleporter.h */,
@@ -1127,6 +1131,7 @@
 				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
 				AA03DDEB13D7768200BEFC7F /* DemoLevel.level */,
 				AAE665B613E53A58009F646A /* ChargedWall.level */,
+				AAB9D58213F8571E0011EBFF /* ions.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1159,6 +1164,17 @@
 			name = Sound;
 			sourceTree = "<group>";
 		};
+		AAB9D58913F858FD0011EBFF /* Pickups */ = {
+			isa = PBXGroup;
+			children = (
+				AA03DE0213D7777000BEFC7F /* Pickup.h */,
+				AA03DE0313D7777000BEFC7F /* Pickup.mm */,
+				AAB9D58B13F859360011EBFF /* Ion.h */,
+				AAB9D58C13F859360011EBFF /* Ion.mm */,
+			);
+			name = Pickups;
+			sourceTree = "<group>";
+		};
 		AAD890EF13E538DC003B3922 /* Walls */ = {
 			isa = PBXGroup;
 			children = (
@@ -1172,7 +1188,7 @@
 			name = Walls;
 			sourceTree = "<group>";
 		};
-		BF56D74313EF652A0072E3C5 /* Switch */ = {
+		BF56D74313EF652A0072E3C5 /* Switches */ = {
 			isa = PBXGroup;
 			children = (
 				AAB6F26213E4C47A00031C64 /* Switch.h */,
@@ -1180,7 +1196,7 @@
 				BF56D74513EF655E0072E3C5 /* TimedSwitch.h */,
 				BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */,
 			);
-			name = Switch;
+			name = Switches;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1261,6 +1277,7 @@
 				BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */,
 				AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */,
 				BF05488A13EF0D8B00FAF6E5 /* SettingsViewController.xib in Resources */,
+				AAB9D58313F8571E0011EBFF /* ions.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,6 +1448,7 @@
 				BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */,
 				AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */,
 				BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */,
+				AAB9D58D13F859360011EBFF /* Ion.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1483,7 +1501,7 @@
 				GCC_PREFIX_HEADER = ballgame/src/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = ballgame/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1501,7 +1519,7 @@
 				GCC_PREFIX_HEADER = ballgame/src/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = ballgame/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

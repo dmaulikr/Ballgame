@@ -19,5 +19,26 @@
 	<integer>10</integer>
 	<key>world_gravity</key>
 	<integer>300</integer>
+	<key>ion_config</key>
+	<array>
+		<dict>
+			<key>diameter</key>
+			<integer>10</integer>
+			<key>charge_decrement</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>diameter</key>
+			<integer>20</integer>
+			<key>charge_decrement</key>
+			<integer>8</integer>
+		</dict>
+		<dict>
+			<key>diameter</key>
+			<integer>30</integer>
+			<key>charge_decrement</key>
+			<integer>12</integer>
+		</dict>
+	</array>
 </dict>
 </plist>
