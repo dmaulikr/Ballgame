@@ -26,5 +26,9 @@
         _body->SetActive(NO);
         
     }
+    else{
+        self.visible = YES;
+        _body->SetActive(YES);
+    }
 }
 @end
