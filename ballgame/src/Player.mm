@@ -63,6 +63,8 @@
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
     
+    bodyDef.linearDamping = 6.5;
+    
 	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
 	bodyDef.userData = self;
 	_body = world->CreateBody(&bodyDef);
@@ -108,6 +110,7 @@
     
     [self rescale:CGSizeMake(_radiusSize * 4, _radiusSize * 4)];
 
+    /*
     //LIMIT MAX VELOCITY
     const b2Vec2 velocity = _body->GetLinearVelocity();
     const float32 speed = velocity.Length();
@@ -115,6 +118,7 @@
     if (speed > _maxSpeed){
         _body->SetLinearVelocity((_maxSpeed/speed) * velocity);
     }
+     */
     
     //HARDCODE
     if (_chargeLevel > 100 || [self isStuck]){

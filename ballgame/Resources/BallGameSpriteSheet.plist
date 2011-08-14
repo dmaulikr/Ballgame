@@ -33,7 +33,7 @@
             <key>GreenWallSegment1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{93,2},{37,32}}</string>
+                <string>{{210,2},{37,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>GreenWallSegment2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{132,2},{37,32}}</string>
+                <string>{{171,2},{37,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>Volt0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,134},{48,48}}</string>
+                <string>{{143,82},{48,48}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>Volt1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{93,82},{48,50}}</string>
+                <string>{{43,82},{48,50}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>Volt2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{143,82},{48,48}}</string>
+                <string>{{93,82},{48,48}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>Volt3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{43,82},{48,48}}</string>
+                <string>{{193,82},{48,48}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>Volt4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{193,82},{48,48}}</string>
+                <string>{{2,134},{48,48}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>spore_blue.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{171,2},{37,36}}</string>
+                <string>{{93,2},{37,36}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>spore_purple.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{210,2},{37,36}}</string>
+                <string>{{132,2},{37,36}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -199,10 +199,23 @@
                 <key>sourceSize</key>
                 <string>{39,38}</string>
             </dict>
+            <key>star.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,212},{96,96}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{96,96}}</string>
+                <key>sourceSize</key>
+                <string>{96,96}</string>
+            </dict>
             <key>switch.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,212},{100,100}}</string>
+                <string>{{100,212},{100,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +228,7 @@
             <key>wall.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{104,212},{120,128}}</string>
+                <string>{{2,314},{120,128}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -234,8 +247,6 @@
             <string>BallGameSpriteSheet.png</string>
             <key>size</key>
             <string>{256,512}</string>
-            <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7d1f3ae420a3cfc25606e247ad3a9341$</string>
             <key>textureFileName</key>
             <string>BallGameSpriteSheet.png</string>
         </dict>

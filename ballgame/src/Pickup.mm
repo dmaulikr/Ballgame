@@ -39,6 +39,14 @@
     _identifier = GameObjectIDPickup;
 }
 
+-(void)setupBody:(b2World *)world
+{
+    // Override default value of false
+    isSensor = true;
+    
+    [super setupBody:world];
+}
+
 -(void) wasPickedUpByPlayer:(Player*)player
 {
     // Do nothing. :(

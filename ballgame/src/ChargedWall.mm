@@ -56,7 +56,8 @@
                 }
                 
                 // Send player flying away.  Limit to player's velocity is annoying.
-                b2Vec2 impulseDirection(0, 1000);
+                // TODO:  don't hardcode the value, it should be in the object plist
+                b2Vec2 impulseDirection(0, 100);
                 
                 b2Vec2 impulseLocation = [object getBody]->GetPosition();
                 [object getBody]->ApplyLinearImpulse(impulseDirection, impulseLocation);

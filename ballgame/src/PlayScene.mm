@@ -473,6 +473,19 @@ enum {
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
+    
+    
+    // Set limit on gravity
+    double gravLength = sqrt(gravity.x * gravity.x + gravity.y * gravity.y);
+    NSLog(@"Gravity - %f", gravLength);
+    if(gravLength > 100)
+    {
+        gravLength /= 100;
+        gravity.x /= gravLength;
+        gravity.y /= gravLength;
+    }
+    
+
 	
 	world->SetGravity( gravity );
 }
