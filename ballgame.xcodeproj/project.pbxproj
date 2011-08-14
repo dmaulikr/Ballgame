@@ -152,7 +152,6 @@
 		AA03DDED13D7768200BEFC7F /* box.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDE913D7768200BEFC7F /* box.level */; };
 		AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEA13D7768200BEFC7F /* MoveableWall.level */; };
 		AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEB13D7768200BEFC7F /* DemoLevel.level */; };
-		AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */ = {isa = PBXBuildFile; fileRef = AA03DDEC13D7768200BEFC7F /* TestConvert.level */; };
 		AA03DDF513D776FA00BEFC7F /* NSSetDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDF413D776FA00BEFC7F /* NSSetDifference.m */; };
 		AA03DDFA13D7771F00BEFC7F /* CollisionManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDF713D7771F00BEFC7F /* CollisionManager.mm */; };
 		AA03DDFB13D7771F00BEFC7F /* ContactListenerBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA03DDF913D7771F00BEFC7F /* ContactListenerBridge.mm */; };
@@ -188,7 +187,6 @@
 		AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */; };
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
 		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
-		AA10978713E630CB006445B2 /* test.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978513E630CA006445B2 /* test.level */; };
 		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
@@ -502,7 +500,6 @@
 		AA03DDE913D7768200BEFC7F /* box.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = box.level; path = levels/box.level; sourceTree = "<group>"; };
 		AA03DDEA13D7768200BEFC7F /* MoveableWall.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MoveableWall.level; path = levels/MoveableWall.level; sourceTree = "<group>"; };
 		AA03DDEB13D7768200BEFC7F /* DemoLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DemoLevel.level; path = levels/DemoLevel.level; sourceTree = "<group>"; };
-		AA03DDEC13D7768200BEFC7F /* TestConvert.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestConvert.level; path = levels/TestConvert.level; sourceTree = "<group>"; };
 		AA03DDF113D776C100BEFC7F /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConfig.h; path = src/GameConfig.h; sourceTree = "<group>"; };
 		AA03DDF213D776D700BEFC7F /* DataDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataDefinitions.h; path = src/DataDefinitions.h; sourceTree = "<group>"; };
 		AA03DDF313D776FA00BEFC7F /* NSSetDifference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSSetDifference.h; path = src/NSSetDifference.h; sourceTree = "<group>"; };
@@ -560,7 +557,6 @@
 		AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ChargedWallCollision.wav; path = Resources/sound/fx/ChargedWallCollision.wav; sourceTree = "<group>"; };
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
 		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
-		AA10978513E630CA006445B2 /* test.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test.level; path = levels/test.level; sourceTree = "<group>"; };
 		AA583A2013E64B11004954E9 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu_texture.jpg; path = Resources/backgrounds/menu_texture.jpg; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
@@ -1127,11 +1123,9 @@
 			isa = PBXGroup;
 			children = (
 				AA10978413E630CA006445B2 /* RotationLevel.level */,
-				AA10978513E630CA006445B2 /* test.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
 				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
 				AA03DDEB13D7768200BEFC7F /* DemoLevel.level */,
-				AA03DDEC13D7768200BEFC7F /* TestConvert.level */,
 				AAE665B613E53A58009F646A /* ChargedWall.level */,
 			);
 			name = Levels;
@@ -1245,7 +1239,6 @@
 				AA03DDED13D7768200BEFC7F /* box.level in Resources */,
 				AA03DDEE13D7768200BEFC7F /* MoveableWall.level in Resources */,
 				AA03DDEF13D7768200BEFC7F /* DemoLevel.level in Resources */,
-				AA03DDF013D7768200BEFC7F /* TestConvert.level in Resources */,
 				AAE665B713E53A58009F646A /* ChargedWall.level in Resources */,
 				AA10975F13E613D8006445B2 /* Icon-72.png in Resources */,
 				AA10976013E613D8006445B2 /* Icon-Small-50.png in Resources */,
@@ -1263,7 +1256,6 @@
 				AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */,
 				AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */,
 				AA10978613E630CA006445B2 /* RotationLevel.level in Resources */,
-				AA10978713E630CB006445B2 /* test.level in Resources */,
 				BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */,
 				BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */,
 				BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */,
