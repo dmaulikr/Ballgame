@@ -144,9 +144,9 @@
     <key>width</key>
     <integer>269</integer>
     <key>x</key>
-    <integer>753</integer>
+    <integer>751</integer>
     <key>y</key>
-    <integer>159</integer>
+    <integer>161</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -170,7 +170,7 @@
     <key>charge_per_second</key>
     <integer>1</integer>
     <key>dependant_object_name</key>
-    <string></string>
+    <string>gate1</string>
     <key>frame_name</key>
     <string>switch.png</string>
     <key>height</key>
@@ -188,7 +188,7 @@
     <key>x</key>
     <integer>789</integer>
     <key>y</key>
-    <integer>78</integer>
+    <integer>79</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -248,24 +248,6 @@
     <key>frame_name</key>
     <string>GreenWallSegment0.png</string>
     <key>height</key>
-    <integer>31</integer>
-    <key>name</key>
-    <string>static10 2</string>
-    <key>rotation</key>
-    <string>0</string>
-    <key>type</key>
-    <string>Wall</string>
-    <key>width</key>
-    <integer>64</integer>
-    <key>x</key>
-    <integer>821</integer>
-    <key>y</key>
-    <integer>501</integer>
-   </dict>
-   <dict>
-    <key>frame_name</key>
-    <string>GreenWallSegment0.png</string>
-    <key>height</key>
     <integer>342</integer>
     <key>name</key>
     <string>static10 3</string>
@@ -317,6 +299,98 @@
     <integer>1676</integer>
     <key>y</key>
     <integer>85</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>22</integer>
+    <key>name</key>
+    <string>gate 2</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Gate</string>
+    <key>width</key>
+    <integer>1351</integer>
+    <key>x</key>
+    <integer>887</integer>
+    <key>y</key>
+    <integer>653</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>342</integer>
+    <key>name</key>
+    <string>static10 2</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>36</integer>
+    <key>x</key>
+    <integer>1174</integer>
+    <key>y</key>
+    <integer>348</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>342</integer>
+    <key>name</key>
+    <string>static10 4</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>36</integer>
+    <key>x</key>
+    <integer>1434</integer>
+    <key>y</key>
+    <integer>469</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>132</integer>
+    <key>name</key>
+    <string>static10 5</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>23</integer>
+    <key>x</key>
+    <integer>606</integer>
+    <key>y</key>
+    <integer>577</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>ion.png</string>
+    <key>height</key>
+    <integer>30</integer>
+    <key>ion_size</key>
+    <string>0</string>
+    <key>name</key>
+    <string>Small Ion</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Ion</string>
+    <key>width</key>
+    <integer>32</integer>
+    <key>x</key>
+    <integer>555</integer>
+    <key>y</key>
+    <integer>580</integer>
    </dict>
   </array>
  </dict>

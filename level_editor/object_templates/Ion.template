@@ -3,11 +3,13 @@
 <plist>   
         <dict>
             <key>frame_name</key>
-            <string>switch.png</string>
+            <string>ion.png</string>
             <key>name</key>
             <string>Small Ion</string>
             <key>rotation</key>
             <string>0</string>
+	    <key>ion_size</key>
+	    <integer>0</integer>
             <key>type</key>
             <string>Ion</string>
             <key>x</key>
