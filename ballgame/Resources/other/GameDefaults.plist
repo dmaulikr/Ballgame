@@ -25,19 +25,19 @@
 			<key>diameter</key>
 			<integer>10</integer>
 			<key>charge_decrement</key>
-			<integer>3</integer>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>diameter</key>
+			<integer>15</integer>
+			<key>charge_decrement</key>
+			<integer>4</integer>
 		</dict>
 		<dict>
 			<key>diameter</key>
 			<integer>20</integer>
 			<key>charge_decrement</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>diameter</key>
-			<integer>30</integer>
-			<key>charge_decrement</key>
-			<integer>12</integer>
+			<integer>7</integer>
 		</dict>
 	</array>
 </dict>

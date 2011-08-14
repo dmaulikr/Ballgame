@@ -50,7 +50,14 @@
     int ionSize = [[_objectInfo valueForKey:@"ion_size"] intValue];
     int chargeDec = [[[[[AssetManager defaults] objectForKey:@"ion_config"] objectAtIndex:ionSize] objectForKey:@"charge_decrement"] intValue];
     
+    // Update player size
     player.chargeLevel -= chargeDec;
+    
+    // Make sure we're not negative
+    if(player.chargeLevel < 0)
+        player.chargeLevel = 0;
+    
+    NSLog(@"Charge - %f", player.chargeLevel);
 }
 
 @end
