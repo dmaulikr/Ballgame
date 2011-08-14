@@ -11,13 +11,13 @@
   <key>level_width</key>
   <integer>500</integer>
   <key>size_grow_rate</key>
-  <integer>7</integer>
+  <integer>1</integer>
   <key>start_x</key>
   <integer>250</integer>
   <key>start_y</key>
   <integer>250</integer>
   <key>starting_size</key>
-  <integer>10</integer>
+  <integer>20</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>
@@ -281,6 +281,24 @@
     <integer>113</integer>
     <key>y</key>
     <integer>374</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>star.png</string>
+    <key>height</key>
+    <integer>50</integer>
+    <key>name</key>
+    <string>star</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Collectible</string>
+    <key>width</key>
+    <integer>50</integer>
+    <key>x</key>
+    <integer>84</integer>
+    <key>y</key>
+    <integer>438</integer>
    </dict>
   </array>
  </dict>

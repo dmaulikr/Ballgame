@@ -194,6 +194,7 @@
 		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
 		AAB9D58313F8571E0011EBFF /* ions.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D58213F8571E0011EBFF /* ions.level */; };
 		AAB9D58D13F859360011EBFF /* Ion.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58C13F859360011EBFF /* Ion.mm */; };
+		AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58F13F88B9D0011EBFF /* Collectible.mm */; };
 		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -571,6 +572,8 @@
 		AAB9D58213F8571E0011EBFF /* ions.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ions.level; path = levels/ions.level; sourceTree = "<group>"; };
 		AAB9D58B13F859360011EBFF /* Ion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ion.h; path = src/Ion.h; sourceTree = "<group>"; };
 		AAB9D58C13F859360011EBFF /* Ion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Ion.mm; path = src/Ion.mm; sourceTree = "<group>"; };
+		AAB9D58E13F88B9C0011EBFF /* Collectible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collectible.h; path = src/Collectible.h; sourceTree = "<group>"; };
+		AAB9D58F13F88B9D0011EBFF /* Collectible.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Collectible.mm; path = src/Collectible.mm; sourceTree = "<group>"; };
 		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
 		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
@@ -1171,6 +1174,8 @@
 				AA03DE0313D7777000BEFC7F /* Pickup.mm */,
 				AAB9D58B13F859360011EBFF /* Ion.h */,
 				AAB9D58C13F859360011EBFF /* Ion.mm */,
+				AAB9D58E13F88B9C0011EBFF /* Collectible.h */,
+				AAB9D58F13F88B9D0011EBFF /* Collectible.mm */,
 			);
 			name = Pickups;
 			sourceTree = "<group>";
@@ -1449,6 +1454,7 @@
 				AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */,
 				BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */,
 				AAB9D58D13F859360011EBFF /* Ion.mm in Sources */,
+				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
