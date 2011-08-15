@@ -9,5 +9,8 @@
 #import "Wall.h"
 
 @interface Bumper : Wall
+{
+    bool selectorIsScheduled;
+}
 
 @end

@@ -77,7 +77,7 @@
     selectorIsScheduled = false;
     
     // Unscehdule this selector so that it only runs once
-    [self unschedule:@selector(eventHappend:)];
+    [self unschedule:@selector(changeBack:)];
     
     // Change sprite back to normal
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]

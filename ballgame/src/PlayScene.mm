@@ -473,9 +473,8 @@ enum {
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
     
     
-    // Set limit on gravity
+    // Set limit on gravity (hardcoded, but I think that's ok)
     double gravLength = sqrt(gravity.x * gravity.x + gravity.y * gravity.y);
-    NSLog(@"Gravity - %f", gravLength);
     if(gravLength > 100)
     {
         gravLength /= 100;
