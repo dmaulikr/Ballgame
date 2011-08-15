@@ -247,20 +247,6 @@ enum {
 	return scene;
 }
 
-+(CCScene*)debugScene{
-    
-    CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	PlayScene *layer = [[PlayScene alloc] init];
-	[layer loadLevelWithName:@"DebugLevel"];
-	// add layer as a child to scene
-	[scene addChild: layer];
-	[layer release];
-	// return the scene
-	return scene;
-}
-
 #pragma mark - Game Loop Methods
 
 -(void) draw
@@ -402,6 +388,7 @@ enum {
 
 }
 
+#pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
      // set velocity of ball to 0
@@ -505,7 +492,31 @@ enum {
 	
 	world->SetGravity( gravity );
 }
+-(void)resumeTapped:(id)sender
+{
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Allow pausing again
+    gameIsPaused = false;
+}
 
+-(void)quitTapped:(id)sender
+{
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Return to Main Menu
+    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
+}
+
+#pragma mark - UI Methods
 -(void) showPauseMenu
 {
     gameIsPaused = true;
@@ -537,30 +548,6 @@ enum {
     [pauseLayer addChild:_menu z:10];
 }
 
--(void)resumeTapped:(id)sender
-{
-    // Remove pause menu
-    [self removeChildByTag:kTagPauseMenu cleanup:YES];
-    
-    // Resume game
-    [[CCDirector sharedDirector] resume];
-    
-    // Allow pausing again
-    gameIsPaused = false;
-}
-
--(void)quitTapped:(id)sender
-{
-    // Remove pause menu
-    [self removeChildByTag:kTagPauseMenu cleanup:YES];
-    
-    // Resume game
-    [[CCDirector sharedDirector] resume];
-    
-    // Return to Main Menu
-    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
-}
-    
 #pragma mark - Data Management
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
