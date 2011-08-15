@@ -47,6 +47,8 @@
     bool firstAccel;
     float accelOffsetX;
     float accelOffsetY;
+    bool accelAxisFlipped;
+    float accelAngle;
     
 }
 -(id)loadLevelWithName:(NSString*)levelName;

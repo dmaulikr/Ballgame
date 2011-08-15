@@ -11,6 +11,7 @@
 #import "PlayScene.h"
 #import "DataDefinitions.h"
 #import "GameOverScene.h"
+#import "math.h"
 
 // enums that will be used as tags
 enum {
@@ -461,19 +462,35 @@ enum {
 {	
     if(firstAccel)
     {
-        accelOffsetX = (float) -acceleration.x;
-        accelOffsetY = (float) -acceleration.y;
+        float aX = (float)acceleration.x;
+        if(aX > 1)
+            aX = 1;
+        if(aX < -1)
+            aX = -1;
+        
+        // -sinInverse(aX)
+        accelAngle = -asinf(aX);
+        
         firstAccel = false;
     }
 	static int gravAdjustment = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
 	
-	float accelX = (float) acceleration.x + accelOffsetX;
-	float accelY = (float) acceleration.y + accelOffsetY;	
+	float accelX = (float) acceleration.x * cos(accelAngle) - (float)acceleration.z * sin(accelAngle);
+	float accelY = (float) acceleration.y;
+    
+    NSLog(@"Accel x, y, z = %f, %f, %f", (float)acceleration.x, (float)acceleration.y, (float)acceleration.z);
+    NSLog(@"AccelX = %f, angle = %f", accelX, accelAngle);
+    NSLog(@"  ");
+    
+
+    
+    // Temporary fix
+    if(accelAxisFlipped)
+        accelX = -(float)acceleration.z;
     
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
-    
     
     // Set limit on gravity (hardcoded, but I think that's ok)
     double gravLength = sqrt(gravity.x * gravity.x + gravity.y * gravity.y);
