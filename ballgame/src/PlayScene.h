@@ -54,7 +54,6 @@
 -(id)loadLevelWithName:(NSString*)levelName;
 
 //Premade Levels
-+(CCScene*)debugScene;
 +(CCScene*)currentLevelScene;
 
 -(void) showPauseMenu;
