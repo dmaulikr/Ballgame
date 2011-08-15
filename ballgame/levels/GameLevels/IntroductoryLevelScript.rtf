@@ -36,6 +36,27 @@ Voice: "Your goal is to reach the goal before you become unstable.  It's just ah
 \
 Users moves to the goal and completes the level.\
  \
+Intro Level Graph: (-- means Edge)\
 \
+Node: Start\
+-Disable Taps\
+Node: Taps Disabled\
+--DisplayText/Play Audio Once\
+Node: Waiting 2 seconds.\
+--Wait 2 Seconds\
+--Enable Taps\
+Node: Intro Message Sent and Taps Enabled\
+--User Taps Screen.  \
+--Door Opens\
+Node: Door Opened\
+--User reaches switch on screen point\
+--Display Text/Play Audio Once\
+Node: Needs Switch To Be Activated\
+--Switch Turns On\
+--Door Opens\
+Node: Needs User to Move past Gate\
+--User moves past gate\
+--Charge Enabled\
+--Display Text/Play Audio Once\
 \
 }
