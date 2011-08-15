@@ -43,6 +43,11 @@
     CCMenu *_pauseScreenMenu;
     bool gameIsPaused;
     
+    // Accel offset
+    bool firstAccel;
+    float accelOffsetX;
+    float accelOffsetY;
+    
 }
 -(id)loadLevelWithName:(NSString*)levelName;
 

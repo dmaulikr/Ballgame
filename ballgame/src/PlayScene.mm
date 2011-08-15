@@ -68,6 +68,9 @@ enum {
     b2Vec2 gravity;
     gravity.Set(0.0f, 0.0f);
     
+    // Make sure we set the gravity offsets the first time we get an accel message
+    firstAccel = true;
+    
     // Do we want to let bodies sleep?
     // This will speed up the physics simulation
     bool doSleep = false;
@@ -456,17 +459,16 @@ enum {
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
-	static float prevX=0, prevY=0;
+    if(firstAccel)
+    {
+        accelOffsetX = (float) -acceleration.x;
+        accelOffsetY = (float) -acceleration.y;
+        firstAccel = false;
+    }
 	static int gravAdjustment = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
-	//#define kFilterFactor 0.05f
-#define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
 	
-	float accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
-	float accelY = (float) acceleration.y * kFilterFactor + (1- kFilterFactor)*prevY;
-	
-	prevX = accelX;
-	prevY = accelY;
-	
+	float accelX = (float) acceleration.x + accelOffsetX;
+	float accelY = (float) acceleration.y + accelOffsetY;	
     
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
