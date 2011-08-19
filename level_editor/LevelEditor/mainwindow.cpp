@@ -1,6 +1,5 @@
 // ToDo:
 
-// Create object templates for easy object creation
 // Zoom in/out
 // Create default propreties for new level
 // Make it possible to move rotated objects
