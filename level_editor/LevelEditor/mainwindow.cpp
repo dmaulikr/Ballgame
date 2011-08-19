@@ -71,6 +71,7 @@ void MainWindow::loadFile()
     // populate tables
     updateLevelPlistTable();
     updateObjectTable(0);
+
     updateObjectComboBox();
 
     // draw objects on screen;
@@ -924,41 +925,7 @@ void MainWindow::createCopyOfObject(int index)
 
     // Rename copy
     QString newName = levelObjects[levelObjects.count()-1].value("name").toString();
-
-    // Determine how many digits the number at the end is (could be 0)
-    int count = 0;
-    while(newName.right(count+1).toInt() != 0)
-    {
-        count++;
-    }
-
-    // Trim number off the end of the string
-    newName = newName.left(newName.length() - count);
-
-    // If the last character is not a space, add one
-    if(newName.right(1) != " ")
-        newName = newName + " ";
-
-    // Find first name that doesn't exist yet
-    count = 1;
-    bool found;
-    do
-    {
-        count++;
-        found = false;
-        QString tempStr = newName;
-        tempStr.append(QString("%1").arg(count));
-        for(int i = 0; i < levelObjects.count(); i++)
-        {
-            if(levelObjects[i].value("name") == tempStr)
-            {
-                found = true;
-                continue;
-            }
-        }
-    } while(found);
-
-    newName.append(QString("%1").arg(count));
+    newName = getNameForCopy(newName);
 
     // Update name
     levelObjects[levelObjects.count()-1].insert("name", newName);
@@ -1243,6 +1210,9 @@ void MainWindow::newObjectClicked(QModelIndex index)
     int newX = ui->graphicsView->horizontalScrollBar()->value() + rect.width() / 2;
     int newY = levelPlist.value("level_height").toInt() - ui->graphicsView->verticalScrollBar()->value() - rect.height() / 2;
 
+    // Rename object
+    newObject.insert("name", getNameForCopy(newObject.value("name").toString()));
+
     // Set object's x/y to center of viewport
     if(newObject.contains("x"))
         newObject.insert("x", QString("%1").arg(newX));
@@ -1340,6 +1310,46 @@ QMap<QString, QVariant> MainWindow::loadObjectFromTemplateFile(QString filename)
     }
 
     return newObject;
+}
+
+QString MainWindow::getNameForCopy(QString newName)
+{
+    // Determine how many digits the number at the end is (could be 0)
+    int count = 0;
+    while(newName.right(count+1).toInt() != 0)
+    {
+        count++;
+    }
+
+    // Trim number off the end of the string
+    newName = newName.left(newName.length() - count);
+
+    // If the last character is not a space, add one
+    if(newName.right(1) != " ")
+        newName = newName + " ";
+
+    // Find first name that doesn't exist yet
+    count = 1;
+    bool found;
+    do
+    {
+        count++;
+        found = false;
+        QString tempStr = newName;
+        tempStr.append(QString("%1").arg(count));
+        for(int i = 0; i < levelObjects.count(); i++)
+        {
+            if(levelObjects[i].value("name") == tempStr)
+            {
+                found = true;
+                continue;
+            }
+        }
+    } while(found);
+
+    newName.append(QString("%1").arg(count));
+
+    return newName;
 }
 
 // Helper function to convert string to rect

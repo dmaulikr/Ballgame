@@ -92,7 +92,10 @@ private:
     void loadSpritePlist();
     void loadLevelPlist(QString level);
     void updateGraphics();  // redraws entire level
+
+
     QRect strToRect(QString in); // helper function to convert string to rect
+    QString getNameForCopy(QString newName); // helper function to get name after copying or creating new object
 
     void updateLevelPlistTable();
     void updateObjectComboBox();
