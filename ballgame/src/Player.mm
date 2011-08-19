@@ -29,11 +29,6 @@
     _status = PlayerBeganLevel;
     
     _identifier = GameObjectIDPlayer;
-    CGPoint p;
-    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
-    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
-    
-    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
     
     _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
     _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
@@ -41,10 +36,34 @@
     _chargeLevel = 0.0;
     _shouldCharge = YES;
     
+    [self startAnimating];
+}
+
+
+-(void) setupSprite
+{
+    CGPoint p;
+    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
+    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
+    
+    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
+    
 	self.position = ccp( p.x,p.y );
+    
+    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+
+}
+
+-(void) setupBody:(b2World*) world
+{
+    CGPoint p;
+    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
+    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
+    
+    bodyDef.linearDamping = 6.5;
     
 	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
 	bodyDef.userData = self;
@@ -52,7 +71,7 @@
 	
 	// Define another box shape for our dynamic body.
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = _radius / PTM_RATIO;
+	dynamicCircle.m_radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2 / PTM_RATIO;
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -60,8 +79,11 @@
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 	_body->CreateFixture(&fixtureDef);
-    
-    [self startAnimating];
+}
+
+-(BOOL)isStuck{
+    //TODO: Figure this out
+    return NO;
 }
 
 -(void) updateGameObject: (ccTime) dt
@@ -69,13 +91,9 @@
     if (_shouldCharge){
         _chargeLevel += _growRate * dt;
     }
-    //NSLog(@"chargeLevel: %1.2f", _chargeLevel);
     [super updateGameObject:dt];
     
     float32 _radiusSize = (_radius + _chargeLevel/CHARGE_TO_PIXELS) ;
-    
-    //NSLog(@"scale: %1.2f", [self scale]);
-    
     
     for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) 
     {
@@ -92,6 +110,7 @@
     
     [self rescale:CGSizeMake(_radiusSize * 4, _radiusSize * 4)];
 
+    /*
     //LIMIT MAX VELOCITY
     const b2Vec2 velocity = _body->GetLinearVelocity();
     const float32 speed = velocity.Length();
@@ -99,9 +118,10 @@
     if (speed > _maxSpeed){
         _body->SetLinearVelocity((_maxSpeed/speed) * velocity);
     }
+     */
     
     //HARDCODE
-    if (_chargeLevel > 100){
+    if (_chargeLevel > 100 || [self isStuck]){
         _status = PlayerDied;
     }
     for (Effect *effect in _effects){
@@ -111,8 +131,7 @@
 
 -(void) startAnimating
 {
-    // HARDCODE
-    
+    // HARDCODE - The spriteFrameName shouldn't be hardcoded.
     // Set up list of frames
     NSMutableArray *walkAnimFrames = [NSMutableArray array];
     for(int i = 0; i <= 4; ++i) {
@@ -136,16 +155,15 @@
     
     switch ([object identifier]){
         case GameObjectIDGoal:
-            //NSLog(@"Level Completed");
             _status = PlayerCompletedLevel;
             break;
         case GameObjectIDSwitch:
-            
             break;
-            
         case GameObjectIDChargedWall:
             _chargeLevel += ((ChargedWall*)object).chargeIncrement;
             NSLog(@"Charge level - %f", _chargeLevel);
+            break;
+        default:
             break;
             
     }

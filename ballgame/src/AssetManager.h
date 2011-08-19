@@ -32,4 +32,9 @@
 -(BOOL)cacheResourceFromURL:(NSURL*)url withDelegate:(id)delegate resultSelector:(SEL)selector andDefaultsKey:(NSString*)key;
 -(NSDictionary*) getDefaults;
 -(NSDictionary*)levelWithName:(NSString*)levelName;
+
+// Settings utility functions.  These might be better suited in their own class, but I don't care enough.
++(bool) settingsMusicOn;
++(bool) settingsEffectsOn;
+
 @end

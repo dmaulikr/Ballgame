@@ -7,7 +7,7 @@
 		<key>height</key>
 		<integer>25</integer>
 		<key>name</key>
-		<string></string>
+		<string>goal</string>
 		<key>rotation</key>
 		<string>0</string>
 		<key>type</key>

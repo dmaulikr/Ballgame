@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>   
+        <dict>
+            <key>frame_name</key>
+            <string>ion.png</string>
+            <key>name</key>
+            <string>Small Ion</string>
+            <key>rotation</key>
+            <string>0</string>
+	    <key>ion_size</key>
+	    <integer>0</integer>
+            <key>type</key>
+            <string>Ion</string>
+            <key>x</key>
+            <integer>100</integer>
+            <key>y</key>
+            <integer>100</integer>
+            <key>ion_size</key>
+            <real>0</real> 
+            <key>width</key>
+            <integer>10</integer>
+            <key>height</key>
+            <integer>10</integer>       
+        </dict>
+</plist>

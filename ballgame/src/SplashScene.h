@@ -15,4 +15,12 @@
 }
 +(CCScene *) scene;
 -(void)loadScene;
+
+// Menu items
+-(void)playTapped:(id)sender;
+-(void)debugTapped:(id)sender;
+-(void)settingsTapped:(id)sender;
+
+-(void)startBackgroundMusic;
+
 @end

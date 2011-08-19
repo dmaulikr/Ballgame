@@ -11,6 +11,7 @@
 #import "PlayScene.h"
 #import "DataDefinitions.h"
 #import "GameOverScene.h"
+#import "math.h"
 
 // enums that will be used as tags
 enum {
@@ -22,9 +23,11 @@ enum {
 
 @interface PlayScene ()
 
--(Player*) addPlayer;
+-(Player*)addPlayer;
 -(id)addGameObject:(NSDictionary *)gameObject;
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
+-(void)sanitizeCollisionSetForObject:(GameObject*)gameObj;
+
 @end
 
 // HelloWorldLayer implementation
@@ -38,11 +41,14 @@ enum {
 
 
 -(id)loadLevelWithName:(NSString *)levelName{
-    
-    [self startBackgroundMusic];
+
     gameIsPaused = false;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
+    if (_levelInfo == nil){
+        [NSException raise:@"Loading the Level Failed" format:@"The level file was not setup correctly"];
+        return nil;
+    }
     [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
@@ -62,6 +68,9 @@ enum {
     // Define the gravity vector.
     b2Vec2 gravity;
     gravity.Set(0.0f, 0.0f);
+    
+    // Make sure we set the gravity offsets the first time we get an accel message
+    firstAccel = true;
     
     // Do we want to let bodies sleep?
     // This will speed up the physics simulation
@@ -105,8 +114,6 @@ enum {
     groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
-    
-     
     // left
     groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2(0,0));
     groundBody->CreateFixture(&groundBox,0);
@@ -116,13 +123,34 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
     
     
+#pragma mark Load the Background
+    // If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
+#if !DEBUG_DRAW
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    // background texture
+	//CGSize winSize = [CCDirector sharedDirector].winSize;
+    int NUM_TILES = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+        //[background setScale:[background scale] * 2];
+        NUM_TILES = 2;
+    }
+	//int IMAGE_SIZE = 512;
+	for(int i = 0; i < NUM_TILES; i++)
+		for(int j = 0; j < NUM_TILES; j++)
+		{
+            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+            // ToDo:  make the background dependend on which hardware it's running on
+			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground_iPhone@2x.png"];
+            background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
+			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
+			
+		}
+#endif
     
 #pragma mark Game Object Initialization
     
-
-    
     //Initialize the Sprite Sheet
-    //NSLog(@"Purging and removing");
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     [CCSpriteFrameCache purgeSharedSpriteFrameCache];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
     NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:@"SpriteSheetPngName"]];
@@ -155,6 +183,7 @@ enum {
             //Find his dependant object and set it
             GameObject <DependantObject>* depObject = (GameObject <DependantObject>*) game_object;
             for (GameObject *searchObject in _gameObjects){
+                
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
                     //NSLog(@"Found our dependant object");
                     [depObject setDependantObject:searchObject];
@@ -166,31 +195,6 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
-// If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
-#if !DEBUG_DRAW
-    
-    // background texture
-	//CGSize winSize = [CCDirector sharedDirector].winSize;
-    int NUM_TILES = 1;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
-        //[background setScale:[background scale] * 2];
-        NUM_TILES = 2;
-    }
-	//int IMAGE_SIZE = 512;
-	for(int i = 0; i < NUM_TILES; i++)
-		for(int j = 0; j < NUM_TILES; j++)
-		{
-			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground.jpg"];
-//            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-//                [background setScale:[background scale] *.5];
-//            }
-            background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
-			//background.position = ccp(winSize.width/2, winSize.height/2);
-			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
-			
-			//[voidNode addChild:background z:-1 parallaxRatio:ccp(0.1f,0.1f) positionOffset:CGPointZero];
-		}
-#endif
     
     
 #pragma mark Initialize the game loop
@@ -229,9 +233,6 @@ enum {
     return nil;
 }
 
-
-
-
 #pragma mark - Premade Scenes
 +(CCScene*)currentLevelScene{
     CCScene *scene = [CCScene node];
@@ -239,22 +240,6 @@ enum {
 	// 'layer' is an autorelease object.
 	PlayScene *layer = [[PlayScene alloc] init];
 	[layer loadCurrentLevel];
-    //[layer setColor:ccWHITE];
-	// add layer as a child to scene
-	[scene addChild: layer];
-	[layer release];
-	// return the scene
-	return scene;
-}
-
-+(CCScene*)debugScene{
-    
-    CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	PlayScene *layer = [[PlayScene alloc] init];
-	[layer loadLevelWithName:@"DebugLevel"];
-    //[layer setColor:ccWHITE];
 	// add layer as a child to scene
 	[scene addChild: layer];
 	[layer release];
@@ -334,44 +319,35 @@ enum {
     
     
 #pragma mark Movement of the Scroll Node
-    CGPoint currentPos = [scrollNode position];
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    b2Vec2 velocity = [_thePlayer getVelocity];
 	// if ball moved off the edge
     
     //Center the scroll node on the player's position...sort of =)
     [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
     
-    //DEPRECATED SCROLLING CODE
-//	if(_thePlayer.position.x < -currentPos.x + SCROLL_BORDER && velocity.x < 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-//	}
-//	if(_thePlayer.position.x > (-currentPos.x+winSize.width) - SCROLL_BORDER && velocity.x > 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(-PTM_RATIO*velocity.x*dt,0))];
-//	}
-//	if(_thePlayer.position.y < -currentPos.y+SCROLL_BORDER && velocity.y < 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-//	}
-//	if(_thePlayer.position.y > (-currentPos.y+winSize.height)-SCROLL_BORDER && velocity.y > 0){
-//		CGPoint currentPos = [scrollNode position];
-//		[scrollNode setPosition: ccpAdd(currentPos, ccp(0,-PTM_RATIO*velocity.y*dt))];
-//	}
+    // Clean up objects that need to be deleted :(
+    for(int i = 0; i < [_gameObjects count]; i++)
+    {
+        GameObject *obj = [_gameObjects objectAtIndex:i];
+        if(obj.flaggedForDeletion)
+        {   
+            //Remove the object from our list of game objects and all parent nodes
+            //Also remove the box2d representation from the world.
+            [_gameObjects removeObjectAtIndex:i];
+            CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+            [batch removeChild:obj cleanup:YES];
+            world->DestroyBody([obj getBody]);
+            i--;
+            [self sanitizeCollisionSetForObject:obj];
+        }
+    }
+    
 }
 
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt{
     
     NSSet *newCollisions = [collisionSet setDifferenceFromSet:_previousCollisions];
     NSSet *removedCollisions = [_previousCollisions setDifferenceFromSet:collisionSet];
-    
-    if ([newCollisions count] != 0){
-        //NSLog(@"new: %@", [newCollisions description]);
-    }
-    if ([removedCollisions count] != 0){
-        //NSLog(@"removed: %@", [removedCollisions description]);
-    }
     
     for (GameObjectCollision *collision in newCollisions){
         if ([[collision objectA] isEqual:_thePlayer]){
@@ -397,6 +373,22 @@ enum {
     
 }
 
+-(void)sanitizeCollisionSetForObject:(GameObject*)gameObj{
+    //This is necessary since we generate events by looking into the past but we may have to remove an object from the past
+    //If we release it....This seems so wrong...
+    NSMutableSet *newPreviousItems = [NSMutableSet setWithSet:_previousCollisions];
+    for (GameObjectCollision *collision in _previousCollisions){
+        if ([collision eitherObjectIsEqual:gameObj]){
+            NSLog(@"Found a collision holding onto this object");
+            [newPreviousItems removeObject:collision];
+        }
+    }
+        [_previousCollisions release];
+        _previousCollisions = [newPreviousItems copy];
+
+}
+
+#pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
      // set velocity of ball to 0
@@ -416,73 +408,115 @@ enum {
             if(!gameIsPaused)
                 [self showPauseMenu];
             
-            // Assuming no multi-touch
+            // Assuming there's no multi-touch
             return;
         }
         
 		CGPoint currentPos = [scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
-		
-        CGSize screenSize = [CCDirector sharedDirector].winSize;
         
-		float pointX = point.x + -1*currentPos.x;
-		float pointY = (screenSize.height - point.y) + -1*currentPos.y;
-		
-		//NSLog(@"%1.2f, %1.2f, %1.2f, %1.2f",point.x,point.y,currentPos.x,currentPos.y);
-		//NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
-		
+        // X and Y of point are flipped for some reason
+        float pointX = point.y + -1*currentPos.x;
+		float pointY = point.x + -1*currentPos.y;
         
-		double vConst = .05;  // multiplier
+		double vConst = 1;  // multiplier
 		
 		b2Body* b = [_thePlayer body];
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(pointX-objectX) ;
-		float accelY = vConst*(pointY-objectY);
-		//NSLog([NSString stringWithFormat:@"%1.2f, %1.2f : %1.2f, %1.2f",objectX,objectY,point.x,point.y]);
+		float accelX = vConst*(pointX - objectX);
+		float accelY = vConst*(pointY - objectY);
+        
+        /*
+        NSLog(@"Click location %1.2f, %1.2f",pointX,pointY);
+		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
+        NSLog(@"ScrollNode Pos %1.2f, %1.2f", currentPos.x, currentPos.y);
+        NSLog(@"Object position %1.2f, %1.2f", objectX, objectY);
+        NSLog(@"Acceleration %1.2f, %1.2f", accelX, accelY);
+        NSLog(@" ");
+         */
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();
         v *= 10;
 		b->SetLinearVelocity(v);
-         
+        
 	}	
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
-	static float prevX=0, prevY=0;
+    if(firstAccel)
+    {
+        float aX = (float)acceleration.x;
+        if(aX > 1)
+            aX = 1;
+        if(aX < -1)
+            aX = -1;
+        
+        // -sinInverse(aX)
+        accelAngle = -asinf(aX);
+        
+        firstAccel = false;
+    }
 	static int gravAdjustment = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
-	//#define kFilterFactor 0.05f
-#define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
 	
-	float accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
-	float accelY = (float) acceleration.y * kFilterFactor + (1- kFilterFactor)*prevY;
-	
-	prevX = accelX;
-	prevY = accelY;
-	
+	float accelX = (float) acceleration.x * cos(accelAngle) - (float)acceleration.z * sin(accelAngle);
+	float accelY = (float) acceleration.y;
+    
+    NSLog(@"Accel x, y, z = %f, %f, %f", (float)acceleration.x, (float)acceleration.y, (float)acceleration.z);
+    NSLog(@"AccelX = %f, angle = %f", accelX, accelAngle);
+    NSLog(@"  ");
+    
+
+    
+    // Temporary fix
+    if(accelAxisFlipped)
+        accelX = -(float)acceleration.z;
     
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
+    
+    // Set limit on gravity (hardcoded, but I think that's ok)
+    double gravLength = sqrt(gravity.x * gravity.x + gravity.y * gravity.y);
+    if(gravLength > 100)
+    {
+        gravLength /= 100;
+        gravity.x /= gravLength;
+        gravity.y /= gravLength;
+    }
+    
+
 	
 	world->SetGravity( gravity );
 }
-
--(void) startBackgroundMusic
+-(void)resumeTapped:(id)sender
 {
-    SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-
-    if(![audio isBackgroundMusicPlaying])
-    {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Game1" ofType:@"mp3"];
-        [audio playBackgroundMusic:path];
-    }
-
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Allow pausing again
+    gameIsPaused = false;
 }
 
+-(void)quitTapped:(id)sender
+{
+    // Remove pause menu
+    [self removeChildByTag:kTagPauseMenu cleanup:YES];
+    
+    // Resume game
+    [[CCDirector sharedDirector] resume];
+    
+    // Return to Main Menu
+    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
+}
+
+#pragma mark - UI Methods
 -(void) showPauseMenu
 {
     gameIsPaused = true;
@@ -514,30 +548,6 @@ enum {
     [pauseLayer addChild:_menu z:10];
 }
 
--(void)resumeTapped:(id)sender
-{
-    // Remove pause menu
-    [self removeChildByTag:kTagPauseMenu cleanup:YES];
-    
-    // Resume game
-    [[CCDirector sharedDirector] resume];
-    
-    // Allow pausing again
-    gameIsPaused = false;
-}
-
--(void)quitTapped:(id)sender
-{
-    // Remove pause menu
-    [self removeChildByTag:kTagPauseMenu cleanup:YES];
-    
-    // Resume game
-    [[CCDirector sharedDirector] resume];
-    
-    // Return to Main Menu
-    [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
-}
-    
 #pragma mark - Data Management
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc

@@ -19,8 +19,6 @@
 @end
 
 @interface GameObject : CCSprite <NSCopying> {
-    
-    NSDictionary *defaults;
     NSDictionary *_objectInfo;
     
     //Game State Info
@@ -31,23 +29,48 @@
     GameObjectID _identifier;
     
     CGSize originalSize;
+    
+    // Stores whether fixtureDef.isSensor should be set while creating b2fixture.
+    // Default is no, but is overridden to yes for switches
+    bool isSensor;
+    
+    // Used only for ions at the moment, but could be used for other stuff later.
+    CGSize objectSize;
+    
+    // Moveable objects functionality
+    bool isMoveable;
+    NSMutableArray *positionPoints;
+    
+    // This is checked at the end of each game loop to see if this object needs to go away
+    bool flaggedForDeletion;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
-@property(nonatomic, retain) NSDictionary *defaults;
+@property (readwrite) bool flaggedForDeletion;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
+
+// Setup functions
+-(void) setupSprite;
+-(void) setupBody:(b2World*) world;
 
 // Sync position of sprite to match box2d object.  Subclasses may override this to do this opposite.
 -(void)syncPosition;
 
 -(b2Vec2)getVelocity;
+-(b2Body*) getBody;
+
 -(void)handleCollisionWithObject:(GameObject*)object;
 -(void)noLongerCollidingWithObject:(GameObject*)object;
 -(void)updateGameObject:(ccTime)dt;
 
 // Rescale object based on given size
 -(void) rescale:(CGSize) size;
+
+// For Moveable Objects
+-(void) setupMoveable;
+// helper function
+-(id) actionMutableArray: (NSMutableArray*) _actionList;
 
 @end

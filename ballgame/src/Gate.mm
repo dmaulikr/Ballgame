@@ -13,12 +13,10 @@
 
 -(void)setupGameObject:(NSDictionary *)game_object forWorld:(b2World *)world{
     [super setupGameObject:game_object forWorld:world];
+    
     _identifier = GameObjectIDGate;
 }
 
--(void)setIsLocked:(BOOL)isLocked{
-    _isLocked = isLocked;
-}
 
 -(void)switchStateChanged:(BOOL)isOn{
     if (isOn){
@@ -27,6 +25,10 @@
         self.visible = NO;
         _body->SetActive(NO);
         
+    }
+    else{
+        self.visible = YES;
+        _body->SetActive(YES);
     }
 }
 @end

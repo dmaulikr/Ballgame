@@ -32,5 +32,8 @@
     
 }
 @property (readwrite) float maxCharge;
+-(void) setupBody:(b2World *)world;
+-(void) switchBecameOn;
+
 
 @end

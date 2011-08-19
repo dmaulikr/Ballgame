@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>   
+<dict>
+<key>frame_name</key>
+<string>bumper.png</string>
+<key>height</key>
+<integer>25</integer>
+<key>name</key>
+<string>Bumper</string>
+<key>rotation</key>
+<string>0</string>
+<key>type</key>
+<string>Bumper</string>
+<key>width</key>
+<integer>25</integer>
+<key>x</key>
+<integer>100</integer>
+<key>y</key>
+<integer>100</integer>
+<key>power</key>
+<real>70</real>                
+</dict>
+</plist>

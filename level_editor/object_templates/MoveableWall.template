@@ -7,7 +7,7 @@
 		<key>height</key>
 		<integer>17</integer>
 		<key>name</key>
-		<string>Wall</string>
+		<string>moveablewall</string>
 		<key>positions</key>
 		<array>
 			<dict>

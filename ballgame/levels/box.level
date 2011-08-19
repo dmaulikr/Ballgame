@@ -29,8 +29,23 @@
     <integer>25</integer>
     <key>name</key>
     <string>Goal1</string>
+    <key>positions</key>
+    <array>
+     <dict>
+      <key>x</key>
+      <integer>100</integer>
+      <key>y</key>
+      <integer>60</integer>
+     </dict>
+     <dict>
+      <key>x</key>
+      <integer>225</integer>
+      <key>y</key>
+      <integer>60</integer>
+     </dict>
+    </array>
     <key>rotation</key>
-    <string>0</string>
+    <string>30</string>
     <key>type</key>
     <string>Goal</string>
     <key>width</key>
@@ -38,7 +53,7 @@
     <key>x</key>
     <integer>100</integer>
     <key>y</key>
-    <integer>100</integer>
+    <integer>60</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -128,13 +143,15 @@
     <key>rotation</key>
     <string>0</string>
     <key>type</key>
-    <string>Switch</string>
+    <string>TimedSwitch</string>
     <key>width</key>
     <integer>40</integer>
     <key>x</key>
     <integer>420</integer>
     <key>y</key>
     <integer>52</integer>
+    <key>duration</key>
+    <real>3.0</real>
    </dict>
    <dict>
     <key>frame_name</key>

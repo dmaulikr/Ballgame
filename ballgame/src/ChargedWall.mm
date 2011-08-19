@@ -7,6 +7,8 @@
 //
 
 #import "ChargedWall.h"
+#import "AssetManager.h"
+#import "Player.h"
 
 @implementation ChargedWall
 @synthesize chargeIncrement;
@@ -46,12 +48,23 @@
                 
                 // Play sound effect
                 // HARDCODED SOUND EFFECT NAME
-                SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
-                NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
-                [audio playEffect:path];
-
+                if([AssetManager settingsEffectsOn])
+                {
+                    SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
+                    NSString *path = [[NSBundle mainBundle] pathForResource:@"ChargedWallCollision" ofType:@"wav"];
+                    [audio playEffect:path];
+                }
+                
+                // Send player flying away.  Limit to player's velocity is annoying.
+                // TODO:  don't hardcode the value, it should be in the object plist
+                b2Vec2 impulseDirection(0, 100);
+                
+                b2Vec2 impulseLocation = [object getBody]->GetPosition();
+                [object getBody]->ApplyLinearImpulse(impulseDirection, impulseLocation);
             }
             
+            break;
+        default:
             break;
     }
     
@@ -64,7 +77,7 @@
     selectorIsScheduled = false;
     
     // Unscehdule this selector so that it only runs once
-    [self unschedule:@selector(eventHappend:)];
+    [self unschedule:@selector(changeBack:)];
     
     // Change sprite back to normal
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]

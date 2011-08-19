@@ -182,4 +182,17 @@ static AssetManager* sharedAssetManager = nil;
     //NSLog(@"%@", plistDefaults);
     
 }
+
++(bool) settingsMusicOn
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:@"soundMusicOn"];
+}
+
++(bool) settingsEffectsOn
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:@"soundEffectsOn"];
+}
+
 @end

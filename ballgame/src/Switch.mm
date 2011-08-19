@@ -7,21 +7,15 @@
 //
 
 #import "Switch.h"
+#import "AssetManager.h"
 
 @implementation Switch
 @synthesize  maxCharge=_maxCharge, dependantObject=_dependant_object;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
-    //TODO: Rotation
+    
     [super setupGameObject:game_object forWorld:world];
     _identifier = GameObjectIDSwitch;
-    
-    CGSize size;
-    size.width = [[game_object valueForKey:@"width"] floatValue];
-    size.height = [[game_object valueForKey:@"height"] floatValue];
-    CGPoint p;
-    p.x = [[game_object valueForKey:@"x"] floatValue];
-    p.y = [[game_object valueForKey:@"y"] floatValue];
     
     //Switches start uncharged
     _charge = 0.0;
@@ -31,29 +25,19 @@
     
     _depObjectName = [game_object valueForKey:@"dependant_object_name"];
     
-    [self rescale:CGSizeMake(size.width, size.height)];
-    
     [self setColor:ccRED];
-    b2BodyDef bodyDef;
-	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
-	bodyDef.userData = self;
-	_body = world->CreateBody(&bodyDef);
-	_body->SetAwake(NO);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-    
-	dynamicBox.SetAsBox(size.width/PTM_RATIO/2 ,size.height/2/PTM_RATIO);
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-    fixtureDef.isSensor = YES;
-	fixtureDef.density = 0.0f;
-	fixtureDef.friction = 0.3f;
-    _body->CreateFixture(&fixtureDef);
-    
 }
+
+
+-(void)setupBody:(b2World *)world
+{
+    // Override default value of false
+    isSensor = true;
+    
+    [super setupBody:world];
+}
+
+
 
 -(void)updateGameObject:(ccTime)dt{
     
@@ -71,16 +55,22 @@
     }
     
     if (_charge >= _maxCharge && !_activated){
-        [self setColor:ccGREEN];
-        [_dependant_object switchStateChanged:YES]; 
-        _activated = YES;
-        
-        // Play sound effect
-        // HARDCODED SOUND EFFECT NAME
+        [self switchBecameOn];
+    }
+}
+
+-(void) switchBecameOn{
+    [self setColor:ccGREEN];
+    [_dependant_object switchStateChanged:YES]; 
+    _activated = YES;
+    
+    // Play sound effect
+    // HARDCODED SOUND EFFECT NAME
+    if([AssetManager settingsEffectsOn])
+    {
         SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
         NSString *path = [[NSBundle mainBundle] pathForResource:@"SwitchOn" ofType:@"wav"];
         [audio playEffect:path];
-        
     }
 }
 

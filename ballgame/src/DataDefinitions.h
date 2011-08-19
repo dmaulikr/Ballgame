@@ -33,5 +33,13 @@ typedef enum {
     GameObjectIDPickup,
     GameObjectIDSwitch,
     GameObjectIDGate,
-    GameObjectIDChargedWall
+    GameObjectIDChargedWall,
+    GameObjectIDTeleporter,
+    GameObjectIDIon,
+    GameObjectIDCollectible,
+    GameObjectIDBumper,
+    GameObjectIDGravityWell,
 } GameObjectID;
+
+#define BACKGROUND_MUSIC @"Game1"
+

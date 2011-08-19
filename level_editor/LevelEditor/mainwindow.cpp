@@ -91,7 +91,7 @@ void MainWindow::updateGraphics()
     scene = new QGraphicsScene(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt());
 
     // Add player object to scene
-    QRect playerRect = spriteSheetLocations.value("player_amoeba.png");
+    QRect playerRect = spriteSheetLocations.value("Volt1.png");
     Q_ASSERT_X(playerRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
     QImage player = spriteSheet.copy(playerRect);
     player = player.scaledToHeight(levelPlist.value("starting_size").toFloat());
@@ -580,10 +580,8 @@ void MainWindow::newLevel()
     // ToDo:  implement "do you want to save?" here
 
     currentFileName = "";
-
-    levelPlist = QMap<QString, QString>();
-    levelObjects = QList< QMap<QString, QVariant> >();
-
+    QString levelPlistPath = QString(PATH_OBJECT_TEMPLATES) + QString("TemplateLevel.level");
+    loadLevelPlist(levelPlistPath);
     updateGraphics();
     clearObjectTable();
     updateLevelPlistTable();

@@ -27,14 +27,20 @@ typedef enum {
     
     PlayerStatus _status;
     BOOL _shouldCharge;
+    
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
 @property (readonly) PlayerStatus status;
 @property (readwrite) float chargeLevel;
 @property (readwrite) BOOL shouldCharge;
 
+-(BOOL)isStuck;
+
 -(void) updateGameObject: (ccTime) dt;
 
+// Setup functions
+-(void) setupSprite;
+-(void) setupBody:(b2World *)world;
 -(void) startAnimating;
   
 @end
