@@ -80,6 +80,12 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
         }
     }
 
+    // If something was selected, pass that along to MainWindow so UI can be updated
+    if(item)
+    {
+        emit objectSelected(item->data(1).toString(), item->data(2).toInt());
+    }
+
     // Fill up list of start positions (for use in mouseMove and moveReleased)
     objectStartPositions.clear();
     objectStartSizes.clear();

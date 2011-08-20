@@ -48,9 +48,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, double, double, bool)));
     connect(ui->graphicsView, SIGNAL(needToUpdateGraphics()), this, SLOT(needToUpdateGraphics()));
 
-    copyObject = -1;
-    selectedObject = -1;
-
     populateNewObjectList();
 
     // Set list pointer in LevelGraphicsView
@@ -130,16 +127,18 @@ void MainWindow::updateGraphics()
 
         // Rotate object around its own center as opposed to its top left corner
         float rotation = levelObjects[i].value("rotation").toFloat();
-        float rotationRadians = (3.141592653/180) * rotation;
-        float xShift = (width/2 * qCos(rotationRadians)) - (height/2 * qSin(rotationRadians)) - width/2;
-        float yShift = (-width/2 * qSin(rotationRadians)) - (height/2 * qCos(rotationRadians)) + height/2;
+        //float rotationRadians = (3.141592653/180) * rotation;
+        //float xShift = (width/2 * qCos(rotationRadians)) - (height/2 * qSin(rotationRadians)) - width/2;
+        //float yShift = (-width/2 * qSin(rotationRadians)) - (height/2 * qCos(rotationRadians)) + height/2;
 
-        item->setPos((int)(xPos - xShift), (int)(yPos + yShift));
+        //item->setPos((int)(xPos - xShift), (int)(yPos + yShift));
+        item->setPos((int)xPos, (int)yPos);
+        item->setTransformOriginPoint(width/2, height/2);
         item->setRotation((int)rotation);
         item->setData(1, "object");
         item->setData(2, i);
         item->setData(3, (rotation != 0 && rotation != 360));
-        item->setData(4, QPoint(xShift, yShift));
+        //item->setData(4, QPoint(xShift, yShift));
     }
 
     // Display a yellow box around whichever objects are selected
@@ -159,6 +158,10 @@ void MainWindow::updateGraphics()
 
 void MainWindow::updateSelectedObjects(QGraphicsScene *scene, bool removePrevious)
 {
+    // If scene doesn't exist, don't do anything
+    if(!scene)
+        return;
+
     // Clear existing lines
     if(removePrevious)
     {
@@ -328,19 +331,21 @@ void MainWindow::objectSelected(QString type, int id)
     // Push Undo object
     pushUndo();
 
+    if(noEmit)
+        return;
+    noEmit = true;
+
     if(type == "object")
     {
         ui->objectSelectorComboBox->setCurrentIndex(id);
         updateObjectTable(id);
-
-        // For copy/paste
-        selectedObject = id;
     }
 
     ui->levelPlistTableWidget->setCurrentCell(-1, -1);
     ui->objectsTableWidget->setCurrentCell(-1, -1);
 
-    updateGraphics();
+    noEmit = false;
+    //updateGraphics();
 }
 
 void MainWindow::needToRescale(QString type, int id, double width, double height, double x, double y, bool objectStillDragging)
@@ -385,6 +390,8 @@ void MainWindow::needToRescale(QString type, int id, double width, double height
 
 void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, bool objectStillDragging)
 {
+
+
     if(type == "player")
     {
         levelPlist.insert("start_x", QString::number(pos.x() + (int)(size.width() / 2)));
@@ -398,7 +405,10 @@ void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, b
 
     else if(type == "object")
     {
+        noEmit = true;
         ui->objectSelectorComboBox->setCurrentIndex(id);
+        noEmit = false;
+
         levelObjects[id].insert("x", QString::number(pos.x() + (int)(size.width() / 2)));
         levelObjects[id].insert("y", QString::number(levelPlist.value("level_height").toFloat() - pos.y() - (int)(size.height() / 2)));
 
@@ -497,8 +507,24 @@ void MainWindow::rotationSliderMoved(int value)
     noEmit = false;
 }
 
+void MainWindow::comboBoxChanged(int objId)
+{
+    if(noEmit)
+        return;
+
+    // Show item as selected in graphics view
+    selectedObjects.clear();
+    selectedObjects.append(objId);
+    updateSelectedObjects(ui->graphicsView->scene(), true);
+
+    updateObjectTable(objId);
+}
+
 void MainWindow::updateObjectTable(int objId)
 {
+    if(noEmit)
+        return;
+
     if(objId == -2 || levelObjects.count() <= objId)
     {
         clearObjectTable();
@@ -508,13 +534,11 @@ void MainWindow::updateObjectTable(int objId)
     if(objId == -1)
         return;
 
-
     QTableWidget *table = ui->objectsTableWidget;
 
     int rowCount = 0;
     table->setColumnCount(2);
     table->setRowCount(0);
-
 
     QMap<QString, QVariant>::const_iterator it;
     for (it = levelObjects.at(objId).constBegin(); it != levelObjects.at(objId).constEnd(); ++it)
@@ -530,16 +554,6 @@ void MainWindow::updateObjectTable(int objId)
         }
         else if(it.value().type() == QVariant::List)
         {
-            // Display contents of list here
-            /*
-            QString out;
-            QList<QVariant> list = it.value().toList();
-            for(int i = 0; i < list.count(); i++)
-            {
-                out +=
-            }
-            */
-
             table->setItem(rowCount-1, 1, new QTableWidgetItem(QString("Click to edit")));
         }
         else
@@ -959,69 +973,89 @@ void MainWindow::newObjectClicked()
     updateObjectTable(levelObjects.count() - 1);
 }
 
-void MainWindow::copyObjectClicked()
+void MainWindow::createCopyOfObjects(QList<int> objects)
 {
-    // Push an Undo object
-    pushUndo();
+    selectedObjects.clear();
 
-    int index = ui->objectSelectorComboBox->currentIndex();
-    if(index == -1) // nothing selected
-        return;
+    for(int i = 0; i < objects.count(); i++)
+    {
+        int index = objects.at(i);
+        levelObjects.append(QMap<QString, QVariant>(levelObjects[index]));
 
-    createCopyOfObject(index);
+        // Rename copy
+        QString newName = levelObjects[levelObjects.count()-1].value("name").toString();
+        newName = getNameForCopy(newName);
 
-    ui->objectSelectorComboBox->setCurrentIndex(levelObjects.count()-1);
-    updateObjectTable(levelObjects.count() - 1);
-}
+        // Update name
+        levelObjects[levelObjects.count()-1].insert("name", newName);
 
-void MainWindow::createCopyOfObject(int index)
-{
-    levelObjects.append(QMap<QString, QVariant>(levelObjects[index]));
+        // Increment x and y by some amount
+        int newX = levelObjects[levelObjects.count()-1].value("x").toInt() + COPY_POSITION_INCREMENT;
+        int newY = levelObjects[levelObjects.count()-1].value("y").toInt() + COPY_POSITION_INCREMENT;
+        levelObjects[levelObjects.count()-1].insert("x", QString("%1").arg(newX));
+        levelObjects[levelObjects.count()-1].insert("y", QString("%1").arg(newY));
 
-    // Rename copy
-    QString newName = levelObjects[levelObjects.count()-1].value("name").toString();
-    newName = getNameForCopy(newName);
-
-    // Update name
-    levelObjects[levelObjects.count()-1].insert("name", newName);
-
-    // Increment x and y by some amount
-    int newX = levelObjects[levelObjects.count()-1].value("x").toInt() + COPY_POSITION_INCREMENT;
-    int newY = levelObjects[levelObjects.count()-1].value("y").toInt() + COPY_POSITION_INCREMENT;
-    levelObjects[levelObjects.count()-1].insert("x", QString("%1").arg(newX));
-    levelObjects[levelObjects.count()-1].insert("y", QString("%1").arg(newY));
+        // Make sure object is selected when we're done
+        selectedObjects.append(levelObjects.count()-1);
+    }
 
     updateGraphics();
+    noEmit = true;
     updateObjectComboBox();
+    ui->objectSelectorComboBox->setCurrentIndex(levelObjects.count()-1);
+    noEmit = false;
 }
 
 void MainWindow::deleteObjectClicked()
 {
+    if(selectedObjects.count() == 0) // nothing selected
+        return;
+
     // Push an Undo object
     pushUndo();
 
-    int index = ui->objectSelectorComboBox->currentIndex();
-    if(index == -1) // nothing selected
-        return;
+    // Sort Selected Objects backwards so we can remove safely below (Whee, Bubblesort!)
+    for(int i = 0; i < selectedObjects.count(); i++)
+    {
+        for(int j = i; j < selectedObjects.count(); j++)
+        {
+            if(selectedObjects[i] < selectedObjects[j])
+            {
+                int temp = selectedObjects[i];
+                selectedObjects[i] = selectedObjects[j];
+                selectedObjects[j] = temp;
+            }
+        }
+    }
 
-    levelObjects.removeAt(index);
+    for(int i = 0; i < selectedObjects.count(); i++)
+    {
+        // This is safe because we just sorted :P
+        levelObjects.removeAt(selectedObjects[i]);
+    }
+    selectedObjects.clear();
+
+    // Make sure we can't paste anything after this without re-copying
+    copyObjects.clear();
+
+    if(noEmit)
+        return;
+    noEmit = true;
 
     updateGraphics();
     updateObjectComboBox();
 
-    if(index != 0)
+    if(levelObjects.count() != 0)
     {
-        ui->objectSelectorComboBox->setCurrentIndex(index-1);
-        updateObjectTable(index-1);
+        ui->objectSelectorComboBox->setCurrentIndex(0);
+        updateObjectTable(0);
     }
-    else if(levelObjects.count() == 0)
+    else
     {
         clearObjectTable();
     }
 
-    // Make sure we can't paste anything after this without re-copying
-    copyObject = -1;
-    selectedObject = -1;
+    noEmit = false;
 }
 
 void MainWindow::addLevelPropertyClicked()
@@ -1079,7 +1113,7 @@ void MainWindow::pushUndo(bool clearRedoStack)
     UndoObject u;
     u.levelObjects = levelObjects;
     u.levelPlist = levelPlist;
-    u.currentObject = ui->objectSelectorComboBox->currentIndex();
+    u.selectedObjects = selectedObjects;
 
     // Push undo object onto undo stack
     undoStack.push(u);
@@ -1108,13 +1142,13 @@ void MainWindow::popUndo()
         UndoObject r;
         r.levelObjects = levelObjects;
         r.levelPlist = levelPlist;
-        r.currentObject = ui->objectSelectorComboBox->currentIndex();
+        r.selectedObjects = selectedObjects;
         redoStack.push(r);
 
         // Restore state from undo object
         levelObjects = u.levelObjects;
         levelPlist = u.levelPlist;
-        int currentObj = u.currentObject;
+        selectedObjects = u.selectedObjects;
 
         // Make sure we don't end up in an infinite loop
         noEmit = true;
@@ -1123,8 +1157,16 @@ void MainWindow::popUndo()
         updateGraphics();
         updateObjectComboBox();
         updateLevelPlistTable();
-        updateObjectTable(currentObj);
-        ui->objectSelectorComboBox->setCurrentIndex(currentObj);
+        if(selectedObjects.length() > 0)
+        {
+            ui->objectSelectorComboBox->setCurrentIndex(selectedObjects[0]);
+            updateObjectTable(selectedObjects[0]);
+        }
+        else
+        {
+            ui->objectSelectorComboBox->setCurrentIndex(0);
+            updateObjectTable(0);
+        }
 
         noEmit = false;
     }
@@ -1156,7 +1198,7 @@ void MainWindow::redoClicked()
         // Restore state from undo object
         levelObjects = r.levelObjects;
         levelPlist = r.levelPlist;
-        int currentObj = r.currentObject;
+        selectedObjects = r.selectedObjects;
 
         // Make sure we don't end up in an infinite loop
         noEmit = true;
@@ -1165,8 +1207,16 @@ void MainWindow::redoClicked()
         updateGraphics();
         updateObjectComboBox();
         updateLevelPlistTable();
-        updateObjectTable(currentObj);
-        ui->objectSelectorComboBox->setCurrentIndex(currentObj);
+        if(selectedObjects.length() > 0)
+        {
+            ui->objectSelectorComboBox->setCurrentIndex(selectedObjects[0]);
+            updateObjectTable(selectedObjects[0]);
+        }
+        else
+        {
+            ui->objectSelectorComboBox->setCurrentIndex(0);
+            updateObjectTable(0);
+        }
 
         noEmit = false;
     }
@@ -1210,16 +1260,12 @@ void MainWindow::deleteClicked()
 
 void MainWindow::copyClicked()
 {
-    copyObject = selectedObject;
+    copyObjects = selectedObjects;
 }
 
 void MainWindow::pasteClicked()
 {
-    // If something was copied
-    if(copyObject != -1)
-    {
-        createCopyOfObject(copyObject);
-    }
+    createCopyOfObjects(copyObjects);
 }
 
 void MainWindow::populateNewObjectList()

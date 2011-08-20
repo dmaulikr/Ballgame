@@ -30,7 +30,7 @@ struct UndoObject
 {
     QMap<QString, QString> levelPlist;
     QList< QMap<QString, QVariant> > levelObjects;
-    int currentObject;
+    QList<int> selectedObjects;
 };
 
 class MainWindow : public QMainWindow
@@ -67,7 +67,6 @@ private slots:
     void addPropertyClicked();
     void deletePropertyClicked();
     void newObjectClicked();
-    void copyObjectClicked();
     void deleteObjectClicked();
     void addLevelPropertyClicked();
     void deleteLevelPropertyClicked();
@@ -76,10 +75,10 @@ private slots:
     // Other
     void levelPlistChanged(QTableWidgetItem*);
     void objectChanged(QTableWidgetItem*);
-    void updateObjectTable(int id);
     void rotationSliderMoved(int);
     void objectTableClicked(int, int);
     void newObjectClicked(QModelIndex);
+    void comboBoxChanged(int);
 
     // Other window
     void doneEditingSublist(QList<QVariant>, int, int);
@@ -121,9 +120,8 @@ private:
     void popUndo();
 
     // Copy/paste functionality
-    void createCopyOfObject(int index);
-    int selectedObject;
-    int copyObject;
+    void createCopyOfObjects(QList<int> objects);
+    QList<int> copyObjects;  // stored objects to be copied (saved when control-c is hit)
 
     // Create new object functionality
     void populateNewObjectList();
@@ -131,6 +129,8 @@ private:
 
     // Multi-select functionality
     QList<int> selectedObjects;
+
+    void updateObjectTable(int id);
 };
 
 #endif // MAINWINDOW_H

@@ -13,9 +13,9 @@
   <key>size_grow_rate</key>
   <integer>1</integer>
   <key>start_x</key>
-  <integer>225</integer>
+  <integer>269</integer>
   <key>start_y</key>
-  <integer>257</integer>
+  <integer>273</integer>
   <key>starting_size</key>
   <integer>20</integer>
   <key>world</key>
@@ -38,9 +38,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>99</integer>
+    <integer>207</integer>
     <key>y</key>
-    <integer>101</integer>
+    <integer>349</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -78,9 +78,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>378</integer>
+    <integer>376</integer>
     <key>y</key>
-    <integer>182</integer>
+    <integer>183</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -118,9 +118,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>290</integer>
+    <integer>397</integer>
     <key>y</key>
-    <integer>121</integer>
+    <integer>370</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -158,9 +158,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>443</integer>
+    <integer>440</integer>
     <key>y</key>
-    <integer>224</integer>
+    <integer>226</integer>
    </dict>
    <dict>
     <key>frame_name</key>

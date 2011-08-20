@@ -99,13 +99,6 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_3">
-             <property name="text">
-              <string>Copy Object</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QPushButton" name="pushButton">
              <property name="text">
               <string>Add Blank New Object</string>
@@ -551,30 +544,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_3</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>copyObjectClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>667</x>
-     <y>455</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>791</x>
-     <y>403</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>rotationSlider</sender>
    <signal>sliderMoved(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>rotationSliderMoved(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>418</x>
-     <y>547</y>
+     <x>671</x>
+     <y>611</y>
     </hint>
     <hint type="destinationlabel">
      <x>440</x>
@@ -602,7 +579,7 @@
    <sender>objectSelectorComboBox</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>updateObjectTable(int)</slot>
+   <slot>comboBoxChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>667</x>
@@ -637,8 +614,8 @@
    <slot>addPropertyClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>667</x>
-     <y>378</y>
+     <x>671</x>
+     <y>432</y>
     </hint>
     <hint type="destinationlabel">
      <x>790</x>
@@ -653,8 +630,8 @@
    <slot>deletePropertyClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>667</x>
-     <y>407</y>
+     <x>671</x>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
@@ -669,8 +646,8 @@
    <slot>newObjectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>667</x>
-     <y>484</y>
+     <x>671</x>
+     <y>538</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
@@ -685,8 +662,8 @@
    <slot>deleteObjectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>667</x>
-     <y>513</y>
+     <x>671</x>
+     <y>567</y>
     </hint>
     <hint type="destinationlabel">
      <x>794</x>
@@ -784,5 +761,6 @@
   <slot>copyClicked()</slot>
   <slot>pasteClicked()</slot>
   <slot>newObjectClicked(QModelIndex)</slot>
+  <slot>comboBoxChanged(int)</slot>
  </slots>
 </ui>
