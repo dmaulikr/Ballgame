@@ -203,6 +203,38 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     //mouseDownPoint = QPointF(0,0);
 }
 
+/**
+  * Zoom the view in and out.
+  */
+void LevelGraphicsView::wheelEvent(QWheelEvent* event) {
+
+    //Get the position of the mouse before scaling, in scene coords
+    QPointF pointBeforeScale(mapToScene(event->pos()));
+
+    //Get the original screen centerpoint
+    QPointF screenCenter = mapToScene(viewport()->rect()).boundingRect().center(); //CurrentCenterPoint; //(visRect.center());
+
+    //Scale the view ie. do the zoom
+    double scaleFactor = 1.15; //How fast we zoom
+    if(event->delta() > 0) {
+        //Zoom in
+        scale(scaleFactor, scaleFactor);
+    } else {
+        //Zooming out
+        scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+    }
+
+    //Get the position after scaling, in scene coords
+    QPointF pointAfterScale(mapToScene(event->pos()));
+
+    //Get the offset of how the screen moved
+    QPointF offset = pointBeforeScale - pointAfterScale;
+
+    //Adjust to the new center for correct zooming
+    //QPointF newCenter = screenCenter + offset;
+    //SetCenter(newCenter);
+}
+
 QGraphicsItem* LevelGraphicsView::getItemForId(int id)
 {
     QList<QGraphicsItem*> its = items();
