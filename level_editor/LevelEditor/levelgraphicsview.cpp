@@ -6,119 +6,187 @@ LevelGraphicsView::LevelGraphicsView(QWidget* pQW_Parent)
 
 void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-    if (QGraphicsItem *item = itemAt(event->pos())) {
+    // This is the default, it might get overwritten later in this function.
+    resizing = false;
 
-        // Currently don't support moving or scaling rotated objects
-        bool rotated = item->data(3).toBool();
-        if(rotated)
+    // Check if control key is being held down
+    bool controlDown = (event->modifiers() & Qt::ControlModifier);
+
+    // Get item that was selected (if any)
+    QGraphicsItem *item = itemAt(event->pos());
+
+    if(controlDown)
+    {
+        // If something was selected
+        if(item)
         {
-            emit objectSelected(item->data(1).toString(), item->data(2).toInt());
-            return;
-        }
-
-        //qDebug() << "You clicked on item" << item;
-        draggedItem = item;
-
-        QList<QGraphicsItem*> its = items();
-
-        for(int i = 0; i < its.count(); i++)
-        {
-            if (its[i] == draggedItem)
+            // If item is already selected, unselect it
+            bool itemRemoved = false;
+            if(selectedObjects->contains(item->data(2).toInt()))
             {
-                draggedItemId = i;
+                selectedObjects->removeOne(item->data(2).toInt());
+                itemRemoved = true;
+            }
+
+            // If item is new, add it
+            else if(!selectedObjects->contains(item->data(2).toInt()))
+            {
+                selectedObjects->append(item->data(2).toInt());
+            }
+
+            // If we didn't just remove something, check for resizing
+            if(!itemRemoved)
+            {
+                // Figure out if we are in resizing mode
+                int mouseX = item->pos().x() - mapToScene(event->pos()).x();
+                int mouseY = item->pos().y() - mapToScene(event->pos()).y();
+                double rightPercent = (double)mouseX / item->boundingRect().size().width() * -1;
+                double bottomPercent = (double)mouseY / item->boundingRect().size().height() * -1;
+
+                if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
+                {
+                    resizing = true;
+                }
             }
         }
-
-        int mouseX = draggedItem->pos().x() - mapToScene(event->pos()).x();
-        int mouseY = draggedItem->pos().y() - mapToScene(event->pos()).y();
-        QPoint rotationOffset = draggedItem->data(4).toPoint();
-        mouseOffset = QPointF(mouseX, mouseY) + rotationOffset;
-
-        resizing = false;
-
-        double rightPercent = (double)mouseX / draggedItem->boundingRect().size().width() * -1;
-        double bottomPercent = (double)mouseY / draggedItem->boundingRect().size().height() * -1;
-
-        //qDebug() << draggedItem->data(3);
-        if(!(draggedItem->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
-        {
-            resizing = true;
-            previousPoint = QPointF(mapToScene(event->pos()));
-        }
-
-
-        //qDebug("Percents - %f, %f", rightPercent, bottomPercent);
-
-        emit objectSelected(draggedItem->data(1).toString(), draggedItem->data(2).toInt());
-
-    } else {
-        //qDebug() << "You didn't click on an item.";
-        draggedItem = NULL;
-        mouseOffset = QPointF(0,0);
-        resizing = false;
     }
+    else // Control not being held down
+    {
+        // If something was selected
+        if(item)
+        {
+            // If item is new, clear and add it
+            if(!selectedObjects->contains(item->data(2).toInt()))
+            {
+                selectedObjects->clear();
+                selectedObjects->append(item->data(2).toInt());
+            }
+
+            // Check for resizing
+            // Figure out if we are in resizing mode
+            int mouseX = item->pos().x() - mapToScene(event->pos()).x();
+            int mouseY = item->pos().y() - mapToScene(event->pos()).y();
+            double rightPercent = (double)mouseX / item->boundingRect().size().width() * -1;
+            double bottomPercent = (double)mouseY / item->boundingRect().size().height() * -1;
+
+            if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
+            {
+                resizing = true;
+            }
+        }
+        else // nothing selected
+        {
+            selectedObjects->clear();
+        }
+    }
+
+    // Fill up list of start positions (for use in mouseMove and moveReleased)
+    objectStartPositions.clear();
+    for(int i = 0; i < selectedObjects->length(); i++)
+    {
+        objectStartPositions.append(getItemForId(selectedObjects->at(i))->pos());
+    }
+
+    // Save where we first clicked the mouse (for use in mouseMoveEvent and mouseReleaseEvent)
+    mouseDownPoint = mapToScene(event->pos());
+
+    emit needToUpdateGraphics();
 }
 
 void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    if(!draggedItem) // no item selected
+    if(selectedObjects->length() == 0) // no item selected
+    {
         return;
-
-    QPointF pos = mapToScene(event->pos()) + mouseOffset;
-
-    if(!resizing)
-    {
-        draggedItem->setPos(pos);
-        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), true);
     }
-    else
+
+    QPointF currentMousePos = mapToScene(event->pos());
+
+    for(int i = 0; i < selectedObjects->length(); i++)
     {
-        draggedItem = items()[draggedItemId];
-        QPointF newPoint = mapToScene(event->pos());
+        QGraphicsItem* draggedItem = getItemForId(selectedObjects->at(i));
 
-        double scaleX = (newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
-        double scaleY = (newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
-
-        if(scaleX > 0 && scaleY > 0)
+        if(!resizing)
         {
-            previousPoint = newPoint;
-            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, true);
+            QPointF pos = currentMousePos - mouseDownPoint + objectStartPositions[i];
+            draggedItem->setPos(pos);
+            emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), true);
+        }
+        else
+        {
+            QPointF newPoint = mapToScene(event->pos());
+
+            double scaleX = 1; //(newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
+            double scaleY = 1; //(newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
+
+            if(scaleX > 0 && scaleY > 0)
+            {
+                //previousPoint = newPoint;
+                emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, true);
+            }
         }
     }
 }
 
-
-
 void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-    if(!draggedItem) // no item selected
+    if(selectedObjects->length() == 0) // no item selected
+    {
+        //mouseDownPoint = QPointF(0,0);
         return;
-
-    QPointF pos = mapToScene(event->pos()) + mouseOffset;
-
-    if(!resizing)
-    {
-        draggedItem->setPos(pos);
-        emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), false);
     }
-    else
+
+    QPointF currentMousePos = mapToScene(event->pos());
+
+    for(int i = 0; i < selectedObjects->length(); i++)
     {
-        draggedItem = items()[draggedItemId];
-        QPointF newPoint = mapToScene(event->pos());
+        QGraphicsItem* draggedItem = getItemForId(selectedObjects->at(i));
 
-        double scaleX = (newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
-        double scaleY = (newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
-
-        if(scaleX > 0 && scaleY > 0)
+        if(!resizing)
         {
-            previousPoint = newPoint;
-            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, false);
+            QPointF pos = currentMousePos - mouseDownPoint + objectStartPositions[i];
+            draggedItem->setPos(pos);
+            emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), false);
+        }
+        else
+        {
+            QPointF newPoint = mapToScene(event->pos());
+
+            double scaleX = 1; //(newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
+            double scaleY = 1; //(newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
+
+            if(scaleX > 0 && scaleY > 0)
+            {
+                //previousPoint = newPoint;
+                emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, false);
+            }
         }
     }
 
-
-
-
-    draggedItem = NULL;
     resizing = false;
+    //mouseDownPoint = QPointF(0,0);
+}
+
+QGraphicsItem* LevelGraphicsView::getItemForId(int id)
+{
+    QList<QGraphicsItem*> its = items();
+    for(int i = 0; i < its.count(); i++)
+    {
+        if (its[i]->data(2).toInt() == id && its[i]->data(1).toString() != "")
+        {
+            return its[i];
+        }
+    }
+
+    return NULL;
+}
+
+void LevelGraphicsView::setListPointer(QList<int> *pointer)
+{
+    selectedObjects = pointer;
+
+    // Make sure we get keyboard input
+    setFocusPolicy(Qt::StrongFocus);
+
+    qDebug("Constructing");
 }

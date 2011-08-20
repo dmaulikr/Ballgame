@@ -19,17 +19,27 @@ public:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
 
+    void setListPointer(QList<int> *pointer);
+
 signals:
     void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
     void needToRescale(QString, int, double, double, bool);
+    void needToUpdateGraphics();
 
 private:
-    QGraphicsItem *draggedItem;
-    int draggedItemId;
-    QPointF mouseOffset;
+
+    // Helper function
+    QGraphicsItem* getItemForId(int id);
+
     bool resizing;
-    QPointF previousPoint;
+    QPointF mouseDownPoint;
+
+    // pointer to list object in MainWindow
+    QList<int> *selectedObjects;
+
+    QList<QPointF> objectStartPositions;
+
 };
 
 #endif // LEVELGRAPHICSVIEW_H

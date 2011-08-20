@@ -61,6 +61,7 @@ private slots:
     void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
     void needToRescale(QString, int, double, double, bool);
+    void needToUpdateGraphics();
 
     // Buttons
     void addPropertyClicked();
@@ -126,6 +127,9 @@ private:
     // Create new object functionality
     void populateNewObjectList();
     QMap<QString, QVariant> loadObjectFromTemplateFile(QString filename);
+
+    // Multi-select functionality
+    QList<int> selectedObjects;
 };
 
 #endif // MAINWINDOW_H

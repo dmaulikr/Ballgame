@@ -4,12 +4,14 @@
 // Create default propreties for new level
 // Make it possible to move rotated objects
 
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #define MINIMUM_WALL_THICKENESS 5
 #define MAX_UNDO_LIMIT 100
+
+// How far away from the edge of the object to display the yellow box when it's selected
+#define SELECTED_BOX_MARGIN 0
 
 // The amount by which an object is translated from the original when it's copy/pasted
 #define COPY_POSITION_INCREMENT 25
@@ -44,15 +46,22 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF, bool)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF, bool)));
     connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
     connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, bool)));
+    connect(ui->graphicsView, SIGNAL(needToUpdateGraphics()), this, SLOT(needToUpdateGraphics()));
 
     copyObject = -1;
     selectedObject = -1;
 
     populateNewObjectList();
+
+    // Set list pointer in LevelGraphicsView
+    ui->graphicsView->setListPointer(&selectedObjects);
 }
 
 void MainWindow::loadFile()
 {
+    // Clean up previous level
+    selectedObjects.clear();
+
     initializing = true;
     spriteSheet = QImage(PATH_SPRITE_IMAGE);
 
@@ -82,12 +91,7 @@ void MainWindow::loadFile()
 
 void MainWindow::updateGraphics()
 {
-    //int horizontalScrollBarPosition = ui->graphicsView->horizontalScrollBar()->sliderPosition();
-    //int verticalScrollBarPosition = ui->graphicsView->verticalScrollBar()->sliderPosition();
-
-    //qDebug("%d, %d", horizontalScrollBarPosition, verticalScrollBarPosition);
-
-    // restatr scene
+    // restart scene
     QGraphicsScene *previousScene = scene;
     scene = new QGraphicsScene(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt());
 
@@ -105,12 +109,15 @@ void MainWindow::updateGraphics()
     item->setData(3, false);        // is the object rotated?
     item->setData(4, QPoint(0,0));  // MouseOffset of the object (not used yet)
 
+    // Add objects to scene
     for(int i = 0; i < levelObjects.length(); i++)
     {
         QRect objRect;
         objRect = spriteSheetLocations.value(levelObjects.at(i).value("frame_name").toString());
 
-        //Q_ASSERT_X(objRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
+        // Make sure we are good to go
+        Q_ASSERT_X(objRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
+
         QImage img = spriteSheet.copy(objRect);
         float height = levelObjects.at(i).value("height").toFloat();
         float width = levelObjects.at(i).value("width").toFloat();
@@ -133,6 +140,32 @@ void MainWindow::updateGraphics()
         item->setData(2, i);
         item->setData(3, (rotation != 0 && rotation != 360));
         item->setData(4, QPoint(xShift, yShift));
+    }
+
+    // Display a yellow box around whichever objects are selected
+    for(int i = 0; i < selectedObjects.length(); i++)
+    {
+        int index = selectedObjects[i];
+        float height, width, x, y;
+        if(index == -1) // player is selected
+        {
+            height = levelPlist.value("starting_size").toFloat();
+            width = height;
+            x = levelPlist.value("start_x").toFloat() - width;
+            y = levelPlist.value("level_height").toFloat() - (levelPlist.value("start_y").toFloat() + height);
+        }
+        else // object is selected
+        {
+            height = levelObjects.at(index).value("height").toFloat();
+            width = levelObjects.at(index).value("width").toFloat();
+            x = levelObjects.at(index).value("x").toFloat() - width/2;
+            y = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat() + height/2);
+        }
+
+        scene->addLine(x - SELECTED_BOX_MARGIN, y - SELECTED_BOX_MARGIN, x - SELECTED_BOX_MARGIN, y+height + SELECTED_BOX_MARGIN, QPen(Qt::yellow));
+        scene->addLine(x+width +SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x-SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, QPen(Qt::yellow));
+        scene->addLine(x+width+SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow));
+        scene->addLine(x-SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow));
     }
 
     QGraphicsView *view = ui->graphicsView;
@@ -291,7 +324,7 @@ void MainWindow::objectSelected(QString type, int id)
     ui->levelPlistTableWidget->setCurrentCell(-1, -1);
     ui->objectsTableWidget->setCurrentCell(-1, -1);
 
-
+    updateGraphics();
 }
 
 void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool objectStillDragging)
@@ -367,6 +400,8 @@ void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, b
     {
         Q_ASSERT_X(false, "MainWindow::objectChanged", "Unknown object type!");
     }
+
+    updateGraphics();
 }
 
 void MainWindow::updateLevelPlistTable()
@@ -1310,6 +1345,11 @@ QMap<QString, QVariant> MainWindow::loadObjectFromTemplateFile(QString filename)
     }
 
     return newObject;
+}
+
+void MainWindow::needToUpdateGraphics()
+{
+    updateGraphics();
 }
 
 QString MainWindow::getNameForCopy(QString newName)

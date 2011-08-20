@@ -13,9 +13,9 @@
   <key>size_grow_rate</key>
   <integer>1</integer>
   <key>start_x</key>
-  <integer>250</integer>
+  <integer>225</integer>
   <key>start_y</key>
-  <integer>250</integer>
+  <integer>257</integer>
   <key>starting_size</key>
   <integer>20</integer>
   <key>world</key>
@@ -58,9 +58,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>357</integer>
+    <integer>56</integer>
     <key>y</key>
-    <integer>351</integer>
+    <integer>355</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -78,9 +78,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>115</integer>
+    <integer>378</integer>
     <key>y</key>
-    <integer>349</integer>
+    <integer>182</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -98,9 +98,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>337</integer>
+    <integer>198</integer>
     <key>y</key>
-    <integer>103</integer>
+    <integer>87</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -118,9 +118,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>237</integer>
+    <integer>290</integer>
     <key>y</key>
-    <integer>211</integer>
+    <integer>121</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -138,9 +138,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>116</integer>
+    <integer>52</integer>
     <key>y</key>
-    <integer>230</integer>
+    <integer>226</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -178,9 +178,9 @@
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>237</integer>
+    <integer>96</integer>
     <key>y</key>
-    <integer>440</integer>
+    <integer>449</integer>
    </dict>
   </array>
  </dict>
