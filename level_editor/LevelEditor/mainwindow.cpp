@@ -11,7 +11,7 @@
 #define MAX_UNDO_LIMIT 100
 
 // How far away from the edge of the object to display the yellow box when it's selected
-#define SELECTED_BOX_MARGIN 0
+#define SELECTED_BOX_MARGIN 5
 
 // The amount by which an object is translated from the original when it's copy/pasted
 #define COPY_POSITION_INCREMENT 25
@@ -143,6 +143,30 @@ void MainWindow::updateGraphics()
     }
 
     // Display a yellow box around whichever objects are selected
+    updateSelectedObjects(scene);
+
+    QGraphicsView *view = ui->graphicsView;
+
+    view->setScene(scene);
+    view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
+
+    // set background
+    scene->setBackgroundBrush(Qt::black);
+
+    // avoid memory leak.  We can't do this earlier, or the QGraphicsView resets its viewport.
+    delete previousScene;
+}
+
+void MainWindow::updateSelectedObjects(QGraphicsScene *scene)
+{
+    // Clear existing lines
+    for(int i = 0; i < sceneYellowLines.length(); i++)
+    {
+        scene->removeItem(sceneYellowLines.at(i));
+    }
+    sceneYellowLines.clear();
+
+    // Draw new lines
     for(int i = 0; i < selectedObjects.length(); i++)
     {
         int index = selectedObjects[i];
@@ -162,22 +186,11 @@ void MainWindow::updateGraphics()
             y = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat() + height/2);
         }
 
-        scene->addLine(x - SELECTED_BOX_MARGIN, y - SELECTED_BOX_MARGIN, x - SELECTED_BOX_MARGIN, y+height + SELECTED_BOX_MARGIN, QPen(Qt::yellow));
-        scene->addLine(x+width +SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x-SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, QPen(Qt::yellow));
-        scene->addLine(x+width+SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow));
-        scene->addLine(x-SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow));
+        sceneYellowLines.append(scene->addLine(x - SELECTED_BOX_MARGIN, y - SELECTED_BOX_MARGIN, x - SELECTED_BOX_MARGIN, y+height + SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x+width +SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x-SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x+width+SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x-SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
     }
-
-    QGraphicsView *view = ui->graphicsView;
-
-    view->setScene(scene);
-    view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
-
-    // set background
-    scene->setBackgroundBrush(Qt::black);
-
-    // avoid memory leak.  We can't do this earlier, or the QGraphicsView resets its viewport.
-    delete previousScene;
 }
 
 // Read sprite size and location data from plist, and save it in a hash table.
@@ -401,7 +414,15 @@ void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, b
         Q_ASSERT_X(false, "MainWindow::objectChanged", "Unknown object type!");
     }
 
-    updateGraphics();
+    // Updating graphics every frame is an enormous performance lag.
+    if(!objectStillDragging)
+    {
+        updateGraphics();
+    }
+    else
+    {
+        updateSelectedObjects(ui->graphicsView->scene());
+    }
 }
 
 void MainWindow::updateLevelPlistTable()

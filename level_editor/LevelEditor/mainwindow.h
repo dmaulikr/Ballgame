@@ -93,7 +93,8 @@ private:
     void loadSpritePlist();
     void loadLevelPlist(QString level);
     void updateGraphics();  // redraws entire level
-
+    void updateSelectedObjects(QGraphicsScene* scene);  // redraws all yellow rectangles
+    QList<QGraphicsLineItem*> sceneYellowLines; // contains pointers to all lines currently in the scene
 
     QRect strToRect(QString in); // helper function to convert string to rect
     QString getNameForCopy(QString newName); // helper function to get name after copying or creating new object
