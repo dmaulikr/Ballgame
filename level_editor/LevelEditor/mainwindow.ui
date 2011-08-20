@@ -257,7 +257,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -376,7 +376,7 @@
  <connections>
   <connection>
    <sender>actionOpen_Level</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>loadFile()</slot>
    <hints>
@@ -392,7 +392,7 @@
   </connection>
   <connection>
    <sender>actionSave_As</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>saveLevelPlistAs()</slot>
    <hints>
@@ -408,7 +408,7 @@
   </connection>
   <connection>
    <sender>actionSave</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>saveLevelPlist()</slot>
    <hints>
@@ -424,7 +424,7 @@
   </connection>
   <connection>
    <sender>actionNew_Level</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>newLevel()</slot>
    <hints>
@@ -440,7 +440,7 @@
   </connection>
   <connection>
    <sender>actionExit</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>quit()</slot>
    <hints>
@@ -456,7 +456,7 @@
   </connection>
   <connection>
    <sender>actionUndo</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>undoClicked()</slot>
    <hints>
@@ -472,7 +472,7 @@
   </connection>
   <connection>
    <sender>actionRedo</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>redoClicked()</slot>
    <hints>
@@ -488,7 +488,7 @@
   </connection>
   <connection>
    <sender>actionDelete</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>deleteClicked()</slot>
    <hints>
@@ -504,7 +504,7 @@
   </connection>
   <connection>
    <sender>actionCopy</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>copyClicked()</slot>
    <hints>
@@ -520,7 +520,7 @@
   </connection>
   <connection>
    <sender>actionPaste</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>pasteClicked()</slot>
    <hints>

@@ -82,9 +82,11 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
 
     // Fill up list of start positions (for use in mouseMove and moveReleased)
     objectStartPositions.clear();
+    objectStartSizes.clear();
     for(int i = 0; i < selectedObjects->length(); i++)
     {
         objectStartPositions.append(getItemForId(selectedObjects->at(i))->pos());
+        objectStartSizes.append(getItemForId(selectedObjects->at(i))->boundingRect().size());
     }
 
     // Save where we first clicked the mouse (for use in mouseMoveEvent and mouseReleaseEvent)
@@ -102,28 +104,43 @@ void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
 
     QPointF currentMousePos = mapToScene(event->pos());
 
-    for(int i = 0; i < selectedObjects->length(); i++)
+    if(!resizing)
     {
-        QGraphicsItem* draggedItem = getItemForId(selectedObjects->at(i));
-
-        if(!resizing)
+        for(int i = 0; i < selectedObjects->length(); i++)
         {
+            QGraphicsItem* draggedItem = getItemForId(selectedObjects->at(i));
             QPointF pos = currentMousePos - mouseDownPoint + objectStartPositions[i];
             draggedItem->setPos(pos);
             emit objectChanged(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), pos, draggedItem->boundingRect().size(), true);
         }
-        else
+    }
+    else
+    {
+        // Figure out magnitude of change
+        double deltaWidth = currentMousePos.x() - mouseDownPoint.x();
+        double deltaHeight = currentMousePos.y() - mouseDownPoint.y();
+
+        // For each selected object
+        for(int i = 0; i < selectedObjects->length(); i++)
         {
-            QPointF newPoint = mapToScene(event->pos());
+            // Retrieve object
+            int num = selectedObjects->at(i);
+            QGraphicsItem* draggedItem = getItemForId(num);
 
-            double scaleX = 1; //(newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
-            double scaleY = 1; //(newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
+            double newWidth = objectStartSizes[i].width() + deltaWidth;
+            double newHeight = objectStartSizes[i].height() + deltaHeight;
 
-            if(scaleX > 0 && scaleY > 0)
-            {
-                //previousPoint = newPoint;
-                emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, true);
-            }
+            // Make sure we're not below the minimum size
+            if(newWidth < 5) newWidth = 5;
+            if(newHeight < 5) newHeight = 5;
+
+            double newX = objectStartPositions[i].x() + newWidth/2;
+            double newY = objectStartPositions[i].y() + newHeight/2;
+
+            // This is so we don't have to call updateGraphics(), which is really slow
+            draggedItem->setTransform(QTransform().scale(newWidth / objectStartSizes[i].width(), newHeight / objectStartSizes[i].height()));
+
+            emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), newWidth, newHeight, newX, newY, true);
         }
     }
 }
@@ -150,15 +167,28 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
         }
         else
         {
-            QPointF newPoint = mapToScene(event->pos());
+            // Figure out magnitude of change
+            double deltaWidth = currentMousePos.x() - mouseDownPoint.x();
+            double deltaHeight = currentMousePos.y() - mouseDownPoint.y();
 
-            double scaleX = 1; //(newPoint.x() - draggedItem->pos().x()) / (previousPoint.x() - draggedItem->pos().x());
-            double scaleY = 1; //(newPoint.y() - draggedItem->pos().y()) / (previousPoint.y() - draggedItem->pos().y());
-
-            if(scaleX > 0 && scaleY > 0)
+            // For each selected object
+            for(int i = 0; i < selectedObjects->length(); i++)
             {
-                //previousPoint = newPoint;
-                emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), scaleX, scaleY, false);
+                // Retrieve object
+                int num = selectedObjects->at(i);
+                QGraphicsItem* draggedItem = getItemForId(num);
+
+                double newWidth = objectStartSizes[i].width() + deltaWidth;
+                double newHeight = objectStartSizes[i].height() + deltaHeight;
+
+                // Make sure we're not below the minimum size
+                if(newWidth < 5) newWidth = 5;
+                if(newHeight < 5) newHeight = 5;
+
+                double newX = objectStartPositions[i].x() + newWidth/2;
+                double newY = objectStartPositions[i].y() + newHeight/2;
+
+                emit needToRescale(draggedItem->data(1).toString(), draggedItem->data(2).toInt(), newWidth, newHeight, newX, newY, false);
             }
         }
     }
@@ -184,9 +214,4 @@ QGraphicsItem* LevelGraphicsView::getItemForId(int id)
 void LevelGraphicsView::setListPointer(QList<int> *pointer)
 {
     selectedObjects = pointer;
-
-    // Make sure we get keyboard input
-    setFocusPolicy(Qt::StrongFocus);
-
-    qDebug("Constructing");
 }

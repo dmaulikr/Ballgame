@@ -24,7 +24,7 @@ public:
 signals:
     void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
-    void needToRescale(QString, int, double, double, bool);
+    void needToRescale(QString, int, double, double, double, double, bool);
     void needToUpdateGraphics();
 
 private:
@@ -39,6 +39,7 @@ private:
     QList<int> *selectedObjects;
 
     QList<QPointF> objectStartPositions;
+    QList<QSizeF> objectStartSizes;
 
 };
 

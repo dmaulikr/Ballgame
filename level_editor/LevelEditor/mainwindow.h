@@ -60,7 +60,7 @@ private slots:
     // From LevelGraphicsView
     void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
-    void needToRescale(QString, int, double, double, bool);
+    void needToRescale(QString, int, double, double, double, double, bool);
     void needToUpdateGraphics();
 
     // Buttons
@@ -93,7 +93,7 @@ private:
     void loadSpritePlist();
     void loadLevelPlist(QString level);
     void updateGraphics();  // redraws entire level
-    void updateSelectedObjects(QGraphicsScene* scene);  // redraws all yellow rectangles
+    void updateSelectedObjects(QGraphicsScene* scene, bool removePrevious);  // redraws all yellow rectangles
     QList<QGraphicsLineItem*> sceneYellowLines; // contains pointers to all lines currently in the scene
 
     QRect strToRect(QString in); // helper function to convert string to rect

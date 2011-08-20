@@ -27,7 +27,7 @@
 #define PATH_SPRITE_PLIST "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.plist"
 #define PATH_SPRITE_IMAGE "..\\..\\ballgame\\Resources\\BallGameSpriteSheet.png"
 #define PATH_DEBUG_LEVEL "..\\..\\ballgame\\levels\\DebugLevel.level"
-#define PATH_BALLGAME_DIR "..\\..\\ballgame\\"
+#define PATH_BALLGAME_DIR "..\\..\\ballgame\\levels\\"
 #define PATH_OBJECT_TEMPLATES "..\\object_templates\\"
 #endif
 
@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->graphicsView, SIGNAL(objectChanged(QString, int, QPointF, QSizeF, bool)), this, SLOT(objectChanged(QString, int, QPointF, QSizeF, bool)));
     connect(ui->graphicsView, SIGNAL(objectSelected(QString, int)), this, SLOT(objectSelected(QString, int)));
-    connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, bool)));
+    connect(ui->graphicsView, SIGNAL(needToRescale(QString, int, double, double, double, double, bool)), this, SLOT(needToRescale(QString, int, double, double, double, double, bool)));
     connect(ui->graphicsView, SIGNAL(needToUpdateGraphics()), this, SLOT(needToUpdateGraphics()));
 
     copyObject = -1;
@@ -143,7 +143,7 @@ void MainWindow::updateGraphics()
     }
 
     // Display a yellow box around whichever objects are selected
-    updateSelectedObjects(scene);
+    updateSelectedObjects(scene, false);
 
     QGraphicsView *view = ui->graphicsView;
 
@@ -157,12 +157,15 @@ void MainWindow::updateGraphics()
     delete previousScene;
 }
 
-void MainWindow::updateSelectedObjects(QGraphicsScene *scene)
+void MainWindow::updateSelectedObjects(QGraphicsScene *scene, bool removePrevious)
 {
     // Clear existing lines
-    for(int i = 0; i < sceneYellowLines.length(); i++)
+    if(removePrevious)
     {
-        scene->removeItem(sceneYellowLines.at(i));
+        for(int i = 0; i < sceneYellowLines.length(); i++)
+        {
+            scene->removeItem(sceneYellowLines.at(i));
+        }
     }
     sceneYellowLines.clear();
 
@@ -340,48 +343,44 @@ void MainWindow::objectSelected(QString type, int id)
     updateGraphics();
 }
 
-void MainWindow::needToRescale(QString type, int id, double scaleX, double scaleY, bool objectStillDragging)
+void MainWindow::needToRescale(QString type, int id, double width, double height, double x, double y, bool objectStillDragging)
 {
     // ToDo:  rescale player
-    int x = levelObjects[id].value("width").toFloat() * scaleX;
-    int y = levelObjects[id].value("height").toFloat() * scaleY;
 
-    if(x < 5) x = 5;
-    if(y < 5) y = 5;
-
-    float dX = x - levelObjects[id].value("width").toFloat();
-    float dY = y - levelObjects[id].value("height").toFloat();
-
-    float oldX = levelObjects[id].value("x").toFloat();
-    float oldY = levelObjects[id].value("y").toFloat();
-
-    float sPXn = (float)(oldX + dX/2);
-    float sPYn = (float)(oldY - dY/2);
+    // Invert y
+    y = levelPlist.value("level_height").toInt() - y;
 
     if(!objectStillDragging)
     {
-        sPXn = (int)sPXn;
-        sPYn = (int)sPYn;
+        width = (int) width;
+        height = (int) height;
+        x = (int) x;
+        y = (int) y;
     }
 
-
+    QString sWidth = QString::number(width);
+    QString sHeight = QString::number(height);
     QString sX = QString::number(x);
     QString sY = QString::number(y);
-    QString sPX = QString::number(sPXn);
-    QString sPY = QString::number(sPYn);
 
+    levelObjects[id].insert("width", sWidth);
+    levelObjects[id].insert("height", sHeight);
+    levelObjects[id].insert("x", sX);
+    levelObjects[id].insert("y", sY);
 
-    //qDebug("scaleX - %f, scaleY - %f", scaleX, scaleY);
-    //qDebug(QString(sX + " " + sY + " " + sPX + " " + sPY).toAscii());
-    //qDebug("%f, %f", sPXn, sPYn);
-
-    levelObjects[id].insert("width", sX);
-    levelObjects[id].insert("height", sY);
-    levelObjects[id].insert("x", sPX);
-    levelObjects[id].insert("y", sPY);
-
-    updateGraphics();
+    // Update UI with new size and position
     updateObjectTable(id);
+
+    // Enormous performance boost
+    if(!objectStillDragging)
+    {
+        updateGraphics();
+    }
+    else
+    {
+        updateSelectedObjects(ui->graphicsView->scene(), true);
+    }
+
 }
 
 void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, bool objectStillDragging)
@@ -421,7 +420,7 @@ void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, b
     }
     else
     {
-        updateSelectedObjects(ui->graphicsView->scene());
+        updateSelectedObjects(ui->graphicsView->scene(), true);
     }
 }
 
