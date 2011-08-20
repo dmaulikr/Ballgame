@@ -198,6 +198,9 @@
 		AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D59213F8924D0011EBFF /* Bumper.mm */; };
 		AAB9D59513F892770011EBFF /* Bumper.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D59413F892770011EBFF /* Bumper.level */; };
 		AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */; };
+		AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D5A913F8AED70011EBFF /* GravityWell.mm */; };
+		AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */; };
+		AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */; };
 		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -581,6 +584,10 @@
 		AAB9D59213F8924D0011EBFF /* Bumper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bumper.mm; sourceTree = "<group>"; };
 		AAB9D59413F892770011EBFF /* Bumper.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bumper.level; path = levels/Bumper.level; sourceTree = "<group>"; };
 		AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Metal_Ting.wav; path = Resources/sound/fx/Metal_Ting.wav; sourceTree = "<group>"; };
+		AAB9D5A813F8AED60011EBFF /* GravityWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GravityWell.h; path = src/GravityWell.h; sourceTree = "<group>"; };
+		AAB9D5A913F8AED70011EBFF /* GravityWell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GravityWell.mm; path = src/GravityWell.mm; sourceTree = "<group>"; };
+		AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GravityWell.level; path = levels/GravityWell.level; sourceTree = "<group>"; };
+		AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GravityWell_multiple.level; path = levels/GravityWell_multiple.level; sourceTree = "<group>"; };
 		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
 		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
@@ -1090,6 +1097,8 @@
 				AA03DDFC13D7775000BEFC7F /* GameObject.h */,
 				AA03DDFD13D7775000BEFC7F /* GameObject.mm */,
 				AA03DDFE13D7775000BEFC7F /* GameObjects.h */,
+				AAB9D5A813F8AED60011EBFF /* GravityWell.h */,
+				AAB9D5A913F8AED70011EBFF /* GravityWell.mm */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -1136,6 +1145,7 @@
 		AA03DDE113D7743F00BEFC7F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */,
 				AA10978413E630CA006445B2 /* RotationLevel.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
 				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
@@ -1143,6 +1153,7 @@
 				AAE665B613E53A58009F646A /* ChargedWall.level */,
 				AAB9D58213F8571E0011EBFF /* ions.level */,
 				AAB9D59413F892770011EBFF /* Bumper.level */,
+				AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1296,6 +1307,8 @@
 				AAB9D58313F8571E0011EBFF /* ions.level in Resources */,
 				AAB9D59513F892770011EBFF /* Bumper.level in Resources */,
 				AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */,
+				AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */,
+				AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1482,7 @@
 				AAB9D58D13F859360011EBFF /* Ion.mm in Sources */,
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
+				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ struct UndoObject
 {
     QMap<QString, QString> levelPlist;
     QList< QMap<QString, QVariant> > levelObjects;
-    int currentObject;
+    QList<int> selectedObjects;
 };
 
 class MainWindow : public QMainWindow
@@ -60,13 +60,13 @@ private slots:
     // From LevelGraphicsView
     void objectChanged(QString, int, QPointF, QSizeF, bool);
     void objectSelected(QString, int);
-    void needToRescale(QString, int, double, double, bool);
+    void needToRescale(QString, int, double, double, double, double, bool);
+    void needToUpdateGraphics();
 
     // Buttons
     void addPropertyClicked();
     void deletePropertyClicked();
     void newObjectClicked();
-    void copyObjectClicked();
     void deleteObjectClicked();
     void addLevelPropertyClicked();
     void deleteLevelPropertyClicked();
@@ -75,10 +75,10 @@ private slots:
     // Other
     void levelPlistChanged(QTableWidgetItem*);
     void objectChanged(QTableWidgetItem*);
-    void updateObjectTable(int id);
     void rotationSliderMoved(int);
     void objectTableClicked(int, int);
     void newObjectClicked(QModelIndex);
+    void comboBoxChanged(int);
 
     // Other window
     void doneEditingSublist(QList<QVariant>, int, int);
@@ -92,7 +92,11 @@ private:
     void loadSpritePlist();
     void loadLevelPlist(QString level);
     void updateGraphics();  // redraws entire level
+    void updateSelectedObjects(QGraphicsScene* scene, bool removePrevious);  // redraws all yellow rectangles
+    QList<QGraphicsLineItem*> sceneYellowLines; // contains pointers to all lines currently in the scene
+
     QRect strToRect(QString in); // helper function to convert string to rect
+    QString getNameForCopy(QString newName); // helper function to get name after copying or creating new object
 
     void updateLevelPlistTable();
     void updateObjectComboBox();
@@ -116,13 +120,20 @@ private:
     void popUndo();
 
     // Copy/paste functionality
-    void createCopyOfObject(int index);
-    int selectedObject;
-    int copyObject;
+    void createCopyOfObjects(QList<int> objects);
+    QList<int> copyObjects;  // stored objects to be copied (saved when control-c is hit)
 
     // Create new object functionality
     void populateNewObjectList();
     QMap<QString, QVariant> loadObjectFromTemplateFile(QString filename);
+
+    // Multi-select functionality
+    QList<int> selectedObjects;
+
+    void updateObjectTable(int id);
+
+    // Set to true in fileOpen() function so that updateGraphics() knows to zoom out as far as possible
+    bool justLoaded;
 };
 
 #endif // MAINWINDOW_H

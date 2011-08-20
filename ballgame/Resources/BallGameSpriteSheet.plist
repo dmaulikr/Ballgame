@@ -124,7 +124,20 @@
             <key>bumper.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,490},{96,96}}</string>
+                <string>{{2,392},{96,96}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{96,96}}</string>
+                <key>sourceSize</key>
+                <string>{96,96}</string>
+            </dict>
+            <key>gravitywell.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,590},{96,96}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +150,7 @@
             <key>ion.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,588},{96,98}}</string>
+                <string>{{2,490},{96,98}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +241,7 @@
             <key>star.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,392},{96,96}}</string>
+                <string>{{2,688},{96,96}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +254,7 @@
             <key>switch.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,688},{100,100}}</string>
+                <string>{{2,786},{100,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +267,7 @@
             <key>wall.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,790},{120,128}}</string>
+                <string>{{2,888},{120,128}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -274,7 +287,7 @@
             <key>size</key>
             <string>{128,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c5f449f22ba28fc860c0569698e2289d$</string>
+            <string>$TexturePacker:SmartUpdate:d584dbe418742c8d01325860d8bec653$</string>
             <key>textureFileName</key>
             <string>BallGameSpriteSheet.png</string>
         </dict>
