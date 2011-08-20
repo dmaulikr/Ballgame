@@ -30,6 +30,9 @@ signals:
 
 private:
 
+    // For zoom
+    void SetCenter(const QPointF& centerPoint);
+
     // Helper function
     QGraphicsItem* getItemForId(int id);
 

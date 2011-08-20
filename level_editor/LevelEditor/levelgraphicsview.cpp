@@ -203,9 +203,7 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     //mouseDownPoint = QPointF(0,0);
 }
 
-/**
-  * Zoom the view in and out.
-  */
+// Zoom in/out
 void LevelGraphicsView::wheelEvent(QWheelEvent* event) {
 
     //Get the position of the mouse before scaling, in scene coords
@@ -231,8 +229,58 @@ void LevelGraphicsView::wheelEvent(QWheelEvent* event) {
     QPointF offset = pointBeforeScale - pointAfterScale;
 
     //Adjust to the new center for correct zooming
-    //QPointF newCenter = screenCenter + offset;
-    //SetCenter(newCenter);
+    QPointF newCenter = screenCenter + offset;
+    SetCenter(newCenter);
+}
+
+//Set the current centerpoint in the
+void LevelGraphicsView::SetCenter(const QPointF& centerPoint) {
+    //Get the rectangle of the visible area in scene coords
+    QRectF visibleArea = mapToScene(rect()).boundingRect();
+
+    //Get the scene area
+    QRectF sceneBounds = sceneRect();
+
+    double boundX = visibleArea.width() / 2.0;
+    double boundY = visibleArea.height() / 2.0;
+    double boundWidth = sceneBounds.width() - 2.0 * boundX;
+    double boundHeight = sceneBounds.height() - 2.0 * boundY;
+
+    //The max boundary that the centerPoint can be to
+    QRectF bounds(boundX, boundY, boundWidth, boundHeight);
+
+    QPointF CurrentCenterPoint;
+
+    if(bounds.contains(centerPoint)) {
+        //We are within the bounds
+        CurrentCenterPoint = centerPoint;
+    } else {
+        //We need to clamp or use the center of the screen
+        if(visibleArea.contains(sceneBounds)) {
+            //Use the center of scene ie. we can see the whole scene
+            CurrentCenterPoint = sceneBounds.center();
+        } else {
+
+            CurrentCenterPoint = centerPoint;
+
+            //We need to clamp the center. The centerPoint is too large
+            if(centerPoint.x() > bounds.x() + bounds.width()) {
+                CurrentCenterPoint.setX(bounds.x() + bounds.width());
+            } else if(centerPoint.x() < bounds.x()) {
+                CurrentCenterPoint.setX(bounds.x());
+            }
+
+            if(centerPoint.y() > bounds.y() + bounds.height()) {
+                CurrentCenterPoint.setY(bounds.y() + bounds.height());
+            } else if(centerPoint.y() < bounds.y()) {
+                CurrentCenterPoint.setY(bounds.y());
+            }
+
+        }
+    }
+
+    //Update the scrollbars
+    centerOn(CurrentCenterPoint);
 }
 
 QGraphicsItem* LevelGraphicsView::getItemForId(int id)
