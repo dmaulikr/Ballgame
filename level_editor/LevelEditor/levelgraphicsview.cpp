@@ -8,6 +8,7 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
 {
     // This is the default, it might get overwritten later in this function.
     resizing = false;
+    panning = false;
 
     // Check if control key is being held down
     bool controlDown = (event->modifiers() & Qt::ControlModifier);
@@ -86,23 +87,47 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
         emit objectSelected(item->data(1).toString(), item->data(2).toInt());
     }
 
-    // Fill up list of start positions (for use in mouseMove and moveReleased)
-    objectStartPositions.clear();
-    objectStartSizes.clear();
-    for(int i = 0; i < selectedObjects->length(); i++)
+    // If something relevant is happening
+    if(item || selectedObjects->count() > 0)
     {
-        objectStartPositions.append(getItemForId(selectedObjects->at(i))->pos());
-        objectStartSizes.append(getItemForId(selectedObjects->at(i))->boundingRect().size());
+        // Fill up list of start positions (for use in mouseMove and moveReleased)
+        objectStartPositions.clear();
+        objectStartSizes.clear();
+        for(int i = 0; i < selectedObjects->length(); i++)
+        {
+            objectStartPositions.append(getItemForId(selectedObjects->at(i))->pos());
+            objectStartSizes.append(getItemForId(selectedObjects->at(i))->boundingRect().size());
+        }
+
+        // Save where we first clicked the mouse (for use in mouseMoveEvent and mouseReleaseEvent)
+        mouseDownPoint = mapToScene(event->pos());
+
+        emit needToUpdateGraphics();
     }
-
-    // Save where we first clicked the mouse (for use in mouseMoveEvent and mouseReleaseEvent)
-    mouseDownPoint = mapToScene(event->pos());
-
-    emit needToUpdateGraphics();
+    else
+    {
+        panning = true;
+        lastPanPoint = event->pos();
+        setCursor(Qt::ClosedHandCursor);
+    }
 }
 
 void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
+    if(panning)
+    {
+        if(!lastPanPoint.isNull()) {
+            //Get how much we panned
+            QPointF delta = mapToScene(lastPanPoint) - mapToScene(event->pos());
+            lastPanPoint = event->pos();
+
+            //Update the center ie. do the pan
+            SetCenter(mapToScene(viewport()->rect()).boundingRect().center() + delta);
+        }
+
+        return;
+    }
+
     if(selectedObjects->length() == 0) // no item selected
     {
         return;
@@ -153,6 +178,13 @@ void LevelGraphicsView::mouseMoveEvent(QMouseEvent *event)
 
 void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
+    if(panning)
+    {
+        setCursor(Qt::ArrowCursor);
+        lastPanPoint = QPoint();
+        return;
+    }
+
     if(selectedObjects->length() == 0) // no item selected
     {
         //mouseDownPoint = QPointF(0,0);
@@ -204,8 +236,8 @@ void LevelGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 }
 
 // Zoom in/out
-void LevelGraphicsView::wheelEvent(QWheelEvent* event) {
-
+void LevelGraphicsView::wheelEvent(QWheelEvent* event)
+{
     //Get the position of the mouse before scaling, in scene coords
     QPointF pointBeforeScale(mapToScene(event->pos()));
 

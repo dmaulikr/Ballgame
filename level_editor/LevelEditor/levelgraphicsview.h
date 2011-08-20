@@ -30,8 +30,10 @@ signals:
 
 private:
 
-    // For zoom
+    // For pan/zoom
     void SetCenter(const QPointF& centerPoint);
+    bool panning;
+    QPoint lastPanPoint;
 
     // Helper function
     QGraphicsItem* getItemForId(int id);

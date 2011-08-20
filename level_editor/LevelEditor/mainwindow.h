@@ -131,6 +131,9 @@ private:
     QList<int> selectedObjects;
 
     void updateObjectTable(int id);
+
+    // Set to true in fileOpen() function so that updateGraphics() knows to zoom out as far as possible
+    bool justLoaded;
 };
 
 #endif // MAINWINDOW_H

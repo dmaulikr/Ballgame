@@ -82,6 +82,7 @@ void MainWindow::loadFile()
 
     // draw objects on screen;
     scene = new QGraphicsScene();
+    justLoaded = true;
     updateGraphics();
     initializing = false;
 }
@@ -145,9 +146,15 @@ void MainWindow::updateGraphics()
     updateSelectedObjects(scene, false);
 
     QGraphicsView *view = ui->graphicsView;
-
     view->setScene(scene);
     view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
+
+    // If we just loaded the level, zoom out all the way.
+    if(justLoaded)
+    {
+        justLoaded = false;
+        view->fitInView(0, 0, levelPlist.value("level_width").toInt(), levelPlist.value("level_height").toInt(), Qt::KeepAspectRatio);
+    }
 
     // set background
     scene->setBackgroundBrush(Qt::black);
