@@ -18,7 +18,7 @@
 
 @implementation Player
 
-@synthesize levelInfo=_levelInfo, status=_status, chargeLevel=_chargeLevel, shouldCharge=_shouldCharge;
+@synthesize levelInfo=_levelInfo, chargeLevel=_chargeLevel, shouldCharge=_shouldCharge, gsm=_gsm;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     if (_levelInfo == nil){
@@ -26,7 +26,6 @@
         return;
     }
     [super setupGameObject:game_object forWorld:world];
-    _status = PlayerBeganLevel;
     
     _identifier = GameObjectIDPlayer;
     
@@ -122,7 +121,7 @@
     
     //HARDCODE
     if (_chargeLevel > 100 || [self isStuck]){
-        _status = PlayerDied;
+        [_gsm processEvent:GSEPlayerDied withInfo:nil];
     }
     for (Effect *effect in _effects){
         [effect updateEffect:dt];
@@ -152,10 +151,11 @@
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
+    [_gsm processEvent:GSEPlayerCollided withInfo:object];
     
     switch ([object identifier]){
         case GameObjectIDGoal:
-            _status = PlayerCompletedLevel;
+            //We hit the goal.  The GSM will take care of this
             break;
         case GameObjectIDSwitch:
             break;
@@ -174,5 +174,10 @@
 -(void)noLongerCollidingWithObject:(GameObject*)object{
     [super noLongerCollidingWithObject:object];
     [object noLongerCollidingWithObject:self];
+}
+
+-(void)dealloc{
+    [_gsm release];
+    [super dealloc];
 }
 @end

@@ -10,12 +10,7 @@
 #import "cocos2d.h"
 #import "GameObject.h"
 #import "ChargedWall.h"
-
-typedef enum {
-    PlayerBeganLevel,
-    PlayerCompletedLevel,
-    PlayerDied
-} PlayerStatus;
+#import "GameStateManager.h"
 
 @interface Player : GameObject {
     float _growRate;
@@ -25,12 +20,12 @@ typedef enum {
     
     NSDictionary *_levelInfo;
     
-    PlayerStatus _status;
+    GameStateManager *_gsm;
     BOOL _shouldCharge;
     
 }
 @property (nonatomic, retain) NSDictionary *levelInfo;
-@property (readonly) PlayerStatus status;
+@property (nonatomic, retain) GameStateManager *gsm;
 @property (readwrite) float chargeLevel;
 @property (readwrite) BOOL shouldCharge;
 

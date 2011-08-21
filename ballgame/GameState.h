@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//GameState Modifications
 extern const NSString* GameStateModificationPlayerMovementEnabled;
 extern const NSString* GameStateModificationPlayerMovementDisabled;
 
@@ -16,8 +17,8 @@ typedef enum{
     GSELevelEnded,
     GSEPlayerDied,
     GSEPlayerSizeChanged,
-    GSEPlayerMoved,
-    GSEPlayerCollidedWith,
+    GSEPlayerCollided,
+    GSEPlayerCollisionEnded,
     GSEPlayerTapped
 } GameStateEvent;
 
@@ -25,8 +26,13 @@ typedef enum{
 
 @property (readonly) NSDictionary *gameStateModifications;
 @property (readonly) NSDictionary *advancementConditions;
-@property (readonly) BOOL isFinalState;
+@property (readonly) NSInteger satisfiedConditions;
+@property (readwrite) BOOL isFinalState;
 
 -(BOOL)canAdvanceGameState;
+-(BOOL)gameShouldEnd;
+
+//States
++(GameState*)defaultInitialState;
 
 @end

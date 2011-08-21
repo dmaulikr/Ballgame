@@ -53,7 +53,15 @@ enum {
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
     _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
-#pragma mark Layer Settings
+    _gsm = [[GameStateManager alloc] init];
+    if ([_levelInfo valueForKey:@"GameStates"] != nil){
+        [_gsm setOrderedGameStates:[_levelInfo valueForKey:@"GameStates"]];
+    }
+    else{
+        GameState *defaultState = [GameState defaultInitialState];
+        [defaultState setIsFinalState:YES];
+        [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
+    }
     
 #pragma mark Game World Settings
     // enable touches
@@ -211,10 +219,10 @@ enum {
 	
 	//CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
     Player *player = [Player spriteWithSpriteFrameName:@"Volt0.png"];
-
 	[batch addChild:player z:PLAYER_Z_ORDER];
     [player setLevelInfo:_levelInfo];
     [player setupGameObject:nil forWorld:world];
+    [player setGsm:_gsm];
 	
     return player;
 }
@@ -245,6 +253,22 @@ enum {
 	[layer release];
 	// return the scene
 	return scene;
+}
+#pragma mark - Game State Delegate Methods
+
+-(void)gameStateWillAdvance{
+    //Check the game state and figure out if there's anything we need 
+    //To do for the end of the current game statee
+}
+
+-(void)gameStateDidAdvance{
+    //Check the game state and figure out if there is anything we need
+    //to do for the beginning of the new game state.
+}
+
+-(void)gameShouldEndDidSucceed:(BOOL)succeeded{
+    NSLog(@"Game is over with Result: %i", succeeded);
+    [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
 }
 
 #pragma mark - Game Loop Methods
@@ -311,11 +335,6 @@ enum {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
     [self processCollisionSet:[_collisionManager collisionSet] withTime:dt];
-    
-    //Check Level Status.  Are we finished?
-	if (_thePlayer.status == PlayerCompletedLevel || _thePlayer.status == PlayerDied){
-        [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
-    }
     
     
 #pragma mark Movement of the Scroll Node
@@ -391,6 +410,7 @@ enum {
 #pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [_gsm processEvent:GSEPlayerTapped withInfo:[touches anyObject]];
      // set velocity of ball to 0
      b2Vec2 v(0, 0);
      b2Body* b = [_thePlayer body];

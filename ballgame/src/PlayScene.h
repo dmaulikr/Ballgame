@@ -17,9 +17,10 @@
 #import "CollisionManager.h"
 #import "SplashScene.h"
 #import "SimpleAudioEngine.h"
+#import "GameStateManager.h"
 // PlayScene
 
-@interface PlayScene : CCLayer
+@interface PlayScene : CCLayer <GameStateManagerDelegate>
 {
     //Physics Data
 	b2World* world;
@@ -30,6 +31,7 @@
 	GLESDebugDraw *m_debugDraw;
     
     //State Data
+    GameStateManager *_gsm;
     NSDictionary *_levelInfo;
     NSMutableArray *_gameObjects;
     Player *_thePlayer;
@@ -43,7 +45,7 @@
     CCMenu *_pauseScreenMenu;
     bool gameIsPaused;
     
-    // Accel offset
+    // Accel offset on startup
     bool firstAccel;
     float accelOffsetX;
     float accelOffsetY;
@@ -52,10 +54,11 @@
     
 }
 -(id)loadLevelWithName:(NSString*)levelName;
+-(void) showPauseMenu;
 
 //Premade Levels
 +(CCScene*)currentLevelScene;
 
--(void) showPauseMenu;
+
 
 @end

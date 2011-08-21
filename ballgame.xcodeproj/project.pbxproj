@@ -211,7 +211,7 @@
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
 		BF2B8CAA1400D560009D37EF /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.m */; };
-		BF2B8CAF140106B4009D37EF /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.m */; };
+		BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.mm */; };
 		BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */; };
 /* End PBXBuildFile section */
 
@@ -606,7 +606,7 @@
 		BF2B8CA81400D560009D37EF /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		BF2B8CA91400D560009D37EF /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
 		BF2B8CAD140106B4009D37EF /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
-		BF2B8CAE140106B4009D37EF /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStateManager.m; sourceTree = "<group>"; };
+		BF2B8CAE140106B4009D37EF /* GameStateManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameStateManager.mm; sourceTree = "<group>"; };
 		BF56D74513EF655E0072E3C5 /* TimedSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedSwitch.h; sourceTree = "<group>"; };
 		BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimedSwitch.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1236,7 +1236,7 @@
 				BF2B8CA81400D560009D37EF /* GameState.h */,
 				BF2B8CA91400D560009D37EF /* GameState.m */,
 				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
-				BF2B8CAE140106B4009D37EF /* GameStateManager.m */,
+				BF2B8CAE140106B4009D37EF /* GameStateManager.mm */,
 			);
 			name = GameState;
 			sourceTree = "<group>";
@@ -1510,7 +1510,7 @@
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
 				BF2B8CAA1400D560009D37EF /* GameState.m in Sources */,
-				BF2B8CAF140106B4009D37EF /* GameStateManager.m in Sources */,
+				BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

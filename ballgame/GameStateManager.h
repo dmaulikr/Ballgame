@@ -35,9 +35,9 @@
 #import "GameState.h"
 
 
-
 @interface GameStateManager : NSObject
 
+@property (nonatomic, retain) id delegate;
 @property (readonly) NSInteger currentGameStateIndex;
 @property (nonatomic, retain) NSArray *orderedGameStates;
 
@@ -50,5 +50,6 @@
 
 -(void)gameStateWillAdvance;
 -(void)gameStateDidAdvance;
+-(void)gameShouldEndDidSucceed:(BOOL)succeeded;
 
 @end
