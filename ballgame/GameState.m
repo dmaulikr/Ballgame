@@ -8,10 +8,12 @@
 
 #import "GameState.h"
 
-const NSString* GameStateRestrictionPlayerMovement = @"PlayerMovement";
+const NSString* GameStateModificationPlayerMovementEnabled = @"PlayerMovementEnabled";
+const NSString* GameStateModificationPlayerMovementDisabled = @"PlayerMovementDisabled";
 
 @implementation GameState
-@synthesize gameStateModifications = _gameStateModifications;
+@synthesize gameStateModifications = _gameStateModifications, advancementConditions=_advancementConditions;
+@synthesize isFinalState=_isFinalState;
 
 - (id)init
 {

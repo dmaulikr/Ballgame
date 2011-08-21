@@ -34,13 +34,15 @@
 #import <Foundation/Foundation.h>
 #import "GameState.h"
 
+
+
 @interface GameStateManager : NSObject
 
 @property (readonly) NSInteger currentGameStateIndex;
 @property (nonatomic, retain) NSArray *orderedGameStates;
 
 -(GameState*)currentGameState;
--(void)advanceGameState;
+-(void)processEvent:(GameStateEvent)event withInfo:(id)info;
 
 @end
 

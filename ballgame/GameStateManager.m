@@ -25,10 +25,9 @@
     return [_orderedGameStates objectAtIndex:_currentGameStateIndex];
 }
 
--(void)advanceGameState{
-    if (![[self currentGameState] isFinalState] && [[self currentGameState] canAdvanceGameState]){
-        
-    }
+
+-(void)processEvent:(GameStateEvent)event withInfo:(id)info{
+    
 }
 
 @end

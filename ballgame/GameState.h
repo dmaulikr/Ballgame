@@ -8,8 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-extern const NSString* GameStateRestrictionPlayerMovement;
+extern const NSString* GameStateModificationPlayerMovementEnabled;
+extern const NSString* GameStateModificationPlayerMovementDisabled;
 
+typedef enum{
+    GSELevelBegan,
+    GSELevelEnded,
+    GSEPlayerDied,
+    GSEPlayerSizeChanged,
+    GSEPlayerMoved,
+    GSEPlayerCollidedWith,
+    GSEPlayerTapped
+} GameStateEvent;
 
 @interface GameState : NSObject
 
