@@ -36,7 +36,7 @@ enum {
 
 #pragma mark - Init
 -(id)loadCurrentLevel{
-    return [self loadLevelWithName:[[GameStateManager currentLevel] valueForKey:@"name"]];
+    return [self loadLevelWithName:[[PlayerStateManager currentLevel] valueForKey:@"name"]];
 }
 
 

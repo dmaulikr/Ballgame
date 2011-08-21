@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AssetManager.h"
-#import "GameStateManager.h"
+#import "PlayerStateManager.h"
 
 typedef void (*CellBlock)();
 

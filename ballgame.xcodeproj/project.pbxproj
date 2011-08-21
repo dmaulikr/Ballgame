@@ -191,7 +191,7 @@
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
-		AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* GameStateManager.m */; };
+		AAB6F26C13E4C4D900031C64 /* PlayerStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26B13E4C4D900031C64 /* PlayerStateManager.m */; };
 		AAB9D58313F8571E0011EBFF /* ions.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D58213F8571E0011EBFF /* ions.level */; };
 		AAB9D58D13F859360011EBFF /* Ion.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58C13F859360011EBFF /* Ion.mm */; };
 		AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D58F13F88B9D0011EBFF /* Collectible.mm */; };
@@ -573,8 +573,8 @@
 		AAB6F25F13E4C47A00031C64 /* Gate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Gate.mm; path = src/Gate.mm; sourceTree = "<group>"; };
 		AAB6F26213E4C47A00031C64 /* Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Switch.h; path = src/Switch.h; sourceTree = "<group>"; };
 		AAB6F26313E4C47A00031C64 /* Switch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Switch.mm; path = src/Switch.mm; sourceTree = "<group>"; };
-		AAB6F26A13E4C4D900031C64 /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameStateManager.h; path = src/GameStateManager.h; sourceTree = "<group>"; };
-		AAB6F26B13E4C4D900031C64 /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameStateManager.m; path = src/GameStateManager.m; sourceTree = "<group>"; };
+		AAB6F26A13E4C4D900031C64 /* PlayerStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerStateManager.h; path = src/PlayerStateManager.h; sourceTree = "<group>"; };
+		AAB6F26B13E4C4D900031C64 /* PlayerStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerStateManager.m; path = src/PlayerStateManager.m; sourceTree = "<group>"; };
 		AAB9D58213F8571E0011EBFF /* ions.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ions.level; path = levels/ions.level; sourceTree = "<group>"; };
 		AAB9D58B13F859360011EBFF /* Ion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ion.h; path = src/Ion.h; sourceTree = "<group>"; };
 		AAB9D58C13F859360011EBFF /* Ion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Ion.mm; path = src/Ion.mm; sourceTree = "<group>"; };
@@ -1123,8 +1123,8 @@
 		387E357E13D39FFC006CB9AD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				AAB6F26A13E4C4D900031C64 /* GameStateManager.h */,
-				AAB6F26B13E4C4D900031C64 /* GameStateManager.m */,
+				AAB6F26A13E4C4D900031C64 /* PlayerStateManager.h */,
+				AAB6F26B13E4C4D900031C64 /* PlayerStateManager.m */,
 				AA03DDE613D7766E00BEFC7F /* AssetManager.h */,
 				AA03DDE713D7766E00BEFC7F /* AssetManager.m */,
 			);
@@ -1473,7 +1473,7 @@
 				AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */,
 				AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */,
 				AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */,
-				AAB6F26C13E4C4D900031C64 /* GameStateManager.m in Sources */,
+				AAB6F26C13E4C4D900031C64 /* PlayerStateManager.m in Sources */,
 				AAE665B413E53956009F646A /* ChargedWall.mm in Sources */,
 				BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */,
 				BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */,

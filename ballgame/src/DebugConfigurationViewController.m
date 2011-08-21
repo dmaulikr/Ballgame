@@ -153,7 +153,7 @@
             [[cell textLabel] setText:[cellTitles objectAtIndex:[indexPath row]]];
             break;
         case 1:
-            if ([indexPath row] == [[GameStateManager sharedInstance] currentLevelIndex]){
+            if ([indexPath row] == [[PlayerStateManager sharedInstance] currentLevelIndex]){
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             [[cell textLabel] setText:[NSString stringWithFormat:@"%i - %@", [indexPath row], [[levels objectAtIndex:[indexPath row]] valueForKey:@"name"]]];
@@ -233,7 +233,7 @@
     }
      
     if ([indexPath section] == 1){
-        [[GameStateManager sharedInstance] setCurrentLevelIndex:[indexPath row]];
+        [[PlayerStateManager sharedInstance] setCurrentLevelIndex:[indexPath row]];
         [tableView reloadData];
     }
     

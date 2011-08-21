@@ -13,7 +13,7 @@
 #import "GLES-Render.h"
 #import "GameObjects.h"
 #import "AssetManager.h"
-#import "GameStateManager.h"
+#import "PlayerStateManager.h"
 #import "CollisionManager.h"
 #import "SplashScene.h"
 #import "SimpleAudioEngine.h"
