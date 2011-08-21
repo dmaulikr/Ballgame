@@ -210,6 +210,8 @@
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
+		BF2B8CAA1400D560009D37EF /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.m */; };
+		BF2B8CAF140106B4009D37EF /* GameStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.m */; };
 		BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */; };
 /* End PBXBuildFile section */
 
@@ -601,6 +603,10 @@
 		BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPad.png; path = Resources/backgrounds/metalbackground_iPad.png; sourceTree = "<group>"; };
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
+		BF2B8CA81400D560009D37EF /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		BF2B8CA91400D560009D37EF /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		BF2B8CAD140106B4009D37EF /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
+		BF2B8CAE140106B4009D37EF /* GameStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStateManager.m; sourceTree = "<group>"; };
 		BF56D74513EF655E0072E3C5 /* TimedSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedSwitch.h; sourceTree = "<group>"; };
 		BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimedSwitch.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -685,6 +691,7 @@
 		381259FE13CA564E001282F6 /* ballgame */ = {
 			isa = PBXGroup;
 			children = (
+				BF2B8CAB1401064A009D37EF /* GameState */,
 				AA03DDE313D7749A00BEFC7F /* View Controllers */,
 				AA03DDE113D7743F00BEFC7F /* Levels */,
 				387E357F13D3A017006CB9AD /* Plists and Defaults */,
@@ -1081,6 +1088,7 @@
 		38125BD713CA58CE001282F6 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				BF2B8CA71400D4D4009D37EF /* Obstacles */,
 				AAB9D58913F858FD0011EBFF /* Pickups */,
 				BF56D74313EF652A0072E3C5 /* Switches */,
 				AAD890EF13E538DC003B3922 /* Walls */,
@@ -1088,17 +1096,11 @@
 				AAB6F25D13E4C47A00031C64 /* Effect.mm */,
 				AA03DE0C13D777AE00BEFC7F /* Goal.h */,
 				AA03DE0D13D777AE00BEFC7F /* Goal.mm */,
-				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
-				AA03DE0113D7777000BEFC7F /* Obstacle.mm */,
 				AA03DE0413D7777000BEFC7F /* Player.h */,
 				AA03DE0513D7777000BEFC7F /* Player.mm */,
-				BF05488313EF0D7B00FAF6E5 /* Teleporter.h */,
-				BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */,
 				AA03DDFC13D7775000BEFC7F /* GameObject.h */,
 				AA03DDFD13D7775000BEFC7F /* GameObject.mm */,
 				AA03DDFE13D7775000BEFC7F /* GameObjects.h */,
-				AAB9D5A813F8AED60011EBFF /* GravityWell.h */,
-				AAB9D5A913F8AED70011EBFF /* GravityWell.mm */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -1213,6 +1215,30 @@
 				AAB9D59213F8924D0011EBFF /* Bumper.mm */,
 			);
 			name = Walls;
+			sourceTree = "<group>";
+		};
+		BF2B8CA71400D4D4009D37EF /* Obstacles */ = {
+			isa = PBXGroup;
+			children = (
+				BF05488313EF0D7B00FAF6E5 /* Teleporter.h */,
+				BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */,
+				AA03DE0013D7777000BEFC7F /* Obstacle.h */,
+				AA03DE0113D7777000BEFC7F /* Obstacle.mm */,
+				AAB9D5A813F8AED60011EBFF /* GravityWell.h */,
+				AAB9D5A913F8AED70011EBFF /* GravityWell.mm */,
+			);
+			name = Obstacles;
+			sourceTree = "<group>";
+		};
+		BF2B8CAB1401064A009D37EF /* GameState */ = {
+			isa = PBXGroup;
+			children = (
+				BF2B8CA81400D560009D37EF /* GameState.h */,
+				BF2B8CA91400D560009D37EF /* GameState.m */,
+				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
+				BF2B8CAE140106B4009D37EF /* GameStateManager.m */,
+			);
+			name = GameState;
 			sourceTree = "<group>";
 		};
 		BF56D74313EF652A0072E3C5 /* Switches */ = {
@@ -1483,6 +1509,8 @@
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
+				BF2B8CAA1400D560009D37EF /* GameState.m in Sources */,
+				BF2B8CAF140106B4009D37EF /* GameStateManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
