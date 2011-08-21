@@ -30,6 +30,14 @@
 
 -(void)processEvent:(GameStateEvent)event withInfo:(id)info{
     //This method just forwards events to the current game state and then decides what to do from them.
+    switch (event) {
+        case GSELevelBegan:
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end
