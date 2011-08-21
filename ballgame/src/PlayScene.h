@@ -47,10 +47,10 @@
     
     // Accel offset on startup
     bool firstAccel;
-    float accelOffsetX;
-    float accelOffsetY;
-    bool accelAxisFlipped;
     float accelAngle;
+    
+    // Set to true if scrollToX:Y: was called, but hasn't finished animating yet.
+    bool scrollNodeAnimated;
     
 }
 -(id)loadLevelWithName:(NSString*)levelName;
@@ -59,6 +59,10 @@
 //Premade Levels
 +(CCScene*)currentLevelScene;
 
+// Scroll camera to given point in world coordinates
+-(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration;
 
+// Scroll camera back to player and re-enable camera tracking the player
+-(void) scrollToPlayerWithDuration:(ccTime)duration;
 
 @end
