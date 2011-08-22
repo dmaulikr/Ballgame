@@ -45,6 +45,7 @@ NSString* const GameStateTypeKey = @"game_state_type";
     _orderedGameStates = [statesMutableDict retain];
     
     //Call Game State Did Advance because we started the first game state
+    [[self currentGameState] beginCurrentGameState];
     [_delegate gameStateDidAdvance];
 }
 
@@ -58,41 +59,13 @@ NSString* const GameStateTypeKey = @"game_state_type";
         return;
     }
     if ([[self currentGameState] canAdvanceGameState]){
+        [[self currentGameState] endCurrentGameState];
         [_delegate gameStateWillAdvance];
         _currentGameStateIndex++;
+        [[self currentGameState] beginCurrentGameState];
         [_delegate gameStateDidAdvance];
     }
 }
-
-//#pragma mark - Event Forwarding
-//-(void)levelBegan{
-//    [[self currentGameState] levelBegan];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerReachedMaximumSize:(id)player{
-//    [[self currentGameState] playerReachedMaximumSize:player];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerIsStuck:(id)player{
-//    [[self currentGameState] playerIsStuck:player];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerSizeChanged:(id)player{
-//    [[self currentGameState] playerSizeChanged:player];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerCollided:(id)player andObject:(id)object{
-//    [[self currentGameState] playerCollided:player andObject:object];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerCollisionEnded:(id)player andObject:(id)object{
-//    [[self currentGameState] playerCollisionEnded:player andObject:object];
-//    [self checkForGameStateChanges];
-//}
-//-(void)playerTappedScreen:(id)touch{
-//    [[self currentGameState] playerTappedScreen:touch];
-//    [self checkForGameStateChanges];
-//}
 
 -(GameState*)currentGameState{
     return [_orderedGameStates objectAtIndex:_currentGameStateIndex];

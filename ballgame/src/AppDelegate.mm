@@ -119,9 +119,11 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[[CCDirector sharedDirector] pause];
+    [[CCDirector sharedDirector] stopAnimation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[CCDirector sharedDirector] startAnimation];
 	[[CCDirector sharedDirector] resume];
 }
 
@@ -130,16 +132,20 @@
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
-	[[CCDirector sharedDirector] stopAnimation];
+    [[CCDirector sharedDirector] pause];
+    [[CCDirector sharedDirector] stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
-	[[CCDirector sharedDirector] startAnimation];
+    [[CCDirector sharedDirector] startAnimation];
+	[[CCDirector sharedDirector] resume];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	CCDirector *director = [CCDirector sharedDirector];
 	
+    [director stopAnimation];
+    [director pause];
 	[[director openGLView] removeFromSuperview];
 	
 	[viewController release];

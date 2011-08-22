@@ -27,6 +27,10 @@ enum {
 -(id)addGameObject:(NSDictionary *)gameObject;
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
 -(void)sanitizeCollisionSetForObject:(GameObject*)gameObj;
+-(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration;
+-(void)cleanUpHelpText;
+-(void)removeAllHelpText;
+-(void)waitForDurationCompleted;
 
 @end
 
@@ -329,8 +333,12 @@ enum {
     //Check the game state and figure out if there's anything we need 
     //To do for the end of the current game state
     NSLog(@"GameStateWillAdvance");
-    for (NSDictionary *modification in [[_gsm currentGameState] gameStateModifications]){
-        NSLog(@"Found modification to Reverse: %@", modification);
+    NSDictionary *modifications = [[_gsm currentGameState] gameStateModifications];
+    for (NSString *key in [modifications allKeys]){
+        if ([key isEqualToString:GameStateModificationDisplayTextForDuration]){
+            //Clean up all help text before moving to the next game state
+            [self removeAllHelpText];
+        }
     }
     
 }
@@ -339,14 +347,39 @@ enum {
     //Check the game state and figure out if there is anything we need
     //to do for the beginning of the new game state.
     NSLog(@"GameStateDidAdvance");
-    for (NSDictionary *modification in [[_gsm currentGameState] gameStateModifications]){
-        NSLog(@"Found modification to perform: %@", modification);
+    NSDictionary *modifications = [[_gsm currentGameState] gameStateModifications];
+    for (NSString *key in [modifications allKeys]){
+        if ([key isEqualToString:GameStateModificationDisplayTextForDuration]){
+            NSDictionary *modInfo = [modifications valueForKey:key];
+            [self displayHelpText:[modInfo valueForKey:@"text"] forDuration:[[modInfo valueForKey:@"duration"] floatValue]];
+        }
+    }
+    
+    
+    //Check to see if we have any waits or pauses that we need to schedule to meet the conditions of the game state
+    
+    NSDictionary *conditionsToMeet = [[_gsm currentGameState] advancementConditions];
+    
+    if ([conditionsToMeet valueForKey:GameStateConditionWaitForDuration] != nil){
+        ccTime duration = [[conditionsToMeet valueForKey:GameStateConditionWaitForDuration] floatValue];
+        if (duration == 0){
+            NSLog(@"ERROR: A GameState should never request a wait of zero duration");
+        }
+        [self schedule:@selector(waitForDurationCompleted) interval:duration];
+        
+        
     }
 }
 
 -(void)gameShouldEndDidSucceed:(BOOL)succeeded{
     NSLog(@"Game is over with Result: %i", succeeded);
     [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
+}
+
+-(void)waitForDurationCompleted{
+    NSLog(@"Wait for Duration completed");
+    [[_gsm currentGameState] waitForDurationFinished];
+    [self unschedule:@selector(waitForDurationCompleted)];
 }
 
 #pragma mark - Game Loop Methods
@@ -686,6 +719,23 @@ enum {
     [pauseLayer addChild:_menu z:10];
 }
 
+-(void)removeAllHelpText{
+    
+}
+
+-(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration{
+    NSLog(@"Displaying text: %@", text);
+    if (duration != 0){
+        //A Zero Duration means that the text stays up until the game state is completed
+        [self schedule:@selector(cleanUpHelpText) interval:duration];
+    }
+}
+
+-(void)cleanUpHelpText{
+    NSLog(@"Cleaning up Help text");
+    [self removeAllHelpText];
+    [self unschedule:@selector(cleanUpHelpText)];
+}
 #pragma mark - Data Management
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc

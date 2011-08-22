@@ -30,7 +30,6 @@ NSString* const GameStateConditionObjectCollisionBegan = @"CollisionBegan";
 NSString* const GameStateConditionObjectCollisionEnded = @"CollisionEnded";
 NSString* const GameStateConditionPlayerTap = @"PlayerTapped";
 NSString* const GameStateConditionWaitForDuration = @"WaitForDuration";
-NSString* const GameStateConditionPauseForDuration = @"PauseForDuration";
 
 @interface GameState ()
 
@@ -95,6 +94,23 @@ NSString* const GameStateConditionPauseForDuration = @"PauseForDuration";
     return _playerBecameStuck || _playerReachedMaximumSize || [self playerWon];
 }
 #pragma mark - Event Handlers
+
+-(void)beginCurrentGameState{
+    //Check for any timers that need to get kicked off to satisfy duration conditions
+    NSLog(@"The current game state %@ has begun", self);
+}
+
+                              
+-(void)endCurrentGameState{
+    NSLog(@"The current game state %@ has ended", self);
+}
+
+-(void)waitForDurationFinished{
+    if ([_advancementConditions objectForKey:GameStateConditionWaitForDuration] != nil){
+        NSLog(@"Wait for Duration satisfied");
+        [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionWaitForDuration];
+    }
+}
 
 -(void)levelBegan{
     

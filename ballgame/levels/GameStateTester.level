@@ -11,7 +11,7 @@
   <key>level_width</key>
   <integer>2000</integer>
   <key>size_grow_rate</key>
-  <integer>30</integer>
+  <integer>2</integer>
   <key>start_x</key>
   <integer>1875</integer>
   <key>start_y</key>
@@ -59,7 +59,21 @@
             <key>PlayerTapped</key>
             <integer>1</integer>
         </dict>
-    </dict> 
+    </dict>
+     <dict>
+         <key>game_state_type</key>
+         <string>GameState</string>
+         <key>modifications</key>
+         <dict>
+             <key>DisplayTextForDuration</key>
+             <dict>
+                 <key>text</key>
+                 <string>Reached the final state</string>
+                 <key>duration</key>
+                 <real>0.0</real>
+             </dict>
+         </dict>
+     </dict> 
  </array>
      <key>game_objects</key>
      <array>

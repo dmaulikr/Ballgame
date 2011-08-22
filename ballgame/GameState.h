@@ -26,7 +26,6 @@ extern NSString* const GameStateConditionObjectCollisionBegan;
 extern NSString* const GameStateConditionObjectCollisionEnded;
 extern NSString* const GameStateConditionPlayerTap;
 extern NSString* const GameStateConditionWaitForDuration;
-extern NSString* const GameStateConditionPauseForDuration;
 
 @interface GameState : NSObject
 
@@ -36,9 +35,12 @@ extern NSString* const GameStateConditionPauseForDuration;
 
 -(id)initWithGameStateMods:(NSDictionary*)mods andConditions:(NSDictionary*)conditions;
 
+-(void)beginCurrentGameState;
+-(void)endCurrentGameState;
 -(BOOL)canAdvanceGameState;
 -(BOOL)gameShouldEnd;
 -(BOOL)playerWon;
+
 
 //Event Handlers - Overriding these shouldn't be necessary in MOST cases.
 -(void)levelBegan;
@@ -48,6 +50,7 @@ extern NSString* const GameStateConditionPauseForDuration;
 -(void)playerCollided:(id)player andObject:(id)object;
 -(void)playerCollisionEnded:(id)player andObject:(id)object;
 -(void)playerTappedScreen:(id)touch;
+-(void)waitForDurationFinished;
 
 //States
 +(GameState*)defaultInitialState;
