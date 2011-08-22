@@ -210,9 +210,10 @@
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
-		BF2B8CAA1400D560009D37EF /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.m */; };
+		BF2B8CAA1400D560009D37EF /* GameState.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.mm */; };
 		BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.mm */; };
 		BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */; };
+		BF811E421401C95300C97CC1 /* GameStateTester.level in Resources */ = {isa = PBXBuildFile; fileRef = BF811E411401C95300C97CC1 /* GameStateTester.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -604,11 +605,12 @@
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
 		BF2B8CA81400D560009D37EF /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		BF2B8CA91400D560009D37EF /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		BF2B8CA91400D560009D37EF /* GameState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameState.mm; sourceTree = "<group>"; };
 		BF2B8CAD140106B4009D37EF /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
 		BF2B8CAE140106B4009D37EF /* GameStateManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameStateManager.mm; sourceTree = "<group>"; };
 		BF56D74513EF655E0072E3C5 /* TimedSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedSwitch.h; sourceTree = "<group>"; };
 		BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimedSwitch.mm; sourceTree = "<group>"; };
+		BF811E411401C95300C97CC1 /* GameStateTester.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GameStateTester.level; path = levels/GameStateTester.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1147,6 +1149,7 @@
 		AA03DDE113D7743F00BEFC7F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				BF811E411401C95300C97CC1 /* GameStateTester.level */,
 				AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */,
 				AA10978413E630CA006445B2 /* RotationLevel.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
@@ -1234,7 +1237,7 @@
 			isa = PBXGroup;
 			children = (
 				BF2B8CA81400D560009D37EF /* GameState.h */,
-				BF2B8CA91400D560009D37EF /* GameState.m */,
+				BF2B8CA91400D560009D37EF /* GameState.mm */,
 				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
 				BF2B8CAE140106B4009D37EF /* GameStateManager.mm */,
 			);
@@ -1335,6 +1338,7 @@
 				AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */,
 				AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */,
 				AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */,
+				BF811E421401C95300C97CC1 /* GameStateTester.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1509,7 +1513,7 @@
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
-				BF2B8CAA1400D560009D37EF /* GameState.m in Sources */,
+				BF2B8CAA1400D560009D37EF /* GameState.mm in Sources */,
 				BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

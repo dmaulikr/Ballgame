@@ -34,6 +34,7 @@
 #import <Foundation/Foundation.h>
 #import "GameState.h"
 
+extern NSString* const GameStateModificationsKey;
 
 @interface GameStateManager : NSObject
 
@@ -41,8 +42,17 @@
 @property (readonly) NSInteger currentGameStateIndex;
 @property (nonatomic, retain) NSArray *orderedGameStates;
 
+-(void)generateGameStatesFromDictionaries:(NSArray*)statesInPlist;
+-(void)checkForGameStateChanges;
+//-(void)levelBegan;
+//-(void)playerReachedMaximumSize:(id)player;
+//-(void)playerIsStuck:(id)player;
+//-(void)playerSizeChanged:(id)player;
+//-(void)playerCollided:(id)player andObject:(id)object;
+//-(void)playerCollisionEnded:(id)player andObject:(id)object;
+//-(void)playerTappedScreen:(id)touch;
+
 -(GameState*)currentGameState;
--(void)processEvent:(GameStateEvent)event withInfo:(id)info;
 
 @end
 
