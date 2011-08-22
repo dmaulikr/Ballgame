@@ -56,9 +56,8 @@ enum {
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
     _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
     _gsm = [[GameStateManager alloc] init];
-    _gsm.delegate = self;
-    if ([_levelInfo valueForKey:@"game_states"] != nil){
-        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:@"game_states"]];
+    if ([_levelInfo valueForKey:@"GameStates"] != nil){
+        [_gsm setOrderedGameStates:[_levelInfo valueForKey:@"GameStates"]];
     }
     else{
         GameState *defaultState = [GameState defaultInitialState];
@@ -327,21 +326,12 @@ enum {
 
 -(void)gameStateWillAdvance{
     //Check the game state and figure out if there's anything we need 
-    //To do for the end of the current game state
-    NSLog(@"GameStateWillAdvance");
-    for (NSDictionary *modification in [[_gsm currentGameState] gameStateModifications]){
-        NSLog(@"Found modification to Reverse: %@", modification);
-    }
-    
+    //To do for the end of the current game statee
 }
 
 -(void)gameStateDidAdvance{
     //Check the game state and figure out if there is anything we need
     //to do for the beginning of the new game state.
-    NSLog(@"GameStateDidAdvance");
-    for (NSDictionary *modification in [[_gsm currentGameState] gameStateModifications]){
-        NSLog(@"Found modification to perform: %@", modification);
-    }
 }
 
 -(void)gameShouldEndDidSucceed:(BOOL)succeeded{
@@ -424,8 +414,6 @@ enum {
             [self sanitizeCollisionSetForObject:obj];
         }
     }
-    
-    [_gsm checkForGameStateChanges];
     
 }
 
@@ -548,7 +536,7 @@ enum {
 #pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [[_gsm currentGameState] playerTappedScreen:[touches anyObject]];
+    [_gsm processEvent:GSEPlayerTapped withInfo:[touches anyObject]];
      // set velocity of ball to 0
      b2Vec2 v(0, 0);
      world->SetGravity(v);

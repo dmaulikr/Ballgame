@@ -43,6 +43,9 @@
     
     // This is checked at the end of each game loop to see if this object needs to go away
     bool flaggedForDeletion;
+    
+    // Pointer to world
+    b2World* _world;
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;

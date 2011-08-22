@@ -120,13 +120,9 @@
      */
     
     //HARDCODE
-    if (_chargeLevel > 100 ){
-        [[_gsm currentGameState] playerReachedMaximumSize:self];
+    if (_chargeLevel > 100 || [self isStuck]){
+        [_gsm processEvent:GSEPlayerDied withInfo:nil];
     }
-    if ([self isStuck]){
-        [[_gsm currentGameState] playerIsStuck:self];
-    }
-    
     for (Effect *effect in _effects){
         [effect updateEffect:dt];
     }
@@ -155,7 +151,7 @@
 
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
-    [[_gsm currentGameState] playerCollided:self andObject:object];
+    [_gsm processEvent:GSEPlayerCollided withInfo:object];
     
     switch ([object identifier]){
         case GameObjectIDGoal:
