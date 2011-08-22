@@ -187,9 +187,10 @@
 		AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */; };
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
 		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
-		AA38F0B01401FC4E005C8AEA /* Chaser.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA38F0AF1401FC4E005C8AEA /* Chaser.mm */; };
-		AA38F0B41401FC99005C8AEA /* Chaser.level in Resources */ = {isa = PBXBuildFile; fileRef = AA38F0B31401FC99005C8AEA /* Chaser.level */; };
 		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
+		AA6F6F7D1401FD7800C26FA4 /* GameState.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA6F6F7C1401FD7800C26FA4 /* GameState.mm */; };
+		AA6F6F801401FDD600C26FA4 /* Chaser.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */; };
+		AA6F6F821401FDFB00C26FA4 /* Chaser.level in Resources */ = {isa = PBXBuildFile; fileRef = AA6F6F811401FDFB00C26FA4 /* Chaser.level */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
@@ -572,10 +573,11 @@
 		AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ChargedWallCollision.wav; path = Resources/sound/fx/ChargedWallCollision.wav; sourceTree = "<group>"; };
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
 		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
-		AA38F0AF1401FC4E005C8AEA /* Chaser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Chaser.mm; path = src/Chaser.mm; sourceTree = "<group>"; };
-		AA38F0B21401FC66005C8AEA /* Chaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chaser.h; sourceTree = "<group>"; };
-		AA38F0B31401FC99005C8AEA /* Chaser.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chaser.level; sourceTree = "<group>"; };
 		AA583A2013E64B11004954E9 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu_texture.jpg; path = Resources/backgrounds/menu_texture.jpg; sourceTree = "<group>"; };
+		AA6F6F7C1401FD7800C26FA4 /* GameState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameState.mm; sourceTree = "<group>"; };
+		AA6F6F7E1401FD9700C26FA4 /* Chaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chaser.h; sourceTree = "<group>"; };
+		AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chaser.mm; sourceTree = "<group>"; };
+		AA6F6F811401FDFB00C26FA4 /* Chaser.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chaser.level; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
@@ -1166,7 +1168,7 @@
 				AAB9D58213F8571E0011EBFF /* ions.level */,
 				AAB9D59413F892770011EBFF /* Bumper.level */,
 				AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */,
-				AA38F0B31401FC99005C8AEA /* Chaser.level */,
+				AA6F6F811401FDFB00C26FA4 /* Chaser.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1219,8 +1221,8 @@
 		AABD61F61401E28200E9B854 /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
-				AA38F0AF1401FC4E005C8AEA /* Chaser.mm */,
-				AA38F0B21401FC66005C8AEA /* Chaser.h */,
+				AA6F6F7E1401FD9700C26FA4 /* Chaser.h */,
+				AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */,
 			);
 			name = Enemies;
 			sourceTree = "<group>";
@@ -1257,6 +1259,7 @@
 			isa = PBXGroup;
 			children = (
 				BF2B8CA81400D560009D37EF /* GameState.h */,
+				AA6F6F7C1401FD7800C26FA4 /* GameState.mm */,
 				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
 				BF2B8CAE140106B4009D37EF /* GameStateManager.mm */,
 			);
@@ -1360,7 +1363,7 @@
 				AABD62021401E3AC00E9B854 /* Giggle.wav in Resources */,
 				AABD62051401E40800E9B854 /* Splash.wav in Resources */,
 				AABD62071401E61300E9B854 /* Buzz.wav in Resources */,
-				AA38F0B41401FC99005C8AEA /* Chaser.level in Resources */,
+				AA6F6F821401FDFB00C26FA4 /* Chaser.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1536,7 +1539,8 @@
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
 				BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */,
-				AA38F0B01401FC4E005C8AEA /* Chaser.mm in Sources */,
+				AA6F6F7D1401FD7800C26FA4 /* GameState.mm in Sources */,
+				AA6F6F801401FDD600C26FA4 /* Chaser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
