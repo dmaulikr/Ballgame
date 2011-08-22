@@ -86,9 +86,6 @@
     
     // Make sure we don't delete this object immediately :P
     flaggedForDeletion = false;
-    
-    // Save reference to world
-    _world = world;
 }
 
 -(void) setupSprite

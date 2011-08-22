@@ -187,6 +187,8 @@
 		AA10978113E62A0F006445B2 /* ChargedWallCollision.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */; };
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
 		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
+		AA38F0B01401FC4E005C8AEA /* Chaser.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA38F0AF1401FC4E005C8AEA /* Chaser.mm */; };
+		AA38F0B41401FC99005C8AEA /* Chaser.level in Resources */ = {isa = PBXBuildFile; fileRef = AA38F0B31401FC99005C8AEA /* Chaser.level */; };
 		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
@@ -201,8 +203,6 @@
 		AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D5A913F8AED70011EBFF /* GravityWell.mm */; };
 		AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */; };
 		AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */; };
-		AABD61FA1401E29E00E9B854 /* Chaser.mm in Sources */ = {isa = PBXBuildFile; fileRef = AABD61F91401E29E00E9B854 /* Chaser.mm */; };
-		AABD61FC1401E34C00E9B854 /* Chaser.level in Resources */ = {isa = PBXBuildFile; fileRef = AABD61FB1401E34C00E9B854 /* Chaser.level */; };
 		AABD62021401E3AC00E9B854 /* Giggle.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62011401E3AC00E9B854 /* Giggle.wav */; };
 		AABD62051401E40800E9B854 /* Splash.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62041401E40800E9B854 /* Splash.wav */; };
 		AABD62071401E61300E9B854 /* Buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62061401E61300E9B854 /* Buzz.wav */; };
@@ -215,7 +215,6 @@
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
-		BF2B8CAA1400D560009D37EF /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.m */; };
 		BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.mm */; };
 		BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */; };
 /* End PBXBuildFile section */
@@ -573,6 +572,9 @@
 		AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ChargedWallCollision.wav; path = Resources/sound/fx/ChargedWallCollision.wav; sourceTree = "<group>"; };
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
 		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
+		AA38F0AF1401FC4E005C8AEA /* Chaser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Chaser.mm; path = src/Chaser.mm; sourceTree = "<group>"; };
+		AA38F0B21401FC66005C8AEA /* Chaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chaser.h; sourceTree = "<group>"; };
+		AA38F0B31401FC99005C8AEA /* Chaser.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chaser.level; sourceTree = "<group>"; };
 		AA583A2013E64B11004954E9 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu_texture.jpg; path = Resources/backgrounds/menu_texture.jpg; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
@@ -595,9 +597,6 @@
 		AAB9D5A913F8AED70011EBFF /* GravityWell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GravityWell.mm; path = src/GravityWell.mm; sourceTree = "<group>"; };
 		AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GravityWell.level; path = levels/GravityWell.level; sourceTree = "<group>"; };
 		AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GravityWell_multiple.level; path = levels/GravityWell_multiple.level; sourceTree = "<group>"; };
-		AABD61F81401E29E00E9B854 /* Chaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chaser.h; path = src/Chaser.h; sourceTree = "<group>"; };
-		AABD61F91401E29E00E9B854 /* Chaser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Chaser.mm; path = src/Chaser.mm; sourceTree = "<group>"; };
-		AABD61FB1401E34C00E9B854 /* Chaser.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Chaser.level; path = levels/Chaser.level; sourceTree = "<group>"; };
 		AABD62011401E3AC00E9B854 /* Giggle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Giggle.wav; path = Resources/sound/fx/Giggle.wav; sourceTree = "<group>"; };
 		AABD62041401E40800E9B854 /* Splash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Splash.wav; path = Resources/sound/fx/Splash.wav; sourceTree = "<group>"; };
 		AABD62061401E61300E9B854 /* Buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Buzz.wav; path = Resources/sound/fx/Buzz.wav; sourceTree = "<group>"; };
@@ -615,7 +614,6 @@
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
 		BF2B8CA81400D560009D37EF /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		BF2B8CA91400D560009D37EF /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
 		BF2B8CAD140106B4009D37EF /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
 		BF2B8CAE140106B4009D37EF /* GameStateManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameStateManager.mm; sourceTree = "<group>"; };
 		BF56D74513EF655E0072E3C5 /* TimedSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedSwitch.h; sourceTree = "<group>"; };
@@ -1168,7 +1166,7 @@
 				AAB9D58213F8571E0011EBFF /* ions.level */,
 				AAB9D59413F892770011EBFF /* Bumper.level */,
 				AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */,
-				AABD61FB1401E34C00E9B854 /* Chaser.level */,
+				AA38F0B31401FC99005C8AEA /* Chaser.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1221,8 +1219,8 @@
 		AABD61F61401E28200E9B854 /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
-				AABD61F81401E29E00E9B854 /* Chaser.h */,
-				AABD61F91401E29E00E9B854 /* Chaser.mm */,
+				AA38F0AF1401FC4E005C8AEA /* Chaser.mm */,
+				AA38F0B21401FC66005C8AEA /* Chaser.h */,
 			);
 			name = Enemies;
 			sourceTree = "<group>";
@@ -1259,7 +1257,6 @@
 			isa = PBXGroup;
 			children = (
 				BF2B8CA81400D560009D37EF /* GameState.h */,
-				BF2B8CA91400D560009D37EF /* GameState.m */,
 				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
 				BF2B8CAE140106B4009D37EF /* GameStateManager.mm */,
 			);
@@ -1360,10 +1357,10 @@
 				AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */,
 				AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */,
 				AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */,
-				AABD61FC1401E34C00E9B854 /* Chaser.level in Resources */,
 				AABD62021401E3AC00E9B854 /* Giggle.wav in Resources */,
 				AABD62051401E40800E9B854 /* Splash.wav in Resources */,
 				AABD62071401E61300E9B854 /* Buzz.wav in Resources */,
+				AA38F0B41401FC99005C8AEA /* Chaser.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1538,9 +1535,8 @@
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
-				BF2B8CAA1400D560009D37EF /* GameState.m in Sources */,
 				BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */,
-				AABD61FA1401E29E00E9B854 /* Chaser.mm in Sources */,
+				AA38F0B01401FC4E005C8AEA /* Chaser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
