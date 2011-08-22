@@ -20,3 +20,6 @@ ballgame/.DS_Store
 .DS_Store
 
 *.backup
+ballgame/GameState.m
+
+ballgame.xcodeproj/project.pbxproj

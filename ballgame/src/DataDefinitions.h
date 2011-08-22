@@ -39,7 +39,6 @@ typedef enum {
     GameObjectIDCollectible,
     GameObjectIDBumper,
     GameObjectIDGravityWell,
-    GameObjectIDChaser,
 } GameObjectID;
 
 #define BACKGROUND_MUSIC @"Game1"
