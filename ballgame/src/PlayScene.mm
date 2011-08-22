@@ -43,6 +43,8 @@ enum {
 -(id)loadLevelWithName:(NSString *)levelName{
 
     gameIsPaused = false;
+    scrollNodeAnimated = false;
+    currentZoomLevel = 1.0f;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     if (_levelInfo == nil){
@@ -64,15 +66,13 @@ enum {
         [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
     }
     
-#pragma mark Game World Settings
-    // enable touches
+    // Enable touches
     self.isTouchEnabled = YES;
     
-    // enable accelerometer
+    // Enable accelerometer
     self.isAccelerometerEnabled = YES;
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
-    //CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
     
     // Define the gravity vector.
     b2Vec2 gravity;
@@ -131,19 +131,14 @@ enum {
     groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
-    
-#pragma mark Load the Background
     // If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
 #if !DEBUG_DRAW
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
     // background texture
-	//CGSize winSize = [CCDirector sharedDirector].winSize;
     int NUM_TILES = 1;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
-        //[background setScale:[background scale] * 2];
         NUM_TILES = 2;
     }
-	//int IMAGE_SIZE = 512;
 	for(int i = 0; i < NUM_TILES; i++)
 		for(int j = 0; j < NUM_TILES; j++)
 		{
@@ -155,8 +150,6 @@ enum {
 			
 		}
 #endif
-    
-#pragma mark Game Object Initialization
     
     //Initialize the Sprite Sheet
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
@@ -177,6 +170,18 @@ enum {
 	//[scrollNode addChild:batch z:0 parallaxRatio:ccp(1.0f,1.0f) positionOffset:CGPointZero];
     [scrollNode setTag:kTagBatchNode];
     [self addChild:scrollNode];
+    
+    // Delete this crap
+    // Temporary button to make sure scroll to position is working
+    // Standard method to create a button
+    CCMenuItem *starMenuItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG SCROLL" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped:)];
+    starMenuItem.position = ccp(60, 60);
+    CCMenuItem *starMenuItem2 = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG ZOOM" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped2:)];
+    starMenuItem2.position = ccp(60, 120);
+    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, starMenuItem2, nil];
+    starMenu.position = CGPointZero;
+    [self addChild:starMenu];
+    // Stop deleting here
     
     //Add the game Objects
     _thePlayer = [[self addPlayer] retain];
@@ -204,13 +209,76 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
-    
-    
-#pragma mark Initialize the game loop
     [self schedule: @selector(update:)];
 
     return self;
 }
+
+// Delete this crap
+-(void) starButtonTapped:(id)sender
+{
+    id action1 = [CCCallFunc actionWithTarget:self selector:@selector(func1)];
+    id action3 = [CCCallFunc actionWithTarget:self selector:@selector(func2)];
+    id action5 = [CCCallFunc actionWithTarget:self selector:@selector(func3)];
+    id action7 = [CCCallFunc actionWithTarget:self selector:@selector(func4)];
+    
+    id action2 = [CCDelayTime actionWithDuration:1.5f];
+    id action4 = [CCDelayTime actionWithDuration:1.5f];
+    id action6 = [CCDelayTime actionWithDuration:1.5f];
+    
+    id seq = [CCSequence actions:action1, action2, action3, action3, action4, action5, action6, action7, nil];
+    
+    [self runAction:seq];
+    
+    NSLog(@"button triggered!");
+}
+
+-(void) func1
+{
+    [self scrollToX:1000 Y:0 withDuration:1.0];
+}
+
+-(void) func2
+{
+    [self scrollToX:0 Y:0 withDuration:1.0];
+}
+
+-(void) func3
+{
+    [self scrollToX:0 Y:1000 withDuration:1.0];
+}
+
+-(void) func4
+{
+    [self scrollToPlayerWithDuration:1.0];
+}
+
+-(void) starButtonTapped2:(id)sender
+{
+    id action1 = [CCCallFunc actionWithTarget:self selector:@selector(func5)];
+    id action3 = [CCCallFunc actionWithTarget:self selector:@selector(func6)];
+    
+    id action2 = [CCDelayTime actionWithDuration:2.5f];
+    
+    id seq = [CCSequence actions:action1, action2, action3, action3, nil];
+    
+    [self runAction:seq];
+    
+    NSLog(@"button triggered!");
+}
+
+-(void) func5
+{
+    [self zoomToFullLevelWithDuration:1.0];
+}
+
+-(void) func6
+{
+    [self zoomToNormalWithDuration:1.0];
+}
+
+// Stop deleting this crap here
+
 
 #pragma mark - Level Creation
 
@@ -286,17 +354,8 @@ enum {
 -(void) draw
 {
     
-     // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-     // Needed states:  GL_VERTEX_ARRAY, 
-     // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-        
-    //[super draw];
-    
 #if DEBUG_DRAW
 
-    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-    // Needed states:  GL_VERTEX_ARRAY,
-    // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
     glDisable(GL_TEXTURE_2D);
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -323,14 +382,10 @@ enum {
 }
 
 -(void) update: (ccTime) dt
-{
-    
-   // NSLog(@"current - %f, %f, new - %f, %f", currentPos.x, currentPos.y, newPosition.x, newPosition.y);
-    
+{    
     [_thePlayer updateGameObject:dt];
     for (GameObject *object in _gameObjects){
         [object updateGameObject:dt];
-        //NSLog(@"Updated :%@", object);
     }
     
 	//It is recommended that a fixed time step is used with Box2D for stability
@@ -346,13 +401,12 @@ enum {
 	world->Step(dt, velocityIterations, positionIterations);
     [self processCollisionSet:[_collisionManager collisionSet] withTime:dt];
     
-    
-#pragma mark Movement of the Scroll Node
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-	// if ball moved off the edge
-    
     //Center the scroll node on the player's position...sort of =)
-    [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    if(!scrollNodeAnimated)
+    {
+        [scrollNode setPosition:CGPointMake((-_thePlayer.position.x + winSize.width/2) * currentZoomLevel , (-_thePlayer.position.y + winSize.height/2) * currentZoomLevel )];
+    }
     
     // Clean up objects that need to be deleted :(
     for(int i = 0; i < [_gameObjects count]; i++)
@@ -419,14 +473,85 @@ enum {
 
 }
 
+
+#pragma mark Scroll and Zoom
+
+-(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-x + winSize.width/2, -y + winSize.height/2)];
+    [scrollNode runAction:action];
+    
+    // Make sure we don't follow the player for now
+    scrollNodeAnimated = true;
+}
+
+-(void) scrollToPlayerWithDuration:(ccTime)duration
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
+    [scrollNode runAction:action];
+    
+    // Schedule a callback for when this is done
+    [self schedule:@selector(doneScrollingToPlayer:) interval:duration];
+}
+
+- (void)doneScrollingToPlayer: (ccTime) dt
+{    
+    // Unscehdule this selector so that it only runs once
+    [self unschedule:@selector(doneScrollingToPlayer:)];
+    
+    // Make sure we start following the player again
+    scrollNodeAnimated = false;
+}
+
+-(void) zoomToScale:(float)zoom withDuration:(ccTime)duration
+{
+    id action = [CCScaleTo actionWithDuration:duration scale:zoom];
+    [scrollNode runAction:action];
+    
+    currentZoomLevel = zoom;
+}
+
+-(void) zoomToNormalWithDuration:(ccTime)duration
+{
+    [self zoomToScale:1.0 withDuration:duration];
+    
+    // Recenter on the player
+    [self scrollToPlayerWithDuration:duration];
+}
+
+-(void) zoomToFullLevelWithDuration:(ccTime)duration
+{
+    // Figure out horizontal and vertical components of zoom
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    float vertZoom = winSize.height / [[_levelInfo valueForKey:@"level_height"] floatValue];
+    float horZoom = winSize.width / [[_levelInfo valueForKey:@"level_width"] floatValue];
+    
+    // Take the smaller (more zoomed out) of the two
+    float zoom = vertZoom;
+    if(horZoom < vertZoom)
+        zoom = horZoom;
+    
+    // Figure out where we're scrolling to
+    float scroll = [[_levelInfo valueForKey:@"level_width"] floatValue]/2 - winSize.width/2;
+    if(vertZoom == zoom)
+        scroll = [[_levelInfo valueForKey:@"level_height"] floatValue]/2 - winSize.height/2;
+    
+    // Zoom to that level
+    [self zoomToScale:zoom withDuration:duration];
+    
+    // Make sure we are centered on the level
+    [self scrollToX:scroll Y:scroll withDuration:duration];
+}
+
 #pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[_gsm currentGameState] playerTappedScreen:[touches anyObject]];
      // set velocity of ball to 0
      b2Vec2 v(0, 0);
-     b2Body* b = [_thePlayer body];
-     b->SetLinearVelocity(v);
+     world->SetGravity(v);
 }
 
 
@@ -459,26 +584,18 @@ enum {
 		
 		float accelX = vConst*(pointX - objectX);
 		float accelY = vConst*(pointY - objectY);
-        
-        /*
-        NSLog(@"Click location %1.2f, %1.2f",pointX,pointY);
-		NSLog(@"Ball Location %1.2f, %1.2f", [_thePlayer position].x, [_thePlayer position].y);
-        NSLog(@"ScrollNode Pos %1.2f, %1.2f", currentPos.x, currentPos.y);
-        NSLog(@"Object position %1.2f, %1.2f", objectX, objectY);
-        NSLog(@"Acceleration %1.2f, %1.2f", accelX, accelY);
-        NSLog(@" ");
-         */
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();
-        v *= 10;
-		b->SetLinearVelocity(v);
+        v *= 55;
+		world->SetGravity(v);
         
 	}	
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
+    // The first this function is called, figure out what at angle the device is being held
     if(firstAccel)
     {
         float aX = (float)acceleration.x;
@@ -497,16 +614,6 @@ enum {
 	float accelX = (float) acceleration.x * cos(accelAngle) - (float)acceleration.z * sin(accelAngle);
 	float accelY = (float) acceleration.y;
     
-    NSLog(@"Accel x, y, z = %f, %f, %f", (float)acceleration.x, (float)acceleration.y, (float)acceleration.z);
-    NSLog(@"AccelX = %f, angle = %f", accelX, accelAngle);
-    NSLog(@"  ");
-    
-
-    
-    // Temporary fix
-    if(accelAxisFlipped)
-        accelX = -(float)acceleration.z;
-    
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
 	b2Vec2 gravity( -accelY * gravAdjustment, accelX * gravAdjustment);
@@ -519,11 +626,10 @@ enum {
         gravity.x /= gravLength;
         gravity.y /= gravLength;
     }
-    
-
 	
 	world->SetGravity( gravity );
 }
+
 -(void)resumeTapped:(id)sender
 {
     // Remove pause menu
