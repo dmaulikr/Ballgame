@@ -188,6 +188,9 @@
 		AA10978213E62A0F006445B2 /* SwitchOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA10978013E62A0F006445B2 /* SwitchOn.wav */; };
 		AA10978613E630CA006445B2 /* RotationLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = AA10978413E630CA006445B2 /* RotationLevel.level */; };
 		AA583A2113E64B11004954E9 /* menu_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA583A2013E64B11004954E9 /* menu_texture.jpg */; };
+		AA6F6F7D1401FD7800C26FA4 /* GameState.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA6F6F7C1401FD7800C26FA4 /* GameState.mm */; };
+		AA6F6F801401FDD600C26FA4 /* Chaser.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */; };
+		AA6F6F821401FDFB00C26FA4 /* Chaser.level in Resources */ = {isa = PBXBuildFile; fileRef = AA6F6F811401FDFB00C26FA4 /* Chaser.level */; };
 		AAB6F26413E4C47A00031C64 /* Effect.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25D13E4C47A00031C64 /* Effect.mm */; };
 		AAB6F26513E4C47A00031C64 /* Gate.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F25F13E4C47A00031C64 /* Gate.mm */; };
 		AAB6F26713E4C47A00031C64 /* Switch.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F26313E4C47A00031C64 /* Switch.mm */; };
@@ -201,6 +204,9 @@
 		AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB9D5A913F8AED70011EBFF /* GravityWell.mm */; };
 		AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */; };
 		AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */ = {isa = PBXBuildFile; fileRef = AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */; };
+		AABD62021401E3AC00E9B854 /* Giggle.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62011401E3AC00E9B854 /* Giggle.wav */; };
+		AABD62051401E40800E9B854 /* Splash.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62041401E40800E9B854 /* Splash.wav */; };
+		AABD62071401E61300E9B854 /* Buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = AABD62061401E61300E9B854 /* Buzz.wav */; };
 		AAD1C7F213EF407700F639C3 /* SettingsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAD1C7F113EF407700F639C3 /* SettingsScene.mm */; };
 		AAE665B413E53956009F646A /* ChargedWall.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAE665B113E53956009F646A /* ChargedWall.mm */; };
 		AAE665B713E53A58009F646A /* ChargedWall.level in Resources */ = {isa = PBXBuildFile; fileRef = AAE665B613E53A58009F646A /* ChargedWall.level */; };
@@ -210,10 +216,8 @@
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
-		BF2B8CAA1400D560009D37EF /* GameState.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CA91400D560009D37EF /* GameState.mm */; };
 		BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8CAE140106B4009D37EF /* GameStateManager.mm */; };
 		BF56D74713EF655E0072E3C5 /* TimedSwitch.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */; };
-		BF811E421401C95300C97CC1 /* GameStateTester.level in Resources */ = {isa = PBXBuildFile; fileRef = BF811E411401C95300C97CC1 /* GameStateTester.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -570,6 +574,10 @@
 		AA10978013E62A0F006445B2 /* SwitchOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SwitchOn.wav; path = Resources/sound/fx/SwitchOn.wav; sourceTree = "<group>"; };
 		AA10978413E630CA006445B2 /* RotationLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RotationLevel.level; path = levels/RotationLevel.level; sourceTree = "<group>"; };
 		AA583A2013E64B11004954E9 /* menu_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu_texture.jpg; path = Resources/backgrounds/menu_texture.jpg; sourceTree = "<group>"; };
+		AA6F6F7C1401FD7800C26FA4 /* GameState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameState.mm; sourceTree = "<group>"; };
+		AA6F6F7E1401FD9700C26FA4 /* Chaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chaser.h; sourceTree = "<group>"; };
+		AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chaser.mm; sourceTree = "<group>"; };
+		AA6F6F811401FDFB00C26FA4 /* Chaser.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chaser.level; sourceTree = "<group>"; };
 		AAB6F25C13E4C47A00031C64 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effect.h; path = src/Effect.h; sourceTree = "<group>"; };
 		AAB6F25D13E4C47A00031C64 /* Effect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Effect.mm; path = src/Effect.mm; sourceTree = "<group>"; };
 		AAB6F25E13E4C47A00031C64 /* Gate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gate.h; path = src/Gate.h; sourceTree = "<group>"; };
@@ -591,6 +599,9 @@
 		AAB9D5A913F8AED70011EBFF /* GravityWell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GravityWell.mm; path = src/GravityWell.mm; sourceTree = "<group>"; };
 		AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GravityWell.level; path = levels/GravityWell.level; sourceTree = "<group>"; };
 		AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GravityWell_multiple.level; path = levels/GravityWell_multiple.level; sourceTree = "<group>"; };
+		AABD62011401E3AC00E9B854 /* Giggle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Giggle.wav; path = Resources/sound/fx/Giggle.wav; sourceTree = "<group>"; };
+		AABD62041401E40800E9B854 /* Splash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Splash.wav; path = Resources/sound/fx/Splash.wav; sourceTree = "<group>"; };
+		AABD62061401E61300E9B854 /* Buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Buzz.wav; path = Resources/sound/fx/Buzz.wav; sourceTree = "<group>"; };
 		AAD1C7F013EF407700F639C3 /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsScene.h; path = src/SettingsScene.h; sourceTree = "<group>"; };
 		AAD1C7F113EF407700F639C3 /* SettingsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsScene.mm; path = src/SettingsScene.mm; sourceTree = "<group>"; };
 		AAE665B013E53956009F646A /* ChargedWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargedWall.h; path = src/ChargedWall.h; sourceTree = "<group>"; };
@@ -605,12 +616,10 @@
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
 		BF2B8CA81400D560009D37EF /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		BF2B8CA91400D560009D37EF /* GameState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameState.mm; sourceTree = "<group>"; };
 		BF2B8CAD140106B4009D37EF /* GameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateManager.h; sourceTree = "<group>"; };
 		BF2B8CAE140106B4009D37EF /* GameStateManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameStateManager.mm; sourceTree = "<group>"; };
 		BF56D74513EF655E0072E3C5 /* TimedSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedSwitch.h; sourceTree = "<group>"; };
 		BF56D74613EF655E0072E3C5 /* TimedSwitch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimedSwitch.mm; sourceTree = "<group>"; };
-		BF811E411401C95300C97CC1 /* GameStateTester.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GameStateTester.level; path = levels/GameStateTester.level; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1090,6 +1099,7 @@
 		38125BD713CA58CE001282F6 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				AABD61F61401E28200E9B854 /* Enemies */,
 				BF2B8CA71400D4D4009D37EF /* Obstacles */,
 				AAB9D58913F858FD0011EBFF /* Pickups */,
 				BF56D74313EF652A0072E3C5 /* Switches */,
@@ -1149,7 +1159,6 @@
 		AA03DDE113D7743F00BEFC7F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				BF811E411401C95300C97CC1 /* GameStateTester.level */,
 				AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */,
 				AA10978413E630CA006445B2 /* RotationLevel.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
@@ -1159,6 +1168,7 @@
 				AAB9D58213F8571E0011EBFF /* ions.level */,
 				AAB9D59413F892770011EBFF /* Bumper.level */,
 				AAB9D5AB13F8AF2E0011EBFF /* GravityWell.level */,
+				AA6F6F811401FDFB00C26FA4 /* Chaser.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -1184,6 +1194,9 @@
 		AA10978313E62A15006445B2 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				AABD62061401E61300E9B854 /* Buzz.wav */,
+				AABD62041401E40800E9B854 /* Splash.wav */,
+				AABD62011401E3AC00E9B854 /* Giggle.wav */,
 				AAB9D5A613F8957D0011EBFF /* Metal_Ting.wav */,
 				AA10977F13E62A0F006445B2 /* ChargedWallCollision.wav */,
 				AA10978013E62A0F006445B2 /* SwitchOn.wav */,
@@ -1203,6 +1216,15 @@
 				AAB9D58F13F88B9D0011EBFF /* Collectible.mm */,
 			);
 			name = Pickups;
+			sourceTree = "<group>";
+		};
+		AABD61F61401E28200E9B854 /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+				AA6F6F7E1401FD9700C26FA4 /* Chaser.h */,
+				AA6F6F7F1401FDD600C26FA4 /* Chaser.mm */,
+			);
+			name = Enemies;
 			sourceTree = "<group>";
 		};
 		AAD890EF13E538DC003B3922 /* Walls */ = {
@@ -1237,7 +1259,7 @@
 			isa = PBXGroup;
 			children = (
 				BF2B8CA81400D560009D37EF /* GameState.h */,
-				BF2B8CA91400D560009D37EF /* GameState.mm */,
+				AA6F6F7C1401FD7800C26FA4 /* GameState.mm */,
 				BF2B8CAD140106B4009D37EF /* GameStateManager.h */,
 				BF2B8CAE140106B4009D37EF /* GameStateManager.mm */,
 			);
@@ -1338,7 +1360,10 @@
 				AAB9D5A713F8957D0011EBFF /* Metal_Ting.wav in Resources */,
 				AAB9D5AC13F8AF2E0011EBFF /* GravityWell.level in Resources */,
 				AAB9D5B313F8BF8E0011EBFF /* GravityWell_multiple.level in Resources */,
-				BF811E421401C95300C97CC1 /* GameStateTester.level in Resources */,
+				AABD62021401E3AC00E9B854 /* Giggle.wav in Resources */,
+				AABD62051401E40800E9B854 /* Splash.wav in Resources */,
+				AABD62071401E61300E9B854 /* Buzz.wav in Resources */,
+				AA6F6F821401FDFB00C26FA4 /* Chaser.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1513,8 +1538,9 @@
 				AAB9D59013F88B9D0011EBFF /* Collectible.mm in Sources */,
 				AAB9D59313F8924D0011EBFF /* Bumper.mm in Sources */,
 				AAB9D5AA13F8AED80011EBFF /* GravityWell.mm in Sources */,
-				BF2B8CAA1400D560009D37EF /* GameState.mm in Sources */,
 				BF2B8CAF140106B4009D37EF /* GameStateManager.mm in Sources */,
+				AA6F6F7D1401FD7800C26FA4 /* GameState.mm in Sources */,
+				AA6F6F801401FDD600C26FA4 /* Chaser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

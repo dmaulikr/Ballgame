@@ -64,6 +64,9 @@
     // Save original size for use in resize() function
     originalSize = [self contentSize];
     
+    //Save the world (You're a hero)
+    _world = world;
+    
     // This is overwritten in Ions
     objectSize.width = [[_objectInfo valueForKey:@"width"] floatValue];
     objectSize.height = [[_objectInfo valueForKey:@"height"] floatValue];

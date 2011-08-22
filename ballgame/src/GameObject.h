@@ -27,6 +27,7 @@
     //Physics Info
     b2Body *_body; //I have a body!
     GameObjectID _identifier;
+    b2World *_world;
     
     CGSize originalSize;
     
