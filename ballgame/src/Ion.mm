@@ -57,7 +57,7 @@
     if(player.chargeLevel < 0)
         player.chargeLevel = 0;
     
-    NSLog(@"Charge - %f", player.chargeLevel);
+    //NSLog(@"Charge - %f", player.chargeLevel);
 }
 
 @end
