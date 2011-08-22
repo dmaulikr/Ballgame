@@ -44,6 +44,7 @@ enum {
 
     gameIsPaused = false;
     scrollNodeAnimated = false;
+    currentZoomLevel = 1.0f;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     if (_levelInfo == nil){
@@ -174,7 +175,9 @@ enum {
     // Standard method to create a button
     CCMenuItem *starMenuItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG SCROLL" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped:)];
     starMenuItem.position = ccp(60, 60);
-    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, nil];
+    CCMenuItem *starMenuItem2 = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG ZOOM" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped2:)];
+    starMenuItem2.position = ccp(60, 120);
+    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, starMenuItem2, nil];
     starMenu.position = CGPointZero;
     [self addChild:starMenu];
     // Stop deleting here
@@ -231,23 +234,48 @@ enum {
 
 -(void) func1
 {
-    [self scrollToX:900 Y:100 withDuration:1.0];
+    [self scrollToX:1000 Y:0 withDuration:1.0];
 }
 
 -(void) func2
 {
-    [self scrollToX:100 Y:100 withDuration:1.0];
+    [self scrollToX:0 Y:0 withDuration:1.0];
 }
 
 -(void) func3
 {
-    [self scrollToX:100 Y:900 withDuration:1.0];
+    [self scrollToX:0 Y:1000 withDuration:1.0];
 }
 
 -(void) func4
 {
     [self scrollToPlayerWithDuration:1.0];
 }
+
+-(void) starButtonTapped2:(id)sender
+{
+    id action1 = [CCCallFunc actionWithTarget:self selector:@selector(func5)];
+    id action3 = [CCCallFunc actionWithTarget:self selector:@selector(func6)];
+    
+    id action2 = [CCDelayTime actionWithDuration:2.5f];
+    
+    id seq = [CCSequence actions:action1, action2, action3, action3, nil];
+    
+    [self runAction:seq];
+    
+    NSLog(@"button triggered!");
+}
+
+-(void) func5
+{
+    [self zoomToFullLevelWithDuration:1.0];
+}
+
+-(void) func6
+{
+    [self zoomToNormalWithDuration:1.0];
+}
+
 // Stop deleting this crap here
 
 
@@ -367,7 +395,7 @@ enum {
     CGSize winSize = [CCDirector sharedDirector].winSize;
     if(!scrollNodeAnimated)
     {
-        [scrollNode setPosition:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
+        [scrollNode setPosition:CGPointMake((-_thePlayer.position.x + winSize.width/2) * currentZoomLevel , (-_thePlayer.position.y + winSize.height/2) * currentZoomLevel )];
     }
     
     // Clean up objects that need to be deleted :(
@@ -433,9 +461,13 @@ enum {
 
 }
 
+
+#pragma mark Scroll and Zoom
+
 -(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration
 {
-    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-x, -y)];
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-x + winSize.width/2, -y + winSize.height/2)];
     [scrollNode runAction:action];
     
     // Make sure we don't follow the player for now
@@ -459,6 +491,46 @@ enum {
     
     // Make sure we start following the player again
     scrollNodeAnimated = false;
+}
+
+-(void) zoomToScale:(float)zoom withDuration:(ccTime)duration
+{
+    id action = [CCScaleTo actionWithDuration:duration scale:zoom];
+    [scrollNode runAction:action];
+    
+    currentZoomLevel = zoom;
+}
+
+-(void) zoomToNormalWithDuration:(ccTime)duration
+{
+    [self zoomToScale:1.0 withDuration:duration];
+    
+    // Recenter on the player
+    [self scrollToPlayerWithDuration:duration];
+}
+
+-(void) zoomToFullLevelWithDuration:(ccTime)duration
+{
+    // Figure out horizontal and vertical components of zoom
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    float vertZoom = winSize.height / [[_levelInfo valueForKey:@"level_height"] floatValue];
+    float horZoom = winSize.width / [[_levelInfo valueForKey:@"level_width"] floatValue];
+    
+    // Take the smaller (more zoomed out) of the two
+    float zoom = vertZoom;
+    if(horZoom < vertZoom)
+        zoom = horZoom;
+    
+    // Figure out where we're scrolling to
+    float scroll = [[_levelInfo valueForKey:@"level_width"] floatValue]/2 - winSize.width/2;
+    if(vertZoom == zoom)
+        scroll = [[_levelInfo valueForKey:@"level_height"] floatValue]/2 - winSize.height/2;
+    
+    // Zoom to that level
+    [self zoomToScale:zoom withDuration:duration];
+    
+    // Make sure we are centered on the level
+    [self scrollToX:scroll Y:scroll withDuration:duration];
 }
 
 #pragma mark - User Input
