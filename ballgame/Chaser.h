@@ -8,7 +8,7 @@
 
 #import "GameObject.h"
 #import "Player.h"
-
+//
 @interface Chaser : GameObject
 {
     // Pointer to player
