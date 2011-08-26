@@ -712,7 +712,7 @@
 				AA03DDE313D7749A00BEFC7F /* View Controllers */,
 				AA03DDE113D7743F00BEFC7F /* Levels */,
 				387E357F13D3A017006CB9AD /* Plists and Defaults */,
-				387E357E13D39FFC006CB9AD /* Managers */,
+				387E357E13D39FFC006CB9AD /* Persistent Data */,
 				387E357513D38BC4006CB9AD /* UI Constructs */,
 				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
@@ -1140,7 +1140,7 @@
 			name = "UI Constructs";
 			sourceTree = "<group>";
 		};
-		387E357E13D39FFC006CB9AD /* Managers */ = {
+		387E357E13D39FFC006CB9AD /* Persistent Data */ = {
 			isa = PBXGroup;
 			children = (
 				AAB6F26A13E4C4D900031C64 /* PlayerStateManager.h */,
@@ -1148,7 +1148,7 @@
 				AA03DDE613D7766E00BEFC7F /* AssetManager.h */,
 				AA03DDE713D7766E00BEFC7F /* AssetManager.m */,
 			);
-			name = Managers;
+			name = "Persistent Data";
 			sourceTree = "<group>";
 		};
 		387E357F13D3A017006CB9AD /* Plists and Defaults */ = {
