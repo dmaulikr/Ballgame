@@ -213,6 +213,9 @@
 		BF05488513EF0D7B00FAF6E5 /* Teleporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF05488413EF0D7B00FAF6E5 /* Teleporter.mm */; };
 		BF05488913EF0D8B00FAF6E5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF05488713EF0D8B00FAF6E5 /* SettingsViewController.m */; };
 		BF05488A13EF0D8B00FAF6E5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF05488813EF0D8B00FAF6E5 /* SettingsViewController.xib */; };
+		BF0ADC1E1402261E006505F4 /* IntroductoryLevel.level in Resources */ = {isa = PBXBuildFile; fileRef = BF0ADC1C1402261E006505F4 /* IntroductoryLevel.level */; };
+		BF0ADC1F1402261E006505F4 /* IntroductoryLevelScript.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF0ADC1D1402261E006505F4 /* IntroductoryLevelScript.rtf */; };
+		BF0ADC211402268A006505F4 /* GameStateTester.level in Resources */ = {isa = PBXBuildFile; fileRef = BF0ADC201402268A006505F4 /* GameStateTester.level */; };
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
@@ -612,6 +615,9 @@
 		BF05488613EF0D8B00FAF6E5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = src/SettingsViewController.h; sourceTree = "<group>"; };
 		BF05488713EF0D8B00FAF6E5 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = src/SettingsViewController.m; sourceTree = "<group>"; };
 		BF05488813EF0D8B00FAF6E5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = src/SettingsViewController.xib; sourceTree = "<group>"; };
+		BF0ADC1C1402261E006505F4 /* IntroductoryLevel.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = IntroductoryLevel.level; sourceTree = "<group>"; };
+		BF0ADC1D1402261E006505F4 /* IntroductoryLevelScript.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = IntroductoryLevelScript.rtf; sourceTree = "<group>"; };
+		BF0ADC201402268A006505F4 /* GameStateTester.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GameStateTester.level; path = levels/GameStateTester.level; sourceTree = "<group>"; };
 		BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPad.png; path = Resources/backgrounds/metalbackground_iPad.png; sourceTree = "<group>"; };
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
@@ -1159,7 +1165,9 @@
 		AA03DDE113D7743F00BEFC7F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				BF0ADC1B1402261E006505F4 /* GameLevels */,
 				AAB9D5B213F8BF8E0011EBFF /* GravityWell_multiple.level */,
+				BF0ADC201402268A006505F4 /* GameStateTester.level */,
 				AA10978413E630CA006445B2 /* RotationLevel.level */,
 				AA03DDE913D7768200BEFC7F /* box.level */,
 				AA03DDEA13D7768200BEFC7F /* MoveableWall.level */,
@@ -1240,6 +1248,16 @@
 				AAB9D59213F8924D0011EBFF /* Bumper.mm */,
 			);
 			name = Walls;
+			sourceTree = "<group>";
+		};
+		BF0ADC1B1402261E006505F4 /* GameLevels */ = {
+			isa = PBXGroup;
+			children = (
+				BF0ADC1C1402261E006505F4 /* IntroductoryLevel.level */,
+				BF0ADC1D1402261E006505F4 /* IntroductoryLevelScript.rtf */,
+			);
+			name = GameLevels;
+			path = levels/GameLevels;
 			sourceTree = "<group>";
 		};
 		BF2B8CA71400D4D4009D37EF /* Obstacles */ = {
@@ -1364,6 +1382,9 @@
 				AABD62051401E40800E9B854 /* Splash.wav in Resources */,
 				AABD62071401E61300E9B854 /* Buzz.wav in Resources */,
 				AA6F6F821401FDFB00C26FA4 /* Chaser.level in Resources */,
+				BF0ADC1E1402261E006505F4 /* IntroductoryLevel.level in Resources */,
+				BF0ADC1F1402261E006505F4 /* IntroductoryLevelScript.rtf in Resources */,
+				BF0ADC211402268A006505F4 /* GameStateTester.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

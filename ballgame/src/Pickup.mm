@@ -23,7 +23,7 @@
             [self wasPickedUpByPlayer:(Player*)object];
             
             // Delete this object at the end of this game loop
-            flaggedForDeletion = true;
+            [self removeFromWorld];
             
             break;
         default:

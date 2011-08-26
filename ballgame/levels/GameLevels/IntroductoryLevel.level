@@ -20,6 +20,71 @@
   <integer>20</integer>
   <key>world</key>
   <string>null</string>
+  <key>game_states</key>
+  <array>
+      <dict>
+          <key>game_state_type</key>
+          <string>GameState</string>
+          <key>modifications</key>
+          <dict>
+              <key>DisplayTextForDuration</key>
+              <dict>
+                  <key>text</key>
+                  <string>Welcome to Volt.  Tilt the device to move.</string>
+                  <key>duration</key>
+                  <real>5.0</real>
+              </dict>
+              <key>PlayerGrowthAdjustment</key>
+              <real>0.0</real>
+          </dict>
+          <key>conditions</key>
+          <dict>
+              <key>WaitForDuration</key>
+              <real>5.0</real>
+          </dict>
+      </dict>
+      <dict>
+          <key>game_state_type</key>
+          <string>GameState</string>
+          <key>modifications</key>
+          <dict>
+              <key>DisplayTextForDuration</key>
+              <dict>
+                  <key>text</key>
+                  <string>Whenever you're ready, tap the screen and we'll let you out.</string>
+                  <key>duration</key>
+                  <real>5.0</real>
+              </dict>
+          </dict>
+          <key>conditions</key>
+          <dict>
+              <key>PlayerTapped</key>
+              <integer>1</integer>
+          </dict>
+      </dict>
+      <dict>
+          <key>game_state_type</key>
+          <string>GameState</string>
+          <key>modifications</key>
+          <dict>
+              <key>DisplayTextForDuration</key>
+              <dict>
+                  <key>text</key>
+                  <string>Move out to explore the other parts of the circuit.</string>
+                  <key>duration</key>
+                  <real>5.0</real>
+              </dict>
+              <key>RemoveObjectNamed</key>
+              <string>barrier1</string>
+          </dict>
+          <key>conditions</key>
+          <dict>
+              <key>PlayerTapped</key>
+              <integer>1</integer>
+          </dict>
+      </dict>
+      
+  </array>
   <key>game_objects</key>
   <array>
    <dict>

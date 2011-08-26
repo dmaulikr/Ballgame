@@ -161,7 +161,7 @@
 -(void) didCollideWithPlayer
 {
     // Delete this object at the end of this game loop
-    flaggedForDeletion = true;
+    [self removeFromWorld];
     
     int chargeDec = [[_objectInfo objectForKey:@"charge_increment"] intValue];
     

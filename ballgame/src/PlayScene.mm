@@ -31,6 +31,7 @@ enum {
 -(void)cleanUpHelpText;
 -(void)removeAllHelpText;
 -(void)waitForDurationCompleted;
+-(void)_gameObjectCleanup;
 
 @end
 
@@ -59,16 +60,7 @@ enum {
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
     _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
-    _gsm = [[GameStateManager alloc] init];
-    _gsm.delegate = self;
-    if ([_levelInfo valueForKey:@"game_states"] != nil){
-        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:@"game_states"]];
-    }
-    else{
-        GameState *defaultState = [GameState defaultInitialState];
-        [defaultState setIsFinalState:YES];
-        [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
-    }
+    
     
     // Enable touches
     self.isTouchEnabled = YES;
@@ -213,6 +205,18 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
+#pragma mark Initialize the game state
+    _gsm = [[GameStateManager alloc] init];
+    _gsm.delegate = self;
+    if ([_levelInfo valueForKey:@"game_states"] != nil){
+        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:@"game_states"]];
+    }
+    else{
+        GameState *defaultState = [GameState defaultInitialState];
+        [defaultState setIsFinalState:YES];
+        [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
+    }
+#pragma mark Schedule the update function
     [self schedule: @selector(update:)];
 
     return self;
@@ -353,6 +357,25 @@ enum {
             NSDictionary *modInfo = [modifications valueForKey:key];
             [self displayHelpText:[modInfo valueForKey:@"text"] forDuration:[[modInfo valueForKey:@"duration"] floatValue]];
         }
+        if ([key isEqualToString:GameStateModificationRemoveObjectNamed]){
+            NSString *modInfo = [modifications valueForKey:key];
+            GameObject *specifiedObject;
+            //Find the Object
+            for (GameObject *searchObj in _gameObjects){
+                if ([[searchObj name] isEqualToString:modInfo]){
+                    specifiedObject = searchObj;
+                    break;
+                }
+            }
+            [specifiedObject removeFromWorld];
+        }
+        
+        if ([key isEqualToString:GameStateModificationGrowthSpeedAdjustment]){
+            float newGrowth = [[modifications valueForKey:key] floatValue];
+            NSLog(@"setting growth to %1.2f", newGrowth);
+            [_thePlayer setGrowRate:newGrowth];
+            
+        }
     }
     
     
@@ -442,21 +465,7 @@ enum {
     }
     
     // Clean up objects that need to be deleted :(
-    for(int i = 0; i < [_gameObjects count]; i++)
-    {
-        GameObject *obj = [_gameObjects objectAtIndex:i];
-        if(obj.flaggedForDeletion)
-        {   
-            //Remove the object from our list of game objects and all parent nodes
-            //Also remove the box2d representation from the world.
-            [_gameObjects removeObjectAtIndex:i];
-            CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
-            [batch removeChild:obj cleanup:YES];
-            world->DestroyBody([obj getBody]);
-            i--;
-            [self sanitizeCollisionSetForObject:obj];
-        }
-    }
+    [self _gameObjectCleanup];
     
     [_gsm checkForGameStateChanges];
     
@@ -491,21 +500,23 @@ enum {
     
 }
 
--(void)sanitizeCollisionSetForObject:(GameObject*)gameObj{
-    //This is necessary since we generate events by looking into the past but we may have to remove an object from the past
-    //If we release it....This seems so wrong...
-    NSMutableSet *newPreviousItems = [NSMutableSet setWithSet:_previousCollisions];
-    for (GameObjectCollision *collision in _previousCollisions){
-        if ([collision eitherObjectIsEqual:gameObj]){
-            NSLog(@"Found a collision holding onto this object");
-            [newPreviousItems removeObject:collision];
+-(void)_gameObjectCleanup{
+    NSMutableArray *objToDelete = [NSMutableArray arrayWithCapacity:[_gameObjects count]];
+    for(int i = 0; i < [_gameObjects count]; i++)
+    {
+        GameObject *obj = [_gameObjects objectAtIndex:i];
+        if(obj.flaggedForDeletion)
+        {   
+            [objToDelete addObject:obj];
+            [_gameObjects removeObject:obj];
         }
     }
-        [_previousCollisions release];
-        _previousCollisions = [newPreviousItems copy];
-
+    CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+    for (GameObject *flaggedObject in objToDelete){
+        [batch removeChild:flaggedObject cleanup:YES];
+    }
+    [objToDelete removeAllObjects];
 }
-
 
 #pragma mark Scroll and Zoom
 
@@ -720,7 +731,7 @@ enum {
 }
 
 -(void)removeAllHelpText{
-    
+    [self unschedule:@selector(cleanUpHelpText)];
 }
 
 -(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration{

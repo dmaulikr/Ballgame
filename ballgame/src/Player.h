@@ -27,6 +27,7 @@
 @property (nonatomic, retain) NSDictionary *levelInfo;
 @property (nonatomic, retain) GameStateManager *gsm;
 @property (readwrite) float chargeLevel;
+@property (readwrite) float growRate;
 @property (readwrite) BOOL shouldCharge;
 
 -(BOOL)isStuck;

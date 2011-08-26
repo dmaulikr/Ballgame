@@ -18,7 +18,7 @@
 
 @implementation Player
 
-@synthesize levelInfo=_levelInfo, chargeLevel=_chargeLevel, shouldCharge=_shouldCharge, gsm=_gsm;
+@synthesize levelInfo=_levelInfo, chargeLevel=_chargeLevel, shouldCharge=_shouldCharge, gsm=_gsm, growRate=_growRate;
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
     if (_levelInfo == nil){

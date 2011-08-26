@@ -47,10 +47,11 @@
 }
 @property (readonly) GameObjectID identifier;
 @property (readwrite) b2Body *body;
-@property (readwrite) bool flaggedForDeletion;
+@property (readonly) bool flaggedForDeletion;
 
 -(NSString*)name;
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world;
+-(void)removeFromWorld;
 
 // Setup functions
 -(void) setupSprite;

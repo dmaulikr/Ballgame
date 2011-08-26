@@ -91,6 +91,11 @@
     flaggedForDeletion = false;
 }
 
+-(void)removeFromWorld{
+    //Override removeFromWorld to do animations with a game object before removing it from the world
+    flaggedForDeletion = true;
+}
+
 -(void) setupSprite
 {
     CGPoint p;
@@ -197,13 +202,6 @@
     return _body;
 }
 
--(void)dealloc{
-    
-    [_objectInfo release];
-    //TODO: Destroy all info about the object that we have created.
-    [super dealloc];
-}
-
 -(void) rescale:(CGSize)size
 {
     float originalWidth = originalSize.width;
@@ -215,6 +213,16 @@
     [self setScaleY:newScaleY];
 }
 
+#pragma mark - Cleanup
+
+-(void)dealloc{
+    
+    [_objectInfo release];
+    //TODO: Destroy all info about the object that we have created.
+    
+    _world->DestroyBody(_body);
+    [super dealloc];
+}
 
 
 @end
