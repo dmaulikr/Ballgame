@@ -26,7 +26,6 @@ enum {
 -(Player*)addPlayer;
 -(id)addGameObject:(NSDictionary *)gameObject;
 -(void)processCollisionSet:(NSSet*)collisionSet withTime:(ccTime)dt;
--(void)sanitizeCollisionSetForObject:(GameObject*)gameObj;
 -(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration;
 -(void)cleanUpHelpText;
 -(void)removeAllHelpText;
