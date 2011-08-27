@@ -39,6 +39,10 @@
     //Sublayers
     CCLayer *scrollNode;
     
+    //HUD
+    CCLayer *_hudLayer;
+    CCLabelTTF *_userMessageLabel;
+    
     // Pausing
     CCLayer *pauseLayer;
     CCSprite *_pauseScreen;

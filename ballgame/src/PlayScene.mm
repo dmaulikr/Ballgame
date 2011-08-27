@@ -18,6 +18,7 @@ enum {
 	kTagTileMap = 1,
 	kTagBatchNode = 1,
 	kTagAnimation1 = 1,
+    kTagHud = 2,
     kTagPauseMenu = 1337,
 };
 
@@ -34,9 +35,7 @@ enum {
 
 @end
 
-// HelloWorldLayer implementation
 @implementation PlayScene
-
 
 #pragma mark - Init
 -(id)loadCurrentLevel{
@@ -204,7 +203,16 @@ enum {
     
     [_collisionManager subscribeCollisionManagerToWorld:world];
     
+#pragma mark Setup the HUD Layer
+    _hudLayer = [[CCLayer alloc] init];
+    [_hudLayer setContentSize:screenSize];
+    [_hudLayer setPosition:CGPointZero];
+    [self addChild:_hudLayer z:HUD_Z_ORDER tag:kTagHud];
+    
 #pragma mark Initialize the game state
+//Initialization of the game state needs to happen just before the update selector is scheduled
+//Time sensitive data lives in the game state and if we don't initialize it as close to update as possible
+//There's a chance that things could happen before the user has any control
     _gsm = [[GameStateManager alloc] init];
     _gsm.delegate = self;
     if ([_levelInfo valueForKey:@"game_states"] != nil){
@@ -215,6 +223,7 @@ enum {
         [defaultState setIsFinalState:YES];
         [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
     }
+    
 #pragma mark Schedule the update function
     [self schedule: @selector(update:)];
 
@@ -517,7 +526,7 @@ enum {
     [objToDelete removeAllObjects];
 }
 
-#pragma mark Scroll and Zoom
+#pragma mark - Scroll and Zoom
 
 -(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration
 {
@@ -730,11 +739,18 @@ enum {
 }
 
 -(void)removeAllHelpText{
+    [_userMessageLabel removeFromParentAndCleanup:YES];
+    [_userMessageLabel release];
+    _userMessageLabel = nil;
     [self unschedule:@selector(cleanUpHelpText)];
 }
 
 -(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration{
     NSLog(@"Displaying text: %@", text);
+    _userMessageLabel = [[CCLabelTTF labelWithString:text dimensions:USER_MESSAGE_DEFAULT_CONTENT_SIZE alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:USER_MESSAGE_FONT_SIZE] retain];
+    [_userMessageLabel setPosition:USER_MESSAGE_DEFAULT_LOCATION];
+    [_hudLayer addChild:_userMessageLabel];
+    
     if (duration != 0){
         //A Zero Duration means that the text stays up until the game state is completed
         [self schedule:@selector(cleanUpHelpText) interval:duration];
@@ -742,7 +758,6 @@ enum {
 }
 
 -(void)cleanUpHelpText{
-    NSLog(@"Cleaning up Help text");
     [self removeAllHelpText];
     [self unschedule:@selector(cleanUpHelpText)];
 }
@@ -756,6 +771,7 @@ enum {
 	
 	delete m_debugDraw;
     
+    [_hudLayer release];
     [_levelInfo release];
     [_gameObjects release];
     [_thePlayer release];
