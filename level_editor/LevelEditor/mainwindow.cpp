@@ -13,6 +13,8 @@
 // How far away from the edge of the object to display the yellow box when it's selected
 #define SELECTED_BOX_MARGIN 5
 
+#define GRID_RESOLUTION 250
+
 // The amount by which an object is translated from the original when it's copy/pasted
 #define COPY_POSITION_INCREMENT 25
 
@@ -144,6 +146,18 @@ void MainWindow::updateGraphics()
 
     // Display a yellow box around whichever objects are selected
     updateSelectedObjects(scene, false);
+
+    // Display grid
+    float levelHeight = levelPlist.value("level_height").toFloat();
+    float levelWidth = levelPlist.value("level_width").toFloat();
+    for(int i = 0; i < levelHeight; i += GRID_RESOLUTION)
+    {
+        scene->addLine(0, i, levelWidth, i, QPen(QColor(255, 255, 255, 50)));
+    }
+    for(int j = 0; j < levelWidth; j += GRID_RESOLUTION)
+    {
+        scene->addLine(j, 0, j, levelHeight, QPen(QColor(255, 255, 255, 50)));
+    }
 
     QGraphicsView *view = ui->graphicsView;
     view->setScene(scene);
