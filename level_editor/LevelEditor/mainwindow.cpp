@@ -159,6 +159,14 @@ void MainWindow::updateGraphics()
         scene->addLine(j, 0, j, levelHeight, QPen(QColor(255, 255, 255, 50)));
     }
 
+    // Display border of level
+    QColor borderColor = QColor(50, 50, 255, 150);
+    scene->addLine(0, 0, 0, levelHeight, QPen(borderColor));
+    scene->addLine(levelWidth, levelHeight, 0, levelHeight, QPen(borderColor));
+    scene->addLine(levelWidth, 0, levelWidth, levelHeight, QPen(borderColor));
+    scene->addLine(0, 0, levelWidth, 0, QPen(borderColor));
+
+    // Setup graphics view with the newly created scene
     QGraphicsView *view = ui->graphicsView;
     view->setScene(scene);
     view->setMaximumSize(levelPlist.value("level_width").toInt() + 2, levelPlist.value("level_height").toInt() + 3);
