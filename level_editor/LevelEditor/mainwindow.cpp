@@ -221,10 +221,34 @@ void MainWindow::updateSelectedObjects(QGraphicsScene *scene, bool removePreviou
             y = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat() + height/2);
         }
 
-        sceneYellowLines.append(scene->addLine(x - SELECTED_BOX_MARGIN, y - SELECTED_BOX_MARGIN, x - SELECTED_BOX_MARGIN, y+height + SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
-        sceneYellowLines.append(scene->addLine(x+width +SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x-SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
-        sceneYellowLines.append(scene->addLine(x+width+SELECTED_BOX_MARGIN, y+height+SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
-        sceneYellowLines.append(scene->addLine(x-SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, x+width+SELECTED_BOX_MARGIN, y-SELECTED_BOX_MARGIN, QPen(Qt::yellow)));
+        // Define unrotated points
+        float x1Unrot = x - SELECTED_BOX_MARGIN;
+        float y1Unrot = y - SELECTED_BOX_MARGIN;
+        float x2Unrot = x - SELECTED_BOX_MARGIN;
+        float y2Unrot = y+height+SELECTED_BOX_MARGIN;
+        float x3Unrot = x+width+SELECTED_BOX_MARGIN;
+        float y3Unrot = y+height+SELECTED_BOX_MARGIN;
+        float x4Unrot = x+width+SELECTED_BOX_MARGIN;
+        float y4Unrot = y - SELECTED_BOX_MARGIN;
+
+        float angle = levelObjects.at(index).value("rotation").toFloat() * 3.14159265 / 180;
+
+        float positionX = levelObjects.at(index).value("x").toFloat();
+        float positionY = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat());
+
+        float x1 = (x1Unrot - positionX) * cos(angle) - (y1Unrot - positionY) * sin(angle) + positionX;
+        float y1 = (x1Unrot - positionX) * sin(angle) + (y1Unrot - positionY) * cos(angle) + positionY;
+        float x2 = (x2Unrot - positionX) * cos(angle) - (y2Unrot - positionY) * sin(angle) + positionX;
+        float y2 = (x2Unrot - positionX) * sin(angle) + (y2Unrot - positionY) * cos(angle) + positionY;
+        float x3 = (x3Unrot - positionX) * cos(angle) - (y3Unrot - positionY) * sin(angle) + positionX;
+        float y3 = (x3Unrot - positionX) * sin(angle) + (y3Unrot - positionY) * cos(angle) + positionY;
+        float x4 = (x4Unrot - positionX) * cos(angle) - (y4Unrot - positionY) * sin(angle) + positionX;
+        float y4 = (x4Unrot - positionX) * sin(angle) + (y4Unrot - positionY) * cos(angle) + positionY;
+
+        sceneYellowLines.append(scene->addLine(x1, y1, x2, y2, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x2, y2, x3, y3, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x3, y3, x4, y4, QPen(Qt::yellow)));
+        sceneYellowLines.append(scene->addLine(x4, y4, x1, y1, QPen(Qt::yellow)));
     }
 }
 
@@ -531,9 +555,12 @@ void MainWindow::rotationSliderMoved(int value)
     levelObjects[objId].insert("rotation", QString::number(rotation));
 
     updateGraphics();
-    updateObjectTable(objId);
 
     noEmit = false;
+
+    updateObjectTable(objId);
+
+
 }
 
 void MainWindow::comboBoxChanged(int objId)
@@ -543,7 +570,8 @@ void MainWindow::comboBoxChanged(int objId)
 
     // Show item as selected in graphics view
     selectedObjects.clear();
-    selectedObjects.append(objId);
+    if(objId != -1)
+        selectedObjects.append(objId);
     updateSelectedObjects(ui->graphicsView->scene(), true);
 
     updateObjectTable(objId);
@@ -831,6 +859,9 @@ void MainWindow::loadLevelPlist(QString level)
         return;
     }
     file.close();
+
+    // Clear selected objects from previous level (if any)
+    selectedObjects.clear();
 
     QString itemName = "null";
     QString itemName2 = "null";
