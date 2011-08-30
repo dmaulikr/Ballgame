@@ -13,11 +13,11 @@
   <key>size_grow_rate</key>
   <integer>1</integer>
   <key>start_x</key>
-  <integer>269</integer>
+  <integer>250</integer>
   <key>start_y</key>
-  <integer>273</integer>
+  <integer>250</integer>
   <key>starting_size</key>
-  <integer>20</integer>
+  <integer>100</integer>
   <key>world</key>
   <string>null</string>
   <key>game_objects</key>

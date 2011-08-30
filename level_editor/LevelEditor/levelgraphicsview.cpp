@@ -44,7 +44,7 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
                 double rightPercent = (double)mouseX / item->boundingRect().size().width() * -1;
                 double bottomPercent = (double)mouseY / item->boundingRect().size().height() * -1;
 
-                if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
+                if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9) && !(item->data(1).toString() == "player"))
                 {
                     resizing = true;
                 }
@@ -70,7 +70,7 @@ void LevelGraphicsView::mousePressEvent(QMouseEvent *event)
             double rightPercent = (double)mouseX / item->boundingRect().size().width() * -1;
             double bottomPercent = (double)mouseY / item->boundingRect().size().height() * -1;
 
-            if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9))
+            if(!(item->data(3).toBool()) && (rightPercent >= .9 || bottomPercent >= .9) && !(item->data(1).toString() == "player"))
             {
                 resizing = true;
             }

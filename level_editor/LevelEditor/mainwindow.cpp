@@ -99,10 +99,13 @@ void MainWindow::updateGraphics()
     QRect playerRect = spriteSheetLocations.value("Volt1.png");
     Q_ASSERT_X(playerRect != QRect(0,0,0,0), "MainWindow::loadFile()", "Could not find sprite location!");
     QImage player = spriteSheet.copy(playerRect);
-    player = player.scaledToHeight(levelPlist.value("starting_size").toFloat());
+
     QGraphicsPixmapItem *item = scene->addPixmap(QPixmap::fromImage(player));
-    int startX = levelPlist.value("start_x").toInt() - playerRect.width()/2;
-    int startY = levelPlist.value("level_height").toInt() - (levelPlist.value("start_y").toInt() + playerRect.height()/2);
+    item->setTransformOriginPoint(item->boundingRect().width()/2, item->boundingRect().height()/2);
+    float scale = levelPlist.value("starting_size").toFloat() / playerRect.width();
+    item->scale(scale, scale);
+    int startX = levelPlist.value("start_x").toInt() - item->boundingRect().width()*scale/2;
+    int startY = levelPlist.value("level_height").toInt() - (levelPlist.value("start_y").toInt() + item->boundingRect().height()*scale/2);
     item->setPos(startX, startY);
     item->setData(1, "player");     // type of object
     item->setData(2, -1);           // object id
@@ -210,8 +213,8 @@ void MainWindow::updateSelectedObjects(QGraphicsScene *scene, bool removePreviou
         {
             height = levelPlist.value("starting_size").toFloat();
             width = height;
-            x = levelPlist.value("start_x").toFloat() - width;
-            y = levelPlist.value("level_height").toFloat() - (levelPlist.value("start_y").toFloat() + height);
+            x = levelPlist.value("start_x").toFloat() - width/2;
+            y = levelPlist.value("level_height").toFloat() - (levelPlist.value("start_y").toFloat() + height/2);
         }
         else // object is selected
         {
@@ -231,10 +234,21 @@ void MainWindow::updateSelectedObjects(QGraphicsScene *scene, bool removePreviou
         float x4Unrot = x+width+SELECTED_BOX_MARGIN;
         float y4Unrot = y - SELECTED_BOX_MARGIN;
 
-        float angle = levelObjects.at(index).value("rotation").toFloat() * 3.14159265 / 180;
+        float angle = 0;
+        if(index != -1 && levelObjects.at(index).contains("rotation"))
+            angle = levelObjects.at(index).value("rotation").toFloat() * 3.14159265 / 180;
 
-        float positionX = levelObjects.at(index).value("x").toFloat();
-        float positionY = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat());
+        float positionX, positionY;
+        if(index != -1) // If we are not the player
+        {
+            positionX = levelObjects.at(index).value("x").toFloat();
+            positionY = levelPlist.value("level_height").toFloat() - (levelObjects.at(index).value("y").toFloat());
+        }
+        else // we are the player
+        {
+            positionX = levelPlist.value("start_x").toFloat() - width;
+            positionY = levelPlist.value("level_height").toFloat() - (levelPlist.value("start_y").toFloat() + height);
+        }
 
         float x1 = (x1Unrot - positionX) * cos(angle) - (y1Unrot - positionY) * sin(angle) + positionX;
         float y1 = (x1Unrot - positionX) * sin(angle) + (y1Unrot - positionY) * cos(angle) + positionY;
@@ -403,8 +417,6 @@ void MainWindow::objectSelected(QString type, int id)
 
 void MainWindow::needToRescale(QString type, int id, double width, double height, double x, double y, bool objectStillDragging)
 {
-    // ToDo:  rescale player
-
     // Invert y
     y = levelPlist.value("level_height").toInt() - y;
 
@@ -421,13 +433,28 @@ void MainWindow::needToRescale(QString type, int id, double width, double height
     QString sX = QString::number(x);
     QString sY = QString::number(y);
 
-    levelObjects[id].insert("width", sWidth);
-    levelObjects[id].insert("height", sHeight);
-    levelObjects[id].insert("x", sX);
-    levelObjects[id].insert("y", sY);
+    // If we are the player
+    if(id == -1)
+    {
+        levelPlist.insert("starting_size", sHeight);
+        levelPlist.insert("start_x", sX);
+        levelPlist.insert("start_y", sY);
 
-    // Update UI with new size and position
-    updateObjectTable(id);
+        // Update UI with new size and position
+        updateLevelPlistTable();
+    }
+
+    // We are not the player
+    else
+    {
+        levelObjects[id].insert("width", sWidth);
+        levelObjects[id].insert("height", sHeight);
+        levelObjects[id].insert("x", sX);
+        levelObjects[id].insert("y", sY);
+
+        // Update UI with new size and position
+        updateObjectTable(id);
+    }
 
     // Enormous performance boost
     if(!objectStillDragging)
@@ -443,13 +470,24 @@ void MainWindow::needToRescale(QString type, int id, double width, double height
 
 void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, bool objectStillDragging)
 {
-
-
     if(type == "player")
     {
-        levelPlist.insert("start_x", QString::number(pos.x() + (int)(size.width() / 2)));
-        QString num = QString::number(levelPlist.value("level_height").toFloat() - pos.y() - (int)(size.height() / 2));
-        levelPlist.insert("start_y", num);
+        // This is disgusting, but I can't think of a better way to do it.  Good luck.
+        QRect playerRect = spriteSheetLocations.value("Volt1.png");
+        float scale = levelPlist.value("starting_size").toFloat() / playerRect.width();
+
+        float posX = pos.x() + size.width()*scale/2;
+        float posY = levelPlist.value("level_height").toFloat() - pos.y() - size.height()*scale/2;
+
+        // If we let go of the object, round to the nearest int
+        if(!objectStillDragging)
+        {
+            posX = (int)(posX - .5) + 1;
+            posY = (int)(posY - .5) + 1;
+        }
+
+        levelPlist.insert("start_x", QString::number(posX));
+        levelPlist.insert("start_y", QString::number(posY));
 
         // ToDo:  update size in level plist here
 
@@ -462,8 +500,18 @@ void MainWindow::objectChanged(QString type, int id, QPointF pos, QSizeF size, b
         ui->objectSelectorComboBox->setCurrentIndex(id);
         noEmit = false;
 
-        levelObjects[id].insert("x", QString::number(pos.x() + (int)(size.width() / 2)));
-        levelObjects[id].insert("y", QString::number(levelPlist.value("level_height").toFloat() - pos.y() - (int)(size.height() / 2)));
+        float posX = pos.x() + size.width() / 2;
+        float posY = levelPlist.value("level_height").toFloat() - pos.y() - size.height() / 2;
+
+        // If we let go of the object, round to the nearest int
+        if(!objectStillDragging)
+        {
+            posX = (int)(posX - .5) + 1;
+            posY = (int)(posY - .5) + 1;
+        }
+
+        levelObjects[id].insert("x", QString::number(posX));
+        levelObjects[id].insert("y", QString::number(posY));
 
         levelObjects[id].insert("height", QString::number(size.height()));
         levelObjects[id].insert("width", QString::number(size.width()));
@@ -1219,8 +1267,16 @@ void MainWindow::popUndo()
         updateLevelPlistTable();
         if(selectedObjects.length() > 0)
         {
-            ui->objectSelectorComboBox->setCurrentIndex(selectedObjects[0]);
-            updateObjectTable(selectedObjects[0]);
+            if(selectedObjects[0] != -1) // not the player
+            {
+                ui->objectSelectorComboBox->setCurrentIndex(selectedObjects[0]);
+                updateObjectTable(selectedObjects[0]);
+            }
+            else
+            {
+                ui->objectSelectorComboBox->setCurrentIndex(0);
+                updateObjectTable(0);
+            }
         }
         else
         {
