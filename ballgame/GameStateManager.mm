@@ -44,12 +44,18 @@ NSString* const GameStateTypeKey = @"game_state_type";
     [[statesMutableDict lastObject] setIsFinalState:YES];
     _orderedGameStates = [statesMutableDict retain];
     
+}
+
+-(void)initializeGame{
     //Call Game State Did Advance because we started the first game state
     [[self currentGameState] beginCurrentGameState];
     [_delegate gameStateDidAdvance];
 }
 
 -(void)checkForGameStateChanges{
+    if ([self currentGameState] == nil){
+        [NSException raise:@"No game state" format:@"The game can not be played without at least one game state."];
+    }
     if ([[self currentGameState] gameShouldEnd]){
         [_delegate gameShouldEndDidSucceed:[[self currentGameState] playerWon]];
     }

@@ -42,6 +42,7 @@ extern NSString* const GameStateModificationsKey;
 @property (readonly) NSInteger currentGameStateIndex;
 @property (nonatomic, retain) NSArray *orderedGameStates;
 
+-(void)initializeGame;
 -(void)generateGameStatesFromDictionaries:(NSArray*)statesInPlist;
 -(void)checkForGameStateChanges;
 //-(void)levelBegan;

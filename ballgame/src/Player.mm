@@ -88,7 +88,8 @@
 -(void) updateGameObject: (ccTime) dt
 {    
     if (_shouldCharge){
-        _chargeLevel += _growRate * dt;
+        self.chargeLevel += _growRate * dt;
+        [[_gsm currentGameState] playerSizeChanged:self];
     }
     [super updateGameObject:dt];
     

@@ -59,6 +59,18 @@ enum {
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
     _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
     
+#pragma mark Load the game states
+    _gsm = [[GameStateManager alloc] init];
+    _gsm.delegate = self;
+    if ([_levelInfo valueForKey:GAME_STATES_KEY] != nil){
+        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:GAME_STATES_KEY]];
+    }
+    else{
+        GameState *defaultState = [GameState defaultInitialState];
+        [defaultState setIsFinalState:YES];
+        [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
+    }
+    
     
     // Enable touches
     self.isTouchEnabled = YES;
@@ -166,18 +178,6 @@ enum {
     [scrollNode setTag:kTagBatchNode];
     [self addChild:scrollNode];
     
-    // Delete this crap
-    // Temporary button to make sure scroll to position is working
-    // Standard method to create a button
-    CCMenuItem *starMenuItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG SCROLL" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped:)];
-    starMenuItem.position = ccp(60, 60);
-    CCMenuItem *starMenuItem2 = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"ZOMG ZOOM" fontName:@"Arial" fontSize:16.0] target:self selector:@selector(starButtonTapped2:)];
-    starMenuItem2.position = ccp(60, 120);
-    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, starMenuItem2, nil];
-    starMenu.position = CGPointZero;
-    [self addChild:starMenu];
-    // Stop deleting here
-    
     //Add the game Objects
     _thePlayer = [[self addPlayer] retain];
     
@@ -194,7 +194,6 @@ enum {
             for (GameObject *searchObject in _gameObjects){
                 
                 if ([[searchObject name] isEqualToString:[depObject getDependantObjectName]]){
-                    //NSLog(@"Found our dependant object");
                     [depObject setDependantObject:searchObject];
                     break;
                 }
@@ -210,88 +209,17 @@ enum {
     [_hudLayer setPosition:CGPointZero];
     [self addChild:_hudLayer z:HUD_Z_ORDER tag:kTagHud];
     
-#pragma mark Initialize the game state
+#pragma mark Set the game state into the first state
 //Initialization of the game state needs to happen just before the update selector is scheduled
 //Time sensitive data lives in the game state and if we don't initialize it as close to update as possible
 //There's a chance that things could happen before the user has any control
-    _gsm = [[GameStateManager alloc] init];
-    _gsm.delegate = self;
-    if ([_levelInfo valueForKey:GAME_STATES_KEY] != nil){
-        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:GAME_STATES_KEY]];
-    }
-    else{
-        GameState *defaultState = [GameState defaultInitialState];
-        [defaultState setIsFinalState:YES];
-        [_gsm setOrderedGameStates:[NSArray arrayWithObject:defaultState]];
-    }
+    [_gsm initializeGame];
     
 #pragma mark Schedule the update function
     [self schedule: @selector(update:)];
 
     return self;
 }
-
-// Delete this crap
--(void) starButtonTapped:(id)sender
-{
-    id action1 = [CCCallFunc actionWithTarget:self selector:@selector(func1)];
-    id action3 = [CCCallFunc actionWithTarget:self selector:@selector(func2)];
-    id action5 = [CCCallFunc actionWithTarget:self selector:@selector(func3)];
-    id action7 = [CCCallFunc actionWithTarget:self selector:@selector(func4)];
-    
-    id action2 = [CCDelayTime actionWithDuration:1.5f];
-    id action4 = [CCDelayTime actionWithDuration:1.5f];
-    id action6 = [CCDelayTime actionWithDuration:1.5f];
-    
-    id seq = [CCSequence actions:action1, action2, action3, action3, action4, action5, action6, action7, nil];
-    
-    [self runAction:seq];
-}
-
--(void) func1
-{
-    [self scrollToX:1000 Y:0 withDuration:1.0];
-}
-
--(void) func2
-{
-    [self scrollToX:0 Y:0 withDuration:1.0];
-}
-
--(void) func3
-{
-    [self scrollToX:0 Y:1000 withDuration:1.0];
-}
-
--(void) func4
-{
-    [self scrollToPlayerWithDuration:1.0];
-}
-
--(void) starButtonTapped2:(id)sender
-{
-    id action1 = [CCCallFunc actionWithTarget:self selector:@selector(func5)];
-    id action3 = [CCCallFunc actionWithTarget:self selector:@selector(func6)];
-    
-    id action2 = [CCDelayTime actionWithDuration:2.5f];
-    
-    id seq = [CCSequence actions:action1, action2, action3, action3, nil];
-    
-    [self runAction:seq];
-}
-
--(void) func5
-{
-    [self zoomToFullLevelWithDuration:1.0];
-}
-
--(void) func6
-{
-    [self zoomToNormalWithDuration:1.0];
-}
-
-// Stop deleting this crap here
-
 
 #pragma mark - Level Creation
 

@@ -32,6 +32,7 @@ NSString* const GameStateConditionWaitForDuration = @"WaitForDuration";
 //Condition Properties
 NSString* const GSConditionPropertyTextKey = @"text";
 NSString* const GSConditionPropertyDurationKey = @"duration";
+NSString* const GSConditionPropertyThresholdKey = @"threshold";
 
 @interface GameState ()
 
@@ -136,11 +137,13 @@ NSString* const GSConditionPropertyDurationKey = @"duration";
 }
 -(void)playerSizeChanged:(id)player{
     Player *thePlayer = (Player*)player;
-    
+#if GAME_STATE_DEBUG
+    NSLog(@"playerSizeChanged to: %1.2f", [player chargeLevel]);
+#endif
     if ([_advancementConditions objectForKey:GameStateConditionPlayerSizeThreshold] != nil){
         //If PlayerSizeThreshold is a condition we should monitor that state
         NSDictionary *condition = [_advancementConditions objectForKey:GameStateConditionPlayerSizeThreshold];
-        if (thePlayer.chargeLevel >= [[condition valueForKey:@"threshold"] floatValue]){
+        if (thePlayer.chargeLevel >= [[condition valueForKey:GSConditionPropertyThresholdKey] floatValue]){
             [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionPlayerSizeThreshold];
         }
     }

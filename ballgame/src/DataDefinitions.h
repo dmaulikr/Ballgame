@@ -8,7 +8,7 @@
 
 #define DEBUG_DRAW 0
 #define COLLISION_DEBUG 0
-#define GAME_STATE_DEBUG 1
+#define GAME_STATE_DEBUG 0
 
 
 //UI Definitions
