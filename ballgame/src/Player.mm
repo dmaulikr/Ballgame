@@ -29,9 +29,9 @@
     
     _identifier = GameObjectIDPlayer;
     
-    _growRate = [[_levelInfo valueForKey:@"size_grow_rate"] floatValue];
-    _radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2;
-    _maxSpeed = [[[AssetManager defaults] valueForKey:@"max_speed"] intValue];
+    _growRate = [[_levelInfo valueForKey:GROW_RATE_KEY] floatValue];
+    _radius = [[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] / 2;
+    _maxSpeed = [[[AssetManager defaults] valueForKey:MAX_SPEED_KEY] intValue];
     _chargeLevel = 0.0;
     _shouldCharge = YES;
     
@@ -42,22 +42,22 @@
 -(void) setupSprite
 {
     CGPoint p;
-    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
-    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
+    p.x = [[_levelInfo valueForKey:START_X_KEY] floatValue];
+    p.y = [[_levelInfo valueForKey:START_Y_KEY] floatValue];
     
-    [self rescale:CGSizeMake([[_levelInfo valueForKey:@"starting_size"] floatValue] * 2, [[_levelInfo valueForKey:@"starting_size"] floatValue] * 2)];    
+    [self rescale:CGSizeMake([[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] * 2, [[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] * 2)];    
     
 	self.position = ccp( p.x,p.y );
     
-    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+    self.rotation = [[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue];
 
 }
 
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
-    p.x = [[_levelInfo valueForKey:@"start_x"] floatValue];
-    p.y = [[_levelInfo valueForKey:@"start_y"] floatValue];
+    p.x = [[_levelInfo valueForKey:START_X_KEY] floatValue];
+    p.y = [[_levelInfo valueForKey:START_Y_KEY] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -70,7 +70,7 @@
 	
 	// Define another box shape for our dynamic body.
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = [[_levelInfo valueForKey:@"starting_size"] floatValue] / 2 / PTM_RATIO;
+	dynamicCircle.m_radius = [[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] / 2 / PTM_RATIO;
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -111,6 +111,7 @@
 
     /*
     //LIMIT MAX VELOCITY
+     // WE DECIDED NOT TO DO THIS.  LEAVING THIS HERE ANYWAY INCASE WE CHANGE OUR MIND
     const b2Vec2 velocity = _body->GetLinearVelocity();
     const float32 speed = velocity.Length();
     

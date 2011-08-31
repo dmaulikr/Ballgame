@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataDefinitions.h"
 
+extern NSString* const MainSpriteSheetPlistKey;
+extern NSString* const MainSpriteSheetImageKey;
 
 @interface AssetManager : NSObject {
     NSDictionary *plistDefaults;

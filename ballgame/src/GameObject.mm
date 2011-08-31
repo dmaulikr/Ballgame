@@ -23,7 +23,7 @@
 }
 
 -(NSString*)name{
-    return [_objectInfo valueForKey:@"name"];
+    return [_objectInfo valueForKey:GO_NAME_KEY];
 }
 
 -(void)updateGameObject:(ccTime)dt{
@@ -46,11 +46,15 @@
 }
 
 -(void)handleCollisionWithObject:(GameObject*)object{
-    //NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));
+#if COLLISION_DEBUG
+    NSLog(@"%@ ran into a %@", NSStringFromClass([self class]), NSStringFromClass([object class]));
+#endif
 }
 
 -(void)noLongerCollidingWithObject:(GameObject*)object{
-    //NSLog(@"%@ moved away from %@",NSStringFromClass([self class]), NSStringFromClass([object class]));
+#if COLLISION_DEBUG
+    NSLog(@"%@ moved away from %@",NSStringFromClass([self class]), NSStringFromClass([object class]));
+#endif
 }
 
 -(void)setupGameObject:(NSDictionary*)game_object forWorld:(b2World*)world{
@@ -68,8 +72,8 @@
     _world = world;
     
     // This is overwritten in Ions
-    objectSize.width = [[_objectInfo valueForKey:@"width"] floatValue];
-    objectSize.height = [[_objectInfo valueForKey:@"height"] floatValue];
+    objectSize.width = [[_objectInfo valueForKey:GO_WIDTH_KEY] floatValue];
+    objectSize.height = [[_objectInfo valueForKey:GO_HEIGHT_KEY] floatValue];
     
     // Setup size and position of sprite based on _objectInfo
     [self setupSprite];
@@ -81,7 +85,7 @@
     [self setupBody:world];
     
     // Find out if we are moveable or not
-    isMoveable = ([game_object objectForKey:@"positions"] != nil);
+    isMoveable = ([game_object objectForKey:GO_POSITIONS_KEY] != nil);
     
     // Setup movable object if necessary
     if(isMoveable)
@@ -99,28 +103,28 @@
 -(void) setupSprite
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     self.position = ccp( p.x * 2,p.y * 2);
     
     [self rescale:CGSizeMake(objectSize.width, objectSize.height)];
     
-    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+    self.rotation = [[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue];
 }
 
 
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
 	bodyDef.userData = self;
     
 	_body = world->CreateBody(&bodyDef);
-    float angle = CC_DEGREES_TO_RADIANS(([[_objectInfo valueForKey:@"rotation"] floatValue]));
+    float angle = CC_DEGREES_TO_RADIANS(([[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue]));
     _body->SetTransform(_body->GetPosition(), angle);
 	_body->SetAwake(NO);
 	
@@ -147,13 +151,13 @@
 -(void) setupMoveable
 {
     // Load positions from plist
-    NSArray *tempArray = [NSMutableArray arrayWithArray:[_objectInfo objectForKey:@"positions"]];
+    NSArray *tempArray = [NSMutableArray arrayWithArray:[_objectInfo objectForKey:GO_POSITIONS_KEY]];
     
     // Store position points in case we need them later
     positionPoints = [NSMutableArray array];
     for(int i = 0; i < [tempArray count]; i++)
     {
-        CGPoint point = ccp([[[tempArray objectAtIndex:i] valueForKey:@"x"] floatValue], [[[tempArray objectAtIndex:i] valueForKey:@"y"] floatValue]);
+        CGPoint point = ccp([[[tempArray objectAtIndex:i] valueForKey:GO_X_KEY] floatValue], [[[tempArray objectAtIndex:i] valueForKey:GO_Y_KEY] floatValue]);
         [positionPoints addObject:[NSValue valueWithCGPoint:point]];
     }
     
@@ -171,7 +175,7 @@
     id act = [self actionMutableArray:actions];
     
     // Initialize position
-    CGPoint pos = ccp([[_objectInfo valueForKey:@"x"] floatValue], [[_objectInfo valueForKey:@"y"] floatValue]);
+    CGPoint pos = ccp([[_objectInfo valueForKey:GO_X_KEY] floatValue], [[_objectInfo valueForKey:GO_Y_KEY] floatValue]);
     self.position = pos;
     
     // Initialize movement

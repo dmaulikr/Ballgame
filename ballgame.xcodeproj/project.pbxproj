@@ -708,12 +708,12 @@
 		381259FE13CA564E001282F6 /* ballgame */ = {
 			isa = PBXGroup;
 			children = (
-				BF2B8CAB1401064A009D37EF /* GameState */,
 				AA03DDE313D7749A00BEFC7F /* View Controllers */,
 				AA03DDE113D7743F00BEFC7F /* Levels */,
 				387E357F13D3A017006CB9AD /* Plists and Defaults */,
 				387E357E13D39FFC006CB9AD /* Persistent Data */,
 				387E357513D38BC4006CB9AD /* UI Constructs */,
+				BF2B8CAB1401064A009D37EF /* GameState */,
 				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
 				3801303113D156C70008EC14 /* Physics */,

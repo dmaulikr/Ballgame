@@ -21,7 +21,8 @@
 -(void) setupSprite
 {
     // Get ion diameter from a combination of object plist and game defaults
-    int ionSize = [[_objectInfo valueForKey:@"ion_size"] intValue];
+    int ionSize = [[_objectInfo valueForKey:GO_ION_SIZE_KEY] intValue];
+    //HARDCODE - This is Gross.  Lets not do this
     int diameter = [[[[[AssetManager defaults] objectForKey:@"ion_config"] objectAtIndex:ionSize] objectForKey:@"diameter"] intValue];
     
     // Overwrite whatever (if anything) was in the object plist
@@ -34,7 +35,8 @@
 -(void) setupBody:(b2World *)world
 {
     // Get ion diameter from a combination of object plist and game defaults
-    int ionSize = [[_objectInfo valueForKey:@"ion_size"] intValue];
+    int ionSize = [[_objectInfo valueForKey:GO_ION_SIZE_KEY] intValue];
+    //HARDCODE - This is Gross.  Lets not do this.
     int diameter = [[[[[AssetManager defaults] objectForKey:@"ion_config"] objectAtIndex:ionSize] objectForKey:@"diameter"] intValue];
     
     // Overwrite whatever (if anything) was in the object plist
@@ -47,7 +49,8 @@
 -(void)wasPickedUpByPlayer:(Player*)player
 {
     // Get ion diameter from a combination of object plist and game defaults
-    int ionSize = [[_objectInfo valueForKey:@"ion_size"] intValue];
+    int ionSize = [[_objectInfo valueForKey:GO_ION_SIZE_KEY] intValue];
+    //HARDCODE - This is Gross.  Lets not do this.
     int chargeDec = [[[[[AssetManager defaults] objectForKey:@"ion_config"] objectAtIndex:ionSize] objectForKey:@"charge_decrement"] intValue];
     
     // Update player size
@@ -56,8 +59,7 @@
     // Make sure we're not negative
     if(player.chargeLevel < 0)
         player.chargeLevel = 0;
-    
-    NSLog(@"Charge - %f", player.chargeLevel);
+
 }
 
 @end

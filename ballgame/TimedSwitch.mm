@@ -17,7 +17,7 @@
 -(void)setupGameObject:(NSDictionary *)game_object forWorld:(b2World*)world{
     [super setupGameObject:game_object forWorld:world];
     
-    _duration = [[game_object valueForKey:@"duration"] floatValue];
+    _duration = [[game_object valueForKey:GO_DURATION_KEY] floatValue];
     
 }
 

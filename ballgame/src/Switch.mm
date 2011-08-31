@@ -20,10 +20,10 @@
     //Switches start uncharged
     _charge = 0.0;
     
-    _maxCharge = [[game_object valueForKey:@"max_charge"] floatValue];
-    _chargePerSecond = [[game_object valueForKey:@"charge_per_second"] floatValue];
+    _maxCharge = [[game_object valueForKey:GO_MAX_CHARGE_KEY] floatValue];
+    _chargePerSecond = [[game_object valueForKey:GO_CHARGE_PER_SEC_KEY] floatValue];
     
-    _depObjectName = [game_object valueForKey:@"dependant_object_name"];
+    _depObjectName = [game_object valueForKey:GO_DEP_OBJECT_KEY];
     
     [self setColor:ccRED];
 }
@@ -43,15 +43,12 @@
     
     [super updateGameObject:dt];
     
-    //NSLog(@"Update");
     if (_charging && _charge < _maxCharge){
         float deltaCharge = _chargePerSecond * dt;
         if ([_thePlayer chargeLevel] >= deltaCharge){
-            //NSLog(@"Siphoning %1.2f charge from the player.", deltaCharge);
             [_thePlayer setChargeLevel:[_thePlayer chargeLevel] - deltaCharge];
             _charge += deltaCharge;
         }
-        //NSLog(@"charge: %1.2f", _charge);
     }
     
     if (_charge >= _maxCharge && !_activated){
@@ -65,7 +62,7 @@
     _activated = YES;
     
     // Play sound effect
-    // HARDCODED SOUND EFFECT NAME
+    // HARDCODE - SOUND EFFECT NAME
     if([AssetManager settingsEffectsOn])
     {
         SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
@@ -77,20 +74,16 @@
 -(void)handleCollisionWithObject:(GameObject *)object{
     [super handleCollisionWithObject:object];
     if ([object identifier] == GameObjectIDPlayer){
-        //NSLog(@"Charging");
         _charging = YES;
         _thePlayer = (Player*)object;
-        //[_thePlayer setShouldCharge:NO];
     }
 }
 
 -(void)noLongerCollidingWithObject:(GameObject *)object{
     [super noLongerCollidingWithObject:object];
     if ([object identifier] == GameObjectIDPlayer){
-        //NSLog(@"Not Charging");
         _charging = NO;
         _thePlayer = nil;
-        //[_thePlayer setShouldCharge:YES];
     }
     
    

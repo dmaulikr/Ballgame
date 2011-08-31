@@ -22,14 +22,16 @@ NSString* const GameStateModificationPlaySoundNamed = @"PlaySoundNamed";
 NSString* const GameStateModificationAnimateCamera = @"AnimateCamera";
 NSString* const GameStateModificationPreventPlayerDeathOnFullCharge = @"FullChargeDoesntKill";
 
-//Condition Definitions
-
 //GameState Conditions
 NSString* const GameStateConditionPlayerSizeThreshold = @"SizeThreshold";
 NSString* const GameStateConditionObjectCollisionBegan = @"CollisionBegan";
 NSString* const GameStateConditionObjectCollisionEnded = @"CollisionEnded";
 NSString* const GameStateConditionPlayerTap = @"PlayerTapped";
 NSString* const GameStateConditionWaitForDuration = @"WaitForDuration";
+
+//Condition Properties
+NSString* const GSConditionPropertyTextKey = @"text";
+NSString* const GSConditionPropertyDurationKey = @"duration";
 
 @interface GameState ()
 
@@ -97,17 +99,23 @@ NSString* const GameStateConditionWaitForDuration = @"WaitForDuration";
 
 -(void)beginCurrentGameState{
     //Check for any timers that need to get kicked off to satisfy duration conditions
+#if GAME_STATE_DEBUG
     NSLog(@"The current game state %@ has begun", self);
+#endif
 }
 
                               
 -(void)endCurrentGameState{
+#if GAME_STATE_DEBUG
     NSLog(@"The current game state %@ has ended", self);
+#endif
 }
 
 -(void)waitForDurationFinished{
     if ([_advancementConditions objectForKey:GameStateConditionWaitForDuration] != nil){
+#if GAME_STATE_DEBUG
         NSLog(@"Wait for Duration satisfied");
+#endif
         [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionWaitForDuration];
     }
 }
@@ -141,11 +149,14 @@ NSString* const GameStateConditionWaitForDuration = @"WaitForDuration";
     GameObject *gObject = (GameObject*)object;
     
     if (gObject.identifier == GameObjectIDGoal){
+#if GAME_STATE_DEBUG
+        NSLog(@"Player Touched Goal");
+#endif
         _playerTouchedGoal = YES;
     }
     else if ([_advancementConditions objectForKey:GameStateConditionObjectCollisionBegan] != nil){
         NSDictionary *condition = [_advancementConditions objectForKey:GameStateConditionObjectCollisionBegan];
-        if (gObject.name == [condition objectForKey:@"name"]){
+        if (gObject.name == [condition objectForKey:GO_NAME_KEY]){
             [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionObjectCollisionBegan];
         }
     }

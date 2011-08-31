@@ -23,20 +23,20 @@
 -(void) setupSprite
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     self.position = ccp( p.x,p.y);
     
     [self rescale:CGSizeMake(objectSize.width, objectSize.height)];
     
-    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+    self.rotation = [[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue];
 }
 
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -50,7 +50,7 @@
     
 	// Define another box shape for our dynamic body.
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = [[_objectInfo valueForKey:@"width"] floatValue] * 15 / PTM_RATIO; // size of tracking circle
+	dynamicCircle.m_radius = [[_objectInfo valueForKey:GO_WIDTH_KEY] floatValue] * 15 / PTM_RATIO; // size of tracking circle
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -75,7 +75,7 @@
                 playerIsInRange = true;
                 
                 // Play sound effect
-                // HARDCODED SOUND EFFECT NAME
+                // HARDCODE -  SOUND EFFECT NAME
                 if([AssetManager settingsEffectsOn])
                 {
                     SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
@@ -104,7 +104,7 @@
                 playerIsInRange = false;
                 
                 // Play sound effect
-                // HARDCODED SOUND EFFECT NAME
+                // HARDCODE - SOUND EFFECT NAME
                 if([AssetManager settingsEffectsOn])
                 {
                     SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
@@ -147,7 +147,7 @@
         return;
     }
     
-    float forcePower = [[_objectInfo valueForKey:@"speed"] floatValue];
+    float forcePower = [[_objectInfo valueForKey:GO_SPEED_KEY] floatValue];
     forceDirection.Normalize();
     forceDirection *= forcePower;
     forceDirection *= (1.0 / pow(distance, 1.4));
@@ -163,13 +163,13 @@
     // Delete this object at the end of this game loop
     [self removeFromWorld];
     
-    int chargeDec = [[_objectInfo objectForKey:@"charge_increment"] intValue];
+    int chargeDec = [[_objectInfo objectForKey:GO_CHARGE_INCR_KEY] intValue];
     
     // Update player size
     player.chargeLevel += chargeDec;
     
     // Play sound effect
-    // HARDCODED SOUND EFFECT NAME
+    // HARDCODE - SOUND EFFECT NAME
     if([AssetManager settingsEffectsOn])
     {
         SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];

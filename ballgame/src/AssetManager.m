@@ -8,6 +8,8 @@
 
 #import "AssetManager.h"
 
+NSString* const MainSpriteSheetPlistKey = @"SpriteSheetPlistName";
+NSString* const MainSpriteSheetImageKey = @"SpriteSheetPngName";
 
 @implementation AssetManager
 
@@ -43,19 +45,19 @@ static AssetManager* sharedAssetManager = nil;
     if (self)
     {
         // Load defaults plist into dictionary
+        //HARDCODE
         NSString *pathToDefaultsPlist = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
         plistDefaults = [[NSDictionary alloc] initWithContentsOfFile:pathToDefaultsPlist];
         _isDownloading = NO;
         
         //Take the name and plist and convert them to actual Documents Directory URLS
         NSMutableDictionary *_changeDict = [NSMutableDictionary dictionaryWithDictionary:plistDefaults];
-        NSString *absolutePngPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:@"SpriteSheetPngName"], nil];
-        NSString *absolutePlistPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:@"SpriteSheetPlistName"], nil];
-        [_changeDict setValue:absolutePlistPath forKey:@"SpriteSheetPlistName"];
-        [_changeDict setValue:absolutePngPath forKey:@"SpriteSheetPngName"];
+        NSString *absolutePngPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:MainSpriteSheetImageKey], nil];
+        NSString *absolutePlistPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@", [plistDefaults objectForKey:MainSpriteSheetPlistKey], nil];
+        [_changeDict setValue:absolutePlistPath forKey:MainSpriteSheetPlistKey];
+        [_changeDict setValue:absolutePngPath forKey:MainSpriteSheetImageKey];
         [plistDefaults release];
         plistDefaults = [_changeDict retain];
-        //NSLog(@"defaults: %@", plistDefaults);
     }
     
     return self;
@@ -67,16 +69,15 @@ static AssetManager* sharedAssetManager = nil;
     NSArray *pathsInBundle = [fileMan contentsOfDirectoryAtPath:[[NSBundle mainBundle] bundlePath] error:nil];
     NSMutableArray *levels = [NSMutableArray arrayWithCapacity:20];
     for (NSString *path in pathsInBundle){
-        //NSLog(@"lastPathComponent %@", [path lastPathComponent]);
+        //HARDCODE - If we ever make our levels not end in .level this has to change
         if ([[path lastPathComponent] hasSuffix:@"level"]){
             
+            //GROSS....I really wish the AssetManager didnt need to import the DataDefinitions.  This is why it does
             NSString *levelName = [[path lastPathComponent] stringByDeletingPathExtension];
-            //NSLog(@"Adding Level: %@", levelName);
             NSDictionary *level = [[AssetManager sharedInstance] levelWithName:levelName];
-            if ([level valueForKey:@"name"] == nil){
-                //NSLog(@"Adding name key: %@", levelName);
+            if ([level valueForKey:LEVEL_NAME_KEY] == nil){
                 level = [NSMutableDictionary dictionaryWithDictionary:level];
-                [level setValue:levelName forKey:@"name"];
+                [level setValue:levelName forKey:LEVEL_NAME_KEY];
             }
             [levels addObject:level];
         }
@@ -130,9 +131,8 @@ static AssetManager* sharedAssetManager = nil;
 
 
 -(NSDictionary*)levelWithName:(NSString*)levelName{
-    
+    //HARDCODE
     NSString *pathToDefaultsPlist = [[NSBundle mainBundle] pathForResource:levelName ofType:@"level"];
-    //NSLog(@"found: %@", pathToDefaultsPlist);
     NSDictionary *levelDefaults = [[NSDictionary alloc] initWithContentsOfFile:pathToDefaultsPlist];
     return [levelDefaults autorelease];
 }
@@ -143,12 +143,10 @@ static AssetManager* sharedAssetManager = nil;
 }
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [_cachedData appendData:data];
-    //NSLog(@"Data");
 }
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [connection release];
-    //NSLog(@"%@", [error description]);
     _isDownloading = NO;
     [_cachedData release];
 }
@@ -160,27 +158,22 @@ static AssetManager* sharedAssetManager = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [connection release];
     _isDownloading = NO;
-    //NSLog(@"writing %i bytes to %@", [_cachedData length], [_placeToWrite absoluteString]);
     
     NSError *err;
     if ([_cachedData writeToURL:_placeToWrite options:NSDataWritingFileProtectionComplete error:&err]){
-        //NSLog(@"Write Succeeded!");
+        //Write succeeded
     }else{
-        //NSLog(@"Write Failed: %@", [err description]);
+        NSLog(@"Write Failed after loading: %@", [err description]);
         _placeToWrite = nil;
     }
     [_downloadDelegate performSelectorOnMainThread:_resultSelector withObject:_placeToWrite waitUntilDone:NO];
     [_downloadDelegate release];
-    //[_downloadDelegate performSelector:_resultSelector withObject:_placeToWrite];
     NSMutableDictionary *_changeDict = [NSMutableDictionary dictionaryWithDictionary:plistDefaults];
     [_changeDict setValue:[_placeToWrite path] forKey:_defaultsKeyToSet];
     [plistDefaults release];
     plistDefaults = [_changeDict retain];
     [_placeToWrite release];
     [_cachedData release];
-    //NSLog(@"Data Load completed");
-    //NSLog(@"%@", plistDefaults);
-    
 }
 
 +(bool) settingsMusicOn

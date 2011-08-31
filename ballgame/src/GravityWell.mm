@@ -23,20 +23,20 @@
 -(void) setupSprite
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     self.position = ccp( p.x,p.y);
     
     [self rescale:CGSizeMake(objectSize.width, objectSize.height)];
     
-    self.rotation = [[_objectInfo valueForKey:@"rotation"] floatValue];
+    self.rotation = [[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue];
 }
 
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -49,7 +49,7 @@
     
 	// Define another box shape for our dynamic body.
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = [[_objectInfo valueForKey:@"width"] floatValue] * 2 / PTM_RATIO;
+	dynamicCircle.m_radius = [[_objectInfo valueForKey:GO_WIDTH_KEY] floatValue] * 2 / PTM_RATIO;
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -81,8 +81,6 @@
     [super handleCollisionWithObject:object];
     
     switch ([object identifier]){
-            
-            // If player collides into us
         case GameObjectIDPlayer:
             
             player = nil;
@@ -106,7 +104,7 @@
     b2Vec2 forceDirection(wellPos.x - playerPos.x, wellPos.y - playerPos.y);
     
     float distance = sqrt(forceDirection.x * forceDirection.x + forceDirection.y * forceDirection.y);
-    float forcePower = [[_objectInfo valueForKey:@"power"] floatValue];
+    float forcePower = [[_objectInfo valueForKey:GO_POWER_KEY] floatValue];
     forceDirection.Normalize();
     forceDirection *= forcePower;
     forceDirection *= [self getBody]->GetMass();

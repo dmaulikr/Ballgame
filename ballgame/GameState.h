@@ -27,6 +27,10 @@ extern NSString* const GameStateConditionObjectCollisionEnded;
 extern NSString* const GameStateConditionPlayerTap;
 extern NSString* const GameStateConditionWaitForDuration;
 
+//Condition Properties
+extern NSString* const GSConditionPropertyTextKey;
+extern NSString* const GSConditionPropertyDurationKey;
+
 @interface GameState : NSObject
 
 @property (readonly) NSDictionary *gameStateModifications;

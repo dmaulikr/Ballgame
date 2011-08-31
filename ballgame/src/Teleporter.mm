@@ -17,7 +17,7 @@
     
     _identifier = GameObjectIDTeleporter;
     
-    _dependantObjectName = [game_object valueForKey:@"dependant_object_name"];
+    _dependantObjectName = [game_object valueForKey:GO_DEP_OBJECT_KEY];
     
 }
 

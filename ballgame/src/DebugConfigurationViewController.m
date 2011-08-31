@@ -135,7 +135,7 @@
             if ([indexPath row] == [[PlayerStateManager sharedInstance] currentLevelIndex]){
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
-            [[cell textLabel] setText:[NSString stringWithFormat:@"%i - %@", [indexPath row], [[levels objectAtIndex:[indexPath row]] valueForKey:@"name"]]];
+            [[cell textLabel] setText:[NSString stringWithFormat:@"%i - %@", [indexPath row], [[levels objectAtIndex:[indexPath row]] valueForKey:LEVEL_NAME_KEY]]];
             break;
     };
     
@@ -162,11 +162,11 @@
                 [settingsVC release];
                 break;
             case 2:
-                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPngName"];
+                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:MainSpriteSheetImageKey];
                 [self.navigationController pushViewController:urlViewController animated:YES];
                 break;
             case 3:
-                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:@"SpriteSheetPlistName"];
+                urlViewController = [[SpecifyURLViewController  alloc] initWithDefaultsKeyToSpecify:MainSpriteSheetPlistKey];
                 [self.navigationController pushViewController:urlViewController animated:YES];
             default:
                 break;

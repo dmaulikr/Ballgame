@@ -26,21 +26,21 @@
 -(void) setupBody:(b2World*) world
 {
     CGPoint p;
-    p.x = [[_objectInfo valueForKey:@"x"] floatValue];
-    p.y = [[_objectInfo valueForKey:@"y"] floatValue];
+    p.x = [[_objectInfo valueForKey:GO_X_KEY] floatValue];
+    p.y = [[_objectInfo valueForKey:GO_Y_KEY] floatValue];
     
     b2BodyDef bodyDef;
 	bodyDef.position.Set((p.x) /PTM_RATIO , (p.y ) /PTM_RATIO );
 	bodyDef.userData = self;
     
 	_body = world->CreateBody(&bodyDef);
-    float angle = CC_DEGREES_TO_RADIANS(([[_objectInfo valueForKey:@"rotation"] floatValue]));
+    float angle = CC_DEGREES_TO_RADIANS(([[_objectInfo valueForKey:GO_ROTATION_KEY] floatValue]));
     _body->SetTransform(_body->GetPosition(), angle);
 	_body->SetAwake(NO);
 	
 	// Define another box shape for our dynamic body.  Assuming that width and height are the same
     b2CircleShape dynamicCircle;
-	dynamicCircle.m_radius = [[_objectInfo valueForKey:@"width"] floatValue] / 2 / PTM_RATIO;
+	dynamicCircle.m_radius = [[_objectInfo valueForKey:GO_WIDTH_KEY] floatValue] / 2 / PTM_RATIO;
     
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -65,6 +65,7 @@
                 
                 // ToDo
                 // Change sprite to something else
+                //HARDCODE - Why is this sprite name hardcoded?
                 CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
                                         spriteFrameByName:@"bumper.png"];
                 [self setDisplayFrame:frame];
@@ -73,7 +74,7 @@
                 [self schedule:@selector(changeBack:) interval:.125];
                 
                 // Play sound effect
-                // HARDCODED SOUND EFFECT NAME
+                // HARDCODE -  SOUND EFFECT NAME
                 if([AssetManager settingsEffectsOn])
                 {
                     SimpleAudioEngine *audio = [SimpleAudioEngine sharedEngine];
@@ -85,7 +86,7 @@
                 b2Vec2 playerPos = [object getBody]->GetPosition();
                 b2Vec2 bumperPos = [self getBody]->GetPosition();
                 b2Vec2 impulseDirection(playerPos.x - bumperPos.x, playerPos.y - bumperPos.y);
-                float impulsePower = [[_objectInfo valueForKey:@"power"] floatValue];
+                float impulsePower = [[_objectInfo valueForKey:GO_POWER_KEY] floatValue];
                 impulseDirection.Normalize();
                 impulseDirection *= impulsePower;
                 
@@ -93,7 +94,7 @@
                 [object getBody]->ApplyLinearImpulse(impulseDirection, impulseLocation);
                 
                 // Make this object grow and shrink once really fast
-                float scaleRatio = [[_objectInfo valueForKey:@"width"] floatValue]/originalSize.width;
+                float scaleRatio = [[_objectInfo valueForKey:GO_WIDTH_KEY] floatValue]/originalSize.width;
                 id action = [CCSequence actions:
                              [CCScaleTo actionWithDuration:.08 scale:1.4f * scaleRatio],
                              [CCScaleTo actionWithDuration:.18 scale:1.0f * scaleRatio],
@@ -119,6 +120,7 @@
     [self unschedule:@selector(eventHappend:)];
     
     // Change sprite back to normal
+    //HARDCODE - Why is this sprite name hardcoded?
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
                             spriteFrameByName:@"bumper.png"];
     [self setDisplayFrame:frame];

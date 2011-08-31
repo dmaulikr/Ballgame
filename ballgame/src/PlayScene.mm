@@ -39,7 +39,7 @@ enum {
 
 #pragma mark - Init
 -(id)loadCurrentLevel{
-    return [self loadLevelWithName:[[PlayerStateManager currentLevel] valueForKey:@"name"]];
+    return [self loadLevelWithName:[[PlayerStateManager currentLevel] valueForKey:LEVEL_NAME_KEY]];
 }
 
 
@@ -54,7 +54,7 @@ enum {
         [NSException raise:@"Loading the Level Failed" format:@"The level file was not setup correctly"];
         return nil;
     }
-    [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:@"LevelStatus"];
+    [_levelInfo setValue:[NSNumber numberWithInt:LevelStatusStarted] forKey:LEVEL_STATUS_KEY];
     _collisionManager = [[CollisionManager alloc] init];
     _previousCollisions = [[NSSet alloc] initWithObjects:nil];
     _gameObjects = [[NSMutableArray arrayWithCapacity:50] retain];
@@ -110,19 +110,19 @@ enum {
     b2PolygonShape groundBox;		
     
     // bottom
-    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,0));
+    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2([[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue] / PTM_RATIO,0));
     groundBody->CreateFixture(&groundBox,0);
     
     // top
-    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
+    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue] / PTM_RATIO), b2Vec2([[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
     // left
-    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO), b2Vec2(0,0));
+    groundBox.SetAsEdge(b2Vec2(0,[[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue] / PTM_RATIO), b2Vec2(0,0));
     groundBody->CreateFixture(&groundBox,0);
     
     // right
-    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:@"level_width"] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:@"level_height"] floatValue] / PTM_RATIO));
+    groundBox.SetAsEdge(b2Vec2([[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue] / PTM_RATIO, 0), b2Vec2([[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue] / PTM_RATIO,[[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue] / PTM_RATIO));
     groundBody->CreateFixture(&groundBox,0);
     
     // If DebugDraw is on, we don't want to draw the background which would obscure the debug draw
@@ -138,6 +138,7 @@ enum {
 		{
             [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
             // ToDo:  make the background dependend on which hardware it's running on
+            //HARDCODE - Should get the name of the backgrond file from somewhere
 			CCSprite *background = [CCSprite spriteWithFile:@"metalbackground_iPhone@2x.png"];
             background.position = ccp(j * background.contentSize.width, i*background.contentSize.height);
 			[self addChild:background z:BACKGROUND_Z_ORDER]; // UNCOMMENT THIS ONE TO RENEW BACKGROUND
@@ -149,17 +150,17 @@ enum {
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     [CCSpriteFrameCache purgeSharedSpriteFrameCache];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
-    NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:@"SpriteSheetPngName"]];
+    NSURL *fileURL = [NSURL fileURLWithPath:[[AssetManager defaults] valueForKey:MainSpriteSheetImageKey]];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:[fileURL path]];
     CCTexture2D *spriteSheetTexture = [[CCTexture2D alloc] initWithImage:image];
     [image release];
     CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:spriteSheetTexture  capacity:150]; 
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[AssetManager defaults] valueForKey:@"SpriteSheetPlistName"]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[AssetManager defaults] valueForKey:MainSpriteSheetPlistKey]];
     
     // Initialize the scrolling layer
     // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
     scrollNode = [CCLayer node];
-    [scrollNode setPosition:CGPointMake(-[[_levelInfo valueForKey:@"start_x"] floatValue] + screenSize.width/2 , -[[_levelInfo valueForKey:@"start_y"] floatValue] + screenSize.height/2  )];
+    [scrollNode setPosition:CGPointMake(-[[_levelInfo valueForKey:START_X_KEY] floatValue] + screenSize.width/2 , -[[_levelInfo valueForKey:START_Y_KEY] floatValue] + screenSize.height/2  )];
     [scrollNode addChild:batch];
 	//[scrollNode addChild:batch z:0 parallaxRatio:ccp(1.0f,1.0f) positionOffset:CGPointZero];
     [scrollNode setTag:kTagBatchNode];
@@ -180,7 +181,7 @@ enum {
     //Add the game Objects
     _thePlayer = [[self addPlayer] retain];
     
-    for (NSDictionary *game_object in [_levelInfo objectForKey:@"game_objects"]){
+    for (NSDictionary *game_object in [_levelInfo objectForKey:GAME_OBJECTS_KEY]){
         //NSLog(@"Adding an object");
         [self addGameObject:game_object];
     }
@@ -215,8 +216,8 @@ enum {
 //There's a chance that things could happen before the user has any control
     _gsm = [[GameStateManager alloc] init];
     _gsm.delegate = self;
-    if ([_levelInfo valueForKey:@"game_states"] != nil){
-        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:@"game_states"]];
+    if ([_levelInfo valueForKey:GAME_STATES_KEY] != nil){
+        [_gsm generateGameStatesFromDictionaries:[_levelInfo valueForKey:GAME_STATES_KEY]];
     }
     else{
         GameState *defaultState = [GameState defaultInitialState];
@@ -245,8 +246,6 @@ enum {
     id seq = [CCSequence actions:action1, action2, action3, action3, action4, action5, action6, action7, nil];
     
     [self runAction:seq];
-    
-    NSLog(@"button triggered!");
 }
 
 -(void) func1
@@ -279,8 +278,6 @@ enum {
     id seq = [CCSequence actions:action1, action2, action3, action3, nil];
     
     [self runAction:seq];
-    
-    NSLog(@"button triggered!");
 }
 
 -(void) func5
@@ -315,10 +312,14 @@ enum {
 -(id)addGameObject:(NSDictionary *)gameObject{
     CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
     
-    NSString *type = [gameObject objectForKey:@"type"];
-    NSString *frameName = [gameObject objectForKey:@"frame_name"];
+    NSString *type = [gameObject objectForKey:GO_TYPE_KEY];
+    NSString *frameName = [gameObject objectForKey:GO_FRAME_NAME];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
+    if (object == nil){
+        NSLog(@"ERROR LOADING GAME OBJECT. Type: %@, FrameName: %@", type, frameName);
+        return nil;
+    }
     [batch addChild:object z:OBJECT_Z_ORDER];
     [object setupGameObject:gameObject forWorld:world];
     
@@ -344,7 +345,9 @@ enum {
 -(void)gameStateWillAdvance{
     //Check the game state and figure out if there's anything we need 
     //To do for the end of the current game state
+#if GAME_STATE_DEBUG
     NSLog(@"GameStateWillAdvance");
+#endif
     NSDictionary *modifications = [[_gsm currentGameState] gameStateModifications];
     for (NSString *key in [modifications allKeys]){
         if ([key isEqualToString:GameStateModificationDisplayTextForDuration]){
@@ -358,12 +361,14 @@ enum {
 -(void)gameStateDidAdvance{
     //Check the game state and figure out if there is anything we need
     //to do for the beginning of the new game state.
+#if GAME_STATE_DEBUG
     NSLog(@"GameStateDidAdvance");
+#endif
     NSDictionary *modifications = [[_gsm currentGameState] gameStateModifications];
     for (NSString *key in [modifications allKeys]){
         if ([key isEqualToString:GameStateModificationDisplayTextForDuration]){
             NSDictionary *modInfo = [modifications valueForKey:key];
-            [self displayHelpText:[modInfo valueForKey:@"text"] forDuration:[[modInfo valueForKey:@"duration"] floatValue]];
+            [self displayHelpText:[modInfo valueForKey:GSConditionPropertyTextKey] forDuration:[[modInfo valueForKey:GSConditionPropertyDurationKey] floatValue]];
         }
         if ([key isEqualToString:GameStateModificationRemoveObjectNamed]){
             NSString *modInfo = [modifications valueForKey:key];
@@ -380,9 +385,7 @@ enum {
         
         if ([key isEqualToString:GameStateModificationGrowthSpeedAdjustment]){
             float newGrowth = [[modifications valueForKey:key] floatValue];
-            NSLog(@"setting growth to %1.2f", newGrowth);
             [_thePlayer setGrowRate:newGrowth];
-            
         }
     }
     
@@ -403,12 +406,16 @@ enum {
 }
 
 -(void)gameShouldEndDidSucceed:(BOOL)succeeded{
+#if GAME_STATE_DEBUG
     NSLog(@"Game is over with Result: %i", succeeded);
+#endif
     [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]];
 }
 
 -(void)waitForDurationCompleted{
+#if GAME_STATE_DEBUG
     NSLog(@"Wait for Duration completed");
+#endif
     [[_gsm currentGameState] waitForDurationFinished];
     [self unschedule:@selector(waitForDurationCompleted)];
 }
@@ -577,8 +584,8 @@ enum {
 {
     // Figure out horizontal and vertical components of zoom
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    float vertZoom = winSize.height / [[_levelInfo valueForKey:@"level_height"] floatValue];
-    float horZoom = winSize.width / [[_levelInfo valueForKey:@"level_width"] floatValue];
+    float vertZoom = winSize.height / [[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue];
+    float horZoom = winSize.width / [[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue];
     
     // Take the smaller (more zoomed out) of the two
     float zoom = vertZoom;
@@ -586,9 +593,9 @@ enum {
         zoom = horZoom;
     
     // Figure out where we're scrolling to
-    float scroll = [[_levelInfo valueForKey:@"level_width"] floatValue]/2 - winSize.width/2;
+    float scroll = [[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue]/2 - winSize.width/2;
     if(vertZoom == zoom)
-        scroll = [[_levelInfo valueForKey:@"level_height"] floatValue]/2 - winSize.height/2;
+        scroll = [[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue]/2 - winSize.height/2;
     
     // Zoom to that level
     [self zoomToScale:zoom withDuration:duration];
@@ -661,7 +668,7 @@ enum {
         
         firstAccel = false;
     }
-	static int gravAdjustment = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
+	static int gravAdjustment = [[[AssetManager defaults] valueForKey:WORLD_GRAVITY_KEY] intValue];
 	
 	float accelX = (float) acceleration.x * cos(accelAngle) - (float)acceleration.z * sin(accelAngle);
 	float accelY = (float) acceleration.y;
@@ -725,6 +732,7 @@ enum {
     [self addChild: pauseLayer z:PAUSE_MENU_Z_ORDER tag:kTagPauseMenu];
     
     // Create menu items
+    //HARDCODE - Menu Names
     CCMenuItem *_resumeItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Resume Game" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(resumeTapped:)];
     [_resumeItem setPosition:ccp(s.width/2, s.height * 2/3)];
     CCMenuItem *_quitItem = [CCMenuItemLabel itemWithLabel:[CCLabelTTF labelWithString:@"Quit to Main Menu" fontName:@"Arial" fontSize:32.0] target:self selector:@selector(quitTapped:)];
@@ -746,7 +754,9 @@ enum {
 }
 
 -(void)displayHelpText:(NSString*)text forDuration:(ccTime)duration{
+#if GAME_STATE_DEBUG
     NSLog(@"Displaying text: %@", text);
+#endif
     _userMessageLabel = [[CCLabelTTF labelWithString:text dimensions:USER_MESSAGE_DEFAULT_CONTENT_SIZE alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:USER_MESSAGE_FONT_SIZE] retain];
     [_userMessageLabel setPosition:USER_MESSAGE_DEFAULT_LOCATION];
     [_hudLayer addChild:_userMessageLabel];

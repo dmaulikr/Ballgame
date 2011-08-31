@@ -21,13 +21,13 @@
 
 -(IBAction)worldGravityChanged:(id)sender{
     NSNumber *newGravity = [NSNumber numberWithFloat:[_worldGravitySlider value]];
-    [[AssetManager defaults] setValue:newGravity forKey:@"world_gravity"];
+    [[AssetManager defaults] setValue:newGravity forKey:WORLD_GRAVITY_KEY];
     [_worldGravityLabel setText:[NSString stringWithFormat:@"%i", [newGravity intValue]]];
 }
 
 -(IBAction)maxSpeedValueChanged{
     NSNumber *newSpeed =  [NSNumber numberWithFloat:[_maxSpeedSlider value]];
-    [[AssetManager defaults] setValue:newSpeed forKey:@"max_speed"];
+    [[AssetManager defaults] setValue:newSpeed forKey:MAX_SPEED_KEY];
     [_maxSpeedLabel setText:[NSString stringWithFormat:@"%i", [newSpeed intValue]]];
 }
 
@@ -45,11 +45,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    int defaultsMaxSpeed = [[[AssetManager defaults] valueForKey:@"max_speed"] intValue];
+    int defaultsMaxSpeed = [[[AssetManager defaults] valueForKey:MAX_SPEED_KEY] intValue];
     [_maxSpeedSlider setValue:defaultsMaxSpeed];
     [_maxSpeedLabel setText:[NSString stringWithFormat:@"%i", defaultsMaxSpeed]];
     
-    int defaultsWorldGravity = [[[AssetManager defaults] valueForKey:@"world_gravity"] intValue];
+    int defaultsWorldGravity = [[[AssetManager defaults] valueForKey:WORLD_GRAVITY_KEY] intValue];
     [_worldGravitySlider setValue:defaultsWorldGravity];
     [_worldGravityLabel setText:[NSString stringWithFormat:@"%i", defaultsWorldGravity]];
                     
