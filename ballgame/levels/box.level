@@ -13,13 +13,13 @@
   <key>size_grow_rate</key>
   <integer>5</integer>
   <key>start_x</key>
-  <integer>375</integer>
+  <integer>373</integer>
   <key>start_y</key>
-  <integer>53</integer>
+  <integer>56</integer>
   <key>starting_size</key>
   <integer>20</integer>
   <key>world</key>
-  <string>null</string>
+  <string>not null</string>
   <key>game_objects</key>
   <array>
    <dict>
@@ -45,21 +45,21 @@
      </dict>
     </array>
     <key>rotation</key>
-    <string>30</string>
+    <integer>30</integer>
     <key>type</key>
     <string>Goal</string>
     <key>width</key>
     <integer>25</integer>
     <key>x</key>
-    <integer>100</integer>
+    <integer>107</integer>
     <key>y</key>
-    <integer>60</integer>
+    <integer>59</integer>
    </dict>
    <dict>
     <key>frame_name</key>
     <string>GreenWallSegment0.png</string>
     <key>height</key>
-    <integer>5</integer>
+    <integer>9</integer>
     <key>name</key>
     <string>Wall 1</string>
     <key>rotation</key>
@@ -69,9 +69,9 @@
     <key>width</key>
     <integer>350</integer>
     <key>x</key>
-    <integer>250</integer>
+    <integer>249</integer>
     <key>y</key>
-    <integer>100</integer>
+    <integer>104</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -132,10 +132,12 @@
     <string>12.5</string>
     <key>dependant_object_name</key>
     <string>switch_gate_1</string>
+    <key>duration</key>
+    <string>3.0</string>
     <key>frame_name</key>
     <string>switch.png</string>
     <key>height</key>
-    <integer>40</integer>
+    <integer>23</integer>
     <key>max_charge</key>
     <string>25.0</string>
     <key>name</key>
@@ -145,13 +147,11 @@
     <key>type</key>
     <string>TimedSwitch</string>
     <key>width</key>
-    <integer>40</integer>
+    <integer>22</integer>
     <key>x</key>
-    <integer>420</integer>
+    <integer>419</integer>
     <key>y</key>
-    <integer>52</integer>
-    <key>duration</key>
-    <real>3.0</real>
+    <integer>55</integer>
    </dict>
    <dict>
     <key>frame_name</key>

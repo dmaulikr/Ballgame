@@ -29,7 +29,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -615,7 +615,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>671</x>
-     <y>432</y>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>790</x>
@@ -631,7 +631,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>671</x>
-     <y>461</y>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>793</x>
@@ -726,12 +726,28 @@
    <slot>wallThicknessClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>514</x>
-     <y>136</y>
+     <x>524</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
      <y>23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>levelPlistTableWidget</sender>
+   <signal>cellClicked(int,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>levelPlistTableClicked(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>794</x>
+     <y>560</y>
     </hint>
    </hints>
   </connection>
@@ -762,5 +778,6 @@
   <slot>pasteClicked()</slot>
   <slot>newObjectClicked(QModelIndex)</slot>
   <slot>comboBoxChanged(int)</slot>
+  <slot>levelPlistTableClicked(int,int)</slot>
  </slots>
 </ui>

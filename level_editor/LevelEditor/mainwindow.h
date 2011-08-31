@@ -28,7 +28,7 @@ namespace Ui {
 
 struct UndoObject
 {
-    QMap<QString, QString> levelPlist;
+    QMap<QString, QVariant> levelPlist;
     QList< QMap<QString, QVariant> > levelObjects;
     QList<int> selectedObjects;
 };
@@ -77,6 +77,7 @@ private slots:
     void objectChanged(QTableWidgetItem*);
     void rotationSliderMoved(int);
     void objectTableClicked(int, int);
+    void levelPlistTableClicked(int, int);
     void newObjectClicked(QModelIndex);
     void comboBoxChanged(int);
 
@@ -91,6 +92,14 @@ private:
 
     void loadSpritePlist();
     void loadLevelPlist(QString level);
+
+    // Load/Save XML subfunctions
+    QList<QVariant> loadArray(QDomNode n);
+    QMap<QString, QVariant> loadDictionary(QDomNode n);
+    QDomElement saveDictionary(QMap<QString, QVariant> inputDict, QDomDocument doc);
+    QDomElement saveArray(QList<QVariant> list, QDomDocument doc);
+
+
     void updateGraphics();  // redraws entire level
     void updateSelectedObjects(QGraphicsScene* scene, bool removePrevious);  // redraws all yellow rectangles
     QList<QGraphicsLineItem*> sceneYellowLines; // contains pointers to all lines currently in the scene
@@ -105,7 +114,7 @@ private:
     QGraphicsScene *scene;
     QImage spriteSheet;
     QMap<QString, QRect> spriteSheetLocations;
-    QMap<QString, QString> levelPlist;
+    QMap<QString, QVariant> levelPlist;
     QList< QMap<QString, QVariant> > levelObjects;
 
     bool noEmit;
