@@ -52,23 +52,5 @@ typedef enum{
     LevelStatusCompleted
 } LevelStatus;
 
-typedef enum {
-    GameObjectIDNone,
-    GameObjectIDPlayer,
-    GameObjectIDWall,
-    GameObjectIDObstacle,
-    GameObjectIDGoal,
-    GameObjectIDPickup,
-    GameObjectIDSwitch,
-    GameObjectIDGate,
-    GameObjectIDChargedWall,
-    GameObjectIDTeleporter,
-    GameObjectIDIon,
-    GameObjectIDCollectible,
-    GameObjectIDBumper,
-    GameObjectIDGravityWell,
-    GameObjectIDChaser
-} GameObjectID;
-
 
 

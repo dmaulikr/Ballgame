@@ -13,6 +13,24 @@
 #import "Effect.h"
 
 
+typedef enum {
+    GameObjectIDNone,
+    GameObjectIDPlayer,
+    GameObjectIDWall,
+    GameObjectIDObstacle,
+    GameObjectIDGoal,
+    GameObjectIDPickup,
+    GameObjectIDSwitch,
+    GameObjectIDGate,
+    GameObjectIDChargedWall,
+    GameObjectIDTeleporter,
+    GameObjectIDIon,
+    GameObjectIDCollectible,
+    GameObjectIDBumper,
+    GameObjectIDGravityWell,
+    GameObjectIDChaser
+} GameObjectID;
+
 @protocol DependantObject
 @property (nonatomic, retain) id dependantObject;
 -(NSString*)getDependantObjectName;
@@ -95,5 +113,7 @@ extern NSString* const GO_CHARGE_INCR_KEY;
 extern NSString* const GO_DEP_OBJECT_KEY;
 extern NSString* const GO_POWER_KEY;
 extern NSString* const GO_ION_SIZE_KEY;
+
+
 
 
