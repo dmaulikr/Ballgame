@@ -18,6 +18,8 @@
 #import "SplashScene.h"
 #import "SimpleAudioEngine.h"
 #import "GameStateManager.h"
+#import "SceneCamera.h"
+
 // PlayScene
 
 @interface PlayScene : CCLayer <GameStateManagerDelegate>
@@ -36,10 +38,8 @@
     NSMutableArray *_gameObjects;
     Player *_thePlayer;
     
-    //Sublayers
-    CCLayer *scrollNode;
-    
     //HUD
+    SceneCamera *_camera;
     CCLayer *_hudLayer;
     CCLabelTTF *_userMessageLabel;
     
@@ -53,12 +53,6 @@
     bool firstAccel;
     float accelAngle;
     
-    // Set to true if scrollToX:Y: was called, but hasn't finished animating yet.
-    bool scrollNodeAnimated;
-    
-    // Default is 1, > 1 means zoomed in, < 1 means zoomed out
-    float currentZoomLevel;
-    
 }
 -(id)loadLevelWithName:(NSString*)levelName;
 -(void) showPauseMenu;
@@ -66,17 +60,8 @@
 //Premade Levels
 +(CCScene*) currentLevelScene;
 
-// Scroll camera to given point in world coordinates
--(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration;
 
-// Scroll camera back to player and re-enable camera tracking the player
--(void) scrollToPlayerWithDuration:(ccTime)duration;
 
-// General method
--(void) zoomToScale:(float)zoom withDuration:(ccTime) duration;
 
-// Utility methods
--(void) zoomToNormalWithDuration:(ccTime)duration;
--(void) zoomToFullLevelWithDuration:(ccTime)Duration;
 
 @end

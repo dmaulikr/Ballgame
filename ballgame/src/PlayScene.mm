@@ -32,6 +32,8 @@ enum {
 -(void)removeAllHelpText;
 -(void)waitForDurationCompleted;
 -(void)_gameObjectCleanup;
+-(void) scrollToPlayerWithDuration:(ccTime)duration;
+-(void)doneScrollingToPlayer: (ccTime) dt;
 
 @end
 
@@ -46,8 +48,6 @@ enum {
 -(id)loadLevelWithName:(NSString *)levelName{
 
     gameIsPaused = false;
-    scrollNodeAnimated = false;
-    currentZoomLevel = 1.0f;
     
     _levelInfo = [[[AssetManager sharedInstance]levelWithName:levelName] retain];
     if (_levelInfo == nil){
@@ -169,20 +169,15 @@ enum {
     CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithTexture:spriteSheetTexture  capacity:150]; 
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[[AssetManager defaults] valueForKey:MainSpriteSheetPlistKey]];
     
-    // Initialize the scrolling layer
-    // This layer is in between the main game layer (this class) and the sprite layer, and makes it easy to scroll through the level
-    scrollNode = [CCLayer node];
-    [scrollNode setPosition:CGPointMake(-[[_levelInfo valueForKey:START_X_KEY] floatValue] + screenSize.width/2 , -[[_levelInfo valueForKey:START_Y_KEY] floatValue] + screenSize.height/2  )];
-    [scrollNode addChild:batch];
-	//[scrollNode addChild:batch z:0 parallaxRatio:ccp(1.0f,1.0f) positionOffset:CGPointZero];
-    [scrollNode setTag:kTagBatchNode];
-    [self addChild:scrollNode];
+    // Initialize the Camera
+    _camera = [[SceneCamera alloc] initWithWorldLayer:batch andTag:kTagBatchNode];
+    [_camera setPosition:CGPointMake([[_levelInfo objectForKey:START_X_KEY] floatValue], [[_levelInfo objectForKey:START_Y_KEY] floatValue])];
+    [self addChild:_camera.scrollNode];
     
     //Add the game Objects
     _thePlayer = [[self addPlayer] retain];
     
     for (NSDictionary *game_object in [_levelInfo objectForKey:GAME_OBJECTS_KEY]){
-        //NSLog(@"Adding an object");
         [self addGameObject:game_object];
     }
     
@@ -362,8 +357,8 @@ enum {
     glPushMatrix();
     
     //tileLayer is the view being offset
-    float translateX = (scrollNode.position.x);
-    float translateY = (scrollNode.position.y);
+    float translateX = (_camera.position.x);
+    float translateY = (_camera.position.y);
     glTranslatef(	translateX, translateY, 0.0f);
     
     world->DrawDebugData();
@@ -401,12 +396,13 @@ enum {
     [self processCollisionSet:[_collisionManager collisionSet] withTime:dt];
     
     //Center the scroll node on the player's position...sort of =)
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    if(!scrollNodeAnimated)
-    {
-        [scrollNode setPosition:CGPointMake((-_thePlayer.position.x + winSize.width/2) * currentZoomLevel , (-_thePlayer.position.y + winSize.height/2) * currentZoomLevel )];
-    }
-    
+    //CGSize winSize = [CCDirector sharedDirector].winSize;
+    [_camera setPosition:[_thePlayer position]];
+//    if(!scrollNodeAnimated)
+//    {
+//        [scrollNode setPosition:CGPointMake((-_thePlayer.position.x + winSize.width/2) * currentZoomLevel , (-_thePlayer.position.y + winSize.height/2) * currentZoomLevel )];
+//    }
+
     // Clean up objects that need to be deleted :(
     [self _gameObjectCleanup];
     
@@ -461,77 +457,6 @@ enum {
     [objToDelete removeAllObjects];
 }
 
-#pragma mark - Scroll and Zoom
-
--(void) scrollToX:(int)x Y:(int)y withDuration:(ccTime)duration
-{
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-x + winSize.width/2, -y + winSize.height/2)];
-    [scrollNode runAction:action];
-    
-    // Make sure we don't follow the player for now
-    scrollNodeAnimated = true;
-}
-
--(void) scrollToPlayerWithDuration:(ccTime)duration
-{
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
-    [scrollNode runAction:action];
-    
-    // Schedule a callback for when this is done
-    [self schedule:@selector(doneScrollingToPlayer:) interval:duration];
-}
-
-- (void)doneScrollingToPlayer: (ccTime) dt
-{    
-    // Unscehdule this selector so that it only runs once
-    [self unschedule:@selector(doneScrollingToPlayer:)];
-    
-    // Make sure we start following the player again
-    scrollNodeAnimated = false;
-}
-
--(void) zoomToScale:(float)zoom withDuration:(ccTime)duration
-{
-    id action = [CCScaleTo actionWithDuration:duration scale:zoom];
-    [scrollNode runAction:action];
-    
-    currentZoomLevel = zoom;
-}
-
--(void) zoomToNormalWithDuration:(ccTime)duration
-{
-    [self zoomToScale:1.0 withDuration:duration];
-    
-    // Recenter on the player
-    [self scrollToPlayerWithDuration:duration];
-}
-
--(void) zoomToFullLevelWithDuration:(ccTime)duration
-{
-    // Figure out horizontal and vertical components of zoom
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    float vertZoom = winSize.height / [[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue];
-    float horZoom = winSize.width / [[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue];
-    
-    // Take the smaller (more zoomed out) of the two
-    float zoom = vertZoom;
-    if(horZoom < vertZoom)
-        zoom = horZoom;
-    
-    // Figure out where we're scrolling to
-    float scroll = [[_levelInfo valueForKey:LEVEL_WIDTH_KEY] floatValue]/2 - winSize.width/2;
-    if(vertZoom == zoom)
-        scroll = [[_levelInfo valueForKey:LEVEL_HEIGHT_KEY] floatValue]/2 - winSize.height/2;
-    
-    // Zoom to that level
-    [self zoomToScale:zoom withDuration:duration];
-    
-    // Make sure we are centered on the level
-    [self scrollToX:scroll Y:scroll withDuration:duration];
-}
-
 #pragma mark - User Input
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -544,6 +469,7 @@ enum {
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+#if TARGET_IPHONE_SIMULATOR
 	for( UITouch *touch in touches ) {
 		
         // If double tapped
@@ -555,13 +481,16 @@ enum {
             // Assuming there's no multi-touch
             return;
         }
-        
-		CGPoint currentPos = [scrollNode position];
+		CGPoint currentPos = [_camera.scrollNode position];
 		CGPoint point = [touch locationInView:[touch view]];
-        
-        // X and Y of point are flipped for some reason
-        float pointX = point.y + -1*currentPos.x;
-		float pointY = point.x + -1*currentPos.y;
+#if INPUT_DEBUG
+        NSLog(@"currentPos: %1.2f, %1.2f", currentPos.x, currentPos.y);
+        NSLog(@"touch: %1.2f, %1.2f", point.x, point.y);
+#endif 
+        // Translate the touch point into world coordinates.  
+        //y and x are swapped because of how we're looking at the screen
+        float worldPointX = point.y + -1*currentPos.x;
+		float worldPointY = point.x + -1*currentPos.y;
         
 		double vConst = 1;  // multiplier
 		
@@ -569,8 +498,11 @@ enum {
 		float objectX = b->GetPosition().x*PTM_RATIO;
 		float objectY = b->GetPosition().y*PTM_RATIO;
 		
-		float accelX = vConst*(pointX - objectX);
-		float accelY = vConst*(pointY - objectY);
+		float accelX = vConst*(worldPointX - objectX);
+		float accelY = vConst*(worldPointY - objectY);
+#if INPUT_DEBUG
+        NSLog(@"accel: %1.2f, %1.2f", accelX, accelY);
+#endif
 		
 		b2Vec2 v(accelX, accelY);	
         v.Normalize();
@@ -578,6 +510,7 @@ enum {
 		world->SetGravity(v);
         
 	}	
+#endif
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
@@ -639,6 +572,26 @@ enum {
     
     // Return to Main Menu
     [[CCDirector sharedDirector] replaceScene:[SplashScene scene]];
+}
+#pragma mark - Camera Animation Methods
+
+-(void) scrollToPlayerWithDuration:(ccTime)duration
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    id action = [CCMoveTo actionWithDuration:duration position:CGPointMake(-_thePlayer.position.x + winSize.width/2 , -_thePlayer.position.y + winSize.height/2  )];
+    [_camera.scrollNode runAction:action];
+    
+    // Schedule a callback for when this is done
+    [self schedule:@selector(doneScrollingToPlayer:) interval:duration];
+}
+
+- (void)doneScrollingToPlayer: (ccTime) dt
+{    
+    // Unscehdule this selector so that it only runs once
+    [self unschedule:@selector(doneScrollingToPlayer:)];
+    
+    // Make sure we start following the player again
+    //scrollNodeAnimated = false;
 }
 
 #pragma mark - UI Methods

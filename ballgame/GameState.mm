@@ -122,7 +122,9 @@ NSString* const GSConditionPropertyThresholdKey = @"threshold";
 }
 
 -(void)levelBegan{
-    
+#if GAME_STATE_DEBUG
+    NSLog(@"Level Began");
+#endif 
 }
 
 -(void)playerReachedMaximumSize:(id)player{
@@ -165,7 +167,14 @@ NSString* const GSConditionPropertyThresholdKey = @"threshold";
     }
 }
 -(void)playerCollisionEnded:(id)player andObject:(id)object{
+    GameObject *gObject = (GameObject*)object;
     
+    if ([_advancementConditions objectForKey:GameStateConditionObjectCollisionEnded] != nil){
+        NSString *conditionObjectName = [_advancementConditions objectForKey:GameStateConditionObjectCollisionEnded];
+        if ([gObject.name isEqualToString:conditionObjectName]){
+            [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionObjectCollisionEnded];
+        }
+    }
 }
 -(void)playerTappedScreen:(id)touch{
     if ([_satisfiedConditions objectForKey:GameStateConditionPlayerTap] != nil){

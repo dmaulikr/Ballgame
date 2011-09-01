@@ -10,6 +10,7 @@
 #define DEBUG_DRAW 0
 #define COLLISION_DEBUG 0
 #define GAME_STATE_DEBUG 0
+#define INPUT_DEBUG 1
 
 //Sound Definitions
 #define BACKGROUND_MUSIC @"Game1"

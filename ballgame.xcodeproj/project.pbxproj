@@ -217,6 +217,7 @@
 		BF0ADC1F1402261E006505F4 /* IntroductoryLevelScript.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF0ADC1D1402261E006505F4 /* IntroductoryLevelScript.rtf */; };
 		BF0ADC211402268A006505F4 /* GameStateTester.level in Resources */ = {isa = PBXBuildFile; fileRef = BF0ADC201402268A006505F4 /* GameStateTester.level */; };
 		BF17911D140F0439005050E4 /* LocationSensor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF17911C140F0438005050E4 /* LocationSensor.mm */; };
+		BF179121140FEC95005050E4 /* SceneCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = BF179120140FEC95005050E4 /* SceneCamera.m */; };
 		BF270F4113E65432002BDBB7 /* metalbackground_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */; };
 		BF270F4213E65432002BDBB7 /* metalbackground_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */; };
 		BF270F4313E65432002BDBB7 /* metalbackground_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */; };
@@ -621,6 +622,8 @@
 		BF0ADC201402268A006505F4 /* GameStateTester.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GameStateTester.level; path = levels/GameStateTester.level; sourceTree = "<group>"; };
 		BF17911B140F0438005050E4 /* LocationSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSensor.h; path = src/LocationSensor.h; sourceTree = "<group>"; };
 		BF17911C140F0438005050E4 /* LocationSensor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LocationSensor.mm; path = src/LocationSensor.mm; sourceTree = "<group>"; };
+		BF17911F140FEC95005050E4 /* SceneCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneCamera.h; path = src/SceneCamera.h; sourceTree = "<group>"; };
+		BF179120140FEC95005050E4 /* SceneCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneCamera.m; path = src/SceneCamera.m; sourceTree = "<group>"; };
 		BF270F3E13E65432002BDBB7 /* metalbackground_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPad.png; path = Resources/backgrounds/metalbackground_iPad.png; sourceTree = "<group>"; };
 		BF270F3F13E65432002BDBB7 /* metalbackground_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbackground_iPhone.png; path = Resources/backgrounds/metalbackground_iPhone.png; sourceTree = "<group>"; };
 		BF270F4013E65432002BDBB7 /* metalbackground_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbackground_iPhone@2x.png"; path = "Resources/backgrounds/metalbackground_iPhone@2x.png"; sourceTree = "<group>"; };
@@ -715,7 +718,7 @@
 				AA03DDE113D7743F00BEFC7F /* Levels */,
 				387E357F13D3A017006CB9AD /* Plists and Defaults */,
 				387E357E13D39FFC006CB9AD /* Persistent Data */,
-				387E357513D38BC4006CB9AD /* UI Constructs */,
+				387E357513D38BC4006CB9AD /* Nibs */,
 				BF2B8CAB1401064A009D37EF /* GameState */,
 				382BC59813D2CFD300199A1D /* Hardcodes */,
 				380C13ED13D2149E00C62364 /* Categories */,
@@ -1091,6 +1094,7 @@
 		38125BD613CA5806001282F6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BF17911E140FEC63005050E4 /* Scene Control */,
 				AAD1C7F013EF407700F639C3 /* SettingsScene.h */,
 				AAD1C7F113EF407700F639C3 /* SettingsScene.mm */,
 				AA03DE2113D7788000BEFC7F /* SplashScene.h */,
@@ -1137,12 +1141,12 @@
 			name = Hardcodes;
 			sourceTree = "<group>";
 		};
-		387E357513D38BC4006CB9AD /* UI Constructs */ = {
+		387E357513D38BC4006CB9AD /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
 				AA10977213E61415006445B2 /* SpecifyURLViewController.xib */,
 			);
-			name = "UI Constructs";
+			name = Nibs;
 			sourceTree = "<group>";
 		};
 		387E357E13D39FFC006CB9AD /* Persistent Data */ = {
@@ -1263,6 +1267,15 @@
 			);
 			name = GameLevels;
 			path = levels/GameLevels;
+			sourceTree = "<group>";
+		};
+		BF17911E140FEC63005050E4 /* Scene Control */ = {
+			isa = PBXGroup;
+			children = (
+				BF17911F140FEC95005050E4 /* SceneCamera.h */,
+				BF179120140FEC95005050E4 /* SceneCamera.m */,
+			);
+			name = "Scene Control";
 			sourceTree = "<group>";
 		};
 		BF2B8CA71400D4D4009D37EF /* Obstacles */ = {
@@ -1568,6 +1581,7 @@
 				AA6F6F7D1401FD7800C26FA4 /* GameState.mm in Sources */,
 				AA6F6F801401FDD600C26FA4 /* Chaser.mm in Sources */,
 				BF17911D140F0439005050E4 /* LocationSensor.mm in Sources */,
+				BF179121140FEC95005050E4 /* SceneCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

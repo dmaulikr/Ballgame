@@ -20,9 +20,9 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>231</integer>
+    <integer>214</integer>
     <key>x</key>
-    <integer>143</integer>
+    <integer>134</integer>
     <key>y</key>
     <integer>139</integer>
    </dict>
@@ -216,7 +216,7 @@
     <key>frame_name</key>
     <string>GreenWallSegment0.png</string>
     <key>height</key>
-    <integer>20</integer>
+    <integer>60</integer>
     <key>name</key>
     <string>gate 2</string>
     <key>rotation</key>
@@ -224,17 +224,17 @@
     <key>type</key>
     <string>Gate</string>
     <key>width</key>
-    <integer>844</integer>
+    <integer>544</integer>
     <key>x</key>
-    <integer>471</integer>
+    <integer>307</integer>
     <key>y</key>
-    <integer>651</integer>
+    <integer>719</integer>
    </dict>
    <dict>
     <key>frame_name</key>
     <string>GreenWallSegment0.png</string>
     <key>height</key>
-    <integer>132</integer>
+    <integer>1431</integer>
     <key>name</key>
     <string>static10 5</string>
     <key>rotation</key>
@@ -242,11 +242,11 @@
     <key>type</key>
     <string>Wall</string>
     <key>width</key>
-    <integer>23</integer>
+    <integer>26</integer>
     <key>x</key>
-    <integer>606</integer>
+    <integer>609</integer>
     <key>y</key>
-    <integer>577</integer>
+    <integer>1239</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -262,9 +262,9 @@
     <key>width</key>
     <integer>50</integer>
     <key>x</key>
-    <integer>727</integer>
+    <integer>735</integer>
     <key>y</key>
-    <integer>584</integer>
+    <integer>1848</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -558,6 +558,60 @@
     <key>y</key>
     <integer>86</integer>
    </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>1311</integer>
+    <key>name</key>
+    <string>static10 7</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>26</integer>
+    <key>x</key>
+    <integer>868</integer>
+    <key>y</key>
+    <integer>1304</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>28</integer>
+    <key>name</key>
+    <string>EndWall</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>Wall</string>
+    <key>width</key>
+    <integer>274</integer>
+    <key>x</key>
+    <integer>735</integer>
+    <key>y</key>
+    <integer>1970</integer>
+   </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>100</integer>
+    <key>name</key>
+    <string>trigger_sensor_2</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>LocationSensor</string>
+    <key>width</key>
+    <integer>100</integer>
+    <key>x</key>
+    <integer>742</integer>
+    <key>y</key>
+    <integer>244</integer>
+   </dict>
   </array>
   <key>game_states</key>
   <array>
@@ -625,8 +679,8 @@
    <dict>
     <key>conditions</key>
     <dict>
-        <key>CollisionBegan</key>
-        <string>firstDoorSwitch</string>
+     <key>CollisionBegan</key>
+     <string>firstDoorSwitch</string>
     </dict>
     <key>game_state_type</key>
     <string>GameState</string>
@@ -641,10 +695,28 @@
      </dict>
     </dict>
    </dict>
-      <dict>
+   <dict>
+    <key>conditions</key>
+    <dict>
+        <key>CollisionBegan</key>
+        <string>trigger_sensor_2</string>
+    </dict>
+    <key>game_state_type</key>
+    <string>GameState</string>
+    <key>modifications</key>
+    <dict>
+     <key>DisplayTextForDuration</key>
+     <dict>
+      <key>duration</key>
+      <real>5.0</real>
+      <key>text</key>
+      <string>Notice that the switch draws power from you to turn on.  Losing power makes you smaller.</string>
+     </dict>
+    </dict>
+   </dict>
+  <dict>
       <key>conditions</key>
-      <dict>
-      </dict>
+      <dict></dict>
       <key>game_state_type</key>
       <string>GameState</string>
       <key>modifications</key>
@@ -654,13 +726,13 @@
               <key>duration</key>
               <real>5.0</real>
               <key>text</key>
-              <string>Notice that the switch draws power from you to turn on.  This makes you shrink and prevents you from becoming unstable.</string>
+              <string>The level is complete when you reach the goal.  The goal is just ahead!</string>
           </dict>
       </dict>
   </dict>
   </array>
   <key>level_height</key>
-  <integer>800</integer>
+  <integer>2000</integer>
   <key>level_width</key>
   <integer>2000</integer>
   <key>size_grow_rate</key>
