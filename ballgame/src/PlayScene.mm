@@ -241,7 +241,7 @@ enum {
     CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
     
     NSString *type = [gameObject objectForKey:GO_TYPE_KEY];
-    NSString *frameName = [gameObject objectForKey:GO_FRAME_NAME];
+    NSString *frameName = [gameObject objectForKey:GO_FRAME_NAME_KEY];
     
     GameObject* object = [NSClassFromString(type) spriteWithSpriteFrameName:frameName];
     if (object == nil){

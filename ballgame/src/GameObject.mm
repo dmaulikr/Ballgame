@@ -9,6 +9,23 @@
 #import "GameObject.h"
 #import "AssetManager.h"
 
+NSString* const GO_NAME_KEY = @"name";
+NSString* const GO_TYPE_KEY  = @"type";
+NSString* const GO_FRAME_NAME_KEY = @"frame_name";
+NSString* const GO_ROTATION_KEY = @"rotation";
+NSString* const GO_WIDTH_KEY = @"width";
+NSString* const GO_HEIGHT_KEY = @"height";
+NSString* const GO_POSITIONS_KEY = @"positions";
+NSString* const GO_X_KEY = @"x";
+NSString* const GO_Y_KEY = @"y";
+NSString* const GO_DURATION_KEY = @"duration";
+NSString* const GO_MAX_CHARGE_KEY = @"max_charge";
+NSString* const GO_CHARGE_PER_SEC_KEY = @"charge_per_second";
+NSString* const GO_SPEED_KEY = @"speed";
+NSString* const GO_CHARGE_INCR_KEY = @"charge_increment";
+NSString* const GO_DEP_OBJECT_KEY = @"dependant_object_name";
+NSString* const GO_POWER_KEY = @"power";
+NSString* const GO_ION_SIZE_KEY = @"ion_size";
 
 
 @implementation GameObject

@@ -76,3 +76,24 @@
 -(id) actionMutableArray: (NSMutableArray*) _actionList;
 
 @end
+
+
+extern NSString* const GO_NAME_KEY;
+extern NSString* const GO_TYPE_KEY;
+extern NSString* const GO_FRAME_NAME_KEY;
+extern NSString* const GO_ROTATION_KEY;
+extern NSString* const GO_WIDTH_KEY;
+extern NSString* const GO_HEIGHT_KEY;
+extern NSString* const GO_POSITIONS_KEY;
+extern NSString* const GO_X_KEY;
+extern NSString* const GO_Y_KEY;
+extern NSString* const GO_DURATION_KEY;
+extern NSString* const GO_MAX_CHARGE_KEY;
+extern NSString* const GO_CHARGE_PER_SEC_KEY;
+extern NSString* const GO_SPEED_KEY;
+extern NSString* const GO_CHARGE_INCR_KEY;
+extern NSString* const GO_DEP_OBJECT_KEY;
+extern NSString* const GO_POWER_KEY;
+extern NSString* const GO_ION_SIZE_KEY;
+
+

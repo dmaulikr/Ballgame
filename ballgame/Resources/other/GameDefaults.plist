@@ -40,5 +40,7 @@
 			<integer>7</integer>
 		</dict>
 	</array>
+	<key>player_radius</key>
+	<integer>10</integer>
 </dict>
 </plist>

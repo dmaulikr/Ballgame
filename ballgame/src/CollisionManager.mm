@@ -26,7 +26,6 @@
 }
 -(BOOL)eitherObjectIsEqual:(GameObject*)objectToCompare{
     if (_objectA == objectToCompare || _objectB == objectToCompare){
-        //NSLog(@"One was equal");
         return YES;
     }
     return NO;
@@ -73,7 +72,6 @@
     b2Body *bodyB = fixtureB->GetBody();
     GameObject *gameObjectB = (GameObject*)bodyB->GetUserData();
     
-    //NSLog(@"Beginning contact: %i+%i", [gameObjectA identifier], [gameObjectB identifier]);
     GameObjectCollision *newCollision = [[GameObjectCollision alloc] initWithGameObjectA:gameObjectA andObjectB:gameObjectB];
     BOOL _collisionExists = NO;
     for (GameObjectCollision *collision in _collisionSet){
@@ -85,7 +83,6 @@
         }
     }
     if (!_collisionExists){
-        //NSLog(@"Adding collision: %i+%i", [gameObjectA identifier], [gameObjectB identifier]);
         [_collisionSet addObject:newCollision];
     }else{
         //This collision is already being tracked in our list.  No need to create another event.
@@ -94,7 +91,6 @@
     [newCollision release];
 }
 -(void)endContact:(b2Contact *)contact{
-    //NSLog(@"Ending Contact");
     b2Fixture *fixtureA = contact->GetFixtureA();
     b2Body *bodyA = fixtureA->GetBody();
     GameObject *gameObjectA = (GameObject*)bodyA->GetUserData();
@@ -106,7 +102,6 @@
     GameObjectCollision *newCollision = [[GameObjectCollision alloc] initWithGameObjectA:gameObjectA andObjectB:gameObjectB];
     for (GameObjectCollision *collision in _collisionSet){
         if ([collision isEqual:newCollision]){
-            //NSLog(@"Removing Collision");
             [_collisionSet removeObject:collision];
             break;
         }

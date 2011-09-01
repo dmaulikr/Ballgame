@@ -17,7 +17,7 @@
   <key>start_y</key>
   <integer>233</integer>
   <key>starting_size</key>
-  <integer>20</integer>
+  <integer>50</integer>
   <key>world</key>
   <string>null</string>
   <key>game_states</key>

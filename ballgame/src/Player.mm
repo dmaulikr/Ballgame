@@ -30,9 +30,9 @@
     _identifier = GameObjectIDPlayer;
     
     _growRate = [[_levelInfo valueForKey:GROW_RATE_KEY] floatValue];
-    _radius = [[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] / 2;
+    _radius = [[[AssetManager defaults] valueForKey:PLAYER_RADIUS] floatValue];
     _maxSpeed = [[[AssetManager defaults] valueForKey:MAX_SPEED_KEY] intValue];
-    _chargeLevel = 0.0;
+    _chargeLevel = [[_levelInfo valueForKey:STARTING_SIZE_KEY] floatValue] / 2;;
     _shouldCharge = YES;
     
     [self startAnimating];
