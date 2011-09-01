@@ -19,6 +19,7 @@
 #include <QStack>
 #include <QVariant>
 #include <QDir>
+#include <QCursor>
 
 #include "subarrayeditwindow.h"
 
@@ -82,7 +83,7 @@ private slots:
     void comboBoxChanged(int);
 
     // Other window
-    void doneEditingSublist(QList<QVariant>, int, int);
+    void doneEditingSublist();
 
 
 private:

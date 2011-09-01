@@ -13,14 +13,12 @@ SubArrayEditWindow::SubArrayEditWindow(QWidget * parent, Qt::WindowFlags f) :
     noEmit = false;
 
     // Make sure we can relay information back to the Main Window
-    connect(this, SIGNAL(doneEditingSublist(QList<QVariant>, int, int)), parent, SLOT(doneEditingSublist(QList<QVariant>, int, int)));
+    connect(this, SIGNAL(doneEditingSublist()), parent, SLOT(doneEditingSublist()));
 }
 
-void SubArrayEditWindow::loadData(QList< QVariant > listIn, int index1, int index2, MainWindow* mainWin)
+void SubArrayEditWindow::loadData(QVariant *listIn, QWidget* mainWin)
 {
     list = listIn;
-    mainWindowObjectId = index1;
-    mainWindowObjectIndex = index2;
 
     updateComboBox();
     updateObjectTable(0);
@@ -30,7 +28,7 @@ void SubArrayEditWindow::loadData(QList< QVariant > listIn, int index1, int inde
 
 void SubArrayEditWindow::doneClicked()
 {
-    emit doneEditingSublist(list, mainWindowObjectId, mainWindowObjectIndex);
+    emit doneEditingSublist();
     close();
 }
 
@@ -51,23 +49,34 @@ void SubArrayEditWindow::objectChanged(QTableWidgetItem* newItem)
     noEmit = true;
 
     // iterate to the changed row
-    QMap<QString, QVariant>::const_iterator it = list[objId].toMap().constBegin();
+    QMap<QString, QVariant>::const_iterator it = list->toList()[objId].toMap().constBegin();
     for(int i = 0; i < row; i++)
         ++it;
 
     if(column == 1)
     {
-        QMap<QString, QVariant> newMap = list[objId].toMap();
+        // This looks like it's more complicated than it needs to be, but unfortunately, it has to be this way :(
+        // list is a pointer to a QVariant in the MainWindow, and when we do list->toList(), we get an entirely new object.
+        // Therefore, if we only do list->toList().modifySomehow(), we modify only the newly created object, but not where it came from.
+        // So in order to make this work, we have to create a tempList object, modify that, then set the original equal to the tempList.
+
+        QMap<QString, QVariant> newMap = list->toList()[objId].toMap();
         newMap.insert(it.key(), newItem->text());
-        list[objId] = QVariant(newMap);
+
+        QList<QVariant> tempList = list->toList();
+        tempList[objId] = QVariant(newMap);
+        *list = QVariant(tempList);
     }
     else if(column == 0)
     {
-        QMap<QString, QVariant> newMap = list[objId].toMap();
+        QMap<QString, QVariant> newMap = list->toList()[objId].toMap();
         QString value = newMap.value(it.key()).toString();
         newMap.remove(it.key());
         newMap.insert(newItem->text(), value);
-        list[objId] = QVariant(newMap);
+
+        QList<QVariant> tempList = list->toList();
+        tempList[objId] = QVariant(newMap);
+        *list = QVariant(tempList);
     }
     noEmit = false;
 }
@@ -85,7 +94,7 @@ void SubArrayEditWindow::updateComboBox()
     int previousSize = comboBox->count();
 
     comboBox->clear();
-    for(int i = 0; i < list.count(); i++)
+    for(int i = 0; i < list->toList().count(); i++)
     {
         comboBox->addItem(QString("Array Index: %1").arg(i));
     }
@@ -96,7 +105,7 @@ void SubArrayEditWindow::updateComboBox()
 
 void SubArrayEditWindow::updateObjectTable(int objId)
 {
-    if(objId == -2 || list.count() <= objId)
+    if(objId == -2 || list->toList().count() <= objId)
     {
         clearObjectTable();
         return;
@@ -114,7 +123,7 @@ void SubArrayEditWindow::updateObjectTable(int objId)
 
 
     QMap<QString, QVariant>::const_iterator it;
-    for (it = list.at(objId).toMap().constBegin(); it != list.at(objId).toMap().constEnd(); ++it)
+    for (it = list->toList().at(objId).toMap().constBegin(); it != list->toList().at(objId).toMap().constEnd(); ++it)
     {
         rowCount++;
         table->setRowCount(rowCount);
@@ -127,12 +136,13 @@ void SubArrayEditWindow::updateObjectTable(int objId)
         }
 
         // This really shouldn't happen... yet
-        else if(it.value().type() == QVariant::List)
+        else if(it.value().type() == QVariant::List || it.value().type() == QVariant::Map)
         {
             table->setItem(rowCount-1, 1, new QTableWidgetItem(QString("Click to edit")));
         }
         else
         {
+            qDebug() << it.value();
             Q_ASSERT_X(false, "MainWindow::updateObjectTable", "Unknown QVariant type!");
         }
     }
@@ -141,17 +151,26 @@ void SubArrayEditWindow::updateObjectTable(int objId)
 void SubArrayEditWindow::addItemClicked()
 {
     // If list is not empty, append a copy of the first object
-    if(list.count() > 0)
-        list.append(QMap<QString, QVariant>(list[0].toMap()));
+    // See comment in objectChanged() for an explanation of why this is so complicated.
+    if(list->toList().count() > 0)
+    {
+        QList<QVariant> tempList = list->toList();
+        tempList.append(QMap<QString, QVariant>(list->toList()[0].toMap()));
+        *list = QVariant(tempList);
+    }
 
     // Otherwise, append a blank object
     else
-        list.append(QMap<QString, QVariant>());
+    {
+        QList<QVariant> tempList = list->toList();
+        tempList.append(QMap<QString, QVariant>());
+        *list = QVariant(tempList);
+    }
 
     updateComboBox();
 
-    ui->comboBox->setCurrentIndex(list.count()-1);
-    updateObjectTable(list.count() - 1);
+    ui->comboBox->setCurrentIndex(list->toList().count()-1);
+    updateObjectTable(list->toList().count() - 1);
 }
 
 void SubArrayEditWindow::deleteItemClicked()
@@ -160,7 +179,10 @@ void SubArrayEditWindow::deleteItemClicked()
     if(index == -1) // nothing selected
         return;
 
-    list.removeAt(index);
+    // See comment in objectChanged() for an explanation of why this is so complicated.
+    QList<QVariant> tempList = list->toList();
+    tempList.removeAt(index);
+    *list = QVariant(tempList);
 
     updateComboBox();
 
@@ -169,10 +191,41 @@ void SubArrayEditWindow::deleteItemClicked()
         ui->comboBox->setCurrentIndex(index-1);
         updateObjectTable(index-1);
     }
-    else if(list.count() == 0)
+    else if(list->toList().count() == 0)
     {
         clearObjectTable();
     }
+}
+
+void SubArrayEditWindow::tableCellClicked(int x, int y)
+{
+    qDebug() << "Click received";
+
+    // If didn't click in second column, don't do anything.
+    if(y != 1)
+        return;
+
+    int objId = ui->comboBox->currentIndex();
+
+    // Iterate to correct item
+    QMap<QString, QVariant>::iterator it = list->toList()[objId].toMap().begin();
+    for (int i = 0; i < x; i++)
+    {
+        it++;
+    }
+
+    // If item is not a list, don't do anything.
+    if(it.value().type() != QVariant::List)
+    {
+        return;
+    }
+
+    // Otherwise, open up a new window and pass some stuff to it
+    Qt::WindowFlags flags = Qt::Window;
+    SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
+    // Pass the new widget a pointer to the data it should manipulate, and a pointer to the main window for a callback.
+    sub->loadData(&it.value(), this);
+    sub->show();
 }
 
 void SubArrayEditWindow::clearObjectTable()

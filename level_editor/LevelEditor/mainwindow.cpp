@@ -15,9 +15,6 @@
 
 #define GRID_RESOLUTION 250
 
-// The amount by which an object is translated from the original when it's copy/pasted
-#define COPY_POSITION_INCREMENT 25
-
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
 #define PATH_SPRITE_PLIST "../../../../../ballgame/Resources/BallGameSpriteSheet.plist"
@@ -690,10 +687,14 @@ void MainWindow::updateObjectTable(int objId)
 
 void MainWindow::objectTableClicked(int x, int y)
 {
+    // If didn't click in second column, don't do anything.
+    if(y != 1)
+        return;
+
     int objId = ui->objectSelectorComboBox->currentIndex();
 
     // Iterate to correct item
-    QMap<QString, QVariant>::const_iterator it = levelObjects.at(objId).constBegin();
+    QMap<QString, QVariant>::iterator it = levelObjects[objId].begin();
     for (int i = 0; i < x; i++)
     {
         it++;
@@ -708,14 +709,19 @@ void MainWindow::objectTableClicked(int x, int y)
     // Otherwise, open up a new window and pass some stuff to it
     Qt::WindowFlags flags = Qt::Window;
     SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
-    sub->loadData(it.value().toList(), objId, x, this);
+    // Pass the new widget a pointer to the data it should manipulate, and a pointer to the main window for a callback.
+    sub->loadData(&it.value(), this);
     sub->show();
 }
 
 void MainWindow::levelPlistTableClicked(int x, int y)
 {
+    // If didn't click in second column, don't do anything.
+    if(y != 1)
+        return;
+
     // Iterate to correct item
-    QMap<QString, QVariant>::const_iterator it = levelPlist.constBegin();
+    QMap<QString, QVariant>::iterator it = levelPlist.begin();
     for (int i = 0; i < x; i++)
     {
         it++;
@@ -730,7 +736,7 @@ void MainWindow::levelPlistTableClicked(int x, int y)
     // Otherwise, open up a new window and pass some stuff to it
     Qt::WindowFlags flags = Qt::Window;
     SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
-    sub->loadData(it.value().toList(), 0, x, this);
+    sub->loadData(&it.value(), this);
     sub->show();
 }
 
@@ -765,10 +771,11 @@ void MainWindow::wallThicknessClicked()
     updateObjectTable(ui->objectSelectorComboBox->currentIndex());
 }
 
-void MainWindow::doneEditingSublist(QList<QVariant> list, int objId, int objProp)
+void MainWindow::doneEditingSublist()
 {
     qDebug("Signal received!");
 
+    /*
     // iterate to the changed row
     QMap<QString, QVariant>::iterator it = levelObjects[objId].begin();
     for(int i = 0; i < objProp; i++)
@@ -777,6 +784,7 @@ void MainWindow::doneEditingSublist(QList<QVariant> list, int objId, int objProp
     QString name = it.key();
 
     levelObjects[objId].insert(name, list);
+    */
 
     updateGraphics();
     updateObjectComboBox();
@@ -888,6 +896,11 @@ void MainWindow::createCopyOfObjects(QList<int> objects)
 {
     selectedObjects.clear();
 
+    // Get mouse point in physics coordinates
+    QPoint mouseGlobal = QCursor::pos();
+    QPoint mouseGraphicsView = ui->graphicsView->mapFromGlobal(mouseGlobal);
+    QPointF mouseGraphicsScene = ui->graphicsView->mapToScene(mouseGraphicsView);
+
     for(int i = 0; i < objects.count(); i++)
     {
         int index = objects.at(i);
@@ -901,8 +914,13 @@ void MainWindow::createCopyOfObjects(QList<int> objects)
         levelObjects[levelObjects.count()-1].insert("name", newName);
 
         // Increment x and y by some amount
-        int newX = levelObjects[levelObjects.count()-1].value("x").toInt() + COPY_POSITION_INCREMENT;
-        int newY = levelObjects[levelObjects.count()-1].value("y").toInt() + COPY_POSITION_INCREMENT;
+        int newX = mouseGraphicsScene.x();
+        int newY = levelPlist.value("level_height").toFloat() - mouseGraphicsScene.y();
+
+        // For pasting multiple objects (add position of current object's source, and subtract last selected object's source)
+        newX += (levelObjects[objects.at(i)].value("x").toFloat() - levelObjects[objects.at(objects.count()-1)].value("x").toFloat());
+        newY += (levelObjects[objects.at(i)].value("y").toFloat() - levelObjects[objects.at(objects.count()-1)].value("y").toFloat());
+
         levelObjects[levelObjects.count()-1].insert("x", QString("%1").arg(newX));
         levelObjects[levelObjects.count()-1].insert("y", QString("%1").arg(newY));
 
