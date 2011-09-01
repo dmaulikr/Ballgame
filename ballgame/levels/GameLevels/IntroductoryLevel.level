@@ -154,7 +154,7 @@
    </dict>
    <dict>
     <key>charge_per_second</key>
-    <integer>1</integer>
+    <integer>5</integer>
     <key>dependant_object_name</key>
     <string>gate1</string>
     <key>frame_name</key>
@@ -174,7 +174,7 @@
     <key>x</key>
     <integer>789</integer>
     <key>y</key>
-    <integer>79</integer>
+    <integer>81</integer>
    </dict>
    <dict>
     <key>frame_name</key>
@@ -554,7 +554,7 @@
     <key>width</key>
     <integer>100</integer>
     <key>x</key>
-    <integer>450</integer>
+    <integer>614</integer>
     <key>y</key>
     <integer>86</integer>
    </dict>
@@ -604,8 +604,8 @@
    <dict>
     <key>conditions</key>
     <dict>
-     <key>PlayerTapped</key>
-     <integer>1</integer>
+     <key>CollisionBegan</key>
+     <string>trigger_sensor_1</string>
     </dict>
     <key>game_state_type</key>
     <string>GameState</string>
@@ -622,6 +622,42 @@
      <string>barrier1</string>
     </dict>
    </dict>
+   <dict>
+    <key>conditions</key>
+    <dict>
+        <key>CollisionBegan</key>
+        <string>firstDoorSwitch</string>
+    </dict>
+    <key>game_state_type</key>
+    <string>GameState</string>
+    <key>modifications</key>
+    <dict>
+     <key>DisplayTextForDuration</key>
+     <dict>
+      <key>duration</key>
+      <real>5.0</real>
+      <key>text</key>
+      <string>This is a switch.  When you touch it, it will gain some charge and eventually turn on.</string>
+     </dict>
+    </dict>
+   </dict>
+      <dict>
+      <key>conditions</key>
+      <dict>
+      </dict>
+      <key>game_state_type</key>
+      <string>GameState</string>
+      <key>modifications</key>
+      <dict>
+          <key>DisplayTextForDuration</key>
+          <dict>
+              <key>duration</key>
+              <real>5.0</real>
+              <key>text</key>
+              <string>Notice that the switch draws power from you to turn on.  This makes you shrink and prevents you from becoming unstable.</string>
+          </dict>
+      </dict>
+  </dict>
   </array>
   <key>level_height</key>
   <integer>800</integer>

@@ -158,8 +158,8 @@ NSString* const GSConditionPropertyThresholdKey = @"threshold";
         _playerTouchedGoal = YES;
     }
     else if ([_advancementConditions objectForKey:GameStateConditionObjectCollisionBegan] != nil){
-        NSDictionary *condition = [_advancementConditions objectForKey:GameStateConditionObjectCollisionBegan];
-        if (gObject.name == [condition objectForKey:GO_NAME_KEY]){
+        NSString *conditionObjectName = [_advancementConditions objectForKey:GameStateConditionObjectCollisionBegan];
+        if ([gObject.name isEqualToString:conditionObjectName]){
             [_satisfiedConditions setValue:[NSNumber numberWithBool:YES] forKey:GameStateConditionObjectCollisionBegan];
         }
     }

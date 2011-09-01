@@ -14,6 +14,7 @@
     
     [super setupGameObject:game_object forWorld:world];
     _identifier = GameObjectIDLocationSensor;
+    [self setVisible:NO];
     
 }
 
