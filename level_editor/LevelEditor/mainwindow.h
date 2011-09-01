@@ -82,7 +82,7 @@ private slots:
     void comboBoxChanged(int);
 
     // Other window
-    void doneEditingSublist(QList<QVariant>, int, int);
+    void doneEditingSublist();
 
 
 private:

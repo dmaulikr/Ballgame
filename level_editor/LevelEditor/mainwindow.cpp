@@ -690,10 +690,14 @@ void MainWindow::updateObjectTable(int objId)
 
 void MainWindow::objectTableClicked(int x, int y)
 {
+    // If didn't click in second column, don't do anything.
+    if(y != 1)
+        return;
+
     int objId = ui->objectSelectorComboBox->currentIndex();
 
     // Iterate to correct item
-    QMap<QString, QVariant>::const_iterator it = levelObjects.at(objId).constBegin();
+    QMap<QString, QVariant>::iterator it = levelObjects[objId].begin();
     for (int i = 0; i < x; i++)
     {
         it++;
@@ -708,14 +712,19 @@ void MainWindow::objectTableClicked(int x, int y)
     // Otherwise, open up a new window and pass some stuff to it
     Qt::WindowFlags flags = Qt::Window;
     SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
-    sub->loadData(it.value().toList(), objId, x, this);
+    // Pass the new widget a pointer to the data it should manipulate, and a pointer to the main window for a callback.
+    sub->loadData(&it.value(), this);
     sub->show();
 }
 
 void MainWindow::levelPlistTableClicked(int x, int y)
 {
+    // If didn't click in second column, don't do anything.
+    if(y != 1)
+        return;
+
     // Iterate to correct item
-    QMap<QString, QVariant>::const_iterator it = levelPlist.constBegin();
+    QMap<QString, QVariant>::iterator it = levelPlist.begin();
     for (int i = 0; i < x; i++)
     {
         it++;
@@ -730,7 +739,7 @@ void MainWindow::levelPlistTableClicked(int x, int y)
     // Otherwise, open up a new window and pass some stuff to it
     Qt::WindowFlags flags = Qt::Window;
     SubArrayEditWindow *sub = new SubArrayEditWindow(this, flags);
-    sub->loadData(it.value().toList(), 0, x, this);
+    sub->loadData(&it.value(), this);
     sub->show();
 }
 
@@ -765,10 +774,11 @@ void MainWindow::wallThicknessClicked()
     updateObjectTable(ui->objectSelectorComboBox->currentIndex());
 }
 
-void MainWindow::doneEditingSublist(QList<QVariant> list, int objId, int objProp)
+void MainWindow::doneEditingSublist()
 {
     qDebug("Signal received!");
 
+    /*
     // iterate to the changed row
     QMap<QString, QVariant>::iterator it = levelObjects[objId].begin();
     for(int i = 0; i < objProp; i++)
@@ -777,6 +787,7 @@ void MainWindow::doneEditingSublist(QList<QVariant> list, int objId, int objProp
     QString name = it.key();
 
     levelObjects[objId].insert(name, list);
+    */
 
     updateGraphics();
     updateObjectComboBox();
