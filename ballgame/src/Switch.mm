@@ -37,8 +37,6 @@
     [super setupBody:world];
 }
 
-
-
 -(void)updateGameObject:(ccTime)dt{
     
     [super updateGameObject:dt];

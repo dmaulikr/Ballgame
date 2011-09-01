@@ -28,7 +28,8 @@ typedef enum {
     GameObjectIDCollectible,
     GameObjectIDBumper,
     GameObjectIDGravityWell,
-    GameObjectIDChaser
+    GameObjectIDChaser,
+    GameObjectIDLocationSensor
 } GameObjectID;
 
 @protocol DependantObject

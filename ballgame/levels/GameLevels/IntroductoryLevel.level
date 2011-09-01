@@ -6,85 +6,6 @@
   <string>nope</string>
   <key>description</key>
   <string>Box Level</string>
-  <key>level_height</key>
-  <integer>800</integer>
-  <key>level_width</key>
-  <integer>2000</integer>
-  <key>size_grow_rate</key>
-  <integer>5</integer>
-  <key>start_x</key>
-  <integer>146</integer>
-  <key>start_y</key>
-  <integer>233</integer>
-  <key>starting_size</key>
-  <integer>50</integer>
-  <key>world</key>
-  <string>null</string>
-  <key>game_states</key>
-  <array>
-      <dict>
-          <key>game_state_type</key>
-          <string>GameState</string>
-          <key>modifications</key>
-          <dict>
-              <key>DisplayTextForDuration</key>
-              <dict>
-                  <key>text</key>
-                  <string>Welcome to Volt.  Tilt the device to move.</string>
-                  <key>duration</key>
-                  <real>5.0</real>
-              </dict>
-              <key>PlayerGrowthAdjustment</key>
-              <real>0.0</real>
-          </dict>
-          <key>conditions</key>
-          <dict>
-              <key>WaitForDuration</key>
-              <real>5.0</real>
-          </dict>
-      </dict>
-      <dict>
-          <key>game_state_type</key>
-          <string>GameState</string>
-          <key>modifications</key>
-          <dict>
-              <key>DisplayTextForDuration</key>
-              <dict>
-                  <key>text</key>
-                  <string>Whenever you're ready, tap the screen and we'll let you out.</string>
-                  <key>duration</key>
-                  <real>5.0</real>
-              </dict>
-          </dict>
-          <key>conditions</key>
-          <dict>
-              <key>PlayerTapped</key>
-              <integer>1</integer>
-          </dict>
-      </dict>
-      <dict>
-          <key>game_state_type</key>
-          <string>GameState</string>
-          <key>modifications</key>
-          <dict>
-              <key>DisplayTextForDuration</key>
-              <dict>
-                  <key>text</key>
-                  <string>Move out to explore the other parts of the circuit.</string>
-                  <key>duration</key>
-                  <real>5.0</real>
-              </dict>
-              <key>RemoveObjectNamed</key>
-              <string>barrier1</string>
-          </dict>
-          <key>conditions</key>
-          <dict>
-              <key>PlayerTapped</key>
-              <integer>1</integer>
-          </dict>
-      </dict>
-      
-  </array>
   <key>game_objects</key>
   <array>
    <dict>
@@ -101,7 +22,7 @@
     <key>width</key>
     <integer>231</integer>
     <key>x</key>
-    <integer>144</integer>
+    <integer>143</integer>
     <key>y</key>
     <integer>139</integer>
    </dict>
@@ -619,6 +540,102 @@
     <key>y</key>
     <integer>120</integer>
    </dict>
+   <dict>
+    <key>frame_name</key>
+    <string>GreenWallSegment0.png</string>
+    <key>height</key>
+    <integer>100</integer>
+    <key>name</key>
+    <string>trigger_sensor_1</string>
+    <key>rotation</key>
+    <string>0</string>
+    <key>type</key>
+    <string>LocationSensor</string>
+    <key>width</key>
+    <integer>100</integer>
+    <key>x</key>
+    <integer>450</integer>
+    <key>y</key>
+    <integer>86</integer>
+   </dict>
   </array>
+  <key>game_states</key>
+  <array>
+   <dict>
+    <key>conditions</key>
+    <dict>
+     <key>WaitForDuration</key>
+     <real>5.0</real>
+    </dict>
+    <key>game_state_type</key>
+    <string>GameState</string>
+    <key>modifications</key>
+    <dict>
+     <key>DisplayTextForDuration</key>
+     <dict>
+      <key>duration</key>
+      <real>5.0</real>
+      <key>text</key>
+      <string>Welcome to Volt.  Tilt the device to move.</string>
+     </dict>
+     <key>PlayerGrowthAdjustment</key>
+     <string>0.0</string>
+    </dict>
+   </dict>
+   <dict>
+    <key>conditions</key>
+    <dict>
+     <key>PlayerTapped</key>
+     <integer>1</integer>
+    </dict>
+    <key>game_state_type</key>
+    <string>GameState</string>
+    <key>modifications</key>
+    <dict>
+     <key>DisplayTextForDuration</key>
+     <dict>
+      <key>duration</key>
+      <real>5.0</real>
+      <key>text</key>
+      <string>Whenever you're ready, tap the screen and we'll let you out.</string>
+     </dict>
+    </dict>
+   </dict>
+   <dict>
+    <key>conditions</key>
+    <dict>
+     <key>PlayerTapped</key>
+     <integer>1</integer>
+    </dict>
+    <key>game_state_type</key>
+    <string>GameState</string>
+    <key>modifications</key>
+    <dict>
+     <key>DisplayTextForDuration</key>
+     <dict>
+      <key>duration</key>
+      <real>5.0</real>
+      <key>text</key>
+      <string>Move out to explore the other parts of the circuit.</string>
+     </dict>
+     <key>RemoveObjectNamed</key>
+     <string>barrier1</string>
+    </dict>
+   </dict>
+  </array>
+  <key>level_height</key>
+  <integer>800</integer>
+  <key>level_width</key>
+  <integer>2000</integer>
+  <key>size_grow_rate</key>
+  <integer>5</integer>
+  <key>start_x</key>
+  <integer>146</integer>
+  <key>start_y</key>
+  <integer>233</integer>
+  <key>starting_size</key>
+  <integer>50</integer>
+  <key>world</key>
+  <string>null</string>
  </dict>
 </plist>
