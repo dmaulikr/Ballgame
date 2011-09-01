@@ -19,6 +19,7 @@
 #include <QStack>
 #include <QVariant>
 #include <QDir>
+#include <QCursor>
 
 #include "subarrayeditwindow.h"
 

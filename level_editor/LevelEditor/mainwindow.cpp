@@ -15,9 +15,6 @@
 
 #define GRID_RESOLUTION 250
 
-// The amount by which an object is translated from the original when it's copy/pasted
-#define COPY_POSITION_INCREMENT 25
-
 // THIS IS DEFINETELY NOT A PERMANENT SOLUTION!
 #ifdef Q_WS_MAC
 #define PATH_SPRITE_PLIST "../../../../../ballgame/Resources/BallGameSpriteSheet.plist"
@@ -899,6 +896,11 @@ void MainWindow::createCopyOfObjects(QList<int> objects)
 {
     selectedObjects.clear();
 
+    // Get mouse point in physics coordinates
+    QPoint mouseGlobal = QCursor::pos();
+    QPoint mouseGraphicsView = ui->graphicsView->mapFromGlobal(mouseGlobal);
+    QPointF mouseGraphicsScene = ui->graphicsView->mapToScene(mouseGraphicsView);
+
     for(int i = 0; i < objects.count(); i++)
     {
         int index = objects.at(i);
@@ -912,8 +914,13 @@ void MainWindow::createCopyOfObjects(QList<int> objects)
         levelObjects[levelObjects.count()-1].insert("name", newName);
 
         // Increment x and y by some amount
-        int newX = levelObjects[levelObjects.count()-1].value("x").toInt() + COPY_POSITION_INCREMENT;
-        int newY = levelObjects[levelObjects.count()-1].value("y").toInt() + COPY_POSITION_INCREMENT;
+        int newX = mouseGraphicsScene.x();
+        int newY = levelPlist.value("level_height").toFloat() - mouseGraphicsScene.y();
+
+        // For pasting multiple objects (add position of current object's source, and subtract last selected object's source)
+        newX += (levelObjects[objects.at(i)].value("x").toFloat() - levelObjects[objects.at(objects.count()-1)].value("x").toFloat());
+        newY += (levelObjects[objects.at(i)].value("y").toFloat() - levelObjects[objects.at(objects.count()-1)].value("y").toFloat());
+
         levelObjects[levelObjects.count()-1].insert("x", QString("%1").arg(newX));
         levelObjects[levelObjects.count()-1].insert("y", QString("%1").arg(newY));
 
