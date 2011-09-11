@@ -167,7 +167,9 @@
             break;
         case GameObjectIDChargedWall:
             _chargeLevel += ((ChargedWall*)object).chargeIncrement;
+#if COLLISION_DEBUG
             NSLog(@"Charge level - %f", _chargeLevel);
+#endif
             break;
         default:
             break;
