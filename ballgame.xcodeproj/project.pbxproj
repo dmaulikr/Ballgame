@@ -226,7 +226,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		381259EA13CA564E001282F6 /* ballgame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ballgame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		381259EA13CA564E001282F6 /* Volt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		381259EE13CA564E001282F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		381259F013CA564E001282F6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		381259F213CA564E001282F6 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -685,7 +685,7 @@
 		381259EB13CA564E001282F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				381259EA13CA564E001282F6 /* ballgame.app */,
+				381259EA13CA564E001282F6 /* Volt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1316,9 +1316,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		381259E913CA564E001282F6 /* ballgame */ = {
+		381259E913CA564E001282F6 /* Volt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38125BC713CA5651001282F6 /* Build configuration list for PBXNativeTarget "ballgame" */;
+			buildConfigurationList = 38125BC713CA5651001282F6 /* Build configuration list for PBXNativeTarget "Volt" */;
 			buildPhases = (
 				381259E613CA564E001282F6 /* Sources */,
 				381259E713CA564E001282F6 /* Frameworks */,
@@ -1328,9 +1328,9 @@
 			);
 			dependencies = (
 			);
-			name = ballgame;
+			name = Volt;
 			productName = ballgame;
-			productReference = 381259EA13CA564E001282F6 /* ballgame.app */;
+			productReference = 381259EA13CA564E001282F6 /* Volt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1354,7 +1354,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				381259E913CA564E001282F6 /* ballgame */,
+				381259E913CA564E001282F6 /* Volt */,
 			);
 		};
 /* End PBXProject section */
@@ -1674,7 +1674,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38125BC713CA5651001282F6 /* Build configuration list for PBXNativeTarget "ballgame" */ = {
+		38125BC713CA5651001282F6 /* Build configuration list for PBXNativeTarget "Volt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38125BC813CA5651001282F6 /* Debug */,
