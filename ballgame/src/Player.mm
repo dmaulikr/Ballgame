@@ -173,8 +173,6 @@
             break;
             
     }
-    
-    [object handleCollisionWithObject:self];
 }
 
 -(void)noLongerCollidingWithObject:(GameObject*)object{

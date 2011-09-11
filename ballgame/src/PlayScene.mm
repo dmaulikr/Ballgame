@@ -416,12 +416,8 @@ enum {
     NSSet *removedCollisions = [_previousCollisions setDifferenceFromSet:collisionSet];
     
     for (GameObjectCollision *collision in newCollisions){
-        if ([[collision objectA] isEqual:_thePlayer]){
-            [_thePlayer handleCollisionWithObject:[collision objectB]];
-        }
-        else if ([[collision objectB] isEqual:_thePlayer]){
-            [_thePlayer handleCollisionWithObject:[collision objectA]];
-        }
+            [(GameObject*)[collision objectA] handleCollisionWithObject:[collision objectB]];
+            [(GameObject*)[collision objectB] handleCollisionWithObject:[collision objectA]];
     }
     
     for (GameObjectCollision *collision in removedCollisions){
