@@ -139,7 +139,8 @@
     // HARDCODE - The spriteFrameName shouldn't be hardcoded.
     // Set up list of frames
     NSMutableArray *walkAnimFrames = [NSMutableArray array];
-    for(int i = 0; i <= 4; ++i) {
+    for(int i = 0; i <= 4; ++i)
+    {
         [walkAnimFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
           [NSString stringWithFormat:@"Volt%d.png", i]]];
@@ -155,11 +156,13 @@
     [self runAction:walkAction];
 }
 
--(void)handleCollisionWithObject:(GameObject *)object{
+-(void)handleCollisionWithObject:(GameObject *)object
+{
     [super handleCollisionWithObject:object];
     [[_gsm currentGameState] playerCollided:self andObject:object];
     
-    switch ([object identifier]){
+    switch ([object identifier])
+    {
         case GameObjectIDGoal:
             //We hit the goal.  The GSM will take care of this
             break;

@@ -265,7 +265,8 @@ enum {
 }
 #pragma mark - Game State Delegate Methods
 
--(void)gameStateWillAdvance{
+-(void)gameStateWillAdvance
+{
     //Check the game state and figure out if there's anything we need 
     //To do for the end of the current game state
 #if GAME_STATE_DEBUG
@@ -281,24 +282,30 @@ enum {
     
 }
 
--(void)gameStateDidAdvance{
+-(void)gameStateDidAdvance
+{
     //Check the game state and figure out if there is anything we need
     //to do for the beginning of the new game state.
 #if GAME_STATE_DEBUG
     NSLog(@"GameStateDidAdvance");
 #endif
     NSDictionary *modifications = [[_gsm currentGameState] gameStateModifications];
-    for (NSString *key in [modifications allKeys]){
-        if ([key isEqualToString:GameStateModificationDisplayTextForDuration]){
+    for (NSString *key in [modifications allKeys])
+    {
+        if ([key isEqualToString:GameStateModificationDisplayTextForDuration])
+        {
             NSDictionary *modInfo = [modifications valueForKey:key];
             [self displayHelpText:[modInfo valueForKey:GSConditionPropertyTextKey] forDuration:[[modInfo valueForKey:GSConditionPropertyDurationKey] floatValue]];
         }
-        if ([key isEqualToString:GameStateModificationRemoveObjectNamed]){
+        if ([key isEqualToString:GameStateModificationRemoveObjectNamed])
+        {
             NSString *modInfo = [modifications valueForKey:key];
             GameObject *specifiedObject;
             //Find the Object
-            for (GameObject *searchObj in _gameObjects){
-                if ([[searchObj name] isEqualToString:modInfo]){
+            for (GameObject *searchObj in _gameObjects)
+            {
+                if ([[searchObj name] isEqualToString:modInfo])
+                {
                     specifiedObject = searchObj;
                     break;
                 }
@@ -306,7 +313,8 @@ enum {
             [specifiedObject removeFromWorld];
         }
         
-        if ([key isEqualToString:GameStateModificationGrowthSpeedAdjustment]){
+        if ([key isEqualToString:GameStateModificationGrowthSpeedAdjustment])
+        {
             float newGrowth = [[modifications valueForKey:key] floatValue];
             [_thePlayer setGrowRate:newGrowth];
         }
@@ -317,7 +325,8 @@ enum {
     
     NSDictionary *conditionsToMeet = [[_gsm currentGameState] advancementConditions];
     
-    if ([conditionsToMeet valueForKey:GameStateConditionWaitForDuration] != nil){
+    if ([conditionsToMeet valueForKey:GameStateConditionWaitForDuration] != nil)
+    {
         ccTime duration = [[conditionsToMeet valueForKey:GameStateConditionWaitForDuration] floatValue];
         if (duration == 0){
             NSLog(@"ERROR: A GameState should never request a wait of zero duration");
@@ -328,7 +337,8 @@ enum {
     }
 }
 
--(void)gameShouldEndDidSucceed:(BOOL)succeeded{
+-(void)gameShouldEndDidSucceed:(BOOL)succeeded
+{
 #if GAME_STATE_DEBUG
     NSLog(@"Game is over with Result: %i", succeeded);
 #endif
